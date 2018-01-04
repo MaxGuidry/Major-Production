@@ -6,9 +6,14 @@ using ScriptableObjects;
 public class InventoryBehaviour : MonoBehaviour
 {
     public Inventory inventory;
-
+    public List<Item> ActiveInventory;
+    [HideInInspector]
+    public List<ItemType> Stones;
+    [HideInInspector]
+    public List<ItemType> Wood;
     void Start()
     {
+        inventory.StartingInventory = new List<Item>();
         if (inventory.InventoryCap <= 0)
         {
             Debug.LogWarning("Inventory Size must be Greater than 0");
@@ -16,41 +21,35 @@ public class InventoryBehaviour : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        ActiveInventory = inventory.CurrentInventory;
+    }
+
     public void AddToInventory(Item newItem)
     {
+        if (inventory.CurrentInventory.Count >= inventory.InventoryCap) return;
+        inventory.CurrentInventory.Add(newItem);
+
+        if(newItem.Type == ItemType.Stone)
+            Stones.Add(newItem.Type);
+        else if (newItem.Type == ItemType.Wood)
+            Wood.Add(newItem.Type);
+
         Debug.Log("Item Added: " + newItem.Type);
-
-        var currentItem = GetItem(newItem.Type);
-
-
-        
     }
 
-    public void RemoveFromInventory(Item newItem)
+    public void RemoveFromInventory(Item theItem)
     {
-
+        if (inventory.CurrentInventory == null) return;
+        if (!inventory.CurrentInventory.Contains(theItem)) return;
+        inventory.CurrentInventory.Remove(theItem);
+        Debug.Log("Removed Item: " + theItem.Type);
     }
 
-    public Item GetItem(ItemType type)
+    public void RemoveAllFromInventory()
     {
-        for (var i = 0; i < inventory.InventoryCap; i++)
-        {
-            if (inventory.CurrentInventory[i].Type == type)
-            {
-                return inventory.CurrentInventory[i];
-            }
-        }
-        var nullitem = new Item { Type = ItemType.None };
-        return nullitem;
-    }
-
-    private int FindFreeItemSlot()
-    {
-        for (var i = 0; i < inventory.InventoryCap; i++)
-        {
-            if (inventory.CurrentInventory[i].Type == ItemType.None)
-                return i;
-        }
-        return -1;
+        if (inventory.CurrentInventory == null) return;
+        inventory.CurrentInventory.Clear();
     }
 }

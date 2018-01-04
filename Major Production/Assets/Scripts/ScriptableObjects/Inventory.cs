@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace ScriptableObjects
 {
-    [CreateAssetMenu(fileName = "Inventory", menuName = "Item/Inventory")]
+    [CreateAssetMenu(fileName = "Inventory", menuName = "Inventory")]
     public class Inventory : ScriptableObject
     {
         public int InventoryCap = 10;

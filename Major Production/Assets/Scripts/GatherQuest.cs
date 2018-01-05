@@ -11,10 +11,13 @@ public enum Objective
 }
 public class GatherQuest : MonoBehaviour
 {
+    [Header("Gather Item")]
     public Objective Objective;
+    [Header("Gather Quest")]
     public Quest gatherQuest;
+    [Header("Gather Amount")]
     public int GatherAmount;
-
+    [Header("Active Quest")]
     public List<Quest> ActiveQuests;
     private GameObject player;
 
@@ -42,10 +45,12 @@ public class GatherQuest : MonoBehaviour
         quest.QuestObjective = objective;
         quest.Progess = QuestProgess.Active;
         quest.RequiredAmount = requiredAmount;
+
         if(Objective == Objective.Wood)
             quest.CurrentAmount = player.GetComponent<InventoryBehaviour>().Wood.Count;
         else if (Objective == Objective.Stone)
             quest.CurrentAmount = player.GetComponent<InventoryBehaviour>().Stones.Count;
+
         if (quest.CurrentAmount == requiredAmount)
         {
             Debug.Log(quest.Title + " Complete");

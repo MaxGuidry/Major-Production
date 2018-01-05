@@ -1,16 +1,24 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using ScriptableObjects;
 
-public class ItemInteractionBehaviour : MonoBehaviour
+
+[Serializable]
+public class CollisionEvent : UnityEvent<Item> { }
+
+public class ItemInteractionBehaviour : MonoBehaviour, IDamageable
 {
     public Item item;
-    private GameObject _player;
+    public CollisionEvent collisionEvent;
+    //private GameObject _player;
 
     void Start()
     {
-        _player = GameObject.FindGameObjectWithTag("Player");
+        collisionEvent = new CollisionEvent();
+        //_player = GameObject.FindGameObjectWithTag("Player");
     }
     void Update()
     {
@@ -36,7 +44,18 @@ public class ItemInteractionBehaviour : MonoBehaviour
     {
         if (!other.CompareTag("Player"))
             return;
+        collisionEvent.Invoke(item);
         other.GetComponent<InventoryBehaviour>().AddToInventory(item);
         Destroy(gameObject);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Die()
+    {
+        throw new NotImplementedException();
     }
 }

@@ -277,6 +277,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: a56e6035ae842e34d876ec8aaa27c90f, type: 2}
+  collisionEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: CollisionEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!23 &228332041
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -374,6 +379,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: b31bfcd18116ad740841648233ee5ee9, type: 2}
+  collisionEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: CollisionEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!23 &532272720
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -448,6 +458,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 899714312}
+  - component: {fileID: 899714313}
   m_Layer: 0
   m_Name: Enviroment
   m_TagString: Untagged
@@ -474,6 +485,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &899714313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 899714311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4008f93505feadb428cbaa8235fb45f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Cycle: {fileID: 11400000, guid: 97e4e66303add8548bac4c71b8582125, type: 2}
 --- !u!1 &951488782
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,7 +589,7 @@ GameObject:
   - component: {fileID: 1073912680}
   m_Layer: 0
   m_Name: Directional Light
-  m_TagString: Untagged
+  m_TagString: Sun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -664,6 +687,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: a56e6035ae842e34d876ec8aaa27c90f, type: 2}
+  collisionEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: CollisionEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!23 &1374163049
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -15,7 +15,7 @@ public class InventoryBehaviour : MonoBehaviour, IStorageable
     [Header("For Viewing Purposes")]
     public List<Item> ActiveInventory;
 
-    public static OnInvChange InvChange;
+    public OnInvChange InvChange;
 
     [HideInInspector]
     public List<ItemType> Stones;

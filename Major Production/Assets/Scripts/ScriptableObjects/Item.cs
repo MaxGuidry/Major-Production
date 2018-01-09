@@ -13,5 +13,6 @@ namespace ScriptableObjects
     public class Item : ScriptableObject
     {
         public ItemType Type;
+        public Sprite icon = null;
     }
 }

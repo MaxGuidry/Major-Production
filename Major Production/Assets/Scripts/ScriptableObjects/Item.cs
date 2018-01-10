@@ -14,5 +14,11 @@ namespace ScriptableObjects
     {
         public ItemType Type;
         public Sprite icon = null;
+
+        public virtual void UseItem()
+        {
+            //DO SOMETHING
+            Debug.Log("Using " + name);
+        }
     }
 }

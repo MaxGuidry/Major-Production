@@ -15,6 +15,7 @@ public class InventoryBehaviour : MonoBehaviour, IStorageable
     [Header("For Viewing Purposes")]
     public List<Item> ActiveInventory;
 
+    public InventoryUIBehaviour InventoryUi;
     public OnInvChange InvChange;
 
     [HideInInspector]
@@ -41,7 +42,7 @@ public class InventoryBehaviour : MonoBehaviour, IStorageable
     {
         if (inventory.CurrentInventory.Count >= inventory.InventoryCap) return;
         inventory.CurrentInventory.Add(newItem);
-
+        InventoryUi.UpdateUI();
         InvChange.Invoke(inventory);
 
         if(newItem.Type == ItemType.Stone)

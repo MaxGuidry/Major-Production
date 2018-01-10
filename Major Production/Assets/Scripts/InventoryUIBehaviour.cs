@@ -5,20 +5,31 @@ using UnityEngine;
 
 public class InventoryUIBehaviour : MonoBehaviour {
 
-    private InventoryBehaviour test;
+    public InventoryBehaviour inventory;
+
+    public Transform itemsParent;
+
+    private InventorySlot[] slots;
     // Use this for initialization
-    void Start () {
-        
-    }
-	
-	// Update is called once per frame
-	void Update () {
-	    test.InvChange.Invoke(UpdateUI());
+    void Start ()
+    {
+        slots = itemsParent.GetComponentsInChildren<InventorySlot>();
     }
 
-    public Inventory UpdateUI()
+    public void UpdateUI()
     {
-        Debug.Log("Update UI");
-        return test.inventory;
+        slots = itemsParent.GetComponentsInChildren<InventorySlot>();
+
+        for (var i = 0; i < slots.Length; i++)
+        {
+            if (i < inventory.ActiveInventory.Count)
+            {
+                slots[i].AddItem(inventory.ActiveInventory[i]);
+            }
+            else
+            {
+                slots[i].ClearSlot();
+            }
+        }
     }
 }

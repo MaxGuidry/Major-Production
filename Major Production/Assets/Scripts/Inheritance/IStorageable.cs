@@ -2,7 +2,7 @@
 
 public interface IStorageable
 {
-    void AddToInventory(Item newItem);
+    void AddToInventory(Item theItem);
     void RemoveFromInventory(Item theItem);
     void RemoveAllFromInventory();
 }

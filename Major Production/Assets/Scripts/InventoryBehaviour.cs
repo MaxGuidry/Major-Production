@@ -59,6 +59,13 @@ public class InventoryBehaviour : MonoBehaviour, IStorageable
         if (!inventory.CurrentInventory.Contains(theItem)) return;
         inventory.CurrentInventory.Remove(theItem);
         InvChange.Invoke(inventory);
+
+        if (theItem.Type == ItemType.Stone)
+            Stones.Remove(theItem.Type);
+        else if (theItem.Type == ItemType.Wood)
+            Wood.Remove(theItem.Type);
+
+
         Debug.Log("Removed Item: " + theItem.Type);
     }
 
@@ -66,5 +73,7 @@ public class InventoryBehaviour : MonoBehaviour, IStorageable
     {
         if (inventory.CurrentInventory == null) return;
         inventory.CurrentInventory.Clear();
+        Stones.Clear();
+        Wood.Clear();
     }
 }

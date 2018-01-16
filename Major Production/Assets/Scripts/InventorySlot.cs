@@ -10,18 +10,20 @@ public class InventorySlot : MonoBehaviour
 
     private Item item;
 
-    public void AddItem(Item newItem)
+    public void UIItemManager(Item newItem, bool AddItem)
     {
-        item = newItem;
-        icon.sprite = item.icon;
-        icon.enabled = true;
-    }
-
-    public void ClearSlot()
-    {
-        item = null;
-        icon.sprite = null;
-        icon.enabled = false;
+        if (AddItem)
+        {
+            item = newItem;
+            icon.sprite = item.icon;
+            icon.enabled = true;
+        }
+        else if (!AddItem)
+        {
+            item = null;
+            icon.sprite = null;
+            icon.enabled = false;
+        }
     }
 
     public void UseItem()

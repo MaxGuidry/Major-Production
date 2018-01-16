@@ -13,19 +13,17 @@ public class ItemInteractionBehaviour : MonoBehaviour
 {
     public Item item;
     public CollisionEvent collisionEvent;
-    //private GameObject _player;
-
     void Start()
     {
         collisionEvent = new CollisionEvent();
-        //_player = GameObject.FindGameObjectWithTag("Player");
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        if (!other.CompareTag("Player"))
-            return;
-        collisionEvent.Invoke(item);
-        other.GetComponent<InventoryBehaviour>().AddToInventory(item);
-        Destroy(gameObject);
+        if (other.gameObject.name == "Player")
+        {
+            collisionEvent.Invoke(item);
+            other.gameObject.GetComponent<InventoryBehaviour>().AddToInventory(item);
+            Destroy(gameObject);
+        }
     }
 }

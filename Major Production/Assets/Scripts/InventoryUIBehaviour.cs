@@ -24,11 +24,11 @@ public class InventoryUIBehaviour : MonoBehaviour {
         {
             if (i < inventory.ActiveInventory.Count)
             {
-                slots[i].AddItem(inventory.ActiveInventory[i]);
+                slots[i].UIItemManager(inventory.ActiveInventory[i], true);
             }
             else
             {
-                slots[i].ClearSlot();
+                slots[i].UIItemManager(null, false);
             }
         }
     }

@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class PlanetTest : MonoBehaviour
 {
-    public float gravity;
+    public float gravity = -9.8f;
 
-    public void Attract(Transform player)
+    public void Attract(Rigidbody player)
     {
         var gravityUp = (player.position - transform.position).normalized;
-        var localUp = player.up;
+        var localUp = player.transform.up;
 
-        player.GetComponent<Rigidbody>().AddForce(gravityUp * gravity);
-
-        var targetRotation = Quaternion.FromToRotation(localUp, gravityUp) * player.rotation;
-
-        player.rotation = Quaternion.Slerp(player.rotation, targetRotation, 50f * Time.deltaTime);
+        // Apply downwards gravity to body
+        player.AddForce(gravityUp * gravity);
+        // Allign bodies up axis with the centre of planet
+        player.rotation = Quaternion.FromToRotation(localUp, gravityUp) * player.rotation;
     }
 }

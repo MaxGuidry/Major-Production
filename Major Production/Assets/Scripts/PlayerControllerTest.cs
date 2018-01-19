@@ -1,44 +1,51 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
-public class PlayerControllerTest : MonoBehaviour {
-    public float walkSpeed;
-    public float runSpeed;
+public class PlayerControllerTest : MonoBehaviour
+{
+    public GameObject UiInventory;
+    private Transform _camTransform;
+    private float _currentSpeed;
+    public float RunSpeed;
 
-    public float turnSmoothTime;
-    float turnSmoothVelocity;
+    public float SpeedSmoothTime;
+    private float _speedSmoothVelocity;
 
-    public float speedSmoothTime;
-    float speedSmoothVelocity;
-    float currentSpeed;
+    public float TurnSmoothTime;
+    private float _turnSmoothVelocity;
 
-    Transform camTransform;
-	// Use this for initialization
-	void Start () {
-        walkSpeed = 2;
-        runSpeed = 6;
+    public float WalkSpeed;
 
-        turnSmoothTime = 0.2f;
-        speedSmoothTime = 0.1f;
-        camTransform = Camera.main.transform;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    // Use this for initialization
+    private void Start()
+    {
+        WalkSpeed = 2;
+        RunSpeed = 6;
+
+        TurnSmoothTime = 0.2f;
+        SpeedSmoothTime = 0.1f;
+        _camTransform = Camera.main.transform;
+        UiInventory.SetActive(false);
+    }
+
+    // Update is called once per frame
+    private void Update()
+    {
+        UiInventory.SetActive(Input.GetKey(KeyCode.Tab));
         var input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         var inputDir = input.normalized;
 
         if (inputDir != Vector3.zero)
         {
-            var targetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + camTransform.eulerAngles.y;
-            transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothTime);
+            var targetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + _camTransform.eulerAngles.y;
+            transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation,
+                                        ref _turnSmoothVelocity, TurnSmoothTime);
         }
 
         var running = Input.GetKey(KeyCode.LeftShift);
-        var targetSpeed = ((running) ? runSpeed: walkSpeed) *inputDir.magnitude;
-        currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedSmoothVelocity, speedSmoothTime);
+        var targetSpeed = (running ? RunSpeed : WalkSpeed) * inputDir.magnitude;
+        _currentSpeed = Mathf.SmoothDamp(_currentSpeed, targetSpeed, ref _speedSmoothVelocity, SpeedSmoothTime);
 
-        transform.Translate(transform.forward * currentSpeed * Time.deltaTime, Space.World);
-	}
+        transform.Translate(transform.forward * _currentSpeed * Time.deltaTime, Space.World);
+    }
 }

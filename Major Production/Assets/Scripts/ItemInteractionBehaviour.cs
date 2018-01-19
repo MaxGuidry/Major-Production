@@ -16,6 +16,20 @@ public class ItemInteractionBehaviour : MonoBehaviour
     void Start()
     {
         collisionEvent = new CollisionEvent();
+        if (item == (item.Type == ItemType.Stone))
+        {
+            GetComponent<Renderer>().material.color = Color.grey;
+            gameObject.tag = "Stone";
+        }
+
+        if (item == (item.Type == ItemType.Wood))
+        {
+            GetComponent<Renderer>().material.color = Color.green;
+            gameObject.tag = "Wood";
+        }
+
+        if (item == (item.Type == ItemType.Chaser))
+            GetComponent<Renderer>().material.color = Color.red;
     }
     private void OnCollisionEnter(Collision other)
     {

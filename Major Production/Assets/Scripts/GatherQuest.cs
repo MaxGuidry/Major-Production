@@ -1,7 +1,8 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 using ScriptableObjects;
+using UnityEngine;
+using UnityEngine.UI;
 
 public enum Objective
 {
@@ -9,47 +10,88 @@ public enum Objective
     Wood = 1,
     Stone = 2
 }
+
 public class GatherQuest : MonoBehaviour
 {
-    [Header("Gather Item")]
-    public Objective Objective;
-    [Header("Gather Quest")]
-    public Quest gatherQuest;
-    [Header("Gather Amount")]
-    public int GatherAmount;
-    [Header("Active Quest")]
-    public List<Quest> ActiveQuests;
-    private GameObject player;
+    [Header("Active Quest")] public List<Quest> ActiveQuests;
 
-    void Start()
+    [Header("Gather Amount")] public int GatherAmount;
+
+    [Header("Gather Quest")] public Quest gatherQuest;
+
+    [Header("Gather Item")] public Objective objective;
+
+    private GameObject _player;
+    public Text QuestText;
+
+    private void Start()
     {
-        player = gameObject;
+        objective = Objective.None;
+        _player = gameObject;
         ActiveQuests = new List<Quest>();
     }
 
-    void Update()
+    private void Update()
     {
+        if (objective == Objective.None)
+        {
+            QuestText.text = "No Active Quest";
+            QuestText.resizeTextForBestFit = true;
+        }
 
-        if(Objective == Objective.Wood)
+        if (objective == Objective.Wood)
+        {
             AddQuest(gatherQuest, "GatherLog", "Gather Log", GatherAmount);
-        else if (Objective == Objective.Stone)
+            if (gatherQuest != null)
+            {
+                QuestText.text = "Current Quest:" + gatherQuest.Description + " " + gatherQuest.CurrentAmount + "/" +
+                                 gatherQuest.RequiredAmount;
+                QuestText.resizeTextForBestFit = true;
+            }
+            else
+            {
+                objective = Objective.None;
+            }
+        }
+        else if (objective == Objective.Stone)
+        {
             AddQuest(gatherQuest, "GatherStone", "Gather Stone", GatherAmount);
+            if (gatherQuest != null)
+            {
+                QuestText.text = "Current Quest:" + gatherQuest.Description + " " + gatherQuest.CurrentAmount + "/" +
+                                 gatherQuest.RequiredAmount;
+                QuestText.resizeTextForBestFit = true;
+            }
+            else
+            {
+                objective = Objective.None;
+            }
+        }
     }
 
-    public void AddQuest(Quest quest, string title, string objective, int requiredAmount)
+    public void AddQuest(Quest quest, string title, string description, int requiredAmount)
     {
         if (quest == null) return;
         if (!ActiveQuests.Contains(quest))
             ActiveQuests.Add(quest);
         quest.Title = title;
-        quest.QuestObjective = objective;
+        quest.Description = description;
         quest.Progess = QuestProgess.Active;
         quest.RequiredAmount = requiredAmount;
 
-        if(Objective == Objective.Wood)
-            quest.CurrentAmount = player.GetComponent<InventoryBehaviour>().Wood.Count;
-        else if (Objective == Objective.Stone)
-            quest.CurrentAmount = player.GetComponent<InventoryBehaviour>().Stones.Count;
+        switch (this.objective)
+        {
+            case Objective.Wood:
+                quest.CurrentAmount = _player.GetComponent<InventoryBehaviour>().Wood.Count;
+                break;
+            case Objective.Stone:
+                quest.CurrentAmount = _player.GetComponent<InventoryBehaviour>().Stones.Count;
+                break;
+            case Objective.None:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
 
         if (quest.CurrentAmount == requiredAmount)
         {

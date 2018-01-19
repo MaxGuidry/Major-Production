@@ -7,7 +7,8 @@ namespace ScriptableObjects
     {
         None = 0,
         Stone = 1,
-        Wood = 2
+        Wood = 2,
+        Chaser = 3
     }
     [CreateAssetMenu(fileName = "Item", menuName = "Item")]
     public class Item : ScriptableObject

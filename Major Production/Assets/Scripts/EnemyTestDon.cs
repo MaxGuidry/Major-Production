@@ -4,22 +4,19 @@ using UnityEngine;
 
 public class EnemyTestDon : MonoBehaviour, IDamageable
 {
-    public EntityStats EnemyTest;
+    public GameObject target;
 
-    public int Damage;
-    public float InitalStatAmount;
+    public float speed;
     // Use this for initialization
     void Start () {
-        //foreach (var stat in EnemyTest.NeedsList)
-        //{
-        //    stat = InitalStatAmount;
-        //}
+        target = GameObject.FindGameObjectWithTag("Player");
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+	    var step = speed * Time.deltaTime;
+	    transform.position = Vector3.MoveTowards(transform.position, target.transform.position, step);
+    }
 
     public void TakeDamage(int damage)
     {

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ScriptableObjects;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 [Serializable]
 public class OnInvChange : UnityEvent<Inventory> { }
@@ -45,10 +46,22 @@ public class InventoryBehaviour : MonoBehaviour, IStorageable
         InventoryUi.UpdateUI();
         InvChange.Invoke(inventory);
 
-        if(newItem.Type == ItemType.Stone)
-            Stones.Add(newItem.Type);
-        else if (newItem.Type == ItemType.Wood)
-            Wood.Add(newItem.Type);
+        switch (newItem.Type)
+        {
+            case ItemType.Stone:
+                Stones.Add(newItem.Type);
+                break;
+            case ItemType.Wood:
+                Wood.Add(newItem.Type);
+                break;
+            case ItemType.Chaser:
+                SceneManager.LoadScene("100.Inventory");
+                break;
+            case ItemType.None:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
 
         Debug.Log("Item Added: " + newItem.Type);
     }
@@ -60,10 +73,19 @@ public class InventoryBehaviour : MonoBehaviour, IStorageable
         inventory.CurrentInventory.Remove(theItem);
         InvChange.Invoke(inventory);
 
-        if (theItem.Type == ItemType.Stone)
-            Stones.Remove(theItem.Type);
-        else if (theItem.Type == ItemType.Wood)
-            Wood.Remove(theItem.Type);
+        switch (theItem.Type)
+        {
+            case ItemType.Stone:
+                Stones.Remove(theItem.Type);
+                break;
+            case ItemType.Wood:
+                Wood.Remove(theItem.Type);
+                break;
+            case ItemType.None:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
 
 
         Debug.Log("Removed Item: " + theItem.Type);

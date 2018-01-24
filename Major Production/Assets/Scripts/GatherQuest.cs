@@ -26,7 +26,7 @@ public class GatherQuest : MonoBehaviour
 
     private void Start()
     {
-        objective = Objective.None;
+        objective = Objective.Wood;
         _player = gameObject;
         ActiveQuests = new List<Quest>();
     }

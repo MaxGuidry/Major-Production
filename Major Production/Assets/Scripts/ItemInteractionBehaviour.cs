@@ -33,7 +33,7 @@ public class ItemInteractionBehaviour : MonoBehaviour
     }
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.name == "Player")
+        if (other.gameObject.tag == "Player")
         {
             collisionEvent.Invoke(item);
             other.gameObject.GetComponent<InventoryBehaviour>().AddToInventory(item);

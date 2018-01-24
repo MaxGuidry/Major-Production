@@ -209,7 +209,6 @@ public class CharacterMovement : MonoBehaviour
 
         //rb.AddForce(velocity,ForceMode.VelocityChange);
         this.transform.position += velocity * Time.deltaTime;
-        rb.AddForce(((currentPlanet.center - this.transform.position).normalized * currentPlanet.gravity));
         // rb.AddForce(-this.transform.up * 10f);
 
 

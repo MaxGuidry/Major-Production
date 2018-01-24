@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlanetBehaviour : MonoBehaviour
 {
-
+    public List<Rigidbody> rbs = new List<Rigidbody>();
     public Planet planet;
 	// Use this for initialization
     void Awake()
@@ -14,12 +15,23 @@ public class PlanetBehaviour : MonoBehaviour
         g.transform.position = planet.center;
         //g.transform.localScale = new Vector3(.1f,.1f,.1f);
     }
-	void Start () {
-		
+	void Start ()
+	{
+	    rbs = GameObject.FindObjectsOfType<Rigidbody>().ToList();
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
+	void Update ()
+	{
+	    foreach (var rb in rbs)
+	    {
+	         
+	    }
 	}
+
+    void Attract(Rigidbody rb)
+    {
+        rb.AddForce(((planet.center - this.transform.position).normalized * planet.gravity));
+
+    }
 }

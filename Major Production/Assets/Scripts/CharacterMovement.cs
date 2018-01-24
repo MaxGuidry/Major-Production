@@ -8,7 +8,7 @@ public class CharacterMovement : MonoBehaviour
 
     public float WalkSpeed = 1;
     public float RunSpeed = 2;
-
+    public GameObject UiInventory;
     private Vector3 acceleration = Vector3.zero;
     private Vector3 velocity = Vector3.zero;
     private Vector3 position;
@@ -23,9 +23,13 @@ public class CharacterMovement : MonoBehaviour
 
     void Start()
     {
-
+        UiInventory.SetActive(false);
     }
 
+    void Update()
+    {
+        UiInventory.SetActive(Input.GetKey(InputMap.KeyBinds["inventory"]));
+    }
     // Update is called once per frame
     void FixedUpdate()
     {

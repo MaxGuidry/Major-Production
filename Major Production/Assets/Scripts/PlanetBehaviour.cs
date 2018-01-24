@@ -25,7 +25,7 @@ public class PlanetBehaviour : MonoBehaviour
 	{
 	    foreach (var rb in rbs)
 	    {
-	         
+	         Attract(rb);
 	    }
 	}
 

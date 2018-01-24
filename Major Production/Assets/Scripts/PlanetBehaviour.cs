@@ -31,6 +31,8 @@ public class PlanetBehaviour : MonoBehaviour
 
     void Attract(Rigidbody rb)
     {
+        if (!rb)
+            rbs.Remove(rb);
         rb.AddForce(((planet.center - rb.transform.position).normalized * planet.gravity));
 
     }

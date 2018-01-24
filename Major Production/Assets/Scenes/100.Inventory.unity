@@ -243,6 +243,7 @@ GameObject:
   - component: {fileID: 207258936}
   - component: {fileID: 207258937}
   - component: {fileID: 207258935}
+  - component: {fileID: 207258938}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -398,6 +399,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planet: {fileID: 531900251}
+--- !u!114 &207258938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 207258928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38de8316ac68e9e4999fee6a5d5d77db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  damage:
+    baseValue: 0
+  armor:
+    baseValue: 3
 --- !u!1 &228332039
 GameObject:
   m_ObjectHideFlags: 0

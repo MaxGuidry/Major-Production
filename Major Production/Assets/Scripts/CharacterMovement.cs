@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
@@ -19,6 +20,7 @@ public class CharacterMovement : MonoBehaviour
     {
         rb = gameObject.GetComponent<Rigidbody>();
     }
+
     void Start()
     {
 
@@ -27,28 +29,19 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //Quaternion origin = this.transform.rotation;
-        //this.transform.forward = Camera.main.transform.forward;
-        //int i = 0;
-        //while (Vector3.Dot((this.transform.position - currentPlanet.center).normalized, this.transform.up) < .9f)
 
-        //{
-        //    this.transform.rotation *= new Quaternion(Mathf.Sin(5f / 2f), 0, 0, Mathf.Cos(5 / 2f));
-        //    i++;
-        //    if (i > 200)
-        //        break;
-        //}
-
-        this.transform.up = (this.transform.position - currentPlanet.center).normalized;
-        //Vector3 cross = Vector3.Cross(new Vector3(0,1,0),this.transform.up);
-        //Vector3 forward = Vector3.Cross(this.transform.up,cross);
-        //Debug.Log(forward);
-        //this.transform.forward = forward;
         float Speed = (Input.GetKey(InputMap.KeyBinds["sprint"])) ? RunSpeed : WalkSpeed;
-        Vector3 t = Vector3.ProjectOnPlane(Camera.main.transform.forward, this.transform.up);
-        acceleration = t; //Camera.main.transform.forward;//new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z);
 
-        if (Input.GetKey(InputMap.KeyBinds["forward"]) && Input.GetKey(InputMap.KeyBinds["left"]) && velocity.magnitude < Speed)
+
+        // Quaternion quat = this.transform.rotation * new Quaternion(this.transform.up.x * Mathf.Sin(dif / 2f), this.transform.up.y * Mathf.Sin(dif / 2f), this.transform.up.z * Mathf.Sin(dif / 2f), Mathf.Cos(dif / 2f));
+        //this.transform.rotation = Quaternion.Slerp(this.transform.rotation, quat, .25f);
+        Vector3 t = Vector3.ProjectOnPlane(Camera.main.transform.forward, this.transform.up);
+
+        acceleration =
+            t; // Camera.main.transform.forward;//new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z);
+
+        if (Input.GetKey(InputMap.KeyBinds["forward"]) && Input.GetKey(InputMap.KeyBinds["left"]) &&
+            velocity.magnitude < Speed)
         {
             float mag = acceleration.magnitude;
             float angle = -45 * Mathf.Deg2Rad;
@@ -67,7 +60,8 @@ public class CharacterMovement : MonoBehaviour
             velocity = velocity.normalized * Speed;
         }
 
-        else if (Input.GetKey(InputMap.KeyBinds["forward"]) && Input.GetKey(InputMap.KeyBinds["right"]) && velocity.magnitude < Speed)
+        else if (Input.GetKey(InputMap.KeyBinds["forward"]) && Input.GetKey(InputMap.KeyBinds["right"]) &&
+                 velocity.magnitude < Speed)
         {
             float mag = acceleration.magnitude;
             float angle = 45 * Mathf.Deg2Rad;
@@ -85,7 +79,8 @@ public class CharacterMovement : MonoBehaviour
             velocity += acceleration;
             velocity = velocity.normalized * Speed;
         }
-        else if (Input.GetKey(InputMap.KeyBinds["back"]) && Input.GetKey(InputMap.KeyBinds["left"]) && velocity.magnitude < Speed)
+        else if (Input.GetKey(InputMap.KeyBinds["back"]) && Input.GetKey(InputMap.KeyBinds["left"]) &&
+                 velocity.magnitude < Speed)
         {
             float mag = acceleration.magnitude;
             float angle = -135 * Mathf.Deg2Rad;
@@ -103,7 +98,8 @@ public class CharacterMovement : MonoBehaviour
             velocity += acceleration;
             velocity = velocity.normalized * Speed;
         }
-        else if (Input.GetKey(InputMap.KeyBinds["back"]) && Input.GetKey(InputMap.KeyBinds["right"]) && velocity.magnitude < Speed)
+        else if (Input.GetKey(InputMap.KeyBinds["back"]) && Input.GetKey(InputMap.KeyBinds["right"]) &&
+                 velocity.magnitude < Speed)
         {
             float mag = acceleration.magnitude;
             float angle = 135 * Mathf.Deg2Rad;
@@ -215,19 +211,39 @@ public class CharacterMovement : MonoBehaviour
         this.transform.position += velocity * Time.deltaTime;
         rb.AddForce(((currentPlanet.center - this.transform.position).normalized * currentPlanet.gravity));
         // rb.AddForce(-this.transform.up * 10f);
-        Debug.DrawLine(this.transform.position, this.transform.position + ((currentPlanet.center - this.transform.position)));
-        Debug.DrawLine(this.transform.position, this.transform.position + velocity, Color.red);
-        Debug.DrawLine(this.transform.position, this.transform.position + acceleration, Color.blue);
-        Debug.DrawLine(this.transform.position, this.transform.position + this.transform.forward, Color.cyan);
+
+
         //this.transform.position = Vector3.Lerp(this.transform.position,rb.position,.2f);
-        
+
         //this.transform.position = position;
         //rb.position += position;
         Quaternion q = this.transform.rotation;
-        this.transform.LookAt(this.transform.position + acceleration.normalized);
-        this.transform.rotation = Quaternion.Slerp(q, this.transform.rotation, .2f);
+        //this.transform.LookAt(this.transform.position + acceleration.normalized);
+        //this.transform.rotation = Quaternion.Slerp(q, this.transform.rotation, .2f);
 
     }
+
+    void LateUpdate()
+    {
+
+        this.transform.up = (this.transform.position - currentPlanet.center).normalized;
+        Vector3 t = Vector3.ProjectOnPlane(Camera.main.transform.forward, this.transform.up);
+
+        Debug.DrawLine(this.transform.position, this.transform.position + t, Color.magenta);
+        var dif = Vector3.Angle(this.transform.forward, t);
+        dif *= Mathf.Deg2Rad;
+        // this.transform.up = (this.transform.position - currentPlanet.center).normalized;
+        Quaternion q = transform.rotation = Quaternion.LookRotation(t, this.transform.up);
+        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, q, .25f);
+
+        Debug.DrawLine(this.transform.position,
+            this.transform.position + ((currentPlanet.center - this.transform.position)));
+        Debug.DrawLine(this.transform.position, this.transform.position + velocity, Color.red);
+        Debug.DrawLine(this.transform.position, this.transform.position + acceleration, Color.blue);
+        Debug.DrawLine(this.transform.position, this.transform.position + this.transform.forward, Color.cyan);
+
+    }
+
 
     void OnCollisionEnter(Collision collision)
     {

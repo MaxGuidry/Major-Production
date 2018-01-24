@@ -10,6 +10,9 @@ public class PlanetBehaviour : MonoBehaviour
     void Awake()
     {
         planet.Initialize(this.transform.position, this.transform.localScale.x / 2f);
+        GameObject g = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        g.transform.position = planet.center;
+        //g.transform.localScale = new Vector3(.1f,.1f,.1f);
     }
 	void Start () {
 		

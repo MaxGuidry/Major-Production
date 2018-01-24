@@ -7,7 +7,9 @@ public class PlanetBehaviour : MonoBehaviour
 {
     public List<Rigidbody> rbs = new List<Rigidbody>();
     public Planet planet;
-	// Use this for initialization
+    public List<Rigidbody> rbrs = new List<Rigidbody>();
+
+    // Use this for initialization
     void Awake()
     {
         planet.Initialize(this.transform.position, this.transform.localScale.x / 2f);
@@ -23,16 +25,25 @@ public class PlanetBehaviour : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+
 	    foreach (var rb in rbs)
 	    {
 	         Attract(rb);
+	    }
+
+	    foreach (var rbr in rbrs)
+	    {
+	        rbs.Remove(rbr);
 	    }
 	}
 
     void Attract(Rigidbody rb)
     {
         if (!rb)
-            rbs.Remove(rb);
+        {
+            rbrs.Add(rb);
+            return;
+        }
         rb.AddForce(((planet.center - rb.transform.position).normalized * planet.gravity));
 
     }

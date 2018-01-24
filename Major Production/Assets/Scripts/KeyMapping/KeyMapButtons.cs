@@ -44,6 +44,10 @@ public class KeyMapButtons : MonoBehaviour
         int k = 5;
         foreach (var keyCode in KeyOptions.keysList)
         {
+            if (!ButtonPrefab)
+                break;
+            if (!menu)
+                break;
             GameObject g = Instantiate(ButtonPrefab);
             g.transform.SetParent(menu.gameObject.transform);
             g.transform.position = g.transform.parent.position;
@@ -102,7 +106,7 @@ public class KeyMapButtons : MonoBehaviour
 
     void OnEnable()
     {
-        InputMap.LoadSettings();
+        //InputMap.LoadSettings();
     }
     private void OnGUI()
     {

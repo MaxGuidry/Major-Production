@@ -45,6 +45,8 @@ public class PlanetBehaviour : MonoBehaviour
             return;
         }
         rb.AddForce(((planet.center - rb.transform.position).normalized * planet.gravity));
+        rb.gameObject.transform.up = (this.transform.position - currentPlanet.center).normalized;
+		Quaternion q = Quaternion.LookRotation(this.transform.forward, this.transform.up);
 
     }
 }

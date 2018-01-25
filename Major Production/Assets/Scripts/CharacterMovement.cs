@@ -236,7 +236,7 @@ public class CharacterMovement : MonoBehaviour
         var dif = Vector3.Angle(this.transform.forward, t);
         dif *= Mathf.Deg2Rad;
         // this.transform.up = (this.transform.position - currentPlanet.center).normalized;
-        Quaternion q = transform.rotation = Quaternion.LookRotation(t, this.transform.up);
+        Quaternion q = Quaternion.LookRotation(t, this.transform.up);
         this.transform.rotation = Quaternion.Slerp(this.transform.rotation, q, .25f);
 
         Debug.DrawLine(this.transform.position,

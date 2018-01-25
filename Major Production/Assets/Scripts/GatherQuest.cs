@@ -13,6 +13,7 @@ public enum Objective
 
 public class GatherQuest : MonoBehaviour
 {
+    private GameObject _playerStat;
     [Header("Active Quest")] public List<Quest> ActiveQuests;
 
     [Header("Gather Amount")] public int GatherAmount;
@@ -26,7 +27,8 @@ public class GatherQuest : MonoBehaviour
 
     private void Start()
     {
-        objective = Objective.Wood;
+        _playerStat = GameObject.FindGameObjectWithTag("Player");
+        objective = Objective.Stone;
         _player = gameObject;
         ActiveQuests = new List<Quest>();
     }
@@ -41,7 +43,7 @@ public class GatherQuest : MonoBehaviour
 
         if (objective == Objective.Wood)
         {
-            AddQuest(gatherQuest, "GatherLog", "Gather Log", GatherAmount);
+            AddQuest(gatherQuest, "GatherLog", "Gather Log", GatherAmount, 10);
             if (gatherQuest != null)
             {
                 QuestText.text = "Current Quest:" + gatherQuest.Description + " " + gatherQuest.CurrentAmount + "/" +
@@ -55,7 +57,7 @@ public class GatherQuest : MonoBehaviour
         }
         else if (objective == Objective.Stone)
         {
-            AddQuest(gatherQuest, "GatherStone", "Gather Stone", GatherAmount);
+            AddQuest(gatherQuest, "GatherStone", "Gather Stone", GatherAmount, 10);
             if (gatherQuest != null)
             {
                 QuestText.text = "Current Quest:" + gatherQuest.Description + " " + gatherQuest.CurrentAmount + "/" +
@@ -69,7 +71,7 @@ public class GatherQuest : MonoBehaviour
         }
     }
 
-    public void AddQuest(Quest quest, string title, string description, int requiredAmount)
+    public void AddQuest(Quest quest, string title, string description, int requiredAmount, int exp)
     {
         if (quest == null) return;
         if (!ActiveQuests.Contains(quest))
@@ -99,6 +101,9 @@ public class GatherQuest : MonoBehaviour
             quest.Progess = QuestProgess.Complete;
             ActiveQuests.Remove(quest);
             gatherQuest = null;
+            _playerStat.GetComponent<PlayerStat>().ExpStat.AddModifier(exp);
+            _playerStat.GetComponent<PlayerStat>().ArmorStat.AddModifier(5);
+            _playerStat.GetComponent<PlayerStat>().ExpStat.GetValue();
         }
     }
 }

@@ -11,8 +11,9 @@ public class PlayerStat : MonoBehaviour, IDamageable
         private set;
     }
 
-    public Stat damage;
-    public Stat armor;
+    public Stat DamageStat;
+    public Stat ArmorStat;
+    public Stat ExpStat;
 
     private void Awake()
     {
@@ -21,11 +22,11 @@ public class PlayerStat : MonoBehaviour, IDamageable
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
-            TakeDamage(10);
+            TakeDamage(20);
     }
     public void TakeDamage(int damage)
     {
-        damage -= armor.GetValue();
+        damage -= ArmorStat.GetValue();
         damage = Mathf.Clamp(damage, 0, int.MaxValue);
 
         CurrentHealth -= damage;

@@ -11,26 +11,37 @@ public class CollisionEvent : UnityEvent<Item> { }
 
 public class ItemInteractionBehaviour : MonoBehaviour
 {
+    public float SpoilerTime;
     public Item item;
     public CollisionEvent collisionEvent;
     void Start()
     {
         collisionEvent = new CollisionEvent();
         if (item == (item.Type == ItemType.Stone))
-        {
-            GetComponent<Renderer>().material.color = Color.grey;
             gameObject.tag = "Stone";
-        }
 
         if (item == (item.Type == ItemType.Wood))
-        {
-            GetComponent<Renderer>().material.color = Color.green;
             gameObject.tag = "Wood";
-        }
 
         if (item == (item.Type == ItemType.Chaser))
             GetComponent<Renderer>().material.color = Color.red;
     }
+
+    private void Update()
+    {
+        Spoiler();
+    }
+
+    public void Spoiler()
+    {
+        var timer = 0f;
+        timer += Time.time;
+        if (SpoilerTime <= 0)
+            return;
+        if (timer > SpoilerTime)
+            Destroy(gameObject);
+    }
+
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "Player")
@@ -41,3 +52,4 @@ public class ItemInteractionBehaviour : MonoBehaviour
         }
     }
 }
+

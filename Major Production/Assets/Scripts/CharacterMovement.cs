@@ -28,12 +28,40 @@ public class CharacterMovement : MonoBehaviour
 
     void Update()
     {
-        UiInventory.SetActive(Input.GetKey(InputMap.KeyBinds["inventory"]));
+       // UiInventory.SetActive(Input.GetKey(InputMap.KeyBinds["inventory"]));
     }
     // Update is called once per frame
     void FixedUpdate()
     {
-
+       // if (Input.GetAxis("A") > 0)
+       //     Debug.Log("A");
+       // if (Input.GetAxis("X") > 0)
+       //     Debug.Log("X");
+       // if (Input.GetAxis("B") > 0)
+       //     Debug.Log("B");
+       // if (Input.GetAxis("Y") > 0)
+       //     Debug.Log("Y");
+       //if(Input.GetAxis("Mouse X") > 0)
+       //    Debug.Log(Input.GetAxis("Mouse X"));
+        //if (Input.GetAxis("") > 0)
+        //    Debug.Log("");
+        //if (Input.GetAxis("") > 0)
+        //    Debug.Log("");
+        //if (Input.GetAxis("") > 0)
+        //    Debug.Log("");
+        //if (Input.GetAxis("") > 0)
+        //    Debug.Log("");
+        //if (Input.GetAxis("") > 0)
+        //    Debug.Log("");
+        //if (Input.GetAxis("") > 0)
+        //    Debug.Log("");
+        //if (Input.GetAxis("") > 0)
+        //    Debug.Log("");
+        //if (Input.GetAxis("") > 0)
+        //    Debug.Log("");
+        //if (Input.GetAxis("") > 0)
+        //    Debug.Log("");
+       
         float Speed = (Input.GetKey(InputMap.KeyBinds["sprint"])) ? RunSpeed : WalkSpeed;
 
 
@@ -41,8 +69,7 @@ public class CharacterMovement : MonoBehaviour
         //this.transform.rotation = Quaternion.Slerp(this.transform.rotation, quat, .25f);
         Vector3 t = Vector3.ProjectOnPlane(Camera.main.transform.forward, this.transform.up);
 
-        acceleration =
-            t; // Camera.main.transform.forward;//new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z);
+        acceleration = t;
 
         if (Input.GetKey(InputMap.KeyBinds["forward"]) && Input.GetKey(InputMap.KeyBinds["left"]) &&
             velocity.magnitude < Speed)
@@ -231,19 +258,13 @@ public class CharacterMovement : MonoBehaviour
 
         this.transform.up = (this.transform.position - currentPlanet.center).normalized;
         Vector3 t = Vector3.ProjectOnPlane(Camera.main.transform.forward, this.transform.up);
-
-        Debug.DrawLine(this.transform.position, this.transform.position + t, Color.magenta);
-        var dif = Vector3.Angle(this.transform.forward, t);
-        dif *= Mathf.Deg2Rad;
         // this.transform.up = (this.transform.position - currentPlanet.center).normalized;
         Quaternion q = Quaternion.LookRotation(t, this.transform.up);
-        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, q, .25f);
+        this.transform.rotation = q;// Quaternion.Slerp(this.transform.rotation, q, .25f);
 
-        Debug.DrawLine(this.transform.position,
-            this.transform.position + ((currentPlanet.center - this.transform.position)));
-        Debug.DrawLine(this.transform.position, this.transform.position + velocity, Color.red);
-        Debug.DrawLine(this.transform.position, this.transform.position + acceleration, Color.blue);
-        Debug.DrawLine(this.transform.position, this.transform.position + this.transform.forward, Color.cyan);
+        //Debug.Log(this.transform.up);
+        //Debug.DrawLine(this.transform.position, this.transform.position + t, Color.magenta);
+        //Debug.DrawLine(this.transform.position, this.transform.position + this.transform.forward, Color.cyan);
 
     }
 

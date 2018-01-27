@@ -60,6 +60,7 @@ namespace Cinemachine
                 m_VerticalAxis.Update(deltaTime);
             }
             Quaternion rot = Quaternion.Euler(m_VerticalAxis.Value, m_HorizontalAxis.Value, 0);
+            Debug.Log(rot);
             rot = rot * Quaternion.FromToRotation(Vector3.up, curState.ReferenceUp);
             curState.OrientationCorrection = curState.OrientationCorrection * rot;
 

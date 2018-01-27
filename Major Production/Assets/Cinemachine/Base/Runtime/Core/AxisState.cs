@@ -69,7 +69,7 @@ namespace Cinemachine
             m_InputAxisName = name;
             m_InputAxisValue = 0;
             m_InvertAxis = invert;
-
+            MaxFix = false;
             mCurrentSpeed = 0f;
             mMinValue = 0f;
             mMaxValue = 0f;
@@ -100,7 +100,7 @@ namespace Cinemachine
         }
 
         const float Epsilon = UnityVectorExtensions.Epsilon;
-
+        public bool MaxFix;
         /// <summary>
         /// Updates the state of this axis based on the axis defined
         /// by AxisState.m_AxisName
@@ -137,6 +137,15 @@ namespace Cinemachine
                     float a = Mathf.Abs(targetSpeed - mCurrentSpeed) / Mathf.Max(Epsilon, m_DecelTime);
                     float delta = Mathf.Min(a * deltaTime, Mathf.Abs(mCurrentSpeed));
                     mCurrentSpeed -= Mathf.Sign(mCurrentSpeed) * delta;
+                    Debug.Log(delta);
+                    
+                    if ((delta > Mathf.Epsilon || delta < -Mathf.Epsilon) && MaxFix)
+                        MaxFix = false;
+                    if (!MaxFix)
+                    {
+                        Value = 0;
+                        MaxFix = true;
+                    }
                 }
                 else 
                 {
@@ -154,7 +163,6 @@ namespace Cinemachine
             // Clamp our max speeds so we don't go crazy
             float maxSpeed = GetMaxSpeed();
             mCurrentSpeed = Mathf.Clamp(mCurrentSpeed, -maxSpeed, maxSpeed);
-
             Value += mCurrentSpeed * deltaTime;
             bool isOutOfRange = (Value > mMaxValue) || (Value < mMinValue);
             if (isOutOfRange)
@@ -172,6 +180,7 @@ namespace Cinemachine
                     mCurrentSpeed = 0f;
                 }
             }
+
             return Mathf.Abs(input) > Epsilon;
         }
 

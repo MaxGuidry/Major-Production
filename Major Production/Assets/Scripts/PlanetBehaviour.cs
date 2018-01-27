@@ -12,7 +12,7 @@ public class PlanetBehaviour : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        planet.Initialize(this.transform.position, this.transform.localScale.x / 2f);
+        planet.Initialize(this.transform.position, this.transform.localScale.x / 2f,5000);
         GameObject g = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         g.transform.position = planet.center;
         //g.transform.localScale = new Vector3(.1f,.1f,.1f);

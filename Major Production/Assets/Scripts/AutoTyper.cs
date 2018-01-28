@@ -8,37 +8,38 @@ using UnityEngine.UI;
 public class AutoTyper : MonoBehaviour
 {
     public float TypeSpeed;
-    public Text TestText;
-    public GameObject TestPanel;
+    public Text TextArea;
+    public GameObject BackgroundPanel;
     public string ChooseFile;
 
     private string path;
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         path = "Assets/Resources/" + ChooseFile + ".txt";
         StartCoroutine(AutoType());
-	}
+    }
 
-    private IEnumerator AutoType()
+    private void SetActive(bool Bool)
     {
-        TestPanel.gameObject.SetActive(true);
-        TestText.gameObject.SetActive(true);
+        BackgroundPanel.gameObject.SetActive(Bool);
+        TextArea.gameObject.SetActive(Bool);
+    }
 
+    public IEnumerator AutoType()
+    {
+        SetActive(true);
         if (ChooseFile == "")
         {
-            TestPanel.gameObject.SetActive(false);
-            TestText.gameObject.SetActive(false);
+            SetActive(false);
             yield break;
         }
-
         StreamReader reader;
-        if(File.Exists(path))
+        if (File.Exists(path))
             reader = new StreamReader(path);
         else
         {
-            TestPanel.gameObject.SetActive(false);
-            TestText.gameObject.SetActive(false);
+            SetActive(false);
             yield break;
         }
         while (true)
@@ -47,15 +48,14 @@ public class AutoTyper : MonoBehaviour
             {
                 foreach (var letter in reader.ReadLine())
                 {
-                    TestText.text += letter;
+                    TextArea.text += letter;
                     yield return new WaitForSeconds(TypeSpeed);
                 }
-                TestText.text = "";
+                TextArea.text = "";
             }
             else
             {
-                TestPanel.gameObject.SetActive(false);
-                TestText.gameObject.SetActive(false);
+                SetActive(false);
                 yield break;
             }
         }

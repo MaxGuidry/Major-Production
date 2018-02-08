@@ -6,9 +6,6 @@ using ScriptableObjects;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-[Serializable]
-public class OnInvChange : UnityEvent<Inventory> { }
-
 public class InventoryBehaviour : MonoBehaviour, IStorageable
 {
     [Space]
@@ -17,15 +14,11 @@ public class InventoryBehaviour : MonoBehaviour, IStorageable
     public List<Item> ActiveInventory;
 
     public InventoryUIBehaviour InventoryUi;
-    public OnInvChange InvChange;
+    public static InventoryEvent InvChange;
 
-    [HideInInspector]
-    public List<ItemType> Stones;
-    [HideInInspector]
-    public List<ItemType> Wood;
     void Start()
     {
-        InvChange = new OnInvChange();
+        InvChange = new InventoryEvent();
         inventory.StartingInventory = new List<Item>();
         if (inventory.InventoryCap <= 0)
         {
@@ -46,23 +39,6 @@ public class InventoryBehaviour : MonoBehaviour, IStorageable
         InventoryUi.UpdateUI();
         InvChange.Invoke(inventory);
 
-        switch (newItem.Type)
-        {
-            case ItemType.Stone:
-                Stones.Add(newItem.Type);
-                break;
-            case ItemType.Wood:
-                Wood.Add(newItem.Type);
-                break;
-            case ItemType.Chaser:
-                SceneManager.LoadScene("100.Inventory");
-                break;
-            case ItemType.None:
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
-
         Debug.Log("Item Added: " + newItem.Type);
     }
 
@@ -73,21 +49,6 @@ public class InventoryBehaviour : MonoBehaviour, IStorageable
         inventory.CurrentInventory.Remove(theItem);
         InvChange.Invoke(inventory);
 
-        switch (theItem.Type)
-        {
-            case ItemType.Stone:
-                Stones.Remove(theItem.Type);
-                break;
-            case ItemType.Wood:
-                Wood.Remove(theItem.Type);
-                break;
-            case ItemType.None:
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
-
-
         Debug.Log("Removed Item: " + theItem.Type);
     }
 
@@ -95,7 +56,5 @@ public class InventoryBehaviour : MonoBehaviour, IStorageable
     {
         if (inventory.CurrentInventory == null) return;
         inventory.CurrentInventory.Clear();
-        Stones.Clear();
-        Wood.Clear();
     }
 }

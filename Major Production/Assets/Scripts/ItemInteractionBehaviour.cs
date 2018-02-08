@@ -6,17 +6,14 @@ using UnityEngine.Events;
 using ScriptableObjects;
 
 
-[Serializable]
-public class CollisionEvent : UnityEvent<Item> { }
-
 public class ItemInteractionBehaviour : MonoBehaviour
 {
     public float SpoilerTime;
     public Item item;
     public CollisionEvent collisionEvent;
+
     void Start()
     {
-        collisionEvent = new CollisionEvent();
         if (item == (item.Type == ItemType.Stone))
             gameObject.tag = "Stone";
 
@@ -47,7 +44,8 @@ public class ItemInteractionBehaviour : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             collisionEvent.Invoke(item);
-            other.gameObject.GetComponent<InventoryBehaviour>().AddToInventory(item);
+            var ib = other.gameObject.GetComponent<IStorageable>();
+            ib.AddToInventory(item);
             Destroy(gameObject);
         }
     }

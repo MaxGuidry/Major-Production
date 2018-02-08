@@ -17,16 +17,5 @@ namespace ScriptableObjects
         public string Description;
         public QuestProgess Progess;
         public int CurrentAmount, RequiredAmount;
-
-        //public List<Item> CompletionItems;
-
-        //public void OnProgessMode(Item item)
-        //{
-        //    if(!CompletionItems.Contains(item))
-        //        return;
-        //    if(CurrentAmount == RequiredAmount)
-        //        return;
-        //    CurrentAmount++;
-        //}
     }
 }

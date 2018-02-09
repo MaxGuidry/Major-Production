@@ -28,9 +28,9 @@ public class FixCamera : MonoBehaviour
     {
 
         //transform.RotateAround(follow.transform.position,follow.transform.up, Input.GetAxis("Mouse X") * sensitivity);
-        Vector3 deltaFollow = follow.transform.position - prevPositon;
-        this.transform.position += deltaFollow;
-        this.transform.LookAt(follow.transform);
+        //Vector3 deltaFollow = follow.transform.position - prevPositon;
+        //this.transform.position += deltaFollow;
+        //this.transform.LookAt(follow.transform);
 
         //float deltaUp = Vector3.Angle(Vector3.ProjectOnPlane(prevUp, new Vector3(1, 0, 0)), Vector3.ProjectOnPlane(follow.transform.up, new Vector3(1, 0, 0)));
         //float sign = Vector3.Dot(follow.transform.forward, deltaFollow.normalized) > 0 ? 1 : -1;

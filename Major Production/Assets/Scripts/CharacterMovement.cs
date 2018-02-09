@@ -28,21 +28,21 @@ public class CharacterMovement : MonoBehaviour
 
     void Update()
     {
-       // UiInventory.SetActive(Input.GetKey(InputMap.KeyBinds["inventory"]));
+        // UiInventory.SetActive(Input.GetKey(InputMap.KeyBinds["inventory"]));
     }
     // Update is called once per frame
     void FixedUpdate()
     {
-       // if (Input.GetAxis("A") > 0)
-       //     Debug.Log("A");
-       // if (Input.GetAxis("X") > 0)
-       //     Debug.Log("X");
-       // if (Input.GetAxis("B") > 0)
-       //     Debug.Log("B");
-       // if (Input.GetAxis("Y") > 0)
-       //     Debug.Log("Y");
-       //if(Input.GetAxis("Mouse X") > 0)
-       //    Debug.Log(Input.GetAxis("Mouse X"));
+        // if (Input.GetAxis("A") > 0)
+        //     Debug.Log("A");
+        // if (Input.GetAxis("X") > 0)
+        //     Debug.Log("X");
+        // if (Input.GetAxis("B") > 0)
+        //     Debug.Log("B");
+        // if (Input.GetAxis("Y") > 0)
+        //     Debug.Log("Y");
+        //if(Input.GetAxis("Mouse X") > 0)
+        //    Debug.Log(Input.GetAxis("Mouse X"));
         //if (Input.GetAxis("") > 0)
         //    Debug.Log("");
         //if (Input.GetAxis("") > 0)
@@ -61,12 +61,11 @@ public class CharacterMovement : MonoBehaviour
         //    Debug.Log("");
         //if (Input.GetAxis("") > 0)
         //    Debug.Log("");
-       
+
         float Speed = (Input.GetKey(InputMap.KeyBinds["sprint"])) ? RunSpeed : WalkSpeed;
 
 
-        // Quaternion quat = this.transform.rotation * new Quaternion(this.transform.up.x * Mathf.Sin(dif / 2f), this.transform.up.y * Mathf.Sin(dif / 2f), this.transform.up.z * Mathf.Sin(dif / 2f), Mathf.Cos(dif / 2f));
-        //this.transform.rotation = Quaternion.Slerp(this.transform.rotation, quat, .25f);
+
         Vector3 t = this.transform.forward;
 
         acceleration = t;
@@ -247,7 +246,6 @@ public class CharacterMovement : MonoBehaviour
 
         //this.transform.position = position;
         //rb.position += position;
-        Quaternion q = this.transform.rotation;
         //this.transform.LookAt(this.transform.position + acceleration.normalized);
         //this.transform.rotation = Quaternion.Slerp(q, this.transform.rotation, .2f);
 
@@ -256,12 +254,16 @@ public class CharacterMovement : MonoBehaviour
     void LateUpdate()
     {
 
-        this.transform.up = (this.transform.position - currentPlanet.center).normalized;
-        Vector3 t = Vector3.ProjectOnPlane(Camera.main.transform.up, this.transform.up);
-        // this.transform.up = (this.transform.position - currentPlanet.center).normalized;
-        Quaternion q = Quaternion.LookRotation(t, this.transform.up);
-        this.transform.rotation = q;// Quaternion.Slerp(this.transform.rotation, q, .25f);
 
+        //this.transform.Rotate(this.transform.up, Input.GetAxis("Mouse X"));
+        //Vector3 forward = this.transform.forward;
+        //this.transform.up = (this.transform.position - currentPlanet.center).normalized;
+        //Vector3 up = this.transform.up;
+       // this.transform.rotation = Quaternion.LookRotation(forward, this.transform.up);
+        //Vector3 t = Vector3.ProjectOnPlane(Camera.main.transform.up, this.transform.up);
+        // this.transform.up = (this.transform.position - currentPlanet.center).normalized;
+        //Quaternion q = Quaternion.LookRotation(t, this.transform.up);
+        // this.transform.rotation = q;// Quaternion.Slerp(this.transform.rotation, q, .25f);
         //Debug.Log(this.transform.up);
         //Debug.DrawLine(this.transform.position, this.transform.position + t, Color.magenta);
         //Debug.DrawLine(this.transform.position, this.transform.position + this.transform.forward, Color.cyan);

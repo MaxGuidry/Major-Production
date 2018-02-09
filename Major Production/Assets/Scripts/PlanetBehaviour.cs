@@ -12,30 +12,30 @@ public class PlanetBehaviour : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        planet.Initialize(this.transform.position, this.transform.localScale.x / 2f,5000);
+        planet.Initialize(this.transform.position, this.transform.localScale.x / 2f, 5000);
         GameObject g = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         g.transform.position = planet.center;
         //g.transform.localScale = new Vector3(.1f,.1f,.1f);
     }
-	void Start ()
-	{
-	    rbs = GameObject.FindObjectsOfType<Rigidbody>().ToList();
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
+    void Start()
+    {
+        rbs = GameObject.FindObjectsOfType<Rigidbody>().ToList();
+    }
 
-	    foreach (var rb in rbs)
-	    {
-	         Attract(rb);
-	    }
+    // Update is called once per frame
+    void Update()
+    {
 
-	    foreach (var rbr in rbrs)
-	    {
-	        rbs.Remove(rbr);
-	    }
-	}
+        foreach (var rb in rbs)
+        {
+            Attract(rb);
+        }
+
+        foreach (var rbr in rbrs)
+        {
+            rbs.Remove(rbr);
+        }
+    }
 
     void Attract(Rigidbody rb)
     {
@@ -45,8 +45,10 @@ public class PlanetBehaviour : MonoBehaviour
             return;
         }
         rb.AddForce(((planet.center - rb.transform.position).normalized * planet.gravity));
-        rb.gameObject.transform.up = (rb.gameObject.transform.position - planet.center).normalized;
-		Quaternion q = Quaternion.LookRotation(rb.gameObject.transform.forward, rb.gameObject.transform.up);
+        float y = rb.transform.rotation.eulerAngles.y;
+        rb.transform.up = (rb.gameObject.transform.position - planet.center).normalized;
+        rb.transform.rotation = Quaternion.Euler(rb.transform.rotation.eulerAngles.x, y, rb.transform.rotation.eulerAngles.z);
+        //rb.gameObject.transform.rotation = Quaternion.LookRotation(f, up);
 
     }
 }

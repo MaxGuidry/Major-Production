@@ -18,7 +18,7 @@ public class FixCamera : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        this.gameObject.transform.position = follow.transform.position + StartPosition;
+        //this.gameObject.transform.position = follow.transform.position + StartPosition;
         prevPositon = follow.transform.position;
         prevUp = follow.transform.up;
     }
@@ -30,15 +30,18 @@ public class FixCamera : MonoBehaviour
         //transform.RotateAround(follow.transform.position,follow.transform.up, Input.GetAxis("Mouse X") * sensitivity);
         Vector3 deltaFollow = follow.transform.position - prevPositon;
         this.transform.position += deltaFollow;
+        this.transform.LookAt(follow.transform);
 
         //float deltaUp = Vector3.Angle(Vector3.ProjectOnPlane(prevUp, new Vector3(1, 0, 0)), Vector3.ProjectOnPlane(follow.transform.up, new Vector3(1, 0, 0)));
-        float sign = Vector3.Dot(follow.transform.forward, deltaFollow.normalized) > 0 ? -1 : 1;
-        //Debug.Log(deltaUp * sign);
-        //this.gameObject.transform.RotateAround(follow.transform.position, Vector3.Cross(Vector3.ProjectOnPlane(prevUp, new Vector3(1, 0, 0).normalized)- Vector3.ProjectOnPlane(follow.transform.up, new Vector3(1, 0, 0)).normalized,new Vector3(0,1,0)), deltaUp * sign);
-        float angle = (this.transform.rotation.eulerAngles.z - follow.transform.rotation.eulerAngles.z) * Mathf.Deg2Rad * sign;
-        this.transform.Rotate(this.transform.forward,angle);
-        this.gameObject.transform.RotateAround(follow.transform.position, follow.transform.up, Input.GetAxis("Mouse X") * sensitivity);
-        //this.gameObject.transform.LookAt(lookat.transform);
+        //float sign = Vector3.Dot(follow.transform.forward, deltaFollow.normalized) > 0 ? 1 : -1;
+        ////Debug.Log(deltaUp * sign);
+        //this.gameObject.transform.RotateAround(follow.transform.position,follow.transform.right, deltaUp * sign);
+        //// float angle = (this.transform.rotation.eulerAngles.z - follow.transform.rotation.eulerAngles.z) * Mathf.Deg2Rad * sign;
+        //this.gameObject.transform.RotateAround(follow.transform.position, follow.transform.up, Input.GetAxis("Mouse X") * sensitivity);
+        //this.transform.rotation = Quaternion.Euler(this.transform.rotation.eulerAngles.x,
+        //    this.transform.rotation.eulerAngles.y, follow.transform.rotation.eulerAngles.z); 
+        ////this.transform.Rotate(this.transform.forward,angle);
+        ////this.gameObject.transform.LookAt(lookat.transform);
 
 
         prevPositon = follow.transform.position;

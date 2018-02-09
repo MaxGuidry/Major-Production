@@ -9,12 +9,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: befddf6d3d3c10243807244e057e2f09, type: 3}
-  m_Name: GatherQuestLog
+  m_Name: GatherTenStone
   m_EditorClassIdentifier: 
-  Title: GatherLog
-  Description: Gather Log
+  Title: GatherRocks
+  Description: Gather Ten Rocks
   Progess: 0
   RequiredItem: {fileID: 11400000, guid: a56e6035ae842e34d876ec8aaa27c90f, type: 2}
-  startAmount: 0
-  currentAmount: 0
-  doneAmount: 5
+  CurrentAmount: 0
+  RequiredAmount: 10
+  QuestStarted: {fileID: 11400000, guid: b66499015cebc5940b09958a4c05f3f7, type: 2}
+  QuestEnded: {fileID: 11400000, guid: 9d44f410c46f20047893219d71f48af9, type: 2}
+  QuestChange: {fileID: 11400000, guid: 6be7e7f74f09fb34d9cddb58bda687b9, type: 2}

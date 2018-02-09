@@ -10,3 +10,6 @@ public class InventoryEvent : UnityEvent<Inventory> { }
 [Serializable]
 public class CollisionEvent : UnityEvent<Item> { }
 
+
+[Serializable]
+public class GameEventArgsResponse : UnityEvent<UnityEngine.Object[]>{}

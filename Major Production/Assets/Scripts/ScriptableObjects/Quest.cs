@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -19,18 +20,29 @@ namespace ScriptableObjects
         public string Description;
         public QuestProgess Progess;
         public Item RequiredItem;
-        public int startAmount = 0;
-        public int currentAmount = 0;
-        public int doneAmount = 5;
+        public int CurrentAmount = 0;
+        public int RequiredAmount = 5;
+        public GameEventArgs QuestStarted;
+        public GameEventArgs QuestEnded;
+        public GameEventArgs QuestChange;
         
-        public void ProgressQuest(ScriptableObject item)
+        public void ProgressQuest(UnityEngine.Object[] args)
         {
-            if (item == RequiredItem)
-            {
-                currentAmount++;
-            }
-        }
+            var sender = args[0] as Item;
 
-        
+            if (sender== RequiredItem)
+            {
+                CurrentAmount++;
+                Progess = QuestProgess.Active;
+                QuestStarted.Raise(this);
+            }
+
+            if (CurrentAmount >= RequiredAmount)
+            {
+                Progess = QuestProgess.Complete;
+                QuestEnded.Raise(this, RequiredItem);
+            }
+            QuestChange.Raise(this, RequiredItem);
+        }
     }
 }

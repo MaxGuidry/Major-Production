@@ -10,7 +10,7 @@ public class ItemInteractionBehaviour : MonoBehaviour
 {
     public float SpoilerTime;
     public Item item;
-    public CollisionEvent collisionEvent;
+    public GameEventArgs ItemPickedUp;
 
     void Start()
     {
@@ -43,7 +43,7 @@ public class ItemInteractionBehaviour : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            collisionEvent.Invoke(item);
+            ItemPickedUp.Raise(item);
             var ib = other.gameObject.GetComponent<IStorageable>();
             ib.AddToInventory(item);
             Destroy(gameObject);

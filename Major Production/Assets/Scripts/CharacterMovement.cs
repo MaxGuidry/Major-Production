@@ -67,7 +67,7 @@ public class CharacterMovement : MonoBehaviour
 
         // Quaternion quat = this.transform.rotation * new Quaternion(this.transform.up.x * Mathf.Sin(dif / 2f), this.transform.up.y * Mathf.Sin(dif / 2f), this.transform.up.z * Mathf.Sin(dif / 2f), Mathf.Cos(dif / 2f));
         //this.transform.rotation = Quaternion.Slerp(this.transform.rotation, quat, .25f);
-        Vector3 t = Vector3.ProjectOnPlane(Camera.main.transform.forward, this.transform.up);
+        Vector3 t = this.transform.forward;
 
         acceleration = t;
 
@@ -257,7 +257,7 @@ public class CharacterMovement : MonoBehaviour
     {
 
         this.transform.up = (this.transform.position - currentPlanet.center).normalized;
-        Vector3 t = Vector3.ProjectOnPlane(Camera.main.transform.forward, this.transform.up);
+        Vector3 t = Vector3.ProjectOnPlane(Camera.main.transform.up, this.transform.up);
         // this.transform.up = (this.transform.position - currentPlanet.center).normalized;
         Quaternion q = Quaternion.LookRotation(t, this.transform.up);
         this.transform.rotation = q;// Quaternion.Slerp(this.transform.rotation, q, .25f);

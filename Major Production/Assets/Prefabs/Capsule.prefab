@@ -25,9 +25,11 @@ GameObject:
   - component: {fileID: 54209656602769418}
   - component: {fileID: 65637629291153470}
   - component: {fileID: 136058188168431356}
+  - component: {fileID: 114618522127270746}
+  - component: {fileID: 114918347306346746}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,14 +55,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1345527714582648}
-  m_LocalRotation: {x: 0.31549904, y: -0.8039576, z: 0.27841777, w: 0.42023337}
-  m_LocalPosition: {x: 63.44, y: -25.45, z: 6.31}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.96, y: 43.7, z: 47.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4693048849450196}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 134.534, y: 45.475998, z: 157.065}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4693048849450196
 Transform:
   m_ObjectHideFlags: 1
@@ -142,6 +144,38 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114618522127270746
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1345527714582648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38de8316ac68e9e4999fee6a5d5d77db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  DamageStat:
+    baseValue: 0
+  ArmorStat:
+    baseValue: 10
+  ExpStat:
+    baseValue: 0
+--- !u!114 &114918347306346746
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1345527714582648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ad27e1aaf71cfa4381374917ba25e23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 11400000, guid: 245027be9b604334b8a7856ac6d75be7, type: 2}
+  ActiveInventory: []
+  InventoryUi: {fileID: 0}
 --- !u!114 &114920532764568814
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -155,6 +189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WalkSpeed: 5
   RunSpeed: 12
+  UiInventory: {fileID: 0}
   currentPlanet: {fileID: 11400000, guid: 0c0da09bcc5af5b499965df2e4c62dd1, type: 2}
 --- !u!136 &136058188168431356
 CapsuleCollider:

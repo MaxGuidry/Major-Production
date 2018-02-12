@@ -1555,7 +1555,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 719573610}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a26bc4a13ec074b4080f4cee664c10be, type: 3}
   m_Name: 
@@ -1565,17 +1565,6 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 4832efa5c44b18d48877b7cf06977b92, type: 2}
-        m_MethodName: ProgressQuest
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 11400000, guid: 065ee56e0afff0b43a6bcc4998ed4f7e, type: 2}
         m_MethodName: ProgressQuest
         m_Mode: 0
@@ -3575,6 +3564,12 @@ Prefab:
       propertyPath: InventoryUi
       value: 
       objectReference: {fileID: 1205027717}
+    - target: {fileID: 114618522127270746, guid: e655f24238d25c34ea6d4c33f482cddd,
+        type: 2}
+      propertyPath: Quest
+      value: 
+      objectReference: {fileID: 11400000, guid: b66499015cebc5940b09958a4c05f3f7,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e655f24238d25c34ea6d4c33f482cddd, type: 2}
   m_IsPrefabParent: 0

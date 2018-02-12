@@ -10,7 +10,7 @@ public class PlayerStat : MonoBehaviour, IDamageable
         get;
         private set;
     }
-
+    public GameEventArgs Quest;
     public Stat DamageStat;
     public Stat ArmorStat;
     public Stat ExpStat;
@@ -18,6 +18,7 @@ public class PlayerStat : MonoBehaviour, IDamageable
     private void Awake()
     {
         CurrentHealth = maxHealth;
+        Quest.Raise();
     }
     void Update()
     {

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8286086bc686bc6439e296d867609903, type: 3}
+  m_Name: ObjectiveGather10Logs
+  m_EditorClassIdentifier: 
+  Title: Gather 10 Log
+  Description: Player you must Gather 10 Logs.
+  MissionType: 1
+  Status: 1
+  Target: {fileID: 0}
+  NextObjective: {fileID: 11400000, guid: 7a4ddb00a240db24287de5ac280773b3, type: 2}
+  ActionsOnReach: 
+  Mod:
+    baseValue: 0

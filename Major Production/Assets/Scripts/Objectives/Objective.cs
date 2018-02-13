@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ScriptableObjects;
 [CreateAssetMenu]
 public class Objective : ScriptableObject
 {
@@ -29,15 +30,23 @@ public class Objective : ScriptableObject
     [Multiline]
     public string Description;
     public ObjectiveType MissionType;
+    public Item RequiredItem;
+    public int CurrentAmount = 0;
+    public int RequiredAmount = 5;
     public ObjectiveStatus Status;
     public GameObject Target;
     public Objective NextObjective;
     public List<ActionOnReach> ActionsOnReach;
     public Stat Mod;
     public Objectives ParentScript { get; set; }
-    public void OnReach()
+
+    public GameEventArgs QuestStarted;
+    public GameEventArgs QuestEnded;
+    public GameEventArgs QuestChange;
+
+    public void OnReach(Objective CurrentObj)
     {
-        if (this.ActionsOnReach.Contains(ActionOnReach.MarkComplete))
-            Status = ObjectiveStatus.Complete;
-    }
+        if (CurrentObj.ActionsOnReach.Contains(ActionOnReach.MarkComplete))
+            CurrentObj.Status = ObjectiveStatus.Complete;
+    }  
 }

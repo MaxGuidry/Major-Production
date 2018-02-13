@@ -12,9 +12,9 @@ public class ObjectiveCollider : MonoBehaviour {
     {
         this.name = Obj.Title;
     }
-    private void OnTriggerEnter(Collider other)
+    public void Update()
     {
-        if (other.tag == "Player" && Obj.ParentScript.CurrentObjective.name == Obj.name)
-            Obj.OnReach();
+        if (Obj.Status == Objective.ObjectiveStatus.Complete)
+            Destroy(this.gameObject);
     }
 }

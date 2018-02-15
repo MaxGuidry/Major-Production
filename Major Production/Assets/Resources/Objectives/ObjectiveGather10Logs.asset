@@ -16,13 +16,13 @@ MonoBehaviour:
   MissionType: 1
   RequiredItem: {fileID: 11400000, guid: b31bfcd18116ad740841648233ee5ee9, type: 2}
   CurrentAmount: 0
-  RequiredAmount: 10
+  RequiredAmount: 1
   Status: 1
   Target: {fileID: 0}
   NextObjective: {fileID: 11400000, guid: 7a4ddb00a240db24287de5ac280773b3, type: 2}
-  ActionsOnReach: 0000000002000000
-  Mod:
-    baseValue: 0
+  ActionsOnReach: 000000000200000001000000
+  PlayerForStat: {fileID: 1224444865195266, guid: 19e958d984c938645a9ef0aa636b09cb,
+    type: 2}
   QuestStarted: {fileID: 11400000, guid: b66499015cebc5940b09958a4c05f3f7, type: 2}
   QuestEnded: {fileID: 11400000, guid: 9d44f410c46f20047893219d71f48af9, type: 2}
   QuestChange: {fileID: 11400000, guid: 6be7e7f74f09fb34d9cddb58bda687b9, type: 2}

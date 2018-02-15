@@ -15,7 +15,7 @@ public class ReachObjectiveBehaviour : MonoBehaviour
     }
     private void Start()
     {
-        var objParent = transform.gameObject;
+        var objParent = transform.gameObject;//when is this ever null
         if (objParent != null)
         {
             foreach (var i in GameObject.FindGameObjectsWithTag("Reach"))

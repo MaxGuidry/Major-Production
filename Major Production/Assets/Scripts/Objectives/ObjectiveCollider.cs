@@ -7,10 +7,15 @@ public class ObjectiveCollider : MonoBehaviour
     public Objective Obj;
     private void OnEnable()
     {
-        if (Obj.MissionType == ObjectiveType.Gather)
-            this.tag = "Gather";
-        else if (Obj.MissionType == ObjectiveType.Reach)
-            this.tag = "Reach";
+        switch (Obj.MissionType)
+        {
+            case ObjectiveType.Gather:
+                this.tag = "Gather";
+                break;
+            case ObjectiveType.Reach:
+                this.tag = "Reach";
+                break;
+        }
     }
     private void Start()
     {

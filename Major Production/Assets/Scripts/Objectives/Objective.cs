@@ -22,6 +22,7 @@ public enum ActionOnReach
     MarkComplete = 0,
     AddModififer = 1,
     PlayAudio = 2,
+    PlayAnimation = 3,
 }
 [CreateAssetMenu]
 public class Objective : ScriptableObject
@@ -35,9 +36,8 @@ public class Objective : ScriptableObject
     public int RequiredAmount = 5;
     public ObjectiveStatus Status;
     public GameObject Target;
-    public Objective NextObjective;
     public List<ActionOnReach> ActionsOnReach;
-    public Stat Mod;
+    public GameObject PlayerForStat;
     //public AudioSource testAudio;
     //public AudioClip TestAudioClip;
     //public GatherObjectiveBehaviour GatherParentScript { get; set; }
@@ -50,15 +50,24 @@ public class Objective : ScriptableObject
     public void OnReach(Objective CurrentObj)
     {
         if (CurrentObj.ActionsOnReach.Contains(ActionOnReach.MarkComplete))
-            CurrentObj.Status = ObjectiveStatus.Complete;
-
-        if(CurrentObj.ActionsOnReach.Contains(ActionOnReach.PlayAudio))
         {
-            //if (!testAudio.isPlaying)
-            //{
-            //    testAudio.clip = TestAudioClip;
-            //    testAudio.Play();
-            //}
+            //Set To Complete
+            CurrentObj.Status = ObjectiveStatus.Complete;
         }
-    }  
+
+        if (CurrentObj.ActionsOnReach.Contains(ActionOnReach.PlayAudio))
+        {
+            //Play Audio
+        }
+
+        if (CurrentObj.ActionsOnReach.Contains(ActionOnReach.AddModififer))
+        {
+            //Add Modifier
+        }
+
+        if (CurrentObj.ActionsOnReach.Contains(ActionOnReach.PlayAnimation))
+        {
+            //Play Animation
+        }
+    }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using ScriptableObjects;
+
 [CreateAssetMenu]
 public class Objective : ScriptableObject
 {
@@ -15,8 +16,9 @@ public class Objective : ScriptableObject
     public enum ObjectiveStatus
     {
         None = 0,
-        Active = 1,
-        Complete = 2
+        Inactive = 1,
+        Active = 2,
+        Complete = 3
     }
 
     public enum ActionOnReach
@@ -38,15 +40,27 @@ public class Objective : ScriptableObject
     public Objective NextObjective;
     public List<ActionOnReach> ActionsOnReach;
     public Stat Mod;
-    public Objectives ParentScript { get; set; }
-
+    //public AudioSource testAudio;
+    //public AudioClip TestAudioClip;
+    //public GatherObjectiveBehaviour GatherParentScript { get; set; }
+    //public ReachObjectiveBehaviour ReachParentScript { get; set; }
     public GameEventArgs QuestStarted;
     public GameEventArgs QuestEnded;
     public GameEventArgs QuestChange;
+
 
     public void OnReach(Objective CurrentObj)
     {
         if (CurrentObj.ActionsOnReach.Contains(ActionOnReach.MarkComplete))
             CurrentObj.Status = ObjectiveStatus.Complete;
+
+        if(CurrentObj.ActionsOnReach.Contains(ActionOnReach.PlayAudio))
+        {
+            //if (!testAudio.isPlaying)
+            //{
+            //    testAudio.clip = TestAudioClip;
+            //    testAudio.Play();
+            //}
+        }
     }  
 }

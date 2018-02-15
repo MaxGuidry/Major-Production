@@ -9,47 +9,47 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1464351142015108}
+  m_RootGameObject: {fileID: 1323031161904684}
   m_IsPrefabParent: 1
---- !u!1 &1464351142015108
+--- !u!1 &1323031161904684
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4727181434737746}
-  - component: {fileID: 33106871476104082}
-  - component: {fileID: 65353099622050686}
-  - component: {fileID: 23290166807707486}
-  - component: {fileID: 114558418982918460}
-  - component: {fileID: 54077215937234668}
+  - component: {fileID: 4027017797708408}
+  - component: {fileID: 33787167866009500}
+  - component: {fileID: 65241969189953330}
+  - component: {fileID: 23929904152768810}
+  - component: {fileID: 54010025261159092}
+  - component: {fileID: 114428372949895632}
   m_Layer: 0
-  m_Name: Wood
+  m_Name: CheckPoint
   m_TagString: Untagged
-  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4727181434737746
+--- !u!4 &4027017797708408
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1464351142015108}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.93, y: 34.76, z: 54.93}
+  m_GameObject: {fileID: 1323031161904684}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.23, y: 30.1, z: 46.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23290166807707486
+--- !u!23 &23929904152768810
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1464351142015108}
+  m_GameObject: {fileID: 1323031161904684}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -58,7 +58,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: a3b1457832d76654eae613a68fbc8aef, type: 2}
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -78,51 +78,49 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33106871476104082
+--- !u!33 &33787167866009500
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1464351142015108}
+  m_GameObject: {fileID: 1323031161904684}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54077215937234668
+--- !u!54 &54010025261159092
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1464351142015108}
+  m_GameObject: {fileID: 1323031161904684}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &65353099622050686
+--- !u!65 &65241969189953330
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1464351142015108}
+  m_GameObject: {fileID: 1323031161904684}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114558418982918460
+--- !u!114 &114428372949895632
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1464351142015108}
+  m_GameObject: {fileID: 1323031161904684}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 783130fe78a30b348874d2f94b4c322d, type: 3}
+  m_Script: {fileID: 11500000, guid: 8839aa146f8e7a749ab3d2a0738e6759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpoilerTime: 0
-  item: {fileID: 11400000, guid: b31bfcd18116ad740841648233ee5ee9, type: 2}
-  ItemPickedUp: {fileID: 11400000, guid: c913b0e6817fa654d9da16c8ca35575b, type: 2}
+  ReachedCheckPoint: {fileID: 11400000, guid: 96cd00f474dc6984e8d8089e3788acdb, type: 2}

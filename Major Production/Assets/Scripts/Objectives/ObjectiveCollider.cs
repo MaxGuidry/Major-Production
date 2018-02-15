@@ -1,16 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class ObjectiveCollider : MonoBehaviour {
+//[RequireComponent(typeof(AudioSource))]
+public class ObjectiveCollider : MonoBehaviour
+{
     public Objective Obj;
     private void OnEnable()
     {
-        this.tag = "Objective";
+        if (Obj.MissionType == Objective.ObjectiveType.Gather)
+            this.tag = "Gather";
+        else if (Obj.MissionType == Objective.ObjectiveType.Reach)
+            this.tag = "Reach";
     }
     private void Start()
     {
         this.name = Obj.Title;
+        //Obj.testAudio = GetComponent<AudioSource>();
     }
     public void Update()
     {

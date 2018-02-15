@@ -7,9 +7,9 @@ public class ObjectiveCollider : MonoBehaviour
     public Objective Obj;
     private void OnEnable()
     {
-        if (Obj.MissionType == Objective.ObjectiveType.Gather)
+        if (Obj.MissionType == ObjectiveType.Gather)
             this.tag = "Gather";
-        else if (Obj.MissionType == Objective.ObjectiveType.Reach)
+        else if (Obj.MissionType == ObjectiveType.Reach)
             this.tag = "Reach";
     }
     private void Start()
@@ -19,7 +19,7 @@ public class ObjectiveCollider : MonoBehaviour
     }
     public void Update()
     {
-        if (Obj.Status == Objective.ObjectiveStatus.Complete)
+        if (Obj.Status == ObjectiveStatus.Complete)
             Destroy(this.gameObject);
     }
 }

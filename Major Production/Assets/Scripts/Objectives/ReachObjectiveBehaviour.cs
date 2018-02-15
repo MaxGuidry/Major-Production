@@ -30,17 +30,16 @@ public class ReachObjectiveBehaviour : MonoBehaviour
                     if (Objective != null)
                     {
                         //Objective.ReachParentScript = this;
-                        Objective.Status = Objective.ObjectiveStatus.Inactive;
+                        Objective.Status = ObjectiveStatus.Inactive;
                     }
                 }
             }
-            PlayerObjectives[0].Status = Objective.ObjectiveStatus.Active;
-            if (PlayerObjectives[0].Status == Objective.ObjectiveStatus.Active)
+            PlayerObjectives[0].Status = ObjectiveStatus.Active;
+            if (PlayerObjectives[0].Status == ObjectiveStatus.Active)
             {
                 CurrentObjective = PlayerObjectives[0];
                 CurrentObjective.QuestStarted.Raise(this, CurrentObjective.Target);
             }
-
         }
         else
             Debug.Log("Unable To Find Objectives!");
@@ -49,7 +48,7 @@ public class ReachObjectiveBehaviour : MonoBehaviour
     {
         if (CurrentObjective != null)
         {
-            if (CurrentObjective.MissionType == Objective.ObjectiveType.Reach)
+            if (CurrentObjective.MissionType == ObjectiveType.Reach)
             {
                 CurrentObjectiveText.text = CurrentObjective.Description + " " + CurrentObjective.Target.transform.position.ToString();
                 if (CurrentObjective.Target == null)
@@ -69,16 +68,16 @@ public class ReachObjectiveBehaviour : MonoBehaviour
     {
 
         CurrentObjective.OnReach(CurrentObjective);
-        if (PlayerObjectives[0].Status == Objective.ObjectiveStatus.Complete)
+        if (PlayerObjectives[0].Status == ObjectiveStatus.Complete)
         {
             PlayerObjectives.Remove(PlayerObjectives[0]);
             if (PlayerObjectives.Count != 0)
-                PlayerObjectives[0].Status = Objective.ObjectiveStatus.Active;
+                PlayerObjectives[0].Status = ObjectiveStatus.Active;
         }
         CurrentObjective.QuestEnded.Raise(this, CurrentObjective.Target);
         if (PlayerObjectives.Count != 0)
         {
-            if (PlayerObjectives[0].Status == Objective.ObjectiveStatus.Active)
+            if (PlayerObjectives[0].Status == ObjectiveStatus.Active)
             {
                 CurrentObjective = PlayerObjectives[0];
             }  

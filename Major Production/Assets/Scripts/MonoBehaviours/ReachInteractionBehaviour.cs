@@ -9,7 +9,6 @@ public class ReachInteractionBehaviour : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log("Hit");
             ReachedCheckPoint.Raise(other.gameObject);
             Destroy(gameObject);
         }

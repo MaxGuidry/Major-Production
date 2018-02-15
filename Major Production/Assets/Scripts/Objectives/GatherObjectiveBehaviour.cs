@@ -48,53 +48,56 @@ public class GatherObjectiveBehaviour : MonoBehaviour
     }
     public void OnGui()
     {
+        if (PlayerObjectives.Count == 0)
+        {
+            CurrentObjectiveText.enabled = false;
+            return;
+        }
         if (CurrentObjective != null)
         {
             if (CurrentObjective.MissionType == Objective.ObjectiveType.Gather)
             {
                 CurrentObjectiveText.text = CurrentObjective.Description + " " + CurrentObjective.CurrentAmount + " / " + CurrentObjective.RequiredAmount;
-                if (CurrentObjective.RequiredAmount == null)
-                {
+                if (CurrentObjective.RequiredAmount == 0)
                     Debug.LogError("Please Set A Required Item For " + CurrentObjective.name);
-                }
             }
             else
-            {
                 Debug.LogError("Please Set Quest To Gather");
-            }
         }
     }
     public void ProgressQuest(UnityEngine.Object[] args)
     {
         var sender = args[0] as Item;
-
+        if (PlayerObjectives.Count == 0)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
         if (CurrentObjective != null)
         {
+            if (sender == CurrentObjective.RequiredItem)
+            {
+                CurrentObjective.CurrentAmount++;
+            }
+            if (CurrentObjective.CurrentAmount >= CurrentObjective.RequiredAmount)
+            {
+                CurrentObjective.OnReach(CurrentObjective);
+                if (PlayerObjectives[0].Status == Objective.ObjectiveStatus.Complete)
+                {
+                    PlayerObjectives.Remove(PlayerObjectives[0]);
+                    if (PlayerObjectives.Count != 0)
+                        PlayerObjectives[0].Status = Objective.ObjectiveStatus.Active;
+                }
+                CurrentObjective.QuestEnded.Raise(this, CurrentObjective.RequiredItem);
+            }
             if (PlayerObjectives.Count != 0)
             {
-                if (sender == CurrentObjective.RequiredItem)
-                {
-                    CurrentObjective.CurrentAmount++;
-                }
-
-                if (CurrentObjective.CurrentAmount >= CurrentObjective.RequiredAmount)
-                {
-                    CurrentObjective.OnReach(CurrentObjective);
-                    if (PlayerObjectives[0].Status == Objective.ObjectiveStatus.Complete)
-                    {
-                        PlayerObjectives.Remove(PlayerObjectives[0]);
-                        PlayerObjectives[0].Status = Objective.ObjectiveStatus.Active;
-                    }
-                    CurrentObjective.QuestEnded.Raise(this, CurrentObjective.RequiredItem);
-                }
                 if (PlayerObjectives[0].Status == Objective.ObjectiveStatus.Active)
                 {
                     CurrentObjective = PlayerObjectives[0];
                 }
-                CurrentObjective.QuestChange.Raise(this, CurrentObjective.RequiredItem);
-
-                PlayerObjectives[0].Status = Objective.ObjectiveStatus.Active;
             }
+            CurrentObjective.QuestChange.Raise(this, CurrentObjective.RequiredItem);
         }
     }
 }

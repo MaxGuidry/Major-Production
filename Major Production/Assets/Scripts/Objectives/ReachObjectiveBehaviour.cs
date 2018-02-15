@@ -9,7 +9,6 @@ public class ReachObjectiveBehaviour : MonoBehaviour
     public List<Objective> PlayerObjectives;
     public Text CurrentObjectiveText;
     private Transform Player;
-    private bool check;
     private void Awake()
     {
         Player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -23,7 +22,6 @@ public class ReachObjectiveBehaviour : MonoBehaviour
             {
                 PlayerObjectives.Add(i.GetComponent<ObjectiveCollider>().Obj);
             }
-            PlayerObjectives.Reverse();
             if (PlayerObjectives != null)
             {
                 Debug.Log("Found All Reach Objectives!");
@@ -49,38 +47,42 @@ public class ReachObjectiveBehaviour : MonoBehaviour
     }
     public void OnGui()
     {
-        check = false;
-        if (CurrentObjective.MissionType == Objective.ObjectiveType.Reach)
+        if (CurrentObjective != null)
         {
-            CurrentObjectiveText.text = CurrentObjective.Description + " " + CurrentObjective.Target.transform.position.ToString();
-            if (CurrentObjective.Target == null)
+            if (CurrentObjective.MissionType == Objective.ObjectiveType.Reach)
             {
-                Debug.LogError("Please Set A Target Destination For " + CurrentObjective.name);
+                CurrentObjectiveText.text = CurrentObjective.Description + " " + CurrentObjective.Target.transform.position.ToString();
+                if (CurrentObjective.Target == null)
+                    Debug.LogError("Please Set A Target Destination For " + CurrentObjective.name);
+                if (PlayerObjectives.Count == 0)
+                {
+                    CurrentObjectiveText.enabled = false;
+                    gameObject.SetActive(false);
+                    return;
+                }
             }
-        }
-        else
-        {
-            Debug.LogError("Please Set Quest To Reach");
+            else
+                Debug.LogError("Please Set Quest To Reach");
         }
     }
     public void ProgressQuest()
     {
+
         CurrentObjective.OnReach(CurrentObjective);
-        Debug.Log("Reached");
         if (PlayerObjectives[0].Status == Objective.ObjectiveStatus.Complete)
         {
             PlayerObjectives.Remove(PlayerObjectives[0]);
-            PlayerObjectives[0].Status = Objective.ObjectiveStatus.Active;
+            if (PlayerObjectives.Count != 0)
+                PlayerObjectives[0].Status = Objective.ObjectiveStatus.Active;
         }
-        if (PlayerObjectives.Count >= 1)
+        CurrentObjective.QuestEnded.Raise(this, CurrentObjective.Target);
+        if (PlayerObjectives.Count != 0)
         {
-            CurrentObjective.QuestEnded.Raise(this, CurrentObjective.Target);
             if (PlayerObjectives[0].Status == Objective.ObjectiveStatus.Active)
             {
                 CurrentObjective = PlayerObjectives[0];
-            }
-            CurrentObjective.QuestChange.Raise(this, CurrentObjective.Target);
-            PlayerObjectives[0].Status = Objective.ObjectiveStatus.Active;
+            }  
         }
+        CurrentObjective.QuestChange.Raise(this, CurrentObjective.Target);
     }
 }

@@ -14,5 +14,4 @@ public class ObjectiveBehaviour : MonoBehaviour
         //activate the currentobjective
         CurrentObjective.ProgressQuest();
     }
-
 }

@@ -4,27 +4,14 @@ using UnityEngine;
 //[RequireComponent(typeof(AudioSource))]
 public class ObjectiveBehaviour : MonoBehaviour
 {
-    public Objective Obj;
-    private void OnEnable()
-    {
-        switch (Obj.MissionType)
-        {
-            case ObjectiveType.Gather:
-                this.tag = "Gather";
-                break;
-            case ObjectiveType.Reach:
-                this.tag = "Reach";
-                break;
-        }
-    }
+    public Objective CurrentObjective;
+    public List<Objective> PlayerObjectives;
     private void Start()
     {
-        this.name = Obj.Title;
-        //Obj.testAudio = GetComponent<AudioSource>();
-    }
-    public void Update()
-    {
-        if (Obj.Status == ObjectiveStatus.Complete)
-            Destroy(this.gameObject);
+        PlayerObjectives.ForEach(objective => objective.ProgressQuest());
+        //set the current objective
+        CurrentObjective = PlayerObjectives[0];
+        //activate the currentobjective
+        CurrentObjective.ProgressQuest();
     }
 }

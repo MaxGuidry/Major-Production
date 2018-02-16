@@ -34,40 +34,24 @@ public class Objective : ScriptableObject
     public Item RequiredItem;
     public int CurrentAmount = 0;
     public int RequiredAmount = 5;
-    public ObjectiveStatus Status;
+    private ObjectiveStatus _status;
+    public ObjectiveStatus Status
+    {
+        get { return _status; }
+        set { _status = value; }
+    }
     public GameObject Target;
-    public List<ActionOnReach> ActionsOnReach;
     public GameObject PlayerForStat;
-    //public AudioSource testAudio;
-    //public AudioClip TestAudioClip;
-    //public GatherObjectiveBehaviour GatherParentScript { get; set; }
-    //public ReachObjectiveBehaviour ReachParentScript { get; set; }
     public GameEventArgs QuestStarted;
     public GameEventArgs QuestEnded;
     public GameEventArgs QuestChange;
-
-
+    public UnityEngine.Events.UnityEvent actionsOnReach;
+    public void MarkComplete()
+    {
+        _status = ObjectiveStatus.Complete;
+    }
     public void OnReach(Objective CurrentObj)
     {
-        if (CurrentObj.ActionsOnReach.Contains(ActionOnReach.MarkComplete))
-        {
-            //Set To Complete
-            CurrentObj.Status = ObjectiveStatus.Complete;
-        }
-
-        if (CurrentObj.ActionsOnReach.Contains(ActionOnReach.PlayAudio))
-        {
-            //Play Audio
-        }
-
-        if (CurrentObj.ActionsOnReach.Contains(ActionOnReach.AddModififer))
-        {
-            //Add Modifier
-        }
-
-        if (CurrentObj.ActionsOnReach.Contains(ActionOnReach.PlayAnimation))
-        {
-            //Play Animation
-        }
+        CurrentObj.actionsOnReach.Invoke();
     }
 }

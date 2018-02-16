@@ -7,96 +7,42 @@ public class GatherObjectiveBehaviour : MonoBehaviour
 {
     public Objective CurrentObjective;
     public List<Objective> PlayerObjectives;
-    public Text CurrentObjectiveText;
-    private Transform Player;
-    private void Awake()
-    {
-        Player = GameObject.FindGameObjectWithTag("Player").transform;
-    }
     private void Start()
     {
-        var objParent = transform.gameObject;
-        if (objParent != null)
+        foreach (var i in GameObject.FindGameObjectsWithTag("Gather"))
         {
-            foreach (var i in GameObject.FindGameObjectsWithTag("Gather"))
+            PlayerObjectives.Add(i.GetComponent<ObjectiveCollider>().Obj);
+        }
+        PlayerObjectives.Reverse();
+        if (PlayerObjectives != null)
+        {
+            Debug.Log("Found All Gather Objectives!");
+            foreach (var Objective in PlayerObjectives)
             {
-                PlayerObjectives.Add(i.GetComponent<ObjectiveCollider>().Obj);
-            }
-            PlayerObjectives.Reverse();
-            if (PlayerObjectives != null)
-            {
-                Debug.Log("Found All Gather Objectives!");
-                foreach (var Objective in PlayerObjectives)
-                {
-                    if (Objective != null)
-                    {
-                        // Objective.GatherParentScript = this;
-                        Objective.Status = ObjectiveStatus.Inactive;
-                    }
-                }
-            }
-            PlayerObjectives[0].Status = ObjectiveStatus.Active;
-            if (PlayerObjectives[0].Status == ObjectiveStatus.Active)
-            {
-                CurrentObjective = PlayerObjectives[0];
-                CurrentObjective.QuestStarted.Raise(this, CurrentObjective.RequiredItem);
+                if (Objective != null)
+                    Objective.Status = ObjectiveStatus.Inactive;
             }
         }
-        else
-            Debug.Log("Unable To Find Objectives!");
-    }
-    public void OnGui()
-    {
-        if (PlayerObjectives.Count == 0)
+        PlayerObjectives[0].Status = ObjectiveStatus.Active;
+        if (PlayerObjectives[0].Status == ObjectiveStatus.Active)
         {
-            CurrentObjectiveText.enabled = false;
-            return;
-        }
-        if (CurrentObjective != null)
-        {
-            if (CurrentObjective.MissionType == ObjectiveType.Gather)
-            {
-                CurrentObjectiveText.text = CurrentObjective.Description + " " + CurrentObjective.CurrentAmount + " / " + CurrentObjective.RequiredAmount;
-                if (CurrentObjective.RequiredAmount == 0)
-                    Debug.LogError("Please Set A Required Item For " + CurrentObjective.name);
-            }
-            else
-                Debug.LogError("Please Set Quest To Gather");
+            CurrentObjective = PlayerObjectives[0];
+            CurrentObjective.QuestStarted.Raise(this, CurrentObjective.RequiredItem);
         }
     }
+
     public void ProgressQuest(UnityEngine.Object[] args)
     {
         var sender = args[0] as Item;
-        if (PlayerObjectives.Count == 0)
+        if (sender == CurrentObjective.RequiredItem)
         {
-            gameObject.SetActive(false);
-            return;
+            CurrentObjective.CurrentAmount++;
         }
-        if (CurrentObjective != null)
+        if (CurrentObjective.CurrentAmount >= CurrentObjective.RequiredAmount)
         {
-            if (sender == CurrentObjective.RequiredItem)
-            {
-                CurrentObjective.CurrentAmount++;
-            }
-            if (CurrentObjective.CurrentAmount >= CurrentObjective.RequiredAmount)
-            {
-                CurrentObjective.OnReach(CurrentObjective);
-                if (PlayerObjectives[0].Status == ObjectiveStatus.Complete)
-                {
-                    PlayerObjectives.Remove(PlayerObjectives[0]);
-                    if (PlayerObjectives.Count != 0)
-                        PlayerObjectives[0].Status = ObjectiveStatus.Active;
-                }
-                CurrentObjective.QuestEnded.Raise(this, CurrentObjective.RequiredItem);
-            }
-            if (PlayerObjectives.Count != 0)
-            {
-                if (PlayerObjectives[0].Status == ObjectiveStatus.Active)
-                {
-                    CurrentObjective = PlayerObjectives[0];
-                }
-            }
-            CurrentObjective.QuestChange.Raise(this, CurrentObjective.RequiredItem);
+            CurrentObjective.OnReach(CurrentObjective);
+            CurrentObjective.QuestEnded.Raise(this, CurrentObjective.RequiredItem);
         }
+        CurrentObjective.QuestChange.Raise(this, CurrentObjective.RequiredItem);
     }
 }

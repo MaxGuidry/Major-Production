@@ -9,14 +9,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8286086bc686bc6439e296d867609903, type: 3}
-  m_Name: ReachObjective
+  m_Name: ObjectiveGather1Logs Again
   m_EditorClassIdentifier: 
-  Title: ReachCheckPoint
-  _description: ReachCheckPoint
-  MissionType: 2
-  _requiredItem: {fileID: 0}
+  Title: Gather 1 Log
+  _description: Gather 1 Log again..
+  MissionType: 1
+  _requiredItem: {fileID: 11400000, guid: b31bfcd18116ad740841648233ee5ee9, type: 2}
   _currentAmount: 0
-  _requiredAmount: 5
+  _requiredAmount: 1
   _status: 0
   QuestStarted: {fileID: 11400000, guid: b66499015cebc5940b09958a4c05f3f7, type: 2}
   QuestEnded: {fileID: 11400000, guid: 9d44f410c46f20047893219d71f48af9, type: 2}

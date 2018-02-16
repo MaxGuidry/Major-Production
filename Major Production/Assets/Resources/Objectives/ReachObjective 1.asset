@@ -12,29 +12,17 @@ MonoBehaviour:
   m_Name: ReachObjective 1
   m_EditorClassIdentifier: 
   Title: ReachCheckPointTest
-  Description: You Have Completed First Test
+  _description: ReachCheckPointTest
   MissionType: 2
-  RequiredItem: {fileID: 0}
-  CurrentAmount: 0
-  RequiredAmount: 5
-  Target: {fileID: 1482949026275948, guid: b34c07f7b3b837d4b9cba937e6deb853, type: 2}
-  PlayerForStat: {fileID: 0}
+  _requiredItem: {fileID: 0}
+  _currentAmount: 0
+  _requiredAmount: 5
+  _status: 0
   QuestStarted: {fileID: 11400000, guid: b66499015cebc5940b09958a4c05f3f7, type: 2}
   QuestEnded: {fileID: 11400000, guid: 9d44f410c46f20047893219d71f48af9, type: 2}
   QuestChange: {fileID: 11400000, guid: 6be7e7f74f09fb34d9cddb58bda687b9, type: 2}
-  actionsOnReach:
+  actionsOnComplete:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000}
-        m_MethodName: MarkComplete
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null

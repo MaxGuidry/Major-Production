@@ -11,6 +11,7 @@ public class ItemInteractionBehaviour : MonoBehaviour
     public float SpoilerTime;
     public Item item;
     public GameEventArgs ItemPickedUp;
+    public bool collided = false;
 
     void Start()
     {
@@ -41,8 +42,9 @@ public class ItemInteractionBehaviour : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && !collided)
         {
+            collided = true;
             ItemPickedUp.Raise(item);
             var ib = other.gameObject.GetComponent<IStorageable>();
             ib.AddToInventory(item);

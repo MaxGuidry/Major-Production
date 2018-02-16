@@ -12,7 +12,7 @@ public class ReachObjectiveBehaviour : MonoBehaviour
     {
         foreach (var i in GameObject.FindGameObjectsWithTag("Reach"))
         {
-            PlayerObjectives.Add(i.GetComponent<ObjectiveCollider>().Obj);
+            PlayerObjectives.Add(i.GetComponent<ObjectiveBehaviour>().Obj);
         }
         if (PlayerObjectives != null)
         {

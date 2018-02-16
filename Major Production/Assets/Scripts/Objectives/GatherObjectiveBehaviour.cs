@@ -13,7 +13,7 @@ public class GatherObjectiveBehaviour : MonoBehaviour
     {
         foreach (var i in GameObject.FindGameObjectsWithTag("Gather"))
         {
-            PlayerObjectives.Add(i.GetComponent<ObjectiveCollider>().Obj);
+            PlayerObjectives.Add(i.GetComponent<ObjectiveBehaviour>().Obj);
         }
         PlayerObjectives.Reverse();
         if (PlayerObjectives != null)

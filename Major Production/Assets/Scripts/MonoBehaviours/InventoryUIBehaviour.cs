@@ -13,6 +13,7 @@ public class InventoryUIBehaviour : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        inventory = FindObjectOfType<InventoryBehaviour>();
         slots = itemsParent.GetComponentsInChildren<InventorySlot>();
     }
 

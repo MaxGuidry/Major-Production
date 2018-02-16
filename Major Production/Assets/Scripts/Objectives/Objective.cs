@@ -27,31 +27,82 @@ public enum ActionOnReach
 [CreateAssetMenu]
 public class Objective : ScriptableObject
 {
-    public string Title;
+
+    [SerializeField]
+    private string Title;
     [Multiline]
-    public string Description;
+    
+    [SerializeField]    
+    private string Description;
+    public string description
+    {
+        get { return Description; }
+    }
+
+    [SerializeField]
     public ObjectiveType MissionType;
-    public Item RequiredItem;
-    public int CurrentAmount = 0;
-    public int RequiredAmount = 5;
+    [SerializeField]
+    private Item RequiredItem;
+    [SerializeField]
+    private int CurrentAmount = 0;
+    public int currentAmount
+    {
+        get { return CurrentAmount; }
+    }
+    [SerializeField]
+    private int RequiredAmount = 5;
+    public int requiredAmount
+    {
+        get { return RequiredAmount; }
+    }
+
+    [SerializeField]
     private ObjectiveStatus _status;
-    public ObjectiveStatus Status
+ 
+    private GameObject Target;
+    [SerializeField]
+    private GameEventArgs QuestStarted;
+    [SerializeField]
+    private GameEventArgs QuestEnded;
+    [SerializeField]
+    private GameEventArgs QuestChange;
+    [SerializeField]
+    private UnityEngine.Events.UnityEvent actionsOnComplete;
+
+    /// <summary>
+    /// move this objective forward in its current state
+    /// None->Inactive, Inactive-> Active, Active-> Active, Active -> Complete
+    /// Invoke the questchange event everytime we changestate
+    /// invoke the questend when going from active -> complete
+    /// </summary>
+    public void ProgressQuest()
     {
-        get { return _status; }
-        set { _status = value; }
+        switch (_status)
+        {
+            case ObjectiveStatus.None://0
+                ChangeState(ObjectiveStatus.Inactive);
+                break;
+            case ObjectiveStatus.Inactive://1
+                ChangeState(ObjectiveStatus.Active);
+                QuestStarted.Raise(this);
+                break;
+            case ObjectiveStatus.Active://2
+                CurrentAmount++;
+                if (CurrentAmount >= RequiredAmount)
+                    ChangeState(ObjectiveStatus.Complete);
+                else
+                    ChangeState(ObjectiveStatus.Active);
+                break;
+            case ObjectiveStatus.Complete://3
+                QuestEnded.Raise(this);
+                actionsOnComplete.Invoke();
+                break;            
+        }        
     }
-    public GameObject Target;
-    public GameObject PlayerForStat;
-    public GameEventArgs QuestStarted;
-    public GameEventArgs QuestEnded;
-    public GameEventArgs QuestChange;
-    public UnityEngine.Events.UnityEvent actionsOnReach;
-    public void MarkComplete()
+
+    private void ChangeState(ObjectiveStatus state)
     {
-        _status = ObjectiveStatus.Complete;
-    }
-    public void OnReach(Objective CurrentObj)
-    {
-        CurrentObj.actionsOnReach.Invoke();
-    }
+        _status = state;
+        QuestChange.Raise(this);
+    }    
 }

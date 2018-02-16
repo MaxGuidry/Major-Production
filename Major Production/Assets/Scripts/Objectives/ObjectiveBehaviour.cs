@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 //[RequireComponent(typeof(AudioSource))]
-public class ObjectiveCollider : MonoBehaviour
+public class ObjectiveBehaviour : MonoBehaviour
 {
     public Objective Obj;
     private void OnEnable()

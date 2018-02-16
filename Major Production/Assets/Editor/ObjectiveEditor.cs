@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using ScriptableObjects;
-[CustomEditor(typeof(Objective))]
+
 [CanEditMultipleObjects]
 public class ObjectiveEditor : EditorWindow {
     public string Title;

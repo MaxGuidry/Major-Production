@@ -26,6 +26,13 @@ public class CharacterMovement : MonoBehaviour
         UiInventory.SetActive(false);
     }
 
+    public KeyCode GetKeyCode(string key)
+    {
+        KeyCode k = KeyCode.None;
+        InputMap.KeyBinds.TryGetValue(key, out k);
+
+        return k;
+    }
     void Update()
     {
         // UiInventory.SetActive(Input.GetKey(InputMap.KeyBinds["inventory"]));
@@ -62,7 +69,15 @@ public class CharacterMovement : MonoBehaviour
         //if (Input.GetAxis("") > 0)
         //    Debug.Log("");
 
-        float Speed = (Input.GetKey(InputMap.KeyBinds["sprint"])) ? RunSpeed : WalkSpeed;
+        KeyCode k_sprint = GetKeyCode("sprint");
+        KeyCode k_forward = GetKeyCode("forward");
+        KeyCode k_left = GetKeyCode("left");
+        KeyCode k_right = GetKeyCode("right");
+        KeyCode k_back = GetKeyCode("back");
+        float Speed = 0.0f;
+
+
+        Speed = (Input.GetKey(k_sprint)) ? RunSpeed : WalkSpeed;
 
 
 
@@ -70,7 +85,7 @@ public class CharacterMovement : MonoBehaviour
 
         acceleration = t;
 
-        if (Input.GetKey(InputMap.KeyBinds["forward"]) && Input.GetKey(InputMap.KeyBinds["left"]) &&
+        if (Input.GetKey(k_forward) && Input.GetKey(k_left) &&
             velocity.magnitude < Speed)
         {
             float mag = acceleration.magnitude;
@@ -81,7 +96,7 @@ public class CharacterMovement : MonoBehaviour
             if (velocity.magnitude > Speed)
                 velocity = velocity.normalized * Speed;
         }
-        else if (Input.GetKey(InputMap.KeyBinds["forward"]) && Input.GetKey(InputMap.KeyBinds["left"]))
+        else if (Input.GetKey(k_forward) && Input.GetKey(k_left))
         {
             float mag = acceleration.magnitude;
             float angle = -45 * Mathf.Deg2Rad;
@@ -90,7 +105,7 @@ public class CharacterMovement : MonoBehaviour
             velocity = velocity.normalized * Speed;
         }
 
-        else if (Input.GetKey(InputMap.KeyBinds["forward"]) && Input.GetKey(InputMap.KeyBinds["right"]) &&
+        else if (Input.GetKey(k_forward) && Input.GetKey(k_right) &&
                  velocity.magnitude < Speed)
         {
             float mag = acceleration.magnitude;
@@ -101,7 +116,7 @@ public class CharacterMovement : MonoBehaviour
             if (velocity.magnitude > Speed)
                 velocity = velocity.normalized * Speed;
         }
-        else if (Input.GetKey(InputMap.KeyBinds["forward"]) && Input.GetKey(InputMap.KeyBinds["right"]))
+        else if (Input.GetKey(k_forward) && Input.GetKey(k_right))
         {
             float mag = acceleration.magnitude;
             float angle = 45 * Mathf.Deg2Rad;
@@ -109,7 +124,7 @@ public class CharacterMovement : MonoBehaviour
             velocity += acceleration;
             velocity = velocity.normalized * Speed;
         }
-        else if (Input.GetKey(InputMap.KeyBinds["back"]) && Input.GetKey(InputMap.KeyBinds["left"]) &&
+        else if (Input.GetKey(k_back) && Input.GetKey(k_left) &&
                  velocity.magnitude < Speed)
         {
             float mag = acceleration.magnitude;
@@ -120,7 +135,7 @@ public class CharacterMovement : MonoBehaviour
             if (velocity.magnitude > Speed)
                 velocity = velocity.normalized * Speed;
         }
-        else if (Input.GetKey(InputMap.KeyBinds["back"]) && Input.GetKey(InputMap.KeyBinds["left"]))
+        else if (Input.GetKey(k_back) && Input.GetKey(k_left))
         {
             float mag = acceleration.magnitude;
             float angle = -135 * Mathf.Deg2Rad;
@@ -128,7 +143,7 @@ public class CharacterMovement : MonoBehaviour
             velocity += acceleration;
             velocity = velocity.normalized * Speed;
         }
-        else if (Input.GetKey(InputMap.KeyBinds["back"]) && Input.GetKey(InputMap.KeyBinds["right"]) &&
+        else if (Input.GetKey(k_back) && Input.GetKey(k_right) &&
                  velocity.magnitude < Speed)
         {
             float mag = acceleration.magnitude;
@@ -139,7 +154,7 @@ public class CharacterMovement : MonoBehaviour
             if (velocity.magnitude > Speed)
                 velocity = velocity.normalized * Speed;
         }
-        else if (Input.GetKey(InputMap.KeyBinds["back"]) && Input.GetKey(InputMap.KeyBinds["right"]))
+        else if (Input.GetKey(k_back) && Input.GetKey(k_right))
         {
             float mag = acceleration.magnitude;
             float angle = 135 * Mathf.Deg2Rad;
@@ -149,7 +164,7 @@ public class CharacterMovement : MonoBehaviour
         }
 
 
-        else if (Input.GetKey(InputMap.KeyBinds["forward"]) && velocity.magnitude < Speed)
+        else if (Input.GetKey(k_forward) && velocity.magnitude < Speed)
         {
 
             velocity += acceleration.normalized * velocity.magnitude;
@@ -157,13 +172,13 @@ public class CharacterMovement : MonoBehaviour
             if (velocity.magnitude > Speed)
                 velocity = velocity.normalized * Speed;
         }
-        else if (Input.GetKey(InputMap.KeyBinds["forward"]))
+        else if (Input.GetKey(k_forward))
         {
 
             velocity += acceleration;
             velocity = velocity.normalized * Speed;
         }
-        else if (Input.GetKey(InputMap.KeyBinds["right"]) && velocity.magnitude < Speed)
+        else if (Input.GetKey(k_right) && velocity.magnitude < Speed)
         {
             float mag = acceleration.magnitude;
             float angle = 90 * Mathf.Deg2Rad;
@@ -175,7 +190,7 @@ public class CharacterMovement : MonoBehaviour
 
 
         }
-        else if (Input.GetKey(InputMap.KeyBinds["right"]))
+        else if (Input.GetKey(k_right))
         {
             float mag = acceleration.magnitude;
             float angle = 90 * Mathf.Deg2Rad;
@@ -186,7 +201,7 @@ public class CharacterMovement : MonoBehaviour
 
 
         }
-        else if (Input.GetKey(InputMap.KeyBinds["back"]) && velocity.magnitude < Speed)
+        else if (Input.GetKey(k_back) && velocity.magnitude < Speed)
         {
             acceleration = -acceleration;
             velocity = acceleration.normalized * velocity.magnitude;
@@ -194,13 +209,13 @@ public class CharacterMovement : MonoBehaviour
             if (velocity.magnitude > Speed)
                 velocity = velocity.normalized * Speed;
         }
-        else if (Input.GetKey(InputMap.KeyBinds["back"]))
+        else if (Input.GetKey(k_back))
         {
             acceleration = -acceleration;
             velocity += acceleration;
             velocity = velocity.normalized * Speed;
         }
-        else if (Input.GetKey(InputMap.KeyBinds["left"]) && velocity.magnitude < Speed)
+        else if (Input.GetKey(k_left) && velocity.magnitude < Speed)
         {
             float mag = acceleration.magnitude;
             float angle = -90 * Mathf.Deg2Rad;
@@ -212,7 +227,7 @@ public class CharacterMovement : MonoBehaviour
 
 
         }
-        else if (Input.GetKey(InputMap.KeyBinds["left"]))
+        else if (Input.GetKey(k_left))
         {
             float mag = acceleration.magnitude;
             float angle = -90 * Mathf.Deg2Rad;
@@ -229,7 +244,7 @@ public class CharacterMovement : MonoBehaviour
             velocity += -velocity * ((v.magnitude * 25f) / WalkSpeed) * Time.deltaTime;
         }
         //velocity += ((currentPlanet.center - this.transform.position).normalized * currentPlanet.gravity);
-        if (Input.GetKey(InputMap.KeyBinds["forward"]))
+        if (Input.GetKey(k_forward))
         {
             velocity += acceleration * Time.deltaTime;
         }
@@ -259,7 +274,7 @@ public class CharacterMovement : MonoBehaviour
         //Vector3 forward = this.transform.forward;
         //this.transform.up = (this.transform.position - currentPlanet.center).normalized;
         //Vector3 up = this.transform.up;
-       // this.transform.rotation = Quaternion.LookRotation(forward, this.transform.up);
+        // this.transform.rotation = Quaternion.LookRotation(forward, this.transform.up);
         //Vector3 t = Vector3.ProjectOnPlane(Camera.main.transform.up, this.transform.up);
         // this.transform.up = (this.transform.position - currentPlanet.center).normalized;
         //Quaternion q = Quaternion.LookRotation(t, this.transform.up);

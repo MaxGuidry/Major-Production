@@ -1,4 +1,4 @@
-﻿ 
+﻿
 public class GatherObjectiveBehaviour : ObjectiveBehaviour
 {
     public UnityEngine.UI.Text CurrentObjectiveText;
@@ -9,7 +9,7 @@ public class GatherObjectiveBehaviour : ObjectiveBehaviour
             return;
         CurrentObjectiveText.text = CurrentObjective.Description + " " + CurrentObjective.CurrentAmount + " / " + CurrentObjective.RequiredAmount;
     }
-    
+
     public void ProgressQuest(UnityEngine.Object[] args)
     {
         var sender = args[0]; //this is an item
@@ -36,5 +36,7 @@ public class GatherObjectiveBehaviour : ObjectiveBehaviour
             else
                 Destroy(gameObject);
         }
+        //PlayerObjectives.Remove(CurrentObjective);
+        //CurrentObjective = PlayerObjectives[0];
     }
 }

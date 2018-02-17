@@ -36,5 +36,7 @@ public class ReachObjectiveBehaviour : ObjectiveBehaviour
             else
                 Destroy(gameObject);
         }
+        //PlayerObjectives.Remove(CurrentObjective);
+        //CurrentObjective = PlayerObjectives[0];
     }
 }

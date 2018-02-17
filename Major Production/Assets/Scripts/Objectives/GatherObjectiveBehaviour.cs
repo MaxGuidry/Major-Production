@@ -18,9 +18,23 @@ public class GatherObjectiveBehaviour : ObjectiveBehaviour
 
     public void ProgressQuestChain()
     {
-        PlayerObjectives.Remove(CurrentObjective);
         if (PlayerObjectives.Count <= 0)
             Destroy(gameObject);
-        CurrentObjective = PlayerObjectives[0];
+        if (CurrentObjective != null)
+        {
+            if (PlayerObjectives.Contains(CurrentObjective))
+            {
+                PlayerObjectives.Remove(CurrentObjective);
+                if (PlayerObjectives.Count != 0)
+                    CurrentObjective = PlayerObjectives[0];
+                else
+                {
+                    Destroy(CurrentObjectiveText);
+                    Destroy(gameObject);
+                }
+            }
+            else
+                Destroy(gameObject);
+        }
     }
 }

@@ -5,19 +5,40 @@ using UnityEngine.UI;
 using System.Linq;
 public class ReachObjectiveBehaviour : ObjectiveBehaviour
 {
-    void onQuestStart(Object[] args)
-    {
-        if(args[0] == CurrentObjective)
-        {
+    public UnityEngine.UI.Text CurrentObjectiveText;
 
-        }
-    }
-    void onQuestCompleted(Object[] args)
+    public void UI_Refresh()
     {
-        if (args[0] == CurrentObjective)
+        if (CurrentObjective == null)
+            return;
+        CurrentObjectiveText.text = CurrentObjective.Description;
+    }
+
+    public void ProgressQuest(UnityEngine.Object[] args)
+    {
+        var sender = args[0]; //this is an item
+        CurrentObjective.ProgressQuest(sender as ScriptableObjects.Item);
+    }
+
+    public void ProgressQuestChain()
+    {
+        if (PlayerObjectives.Count <= 0)
+            Destroy(gameObject);
+        if (CurrentObjective != null)
         {
-            PlayerObjectives.Remove(CurrentObjective);
-            CurrentObjective = PlayerObjectives[0];
+            if (PlayerObjectives.Contains(CurrentObjective))
+            {
+                PlayerObjectives.Remove(CurrentObjective);
+                if (PlayerObjectives.Count != 0)
+                    CurrentObjective = PlayerObjectives[0];
+                else
+                {
+                    Destroy(CurrentObjectiveText);
+                    Destroy(gameObject);
+                }
+            }
+            else
+                Destroy(gameObject);
         }
     }
 }

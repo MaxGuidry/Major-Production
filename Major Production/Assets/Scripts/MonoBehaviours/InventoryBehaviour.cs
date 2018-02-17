@@ -38,8 +38,6 @@ public class InventoryBehaviour : MonoBehaviour, IStorageable
         inventory.CurrentInventory.Add(newItem);
         InventoryUi.UpdateUI();
         InvChange.Invoke(inventory);
-
-        Debug.Log("Item Added: " + newItem.Type);
     }
 
     public void RemoveFromInventory(Item theItem)
@@ -49,7 +47,6 @@ public class InventoryBehaviour : MonoBehaviour, IStorageable
         inventory.CurrentInventory.Remove(theItem);
         InvChange.Invoke(inventory);
 
-        Debug.Log("Removed Item: " + theItem.Type);
     }
 
     public void RemoveAllFromInventory()

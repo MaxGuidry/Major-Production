@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using System.Linq;
+﻿
 public class ReachObjectiveBehaviour : ObjectiveBehaviour
 {
     public UnityEngine.UI.Text CurrentObjectiveText;
@@ -16,7 +12,7 @@ public class ReachObjectiveBehaviour : ObjectiveBehaviour
 
     public void ProgressQuest(UnityEngine.Object[] args)
     {
-        var sender = args[0]; //this is an item
+        var sender = args[0];
         CurrentObjective.ProgressQuest(sender as ScriptableObjects.Item);
     }
 

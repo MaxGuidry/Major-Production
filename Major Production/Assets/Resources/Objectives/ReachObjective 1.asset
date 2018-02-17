@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Name: ReachObjective 1
   m_EditorClassIdentifier: 
   Title: ReachCheckPointTest
-  _description: ReachCheckPointTest
+  _description: Reach CheckPoint Test Two
   MissionType: 2
-  _requiredItem: {fileID: 0}
+  _requiredItem: {fileID: 11400000, guid: 98eccdbbd91bbb14aa152b928f73c489, type: 2}
   _currentAmount: 0
-  _requiredAmount: 5
+  _requiredAmount: 1
   _status: 0
   QuestStarted: {fileID: 11400000, guid: b66499015cebc5940b09958a4c05f3f7, type: 2}
   QuestEnded: {fileID: 11400000, guid: 9d44f410c46f20047893219d71f48af9, type: 2}

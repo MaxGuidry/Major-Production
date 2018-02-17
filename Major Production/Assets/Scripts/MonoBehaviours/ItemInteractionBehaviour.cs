@@ -13,18 +13,6 @@ public class ItemInteractionBehaviour : MonoBehaviour
     public GameEventArgs ItemPickedUp;
     public bool collided = false;
 
-    void Start()
-    {
-        if (item == (item.Type == ItemType.Stone))
-            gameObject.tag = "Stone";
-
-        if (item == (item.Type == ItemType.Wood))
-            gameObject.tag = "Wood";
-
-        if (item == (item.Type == ItemType.Chaser))
-            GetComponent<Renderer>().material.color = Color.red;
-    }
-
     private void Update()
     {
         Spoiler();

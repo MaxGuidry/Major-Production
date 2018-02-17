@@ -25,7 +25,7 @@ public class ScriptableObjectHelpers
         {
             case PlayModeStateChange.EnteredPlayMode:
                 objectsToUnload = Resources.LoadAll<ScriptableObject>("").ToList();
-                AssetDatabase.SaveAssets();
+                //AssetDatabase.SaveAssets();
                 break;
 
             case PlayModeStateChange.ExitingPlayMode:

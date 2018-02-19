@@ -82,7 +82,7 @@ public class Objective : ScriptableObject
     {
         if (args[0] == null)
             return;
-        Debug.Log("progress quest" + args[0].ToString());
+        Debug.Log("Quest Progress: "+ Title + " " + args[0].ToString());
         var valids = new object[] { _requiredItem, "initialize", "start"};
         
         if (!valids.Contains(args[0]))

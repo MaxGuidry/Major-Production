@@ -10,10 +10,13 @@ public class ObjectiveBehaviour : MonoBehaviour
     {
         //this is bad for future donray
         //null should be used to check validity of the token
-        PlayerObjectives.ForEach(objective => objective.ProgressQuest("initialize"));
-        //set the current objective
-        CurrentObjective = PlayerObjectives[0];
-        //activate the currentobjective
-        CurrentObjective.ProgressQuest("start");
+        if (PlayerObjectives != null)
+        {
+            PlayerObjectives.ForEach(objective => objective.ProgressQuest("initialize"));
+            //set the current objective
+            CurrentObjective = PlayerObjectives[0];
+            //activate the currentobjective
+            CurrentObjective.ProgressQuest("start");
+        }
     }
 }

@@ -316,7 +316,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 299397829}
-        m_MethodName: UI_Refresh
+        m_MethodName: UI_RefreshGather
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -345,7 +345,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 299397829}
-        m_MethodName: ProgressQuestChain
+        m_MethodName: ProgressGatherChain
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -356,7 +356,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 299397829}
-        m_MethodName: UI_Refresh
+        m_MethodName: UI_RefreshGather
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -385,7 +385,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 299397829}
-        m_MethodName: ProgressQuest
+        m_MethodName: ProgressGather
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -425,7 +425,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 299397829}
-        m_MethodName: UI_Refresh
+        m_MethodName: UI_RefreshGather
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1948,7 +1948,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2064579533}
-        m_MethodName: ProgressQuest
+        m_MethodName: ProgresstReach
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1977,7 +1977,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2064579533}
-        m_MethodName: ProgressQuestChain
+        m_MethodName: ProgressReachChain
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1988,7 +1988,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 2064579533}
-        m_MethodName: UI_Refresh
+        m_MethodName: UI_RefreshReach
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2017,7 +2017,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2064579533}
-        m_MethodName: UI_Refresh
+        m_MethodName: UI_RefreshReach
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2046,7 +2046,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2064579533}
-        m_MethodName: UI_Refresh
+        m_MethodName: UI_RefreshReach
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

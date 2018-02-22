@@ -1,22 +1,23 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class AutoTyper : MonoBehaviour
 {
-    public float TypeSpeed;
-    public Text TextArea;
     public GameObject BackgroundPanel;
     public string ChooseFile;
 
-    private string path;
+    [HideInInspector] public string path;
+
+    public Text TextArea;
+
+    public float TypeSpeed;
+
     // Use this for initialization
-    void Start()
+    private void Start()
     {
-        path = "Assets/Resources/" + ChooseFile + ".txt";
+        path = "Assets/Resources/Dialogue/" + ChooseFile + ".txt";
         StartCoroutine(AutoType());
     }
 
@@ -28,22 +29,25 @@ public class AutoTyper : MonoBehaviour
 
     public IEnumerator AutoType()
     {
-        SetActive(true);
+        SetActive(!BackgroundPanel.gameObject.activeInHierarchy);
         if (ChooseFile == "")
         {
             SetActive(false);
             yield break;
         }
+
         StreamReader reader;
         if (File.Exists(path))
+        {
             reader = new StreamReader(path);
+        }
         else
         {
             SetActive(false);
             yield break;
         }
+
         while (true)
-        {
             if (!reader.EndOfStream)
             {
                 foreach (var letter in reader.ReadLine())
@@ -51,6 +55,7 @@ public class AutoTyper : MonoBehaviour
                     TextArea.text += letter;
                     yield return new WaitForSeconds(TypeSpeed);
                 }
+
                 TextArea.text = "";
             }
             else
@@ -58,6 +63,5 @@ public class AutoTyper : MonoBehaviour
                 SetActive(false);
                 yield break;
             }
-        }
     }
 }

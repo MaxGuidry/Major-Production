@@ -34,7 +34,6 @@ public class ObjectiveBehaviour : MonoBehaviour
     /// </summary>
     public virtual void ProgressChain()
     {
-        Debug.Log("chain progress");
         if (CurrentObjective == null)
             return;
         if (PlayerObjectives.Count <= 0)

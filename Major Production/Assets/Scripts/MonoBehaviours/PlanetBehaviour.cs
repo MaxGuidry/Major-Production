@@ -45,10 +45,12 @@ public class PlanetBehaviour : MonoBehaviour
             return;
         }
         rb.AddForce(((planet.center - rb.transform.position).normalized * planet.gravity));
-        float y = rb.transform.rotation.eulerAngles.y;
-        rb.transform.up = (rb.gameObject.transform.position - planet.center).normalized;
-        rb.transform.rotation = Quaternion.Euler(rb.transform.rotation.eulerAngles.x, y, rb.transform.rotation.eulerAngles.z);
+        //float y = rb.transform.rotation.eulerAngles.y;
+        //rb.transform.up = (rb.gameObject.transform.position - planet.center).normalized;
+        //rb.transform.rotation = Quaternion.Euler(rb.transform.rotation.eulerAngles.x, y, rb.transform.rotation.eulerAngles.z);
         //rb.gameObject.transform.rotation = Quaternion.LookRotation(f, up);
+        rb.transform.rotation = Quaternion.FromToRotation(rb.transform.up, rb.transform.position - planet.center) *
+                                rb.transform.rotation;
 
     }
 }

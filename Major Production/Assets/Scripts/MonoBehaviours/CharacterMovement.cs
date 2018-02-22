@@ -76,6 +76,7 @@ public class CharacterMovement : MonoBehaviour
         //KeyCode k_back = GetKeyCode("back");
         //float Speed = 0.0f;
 
+        UiInventory.SetActive(Input.GetKey(KeyCode.Tab));
 
         float Speed = (Input.GetKey(InputMap.KeyBinds["sprint"])) ? RunSpeed : WalkSpeed;
 

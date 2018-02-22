@@ -18,6 +18,7 @@ public class CharacterMovement : MonoBehaviour
 
     void Awake()
     {
+        
         rb = gameObject.GetComponent<Rigidbody>();
     }
 
@@ -50,12 +51,16 @@ public class CharacterMovement : MonoBehaviour
         //     Debug.Log("Y");
         //if(Input.GetAxis("Mouse X") > 0)
         //    Debug.Log(Input.GetAxis("Mouse X"));
+        //if (Input.GetAxis("Mouse Y") > 0)
+        //    Debug.Log(Input.GetAxis("Mouse Y"));
+        //if (Input.GetAxis("Right Trigger"))
+        //    Debug.Log(Input.GetAxis("Trigger"));
         //if (Input.GetAxis("") > 0)
-        //    Debug.Log("");
+           // Debug.Log(Input.GetAxis("Left Bumper"));
+       // Debug.Log(Input.GetAxis("Right Bumper"));
         //if (Input.GetAxis("") > 0)
-        //    Debug.Log("");
-        //if (Input.GetAxis("") > 0)
-        //    Debug.Log("");
+        Debug.Log(Input.GetAxis("Horizontal"));
+        Debug.Log(Input.GetAxis("Vertical"));
         //if (Input.GetAxis("") > 0)
         //    Debug.Log("");
         //if (Input.GetAxis("") > 0)
@@ -91,7 +96,8 @@ public class CharacterMovement : MonoBehaviour
         {
             float mag = acceleration.magnitude;
             float angle = -45 * Mathf.Deg2Rad;
-            acceleration = new Quaternion(0, Mathf.Sin(angle / 2f), 0, Mathf.Cos(angle / 2f)) * acceleration;
+            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * this.transform.up.x, Mathf.Sin(angle / 2f)
+                                                                                       * this.transform.up.y, Mathf.Sin(angle / 2f) * this.transform.up.z, Mathf.Cos(angle / 2f)) * acceleration;
             velocity = acceleration.normalized * velocity.magnitude;
             velocity += acceleration;
             if (velocity.magnitude > Speed)
@@ -101,7 +107,8 @@ public class CharacterMovement : MonoBehaviour
         {
             float mag = acceleration.magnitude;
             float angle = -45 * Mathf.Deg2Rad;
-            acceleration = new Quaternion(0, Mathf.Sin(angle / 2f), 0, Mathf.Cos(angle / 2f)) * acceleration;
+            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * this.transform.up.x, Mathf.Sin(angle / 2f)
+                                                                                       * this.transform.up.y, Mathf.Sin(angle / 2f) * this.transform.up.z, Mathf.Cos(angle / 2f)) * acceleration;
             velocity += acceleration;
             velocity = velocity.normalized * Speed;
         }
@@ -111,7 +118,8 @@ public class CharacterMovement : MonoBehaviour
         {
             float mag = acceleration.magnitude;
             float angle = 45 * Mathf.Deg2Rad;
-            acceleration = new Quaternion(0, Mathf.Sin(angle / 2f), 0, Mathf.Cos(angle / 2f)) * acceleration;
+            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * this.transform.up.x, Mathf.Sin(angle / 2f)
+                                                                                       * this.transform.up.y, Mathf.Sin(angle / 2f) * this.transform.up.z, Mathf.Cos(angle / 2f)) * acceleration;
             velocity = acceleration.normalized * velocity.magnitude;
             velocity += acceleration;
             if (velocity.magnitude > Speed)
@@ -121,7 +129,8 @@ public class CharacterMovement : MonoBehaviour
         {
             float mag = acceleration.magnitude;
             float angle = 45 * Mathf.Deg2Rad;
-            acceleration = new Quaternion(0, Mathf.Sin(angle / 2f), 0, Mathf.Cos(angle / 2f)) * acceleration;
+            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * this.transform.up.x, Mathf.Sin(angle / 2f)
+                                                                                       * this.transform.up.y, Mathf.Sin(angle / 2f) * this.transform.up.z, Mathf.Cos(angle / 2f)) * acceleration;
             velocity += acceleration;
             velocity = velocity.normalized * Speed;
         }
@@ -130,7 +139,8 @@ public class CharacterMovement : MonoBehaviour
         {
             float mag = acceleration.magnitude;
             float angle = -135 * Mathf.Deg2Rad;
-            acceleration = new Quaternion(0, Mathf.Sin(angle / 2f), 0, Mathf.Cos(angle / 2f)) * acceleration;
+            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * this.transform.up.x, Mathf.Sin(angle / 2f)
+                                                                                       * this.transform.up.y, Mathf.Sin(angle / 2f) * this.transform.up.z, Mathf.Cos(angle / 2f)) * acceleration;
             velocity = acceleration.normalized * velocity.magnitude;
             velocity += acceleration;
             if (velocity.magnitude > Speed)
@@ -140,7 +150,8 @@ public class CharacterMovement : MonoBehaviour
         {
             float mag = acceleration.magnitude;
             float angle = -135 * Mathf.Deg2Rad;
-            acceleration = new Quaternion(0, Mathf.Sin(angle / 2f), 0, Mathf.Cos(angle / 2f)) * acceleration;
+            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * this.transform.up.x, Mathf.Sin(angle / 2f)
+                                                                                       * this.transform.up.y, Mathf.Sin(angle / 2f) * this.transform.up.z, Mathf.Cos(angle / 2f)) * acceleration;
             velocity += acceleration;
             velocity = velocity.normalized * Speed;
         }
@@ -149,7 +160,8 @@ public class CharacterMovement : MonoBehaviour
         {
             float mag = acceleration.magnitude;
             float angle = 135 * Mathf.Deg2Rad;
-            acceleration = new Quaternion(0, Mathf.Sin(angle / 2f), 0, Mathf.Cos(angle / 2f)) * acceleration;
+            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * this.transform.up.x, Mathf.Sin(angle / 2f)
+                                                                                       * this.transform.up.y, Mathf.Sin(angle / 2f) * this.transform.up.z, Mathf.Cos(angle / 2f)) * acceleration;
             velocity = acceleration.normalized * velocity.magnitude;
             velocity += acceleration;
             if (velocity.magnitude > Speed)
@@ -159,8 +171,8 @@ public class CharacterMovement : MonoBehaviour
         {
             float mag = acceleration.magnitude;
             float angle = 135 * Mathf.Deg2Rad;
-            acceleration = new Quaternion(0, Mathf.Sin(angle / 2f), 0, Mathf.Cos(angle / 2f)) * acceleration;
-            velocity += acceleration;
+            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * this.transform.up.x, Mathf.Sin(angle / 2f)
+                                                                                       * this.transform.up.y, Mathf.Sin(angle / 2f) * this.transform.up.z, Mathf.Cos(angle / 2f)) * acceleration; velocity += acceleration;
             velocity = velocity.normalized * Speed;
         }
 
@@ -183,8 +195,8 @@ public class CharacterMovement : MonoBehaviour
         {
             float mag = acceleration.magnitude;
             float angle = 90 * Mathf.Deg2Rad;
-            acceleration = new Quaternion(0, Mathf.Sin(angle / 2f), 0, Mathf.Cos(angle / 2f)) * acceleration;
-            velocity = acceleration.normalized * velocity.magnitude;
+            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * this.transform.up.x, Mathf.Sin(angle / 2f)
+                                                                                       * this.transform.up.y, Mathf.Sin(angle / 2f) * this.transform.up.z, Mathf.Cos(angle / 2f)) * acceleration; velocity = acceleration.normalized * velocity.magnitude;
             velocity += acceleration;
             if (velocity.magnitude > Speed)
                 velocity = velocity.normalized * Speed;
@@ -195,8 +207,8 @@ public class CharacterMovement : MonoBehaviour
         {
             float mag = acceleration.magnitude;
             float angle = 90 * Mathf.Deg2Rad;
-            acceleration = new Quaternion(0, Mathf.Sin(angle / 2f), 0, Mathf.Cos(angle / 2f)) * acceleration;
-            velocity += acceleration;
+            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * this.transform.up.x, Mathf.Sin(angle / 2f)
+                                                                                       * this.transform.up.y, Mathf.Sin(angle / 2f) * this.transform.up.z, Mathf.Cos(angle / 2f)) * acceleration; velocity += acceleration;
             velocity = velocity.normalized * Speed;
 
 
@@ -220,8 +232,8 @@ public class CharacterMovement : MonoBehaviour
         {
             float mag = acceleration.magnitude;
             float angle = -90 * Mathf.Deg2Rad;
-            acceleration = new Quaternion(0, Mathf.Sin(angle / 2f), 0, Mathf.Cos(angle / 2f)) * acceleration;
-            velocity = acceleration.normalized * velocity.magnitude;
+            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * this.transform.up.x, Mathf.Sin(angle / 2f)
+                                                                                       * this.transform.up.y, Mathf.Sin(angle / 2f) * this.transform.up.z, Mathf.Cos(angle / 2f)) * acceleration; velocity = acceleration.normalized * velocity.magnitude;
             velocity += acceleration;
             if (velocity.magnitude > Speed)
                 velocity = velocity.normalized * Speed;
@@ -232,8 +244,8 @@ public class CharacterMovement : MonoBehaviour
         {
             float mag = acceleration.magnitude;
             float angle = -90 * Mathf.Deg2Rad;
-            acceleration = new Quaternion(0, Mathf.Sin(angle / 2f), 0, Mathf.Cos(angle / 2f)) * acceleration;
-            velocity += acceleration;
+            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * this.transform.up.x, Mathf.Sin(angle / 2f)
+                                                                                       * this.transform.up.y, Mathf.Sin(angle / 2f) * this.transform.up.z, Mathf.Cos(angle / 2f)) * acceleration; velocity += acceleration;
             velocity = velocity.normalized * Speed;
 
         }
@@ -253,8 +265,6 @@ public class CharacterMovement : MonoBehaviour
 
         this.transform.position += velocity * Time.deltaTime;
 
-
-
         //this.transform.rotation = Quaternion.Slerp(q, this.transform.rotation, .2f);
         float theta = Input.GetAxis("Mouse X") * Mathf.Deg2Rad * 5;
         this.transform.rotation = new Quaternion(Mathf.Sin(theta / 2f) * this.transform.up.x, Mathf.Sin(theta / 2f)
@@ -263,8 +273,6 @@ public class CharacterMovement : MonoBehaviour
 
     void LateUpdate()
     {
-
-        
 
         //this.transform.Rotate(this.transform.up, Input.GetAxis("Mouse X"));
         //Vector3 forward = this.transform.forward;

@@ -1,7 +1,4 @@
-﻿
-using System.Diagnostics;
-
-public class ReachObjectiveBehaviour : ObjectiveBehaviour
+﻿public class ReachObjectiveBehaviour : ObjectiveBehaviour
 {
     public UnityEngine.UI.Text CurrentObjectiveText;
 

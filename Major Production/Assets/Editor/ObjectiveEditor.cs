@@ -9,7 +9,6 @@ public class ObjectiveEditor : EditorWindow {
     public string Title;
     [Multiline]
     public string Description;
-    public ObjectiveType MissonType;
     public Item RequiredItem;
     public int CurrentAmount;
     public int RequiredAmount;

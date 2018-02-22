@@ -33,8 +33,8 @@ public class ObjectiveBehaviour : MonoBehaviour
             return;
         if (PlayerObjectives.Count <= 0)
             Destroy(gameObject);
-        //Set Next Objective
 
+        //Set Next Objective
         PlayerObjectives.Remove(CurrentObjective);
         if (PlayerObjectives.Count != 0)
         {
@@ -42,6 +42,7 @@ public class ObjectiveBehaviour : MonoBehaviour
             CurrentObjective.Status = ObjectiveStatus.Active;
         }
     }
+
     public void ProgressObjective(UnityEngine.Object[] args)
     {
         var sender = args[0];

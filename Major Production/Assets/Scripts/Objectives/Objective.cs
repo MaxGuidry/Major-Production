@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Linq;
-using UnityEngine;
 using ScriptableObjects;
-public enum ObjectiveType
-{
-    None = 0,
-    Gather = 1,
-    Reach = 2
-}
+using UnityEngine;
+using UnityEngine.Events;
 
+/// <summary>
+///     Controls the Status of the Current Objective
+/// </summary>
 public enum ObjectiveStatus
 {
     None = 0,
@@ -17,90 +15,63 @@ public enum ObjectiveStatus
     Complete = 3
 }
 
-//public enum ActionOnReach
-//{
-//    MarkComplete = 0,
-//    AddModififer = 1,
-//    PlayAudio = 2,
-//    PlayAnimation = 3,
-//}
 [CreateAssetMenu]
 public class Objective : ScriptableObject
 {
+    [SerializeField] private string _title;
 
-    [SerializeField]
-    private string Title;
-    [Multiline]
+    [Multiline] [SerializeField] private  string _description;
 
-    [SerializeField]
-    private string _description;
+    [SerializeField] private int _currentAmount;
+
+    [SerializeField] private int _requiredAmount;
+
+    [SerializeField] private Item _requiredItem;
+
+    [SerializeField] private GameEventArgs QuestStart;
+
+    [SerializeField] private GameEventArgs QuestChange;
+
+    [SerializeField] private GameEventArgs QuestComplete;
+
+    [SerializeField] private UnityEvent actionsOnComplete;
+
     public string Description
     {
         get { return _description; }
     }
-
-    [SerializeField]
-    public ObjectiveType MissionType;
-    [SerializeField]
-    private Item _requiredItem;
-
-    [SerializeField]
-    private int _currentAmount;
 
     public int CurrentAmount
     {
         get { return _currentAmount; }
     }
 
-    [SerializeField]
-    private int _requiredAmount = 5;
-
     public int RequiredAmount
     {
         get { return _requiredAmount; }
     }
 
-    public ObjectiveStatus Status
-    {
-        get
-        {
-            return _status;
-        }
-
-        set
-        {
-            _status = value;
-        }
-    }
-
-    [SerializeField]
-    private ObjectiveStatus _status;
-    [SerializeField]
-    private GameEventArgs QuestStarted;
-    [SerializeField]
-    private GameEventArgs QuestEnded;
-    [SerializeField]
-    private GameEventArgs QuestChange;
-    [SerializeField]
-    private UnityEngine.Events.UnityEvent actionsOnComplete;
-
+    public ObjectiveStatus Status { get; set; }
 
     /// <summary>
-    /// move this objective forward in its current state
-    /// None->Inactive, Inactive-> Active, Active-> Active, Active -> Complete
-    /// Invoke the questchange event everytime we changestate
-    /// invoke the questend when going from active -> complete    /// 
+    ///     move this objective forward in its current state
+    ///     None->Inactive, Inactive-> Active, Active-> Active, Active -> Complete
+    ///     Invoke the questchange event everytime we changestate
+    ///     invoke the questend when going from active -> complete    ///
     /// </summary>
-    /// <param>the item we are using to progress this quest
+    /// <param>
+    ///     the item we are using to progress this quest
     ///     <name>item</name>
     /// </param>
     public void ProgressQuest(params object[] args)
     {
         if (args[0] == null)
             return;
-        Debug.Log("Quest Progress: " + Title + " " + args[0]);
-        var valids = new object[] { _requiredItem, "initialize", "start"};
-        
+
+        Debug.Log("Quest Progress: " + _title + " " + args[0]);
+
+        var valids = new object[] {_requiredItem, "initialize", "start"};
+
         if (!valids.Contains(args[0]))
             return;
 
@@ -110,13 +81,13 @@ public class Objective : ScriptableObject
                 ChangeState(ObjectiveStatus.Inactive);
                 break;
             case ObjectiveStatus.Inactive:
-                ChangeState(ObjectiveStatus.Active);                
+                ChangeState(ObjectiveStatus.Active);
                 break;
             case ObjectiveStatus.Active:
                 _currentAmount++;
-                ChangeState(_currentAmount >= _requiredAmount ? ObjectiveStatus.Complete : ObjectiveStatus.Active);
+                ChangeState(AmountCheck() ? ObjectiveStatus.Complete : ObjectiveStatus.Active);
                 break;
-            case ObjectiveStatus.Complete:                  
+            case ObjectiveStatus.Complete:
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -124,7 +95,7 @@ public class Objective : ScriptableObject
     }
 
     /// <summary>
-    /// successful valid state change so now do stuff
+    ///     Successful valid state change raise events and invoke unity events
     /// </summary>
     /// <param name="state"></param>
     private void ChangeState(ObjectiveStatus state)
@@ -133,19 +104,28 @@ public class Objective : ScriptableObject
         QuestChange.Raise(this);
         switch (Status)
         {
-            case ObjectiveStatus.None:               
+            case ObjectiveStatus.None:
                 break;
-            case ObjectiveStatus.Inactive:              
-                QuestStarted.Raise(this);
+            case ObjectiveStatus.Inactive:
+                QuestStart.Raise(this);
                 break;
-            case ObjectiveStatus.Active:        
+            case ObjectiveStatus.Active:
                 break;
             case ObjectiveStatus.Complete:
-                QuestEnded.Raise(this);
-                //actionsOnComplete.Invoke();
+                QuestComplete.Raise(this);
+                actionsOnComplete.Invoke();
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
-        } 
+        }
+    }
+
+    /// <summary>
+    ///     Check if Goal is reached
+    /// </summary>
+    /// <returns></returns>
+    private bool AmountCheck()
+    {
+        return CurrentAmount >= RequiredAmount;
     }
 }

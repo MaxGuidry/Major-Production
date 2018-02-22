@@ -1,5 +1,4 @@
-﻿
-public class GatherObjectiveBehaviour : ObjectiveBehaviour
+﻿public class GatherObjectiveBehaviour : ObjectiveBehaviour
 {
     public UnityEngine.UI.Text CurrentObjectiveText;
 

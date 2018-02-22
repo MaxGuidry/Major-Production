@@ -1,45 +1,43 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
-
-    public float WalkSpeed = 1;
-    public float RunSpeed = 2;
-    public GameObject UiInventory;
     private Vector3 acceleration = Vector3.zero;
-    private Vector3 velocity = Vector3.zero;
-    private Vector3 position;
     public Planet currentPlanet;
+    private Vector3 position;
 
     private Rigidbody rb;
+    public float RunSpeed = 2;
+    public GameObject UiInventory;
+    private Vector3 velocity = Vector3.zero;
 
-    void Awake()
+    public float WalkSpeed = 1;
+
+    private void Awake()
     {
-        
         rb = gameObject.GetComponent<Rigidbody>();
     }
 
-    void Start()
+    private void Start()
     {
         //UiInventory.SetActive(false);
     }
 
     public KeyCode GetKeyCode(string key)
     {
-        KeyCode k = KeyCode.None;
+        var k = KeyCode.None;
         InputMap.KeyBinds.TryGetValue(key, out k);
 
         return k;
     }
-    void Update()
+
+    private void Update()
     {
         // UiInventory.SetActive(Input.GetKey(InputMap.KeyBinds["inventory"]));
     }
+
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         // if (Input.GetAxis("A") > 0)
         //     Debug.Log("A");
@@ -56,11 +54,11 @@ public class CharacterMovement : MonoBehaviour
         //if (Input.GetAxis("Right Trigger"))
         //    Debug.Log(Input.GetAxis("Trigger"));
         //if (Input.GetAxis("") > 0)
-           // Debug.Log(Input.GetAxis("Left Bumper"));
-       // Debug.Log(Input.GetAxis("Right Bumper"));
+        // Debug.Log(Input.GetAxis("Left Bumper"));
+        // Debug.Log(Input.GetAxis("Right Bumper"));
         //if (Input.GetAxis("") > 0)
-        Debug.Log(Input.GetAxis("Horizontal"));
-        Debug.Log(Input.GetAxis("Vertical"));
+        //Debug.Log(Input.GetAxis("Horizontal"));
+        //Debug.Log(Input.GetAxis("Vertical"));
         //if (Input.GetAxis("") > 0)
         //    Debug.Log("");
         //if (Input.GetAxis("") > 0)
@@ -83,21 +81,21 @@ public class CharacterMovement : MonoBehaviour
 
         UiInventory.SetActive(Input.GetKey(KeyCode.Tab));
 
-        float Speed = (Input.GetKey(InputMap.KeyBinds["sprint"])) ? RunSpeed : WalkSpeed;
+        var Speed = Input.GetKey(InputMap.KeyBinds["sprint"]) ? RunSpeed : WalkSpeed;
 
 
-
-        Vector3 t = this.transform.forward;
+        var t = transform.forward;
 
         acceleration = t;
 
         if (Input.GetKey(InputMap.KeyBinds["forward"]) && Input.GetKey(InputMap.KeyBinds["left"]) &&
             velocity.magnitude < Speed)
         {
-            float mag = acceleration.magnitude;
-            float angle = -45 * Mathf.Deg2Rad;
-            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * this.transform.up.x, Mathf.Sin(angle / 2f)
-                                                                                       * this.transform.up.y, Mathf.Sin(angle / 2f) * this.transform.up.z, Mathf.Cos(angle / 2f)) * acceleration;
+            var mag = acceleration.magnitude;
+            var angle = -45 * Mathf.Deg2Rad;
+            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * transform.up.x, Mathf.Sin(angle / 2f)
+                                                                                  * transform.up.y,
+                               Mathf.Sin(angle / 2f) * transform.up.z, Mathf.Cos(angle / 2f)) * acceleration;
             velocity = acceleration.normalized * velocity.magnitude;
             velocity += acceleration;
             if (velocity.magnitude > Speed)
@@ -105,10 +103,11 @@ public class CharacterMovement : MonoBehaviour
         }
         else if (Input.GetKey(InputMap.KeyBinds["forward"]) && Input.GetKey(InputMap.KeyBinds["left"]))
         {
-            float mag = acceleration.magnitude;
-            float angle = -45 * Mathf.Deg2Rad;
-            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * this.transform.up.x, Mathf.Sin(angle / 2f)
-                                                                                       * this.transform.up.y, Mathf.Sin(angle / 2f) * this.transform.up.z, Mathf.Cos(angle / 2f)) * acceleration;
+            var mag = acceleration.magnitude;
+            var angle = -45 * Mathf.Deg2Rad;
+            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * transform.up.x, Mathf.Sin(angle / 2f)
+                                                                                  * transform.up.y,
+                               Mathf.Sin(angle / 2f) * transform.up.z, Mathf.Cos(angle / 2f)) * acceleration;
             velocity += acceleration;
             velocity = velocity.normalized * Speed;
         }
@@ -116,10 +115,11 @@ public class CharacterMovement : MonoBehaviour
         else if (Input.GetKey(InputMap.KeyBinds["forward"]) && Input.GetKey(InputMap.KeyBinds["right"]) &&
                  velocity.magnitude < Speed)
         {
-            float mag = acceleration.magnitude;
-            float angle = 45 * Mathf.Deg2Rad;
-            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * this.transform.up.x, Mathf.Sin(angle / 2f)
-                                                                                       * this.transform.up.y, Mathf.Sin(angle / 2f) * this.transform.up.z, Mathf.Cos(angle / 2f)) * acceleration;
+            var mag = acceleration.magnitude;
+            var angle = 45 * Mathf.Deg2Rad;
+            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * transform.up.x, Mathf.Sin(angle / 2f)
+                                                                                  * transform.up.y,
+                               Mathf.Sin(angle / 2f) * transform.up.z, Mathf.Cos(angle / 2f)) * acceleration;
             velocity = acceleration.normalized * velocity.magnitude;
             velocity += acceleration;
             if (velocity.magnitude > Speed)
@@ -127,20 +127,22 @@ public class CharacterMovement : MonoBehaviour
         }
         else if (Input.GetKey(InputMap.KeyBinds["forward"]) && Input.GetKey(InputMap.KeyBinds["right"]))
         {
-            float mag = acceleration.magnitude;
-            float angle = 45 * Mathf.Deg2Rad;
-            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * this.transform.up.x, Mathf.Sin(angle / 2f)
-                                                                                       * this.transform.up.y, Mathf.Sin(angle / 2f) * this.transform.up.z, Mathf.Cos(angle / 2f)) * acceleration;
+            var mag = acceleration.magnitude;
+            var angle = 45 * Mathf.Deg2Rad;
+            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * transform.up.x, Mathf.Sin(angle / 2f)
+                                                                                  * transform.up.y,
+                               Mathf.Sin(angle / 2f) * transform.up.z, Mathf.Cos(angle / 2f)) * acceleration;
             velocity += acceleration;
             velocity = velocity.normalized * Speed;
         }
         else if (Input.GetKey(InputMap.KeyBinds["back"]) && Input.GetKey(InputMap.KeyBinds["left"]) &&
                  velocity.magnitude < Speed)
         {
-            float mag = acceleration.magnitude;
-            float angle = -135 * Mathf.Deg2Rad;
-            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * this.transform.up.x, Mathf.Sin(angle / 2f)
-                                                                                       * this.transform.up.y, Mathf.Sin(angle / 2f) * this.transform.up.z, Mathf.Cos(angle / 2f)) * acceleration;
+            var mag = acceleration.magnitude;
+            var angle = -135 * Mathf.Deg2Rad;
+            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * transform.up.x, Mathf.Sin(angle / 2f)
+                                                                                  * transform.up.y,
+                               Mathf.Sin(angle / 2f) * transform.up.z, Mathf.Cos(angle / 2f)) * acceleration;
             velocity = acceleration.normalized * velocity.magnitude;
             velocity += acceleration;
             if (velocity.magnitude > Speed)
@@ -148,20 +150,22 @@ public class CharacterMovement : MonoBehaviour
         }
         else if (Input.GetKey(InputMap.KeyBinds["back"]) && Input.GetKey(InputMap.KeyBinds["left"]))
         {
-            float mag = acceleration.magnitude;
-            float angle = -135 * Mathf.Deg2Rad;
-            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * this.transform.up.x, Mathf.Sin(angle / 2f)
-                                                                                       * this.transform.up.y, Mathf.Sin(angle / 2f) * this.transform.up.z, Mathf.Cos(angle / 2f)) * acceleration;
+            var mag = acceleration.magnitude;
+            var angle = -135 * Mathf.Deg2Rad;
+            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * transform.up.x, Mathf.Sin(angle / 2f)
+                                                                                  * transform.up.y,
+                               Mathf.Sin(angle / 2f) * transform.up.z, Mathf.Cos(angle / 2f)) * acceleration;
             velocity += acceleration;
             velocity = velocity.normalized * Speed;
         }
         else if (Input.GetKey(InputMap.KeyBinds["back"]) && Input.GetKey(InputMap.KeyBinds["right"]) &&
                  velocity.magnitude < Speed)
         {
-            float mag = acceleration.magnitude;
-            float angle = 135 * Mathf.Deg2Rad;
-            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * this.transform.up.x, Mathf.Sin(angle / 2f)
-                                                                                       * this.transform.up.y, Mathf.Sin(angle / 2f) * this.transform.up.z, Mathf.Cos(angle / 2f)) * acceleration;
+            var mag = acceleration.magnitude;
+            var angle = 135 * Mathf.Deg2Rad;
+            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * transform.up.x, Mathf.Sin(angle / 2f)
+                                                                                  * transform.up.y,
+                               Mathf.Sin(angle / 2f) * transform.up.z, Mathf.Cos(angle / 2f)) * acceleration;
             velocity = acceleration.normalized * velocity.magnitude;
             velocity += acceleration;
             if (velocity.magnitude > Speed)
@@ -169,17 +173,18 @@ public class CharacterMovement : MonoBehaviour
         }
         else if (Input.GetKey(InputMap.KeyBinds["back"]) && Input.GetKey(InputMap.KeyBinds["right"]))
         {
-            float mag = acceleration.magnitude;
-            float angle = 135 * Mathf.Deg2Rad;
-            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * this.transform.up.x, Mathf.Sin(angle / 2f)
-                                                                                       * this.transform.up.y, Mathf.Sin(angle / 2f) * this.transform.up.z, Mathf.Cos(angle / 2f)) * acceleration; velocity += acceleration;
+            var mag = acceleration.magnitude;
+            var angle = 135 * Mathf.Deg2Rad;
+            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * transform.up.x, Mathf.Sin(angle / 2f)
+                                                                                  * transform.up.y,
+                               Mathf.Sin(angle / 2f) * transform.up.z, Mathf.Cos(angle / 2f)) * acceleration;
+            velocity += acceleration;
             velocity = velocity.normalized * Speed;
         }
 
 
         else if (Input.GetKey(InputMap.KeyBinds["forward"]) && velocity.magnitude < Speed)
         {
-
             velocity += acceleration.normalized * velocity.magnitude;
             velocity += acceleration * Time.deltaTime;
             if (velocity.magnitude > Speed)
@@ -187,32 +192,30 @@ public class CharacterMovement : MonoBehaviour
         }
         else if (Input.GetKey(InputMap.KeyBinds["forward"]))
         {
-
             velocity += acceleration;
             velocity = velocity.normalized * Speed;
         }
         else if (Input.GetKey(InputMap.KeyBinds["right"]) && velocity.magnitude < Speed)
         {
-            float mag = acceleration.magnitude;
-            float angle = 90 * Mathf.Deg2Rad;
-            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * this.transform.up.x, Mathf.Sin(angle / 2f)
-                                                                                       * this.transform.up.y, Mathf.Sin(angle / 2f) * this.transform.up.z, Mathf.Cos(angle / 2f)) * acceleration; velocity = acceleration.normalized * velocity.magnitude;
+            var mag = acceleration.magnitude;
+            var angle = 90 * Mathf.Deg2Rad;
+            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * transform.up.x, Mathf.Sin(angle / 2f)
+                                                                                  * transform.up.y,
+                               Mathf.Sin(angle / 2f) * transform.up.z, Mathf.Cos(angle / 2f)) * acceleration;
+            velocity = acceleration.normalized * velocity.magnitude;
             velocity += acceleration;
             if (velocity.magnitude > Speed)
                 velocity = velocity.normalized * Speed;
-
-
         }
         else if (Input.GetKey(InputMap.KeyBinds["right"]))
         {
-            float mag = acceleration.magnitude;
-            float angle = 90 * Mathf.Deg2Rad;
-            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * this.transform.up.x, Mathf.Sin(angle / 2f)
-                                                                                       * this.transform.up.y, Mathf.Sin(angle / 2f) * this.transform.up.z, Mathf.Cos(angle / 2f)) * acceleration; velocity += acceleration;
+            var mag = acceleration.magnitude;
+            var angle = 90 * Mathf.Deg2Rad;
+            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * transform.up.x, Mathf.Sin(angle / 2f)
+                                                                                  * transform.up.y,
+                               Mathf.Sin(angle / 2f) * transform.up.z, Mathf.Cos(angle / 2f)) * acceleration;
+            velocity += acceleration;
             velocity = velocity.normalized * Speed;
-
-
-
         }
         else if (Input.GetKey(InputMap.KeyBinds["back"]) && velocity.magnitude < Speed)
         {
@@ -230,50 +233,49 @@ public class CharacterMovement : MonoBehaviour
         }
         else if (Input.GetKey(InputMap.KeyBinds["left"]) && velocity.magnitude < Speed)
         {
-            float mag = acceleration.magnitude;
-            float angle = -90 * Mathf.Deg2Rad;
-            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * this.transform.up.x, Mathf.Sin(angle / 2f)
-                                                                                       * this.transform.up.y, Mathf.Sin(angle / 2f) * this.transform.up.z, Mathf.Cos(angle / 2f)) * acceleration; velocity = acceleration.normalized * velocity.magnitude;
+            var mag = acceleration.magnitude;
+            var angle = -90 * Mathf.Deg2Rad;
+            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * transform.up.x, Mathf.Sin(angle / 2f)
+                                                                                  * transform.up.y,
+                               Mathf.Sin(angle / 2f) * transform.up.z, Mathf.Cos(angle / 2f)) * acceleration;
+            velocity = acceleration.normalized * velocity.magnitude;
             velocity += acceleration;
             if (velocity.magnitude > Speed)
                 velocity = velocity.normalized * Speed;
-
-
         }
         else if (Input.GetKey(InputMap.KeyBinds["left"]))
         {
-            float mag = acceleration.magnitude;
-            float angle = -90 * Mathf.Deg2Rad;
-            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * this.transform.up.x, Mathf.Sin(angle / 2f)
-                                                                                       * this.transform.up.y, Mathf.Sin(angle / 2f) * this.transform.up.z, Mathf.Cos(angle / 2f)) * acceleration; velocity += acceleration;
+            var mag = acceleration.magnitude;
+            var angle = -90 * Mathf.Deg2Rad;
+            acceleration = new Quaternion(Mathf.Sin(angle / 2f) * transform.up.x, Mathf.Sin(angle / 2f)
+                                                                                  * transform.up.y,
+                               Mathf.Sin(angle / 2f) * transform.up.z, Mathf.Cos(angle / 2f)) * acceleration;
+            velocity += acceleration;
             velocity = velocity.normalized * Speed;
-
         }
         else
         {
             if (velocity.magnitude < .2f)
                 velocity = Vector3.zero;
-            Vector3 v = new Vector3(velocity.x, 0, velocity.z);
-            velocity += -velocity * ((v.magnitude * 25f) / WalkSpeed) * Time.deltaTime;
+            var v = new Vector3(velocity.x, 0, velocity.z);
+            velocity += -velocity * (v.magnitude * 25f / WalkSpeed) * Time.deltaTime;
         }
+
         //velocity += ((currentPlanet.center - this.transform.position).normalized * currentPlanet.gravity);
-        if (Input.GetKey(InputMap.KeyBinds["forward"]))
-        {
-            velocity += acceleration * Time.deltaTime;
-        }
+        if (Input.GetKey(InputMap.KeyBinds["forward"])) velocity += acceleration * Time.deltaTime;
         //Debug.Log(velocity);
 
-        this.transform.position += velocity * Time.deltaTime;
+        transform.position += velocity * Time.deltaTime;
 
         //this.transform.rotation = Quaternion.Slerp(q, this.transform.rotation, .2f);
-        float theta = Input.GetAxis("Mouse X") * Mathf.Deg2Rad * 5;
-        this.transform.rotation = new Quaternion(Mathf.Sin(theta / 2f) * this.transform.up.x, Mathf.Sin(theta / 2f)
-        * this.transform.up.y, Mathf.Sin(theta / 2f) * this.transform.up.z, Mathf.Cos(theta / 2f)) * this.transform.rotation;
+        var theta = Input.GetAxis("Mouse X") * Mathf.Deg2Rad * 5;
+        transform.rotation = new Quaternion(Mathf.Sin(theta / 2f) * transform.up.x, Mathf.Sin(theta / 2f)
+                                                                                    * transform.up.y,
+                                 Mathf.Sin(theta / 2f) * transform.up.z, Mathf.Cos(theta / 2f)) * transform.rotation;
     }
 
-    void LateUpdate()
+    private void LateUpdate()
     {
-
         //this.transform.Rotate(this.transform.up, Input.GetAxis("Mouse X"));
         //Vector3 forward = this.transform.forward;
         //this.transform.up = (this.transform.position - currentPlanet.center).normalized;
@@ -286,14 +288,11 @@ public class CharacterMovement : MonoBehaviour
         //Debug.Log(this.transform.up);
         //Debug.DrawLine(this.transform.position, this.transform.position + t, Color.magenta);
         //Debug.DrawLine(this.transform.position, this.transform.position + this.transform.forward, Color.cyan);
-
     }
 
 
-    void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
-
         // Debug.Log("collision");
-
     }
 }

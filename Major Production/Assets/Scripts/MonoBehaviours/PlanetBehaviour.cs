@@ -51,6 +51,6 @@ public class PlanetBehaviour : MonoBehaviour
         //rb.gameObject.transform.rotation = Quaternion.LookRotation(f, up);
         rb.transform.rotation = Quaternion.FromToRotation(rb.transform.up, rb.transform.position - planet.center) *
                                 rb.transform.rotation;
-
+       
     }
 }

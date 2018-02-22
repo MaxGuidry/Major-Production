@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using UnityEngine;
 using ScriptableObjects;
 public enum ObjectiveType
@@ -16,13 +17,13 @@ public enum ObjectiveStatus
     Complete = 3
 }
 
-public enum ActionOnReach
-{
-    MarkComplete = 0,
-    AddModififer = 1,
-    PlayAudio = 2,
-    PlayAnimation = 3,
-}
+//public enum ActionOnReach
+//{
+//    MarkComplete = 0,
+//    AddModififer = 1,
+//    PlayAudio = 2,
+//    PlayAnimation = 3,
+//}
 [CreateAssetMenu]
 public class Objective : ScriptableObject
 {
@@ -44,7 +45,7 @@ public class Objective : ScriptableObject
     private Item _requiredItem;
 
     [SerializeField]
-    private int _currentAmount = 0;
+    private int _currentAmount;
 
     public int CurrentAmount
     {
@@ -57,6 +58,19 @@ public class Objective : ScriptableObject
     public int RequiredAmount
     {
         get { return _requiredAmount; }
+    }
+
+    public ObjectiveStatus Status
+    {
+        get
+        {
+            return _status;
+        }
+
+        set
+        {
+            _status = value;
+        }
     }
 
     [SerializeField]
@@ -77,34 +91,35 @@ public class Objective : ScriptableObject
     /// Invoke the questchange event everytime we changestate
     /// invoke the questend when going from active -> complete    /// 
     /// </summary>
-    /// <param name="item">the item we are using to progress this quest</param>
+    /// <param>the item we are using to progress this quest
+    ///     <name>item</name>
+    /// </param>
     public void ProgressQuest(params object[] args)
     {
         if (args[0] == null)
             return;
-        Debug.Log("Quest Progress: "+ Title + " " + args[0].ToString());
+        Debug.Log("Quest Progress: " + Title + " " + args[0]);
         var valids = new object[] { _requiredItem, "initialize", "start"};
         
         if (!valids.Contains(args[0]))
             return;
 
-        switch (_status)
+        switch (Status)
         {
-            case ObjectiveStatus.None://0
+            case ObjectiveStatus.None:
                 ChangeState(ObjectiveStatus.Inactive);
                 break;
-            case ObjectiveStatus.Inactive://1
+            case ObjectiveStatus.Inactive:
                 ChangeState(ObjectiveStatus.Active);                
                 break;
-            case ObjectiveStatus.Active://2
+            case ObjectiveStatus.Active:
                 _currentAmount++;
-                if (_currentAmount >= _requiredAmount)
-                    ChangeState(ObjectiveStatus.Complete);
-                else
-                    ChangeState(ObjectiveStatus.Active);
+                ChangeState(_currentAmount >= _requiredAmount ? ObjectiveStatus.Complete : ObjectiveStatus.Active);
                 break;
-            case ObjectiveStatus.Complete://3                   
+            case ObjectiveStatus.Complete:                  
                 break;
+            default:
+                throw new ArgumentOutOfRangeException();
         }
     }
 
@@ -114,21 +129,23 @@ public class Objective : ScriptableObject
     /// <param name="state"></param>
     private void ChangeState(ObjectiveStatus state)
     {
-        _status = state;
+        Status = state;
         QuestChange.Raise(this);
-        switch (_status)
+        switch (Status)
         {
-            case ObjectiveStatus.None://0                
+            case ObjectiveStatus.None:               
                 break;
-            case ObjectiveStatus.Inactive://1                
+            case ObjectiveStatus.Inactive:              
                 QuestStarted.Raise(this);
                 break;
-            case ObjectiveStatus.Active://2        
+            case ObjectiveStatus.Active:        
                 break;
-            case ObjectiveStatus.Complete://3
+            case ObjectiveStatus.Complete:
                 QuestEnded.Raise(this);
                 //actionsOnComplete.Invoke();
                 break;
+            default:
+                throw new ArgumentOutOfRangeException();
         } 
     }
 }

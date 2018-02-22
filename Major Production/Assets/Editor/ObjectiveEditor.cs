@@ -16,7 +16,6 @@ public class ObjectiveEditor : EditorWindow {
     public ObjectiveStatus Status;
     public GameObject Target;
     public Objective NextObjective;
-    public List<ActionOnReach> ActionsOnReach;
     public Stat Mod;
     [MenuItem("CreateObjective/Start")]
     public static void ShowWindow()

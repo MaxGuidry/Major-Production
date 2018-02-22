@@ -17,8 +17,9 @@ public class ObjectiveBehaviour : MonoBehaviour
         //activate the currentobjective
         CurrentObjective.ProgressQuest("start");
     }
+
     /// <summary>
-    /// 
+    ///     Checks if the objectives are the same then progresses
     /// </summary>
     /// <param name="args"></param>
     public void ProgressChain(Object[] args)
@@ -27,8 +28,9 @@ public class ObjectiveBehaviour : MonoBehaviour
             return;
         ProgressChain();
     }
+
     /// <summary>
-    /// 
+    ///     Moves to the next quest in the list
     /// </summary>
     public virtual void ProgressChain()
     {
@@ -46,8 +48,9 @@ public class ObjectiveBehaviour : MonoBehaviour
             CurrentObjective.Status = ObjectiveStatus.Active;
         }
     }
+
     /// <summary>
-    /// 
+    ///     Progress the objective status
     /// </summary>
     /// <param name="args"></param>
     public void ProgressObjective(Object[] args)

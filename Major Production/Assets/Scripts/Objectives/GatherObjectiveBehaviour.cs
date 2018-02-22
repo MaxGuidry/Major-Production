@@ -3,8 +3,10 @@
 public class GatherObjectiveBehaviour : ObjectiveBehaviour
 {
     public Text CurrentObjectiveText;
+
     /// <summary>
-    /// 
+    ///     Checks if you have a current objective and if the list is not empty
+    ///     Sets the text
     /// </summary>
     public void UI_RefreshGather()
     {
@@ -16,8 +18,9 @@ public class GatherObjectiveBehaviour : ObjectiveBehaviour
                                     CurrentObjective.CurrentAmount + " / " +
                                     CurrentObjective.RequiredAmount;
     }
+
     /// <summary>
-    /// 
+    ///     Not important for now
     /// </summary>
     public override void ProgressChain()
     {

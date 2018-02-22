@@ -54,13 +54,8 @@ public class Objective : ScriptableObject
     /// <summary>
     ///     Move this objective forward in its current state
     ///     None->Inactive, Inactive-> Active, Active-> Active, Active -> Complete
-    ///     Invoke the questchange event everytime we changestate
-    ///     Invoke the questend when going from active -> complete    ///
     /// </summary>
-    /// <param>
-    ///     The item we are using to progress this quest
-    ///     <name>item</name>
-    /// </param>
+    /// <param name="args"></param>
     public void ProgressQuest(params object[] args)
     {
         if (args[0] == null)

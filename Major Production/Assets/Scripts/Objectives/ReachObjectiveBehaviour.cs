@@ -8,8 +8,10 @@ public class ReachObjectiveBehaviour : ObjectiveBehaviour
 
     public AudioClip Clip;
     public Text CurrentObjectiveText;
+
     /// <summary>
-    /// 
+    ///     Checks if you have a current objective and if the list is not empty
+    ///     Sets the text
     /// </summary>
     public void UI_RefreshReach()
     {
@@ -19,8 +21,9 @@ public class ReachObjectiveBehaviour : ObjectiveBehaviour
             Destroy(CurrentObjectiveText);
         CurrentObjectiveText.text = CurrentObjective.Description;
     }
+
     /// <summary>
-    /// 
+    ///     Plays Audio from the AudioSource
     /// </summary>
     public void PlayAudio()
     {
@@ -29,8 +32,9 @@ public class ReachObjectiveBehaviour : ObjectiveBehaviour
         _Audio.clip = Clip;
         _Audio.Play();
     }
+
     /// <summary>
-    /// 
+    ///     Not important for now
     /// </summary>
     public override void ProgressChain()
     {

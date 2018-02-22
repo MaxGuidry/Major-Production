@@ -34,8 +34,6 @@ public class Objective : ScriptableObject
 
     [SerializeField] private GameEventArgs QuestComplete;
 
-    [SerializeField] private UnityEvent actionsOnComplete;
-
     public string Description
     {
         get { return _description; }
@@ -54,13 +52,13 @@ public class Objective : ScriptableObject
     public ObjectiveStatus Status { get; set; }
 
     /// <summary>
-    ///     move this objective forward in its current state
+    ///     Move this objective forward in its current state
     ///     None->Inactive, Inactive-> Active, Active-> Active, Active -> Complete
     ///     Invoke the questchange event everytime we changestate
-    ///     invoke the questend when going from active -> complete    ///
+    ///     Invoke the questend when going from active -> complete    ///
     /// </summary>
     /// <param>
-    ///     the item we are using to progress this quest
+    ///     The item we are using to progress this quest
     ///     <name>item</name>
     /// </param>
     public void ProgressQuest(params object[] args)
@@ -113,7 +111,6 @@ public class Objective : ScriptableObject
                 break;
             case ObjectiveStatus.Complete:
                 QuestComplete.Raise(this);
-                actionsOnComplete.Invoke();
                 break;
             default:
                 throw new ArgumentOutOfRangeException();

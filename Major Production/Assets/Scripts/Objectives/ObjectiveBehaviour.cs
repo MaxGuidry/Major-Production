@@ -1,7 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using ScriptableObjects;
 using UnityEngine;
-//[RequireComponent(typeof(AudioSource))]
+
 public class ObjectiveBehaviour : MonoBehaviour
 {
     public Objective CurrentObjective;
@@ -9,7 +9,6 @@ public class ObjectiveBehaviour : MonoBehaviour
 
     private void Start()
     {
-        //this is bad for future donray
         //null should be used to check validity of the token
         if (PlayerObjectives == null) return;
         PlayerObjectives.ForEach(objective => objective.ProgressQuest("initialize"));
@@ -18,14 +17,19 @@ public class ObjectiveBehaviour : MonoBehaviour
         //activate the currentobjective
         CurrentObjective.ProgressQuest("start");
     }
-
-    public void ProgressChain(UnityEngine.Object[] args)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="args"></param>
+    public void ProgressChain(Object[] args)
     {
         if (args[0] != CurrentObjective)
             return;
         ProgressChain();
     }
-
+    /// <summary>
+    /// 
+    /// </summary>
     public virtual void ProgressChain()
     {
         Debug.Log("chain progress");
@@ -42,10 +46,13 @@ public class ObjectiveBehaviour : MonoBehaviour
             CurrentObjective.Status = ObjectiveStatus.Active;
         }
     }
-
-    public void ProgressObjective(UnityEngine.Object[] args)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="args"></param>
+    public void ProgressObjective(Object[] args)
     {
         var sender = args[0];
-        CurrentObjective.ProgressQuest(sender as ScriptableObjects.Item);
+        CurrentObjective.ProgressQuest(sender as Item);
     }
 }

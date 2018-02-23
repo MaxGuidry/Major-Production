@@ -58,7 +58,7 @@ public class CharacterMovement : MonoBehaviour
         // Debug.Log(Input.GetAxis("Right Bumper"));
         //if (Input.GetAxis("") > 0)
        // Debug.Log(Input.GetAxis("Horizontal"));
-        Debug.Log(Input.GetAxis("Vertical"));
+        //Debug.Log(Input.GetAxis("Vertical"));
         //Debug.Log("Start: " + Input.GetAxis("Start"));
         //Debug.Log("DPad Horizontal: " + Input.GetAxis("DPad Horizontal"));
         //Debug.Log("DPad Vertical: " +Input.GetAxis("DPad Vertical"));

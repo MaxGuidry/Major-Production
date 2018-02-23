@@ -7,23 +7,13 @@ using UnityEngine.UI;
 public class InventorySlot : MonoBehaviour
 {
     public Image icon;
+    public Item item;
 
-    private Item item;
-
-    public void UIItemManager(Item newItem, bool AddItem)
+    private void Start()
     {
-        if (AddItem)
-        {
-            item = newItem;
-            icon.sprite = item.icon;
-            icon.enabled = true;
-        }
-        else if (!AddItem)
-        {
-            item = null;
-            icon.sprite = null;
-            icon.enabled = false;
-        }
+        if (item == null) return;
+        icon.sprite = item.icon;
+        icon.enabled = true;
     }
 
     public void UseItem()

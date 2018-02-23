@@ -5,46 +5,34 @@ using UnityEngine;
 
 public class FixCamera : MonoBehaviour
 {
-    private Vector3 StartPosition = new Vector3(0f, 3f, -4.5f);
-    public GameObject follow;
+   private float Sensitivity = 1;
 
-    public GameObject lookat;
+    private CharacterMovement character;
 
-    public float sensitivity = 1;
-
-    private Vector3 prevPositon;
-
-    private Vector3 prevUp;
+    private Vector3 forward;
     // Use this for initialization
     void Start()
     {
-        //this.gameObject.transform.position = follow.transform.position + StartPosition;
-        prevPositon = follow.transform.position;
-        prevUp = follow.transform.up;
+        character = GetComponentInParent<CharacterMovement>();
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
+        
+       
+        Quaternion origin = this.transform.rotation;
+        Sensitivity = character.Sensitivity;
+        var thetaY = Input.GetAxis("Mouse Y") * Mathf.Deg2Rad * Sensitivity * .25f;
+        thetaY = ((thetaY > .35f) ? .35f : thetaY);
+        thetaY = (thetaY < -.35f ? -.35f : thetaY);
+        transform.rotation = new Quaternion(Mathf.Sin(thetaY / 2f) * transform.right.x, Mathf.Sin(thetaY / 2f)
+                                                                                     * transform.right.y,
+                                 Mathf.Sin(thetaY / 2f) * transform.right.z, Mathf.Cos(thetaY / 2f)) * transform.rotation;
 
-        //transform.RotateAround(follow.transform.position,follow.transform.up, Input.GetAxis("Mouse X") * sensitivity);
-        //Vector3 deltaFollow = follow.transform.position - prevPositon;
-        //this.transform.position += deltaFollow;
-        //this.transform.LookAt(follow.transform);
-
-        //float deltaUp = Vector3.Angle(Vector3.ProjectOnPlane(prevUp, new Vector3(1, 0, 0)), Vector3.ProjectOnPlane(follow.transform.up, new Vector3(1, 0, 0)));
-        //float sign = Vector3.Dot(follow.transform.forward, deltaFollow.normalized) > 0 ? 1 : -1;
-        ////Debug.Log(deltaUp * sign);
-        //this.gameObject.transform.RotateAround(follow.transform.position,follow.transform.right, deltaUp * sign);
-        //// float angle = (this.transform.rotation.eulerAngles.z - follow.transform.rotation.eulerAngles.z) * Mathf.Deg2Rad * sign;
-        //this.gameObject.transform.RotateAround(follow.transform.position, follow.transform.up, Input.GetAxis("Mouse X") * sensitivity);
-        //this.transform.rotation = Quaternion.Euler(this.transform.rotation.eulerAngles.x,
-        //    this.transform.rotation.eulerAngles.y, follow.transform.rotation.eulerAngles.z); 
-        ////this.transform.Rotate(this.transform.forward,angle);
-        ////this.gameObject.transform.LookAt(lookat.transform);
-
-
-        prevPositon = follow.transform.position;
-        prevUp = follow.transform.up;
+        if (Vector3.Dot(this.transform.up, character.gameObject.transform.up) < .90f)
+        {
+            this.transform.rotation = origin;
+        }
     }
 }

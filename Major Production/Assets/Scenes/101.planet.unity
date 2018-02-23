@@ -2802,6 +2802,47 @@ MonoBehaviour:
   m_SoftZoneHeight: 0
   m_BiasX: 0.5
   m_BiasY: 0
+--- !u!1 &970420694
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 970420695}
+  - component: {fileID: 970420696}
+  m_Layer: 0
+  m_Name: CameraPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &970420695
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 970420694}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1358629137}
+  m_Father: {fileID: 2050706323}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &970420696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 970420694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b2f62e8d822fbc47acedfc62e947ecc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1000409258 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1440876229717566, guid: e655f24238d25c34ea6d4c33f482cddd,
@@ -4002,11 +4043,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1358629136}
   m_LocalRotation: {x: 0.18828224, y: -0, z: -0, w: 0.982115}
-  m_LocalPosition: {x: 0, y: 2.85, z: -2.93}
+  m_LocalPosition: {x: 0, y: 2.36, z: -3.41}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2050706323}
-  m_RootOrder: 1
+  m_Father: {fileID: 970420695}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 21.705002, y: 0, z: 0}
 --- !u!81 &1358629138
 AudioListener:
@@ -5029,6 +5070,20 @@ Prefab:
         type: 2}
       propertyPath: RunSpeed
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114920532764568814, guid: e655f24238d25c34ea6d4c33f482cddd,
+        type: 2}
+      propertyPath: Sensitivity
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114920532764568814, guid: e655f24238d25c34ea6d4c33f482cddd,
+        type: 2}
+      propertyPath: cameraPivot
+      value: 
+      objectReference: {fileID: 970420694}
+    - target: {fileID: 4693048849450196, guid: e655f24238d25c34ea6d4c33f482cddd, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e655f24238d25c34ea6d4c33f482cddd, type: 2}

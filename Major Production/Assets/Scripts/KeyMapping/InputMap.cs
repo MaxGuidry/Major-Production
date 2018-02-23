@@ -28,6 +28,7 @@ public static class InputMap
     //public static KeyCode MoveRight { get; set; }
     //public static KeyCode MoveBack { get; set; }
     public static Dictionary<string, KeyCode> KeyBinds = new Dictionary<string, KeyCode>();
+    public static float Sensititivity;
 
     [Serializable]
     class SaveKeys
@@ -35,6 +36,7 @@ public static class InputMap
         //public Dictionary<string, KeyCode> binds = new Dictionary<string, KeyCode>();
         public List<string> keys = new List<string>();
         public List<KeyCode> values = new List<KeyCode>();
+        public float sensitivity;
     }
 
     public static void SaveSettings()
@@ -54,6 +56,7 @@ public static class InputMap
         SaveKeys save = new SaveKeys();
         save.keys = new List<string>(KeyBinds.Keys);
         save.values = new List<KeyCode>(KeyBinds.Values);
+        save.sensitivity = InputMap.Sensititivity;
         //Dictionary<string, KeyCode> Kb = new Dictionary<string, KeyCode>(KeyBinds);
 
         //save.binds = KeyBinds;
@@ -89,6 +92,8 @@ public static class InputMap
             KeyBinds.Add(key, saved.values[i]);
             i++;
         }
+
+        InputMap.Sensititivity = saved.sensitivity;
         Debug.Log(KeyBinds.Count);
     }
     public static KeyCode WhatMouseButton(int i)

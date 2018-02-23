@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class AutoTyper : MonoBehaviour
 {
-    public GameObject BackgroundPanel;
+    public GameObject BackgroundPanel, Target;
     public string ChooseFile;
 
     [HideInInspector] public string path;
@@ -29,6 +29,8 @@ public class AutoTyper : MonoBehaviour
 
     public IEnumerator AutoType()
     {
+        var startPos = BackgroundPanel.transform.position;
+        var back = false;
         SetActive(true);
         if (ChooseFile == "")
         {
@@ -49,7 +51,14 @@ public class AutoTyper : MonoBehaviour
 
         while (true)
             if (!reader.EndOfStream)
+
             {
+                BackgroundPanel.transform.position = Vector3.Lerp(BackgroundPanel.transform.position,
+                    !back ? Target.gameObject.transform.position : startPos, Time.deltaTime);
+
+                if (Vector3.Distance(BackgroundPanel.transform.position,
+                        Target.transform.position) <= 2)
+                    back = true;
                 foreach (var letter in reader.ReadLine())
                 {
                     TextArea.text += letter;
@@ -57,9 +66,13 @@ public class AutoTyper : MonoBehaviour
                 }
 
                 TextArea.text = "";
+                if (back && Vector3.Distance(BackgroundPanel.transform.position,
+                        startPos) <= 2)
+                    back = false;
             }
             else
             {
+
                 SetActive(false);
                 yield break;
             }

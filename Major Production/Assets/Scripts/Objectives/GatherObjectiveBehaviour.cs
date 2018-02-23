@@ -24,10 +24,5 @@ public class GatherObjectiveBehaviour : ObjectiveBehaviour
     public override void ProgressChain()
     {
         base.ProgressChain();
-        if (typer == null) return;
-        typer.ChooseFile = "GatherProgress";
-        typer.TypeSpeed = 0.1f;
-        typer.path = "Assets/Resources/Dialogue/" + typer.ChooseFile + ".txt";
-        StartCoroutine(typer.AutoType());
     }
 }

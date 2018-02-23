@@ -12,8 +12,6 @@ public class InventoryBehaviour : MonoBehaviour, IStorageable
     public Inventory inventory;
     [Header("For Viewing Purposes")]
     public List<Item> ActiveInventory;
-
-    public InventoryUIBehaviour InventoryUi;
     public static InventoryEvent InvChange;
 
     void Start()
@@ -36,7 +34,6 @@ public class InventoryBehaviour : MonoBehaviour, IStorageable
     {
         if (inventory.CurrentInventory.Count >= inventory.InventoryCap) return;
         inventory.CurrentInventory.Add(newItem);
-        InventoryUi.UpdateUI();
         InvChange.Invoke(inventory);
     }
 
@@ -46,7 +43,6 @@ public class InventoryBehaviour : MonoBehaviour, IStorageable
         if (!inventory.CurrentInventory.Contains(theItem)) return;
         inventory.CurrentInventory.Remove(theItem);
         InvChange.Invoke(inventory);
-
     }
 
     public void RemoveAllFromInventory()

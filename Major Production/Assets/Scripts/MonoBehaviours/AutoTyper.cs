@@ -29,7 +29,7 @@ public class AutoTyper : MonoBehaviour
 
     public IEnumerator AutoType()
     {
-        SetActive(!BackgroundPanel.gameObject.activeInHierarchy);
+        SetActive(true);
         if (ChooseFile == "")
         {
             SetActive(false);

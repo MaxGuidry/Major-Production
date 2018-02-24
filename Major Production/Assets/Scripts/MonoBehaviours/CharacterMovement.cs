@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Events;
 
 public class CharacterMovement : MonoBehaviour
 {
@@ -16,12 +18,23 @@ public class CharacterMovement : MonoBehaviour
     private void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody>();
-        
+
     }
+    private Dictionary<string, GameEventArgs> buttonevents = new Dictionary<string, GameEventArgs>();
+
+    
+    
+    private Dictionary<string, float> axisValues = new Dictionary<string, float>();
 
     private void Start()
     {
-        //UiInventory.SetActive(false);
+        
+        var f = Resources.LoadAll<GameEventArgs>("Buttons/");
+        foreach (var button in f)
+        {
+            buttonevents.Add(button.name, button);
+            axisValues.Add(button.name,0);
+        }
     }
 
     public KeyCode GetKeyCode(string key)
@@ -31,7 +44,6 @@ public class CharacterMovement : MonoBehaviour
 
         return k;
     }
-
     private void Update()
     {
         Sensitivity = InputMap.Sensititivity;
@@ -41,61 +53,28 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        // if (Input.GetAxis("A") > 0)
-        //     Debug.Log("A");
-        // if (Input.GetAxis("X") > 0)
-        //     Debug.Log("X");
-        // if (Input.GetAxis("B") > 0)
-        //     Debug.Log("B");
-        // if (Input.GetAxis("Y") > 0)
-        //     Debug.Log("Y");
-        //if(Input.GetAxis("Mouse X") > 0)
-        //    Debug.Log(Input.GetAxis("Mouse X"));
-        //if (Input.GetAxis("Mouse Y") > 0)
-        //    Debug.Log(Input.GetAxis("Mouse Y"));
-        //if (Input.GetAxis("Right Trigger"))
-        //    Debug.Log(Input.GetAxis("Trigger"));
-        //if (Input.GetAxis("") > 0)
-        // Debug.Log(Input.GetAxis("Left Bumper"));
-        // Debug.Log(Input.GetAxis("Right Bumper"));
-        //if (Input.GetAxis("") > 0)
-        // Debug.Log(Input.GetAxis("Horizontal"));
-        //Debug.Log(Input.GetAxis("Vertical"));
-        //Debug.Log("Start: " + Input.GetAxis("Start"));
-        //Debug.Log("DPad Horizontal: " + Input.GetAxis("DPad Horizontal"));
-        //Debug.Log("DPad Vertical: " +Input.GetAxis("DPad Vertical"));
-        //Debug.Log("Left Stick Button: " + Input.GetAxis("Left Stick Button"));
-        //Debug.Log("Right Stick Button: " + Input.GetAxis("Right Stick Button"));
-        //if (Input.GetAxis("") > 0)
-        //    Debug.Log("");
-        //if (Input.GetAxis("") > 0)
-        //    Debug.Log("");
-        //if (Input.GetAxis("") > 0)
-        //    Debug.Log("");
-        //if (Input.GetAxis("") > 0)
-        //    Debug.Log("");
-        //if (Input.GetAxis("") > 0)
-        //    Debug.Log("");
-        //if (Input.GetAxis("") > 0)
-        //    Debug.Log("");
-
-        //KeyCode k_sprint = GetKeyCode("sprint");
-        //KeyCode k_forward = GetKeyCode("forward");
-        //KeyCode k_left = GetKeyCode("left");
-        //KeyCode k_right = GetKeyCode("right");
-        //KeyCode k_back = GetKeyCode("back");
-        //float Speed = 0.0f;
-
-        UiInventory.SetActive(Input.GetKey(KeyCode.Tab));
+        foreach (var button in buttonevents)
+        {
+            float value = Input.GetAxis(button.Key);
+            if (value > .1f)
+            {
+                StringVariable sv = ScriptableObject.CreateInstance<StringVariable>();
+                sv.Value = button.Key;
+                button.Value.Raise(sv);
+            }
+                
+            axisValues[button.Key] = value;
+        }
+       
+        
+        //UiInventory.SetActive(Input.GetKey(KeyCode.Tab));
 
         var Speed = Input.GetKey(InputMap.KeyBinds["sprint"]) ? RunSpeed : WalkSpeed;
-
-
-        var t = transform.forward;
+       
         var vert = Input.GetAxis("Vertical");
         var hor = Input.GetAxis("Horizontal");
 
-        acceleration = t;
+        acceleration = transform.forward;
         var afor = this.transform.forward * ((vert < .1f && vert > -.1f) ? 0 : vert);
         var aright = this.transform.right * ((hor < .1f && hor > -.1f) ? 0 : hor);
 
@@ -135,7 +114,7 @@ public class CharacterMovement : MonoBehaviour
                                  Mathf.Sin(thetaX / 2f) * transform.up.z, Mathf.Cos(thetaX / 2f)) * transform.rotation;
     }
 
-   
 
-    
+
+
 }

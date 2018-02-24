@@ -1,31 +1,50 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class InputEvents : MonoBehaviour
 {
-    [System.Serializable]
-    public class ButtonPressed : UnityEvent<string> { };
-    [System.Serializable]
-    public class ButtonHeld : UnityEvent<string> { };
-    [System.Serializable]
-    public class ButtonReleased : UnityEvent<string> { };
 
-    public ButtonPressed OnButtonPressed;
-    public ButtonHeld OnButtonHeld;
-    public ButtonReleased OnButtonReleased;
+
+
+    public void TestListener(object[] args)
+    {
+        Debug.Log(args[0]);
+    }
+
+    public GameEventArgsListenerObject PressedListener;
+    public GameEventArgsListenerObject HeldListener; 
+    public GameEventArgsListenerObject ReleasedListener;
+    private GameEventArgsObject OnButtonPressed;
+    private GameEventArgsObject OnButtonHeld; 
+    private GameEventArgsObject OnButtonReleased ;
 
     public List<string> Buttons = new List<string>();
 
     public Dictionary<string, float> buttonValues = new Dictionary<string, float>();
+    
     // Use this for initialization
     void Start()
     {
+        buttonValues = new Dictionary<string, float>();
+        PressedListener = this.gameObject.AddComponent<GameEventArgsListenerObject>();
+        HeldListener = this.gameObject.AddComponent<GameEventArgsListenerObject>();
+        ReleasedListener = this.gameObject.AddComponent<GameEventArgsListenerObject>();
+        OnButtonPressed = ScriptableObject.CreateInstance<GameEventArgsObject>();
+        OnButtonHeld = ScriptableObject.CreateInstance<GameEventArgsObject>();
+        OnButtonReleased = ScriptableObject.CreateInstance<GameEventArgsObject>();
         foreach (var button in Buttons)
         {
             buttonValues.Add(button, 0);
         }
+        PressedListener.NewEvent = OnButtonPressed;
+        PressedListener.NewEvent.NewRegisterListener(PressedListener);
+        HeldListener.NewEvent = OnButtonHeld;
+        ReleasedListener.NewEvent = OnButtonReleased;
+        PressedListener.NewResponse = new GameEventArgsResponseObject();
+        PressedListener.NewResponse.AddListener(TestInputEvents);
     }
 
     void Update()
@@ -34,16 +53,16 @@ public class InputEvents : MonoBehaviour
         {
             float value = Input.GetAxis(button);
             if (value > .1f && buttonValues[button] < .1f)
-                OnButtonPressed.Invoke(button);
+                OnButtonPressed.newRaise(button);
             else if (value > .1f)
-                OnButtonHeld.Invoke(button);
+                OnButtonHeld.newRaise(button);
             else if (value < .1f && buttonValues[button] > .1f)
-                OnButtonReleased.Invoke(button);
+                OnButtonReleased.newRaise(button);
         }
     }
 
-    public void TestInputEvents(string s)
+    public void TestInputEvents(object[] args)
     {
-        Debug.Log(s);
+        Debug.Log(args[0]);
     }
 }

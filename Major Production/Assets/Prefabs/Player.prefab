@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 20831859118768326}
   - component: {fileID: 124278663586369990}
   - component: {fileID: 81087298847178876}
+  - component: {fileID: 114486914742647440}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -72,13 +73,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1264001811344554}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
+  m_LocalPosition: {x: 0.03, y: 4.83, z: -5.39}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4346267240763632}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
 --- !u!4 &4249803301684892
 Transform:
   m_ObjectHideFlags: 1
@@ -99,7 +100,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1224444865195266}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.78, y: 43.7, z: 47.9}
+  m_LocalPosition: {x: 2.96, y: 43.7, z: 47.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4249803301684892}
@@ -138,6 +139,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -228,10 +230,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c988a6b7c96371f4087baa60eca4741f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WalkSpeed: 5
+  currentPlanet: {fileID: 11400000, guid: 0c0da09bcc5af5b499965df2e4c62dd1, type: 2}
+  Sensitivity: 1
   RunSpeed: 12
   UiInventory: {fileID: 0}
-  currentPlanet: {fileID: 11400000, guid: 0c0da09bcc5af5b499965df2e4c62dd1, type: 2}
+  WalkSpeed: 5
+  cameraPivot: {fileID: 0}
+--- !u!114 &114486914742647440
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1264001811344554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e56c4f431d3486a4880588dfe5e57c9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menu: {fileID: 0}
+  ButtonPrefab: {fileID: 0}
+  KeyOptions: {fileID: 11400000, guid: e794c81abb62df548af3adfee9246f31, type: 2}
 --- !u!114 &114724766372456566
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -245,7 +263,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventory: {fileID: 11400000, guid: 245027be9b604334b8a7856ac6d75be7, type: 2}
   ActiveInventory: []
-  InventoryUi: {fileID: 0}
 --- !u!114 &114933455162699036
 MonoBehaviour:
   m_ObjectHideFlags: 1

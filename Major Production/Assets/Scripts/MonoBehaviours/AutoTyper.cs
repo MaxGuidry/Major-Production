@@ -64,7 +64,12 @@ public class AutoTyper : MonoBehaviour
             }
             else
             {
-                FadeOut(canvasGroup);
+                while (canvasGroup.alpha > 0)
+                {
+                    canvasGroup.alpha -= Time.deltaTime / 2;
+                    yield return null;
+                }
+                canvasGroup.interactable = false;
                 SetActive(false);
                 yield return null;
             }

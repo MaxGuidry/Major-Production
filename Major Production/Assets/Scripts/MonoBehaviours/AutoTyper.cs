@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class AutoTyper : MonoBehaviour
 {
-    public GameObject BackgroundPanel, Target;
+    public GameObject BackgroundPanel;
     public string ChooseFile;
 
     [HideInInspector] public string path;
@@ -29,8 +29,7 @@ public class AutoTyper : MonoBehaviour
 
     public IEnumerator AutoType()
     {
-        var startPos = BackgroundPanel.transform.position;
-        var back = false;
+        var canvasGroup = GetComponent<CanvasGroup>();
         SetActive(true);
         if (ChooseFile == "")
         {
@@ -51,30 +50,54 @@ public class AutoTyper : MonoBehaviour
 
         while (true)
             if (!reader.EndOfStream)
-
             {
-                BackgroundPanel.transform.position = Vector3.Lerp(BackgroundPanel.transform.position,
-                    !back ? Target.gameObject.transform.position : startPos, Time.deltaTime);
-
-                if (Vector3.Distance(BackgroundPanel.transform.position,
-                        Target.transform.position) <= 2)
-                    back = true;
-                foreach (var letter in reader.ReadLine())
                 {
-                    TextArea.text += letter;
-                    yield return new WaitForSeconds(TypeSpeed);
-                }
+                    FadeIn(canvasGroup);
+                    foreach (var letter in reader.ReadLine())
+                    {
+                        TextArea.text += letter;
+                        yield return new WaitForSeconds(TypeSpeed);
+                    }
 
-                TextArea.text = "";
-                if (back && Vector3.Distance(BackgroundPanel.transform.position,
-                        startPos) <= 2)
-                    back = false;
+                    TextArea.text = "";
+                }
             }
             else
             {
-
+                FadeOut(canvasGroup);
                 SetActive(false);
-                yield break;
+                yield return null;
             }
+    }
+
+    public void FadeIn(CanvasGroup cg)
+    {
+        StartCoroutine(FadeCanvasGroup(cg, cg.alpha, 1, 1));
+    }
+
+    public void FadeOut(CanvasGroup cg)
+    {
+        StartCoroutine(FadeCanvasGroup(cg, cg.alpha, 0, 1));
+    }
+
+    public IEnumerator FadeCanvasGroup(CanvasGroup cg, float start, float end, float lerpTime)
+    {
+        var startLerp = Time.time;
+        var timesinceStart = Time.time - startLerp;
+        var percentageComple = timesinceStart / lerpTime;
+
+        while (true)
+        {
+            timesinceStart = Time.time - startLerp;
+            percentageComple = timesinceStart / lerpTime;
+
+            var currentValue = Mathf.Lerp(start, end, percentageComple);
+
+            cg.alpha = currentValue;
+
+            if (percentageComple >= 1) break;
+
+            yield return new WaitForEndOfFrame();
+        }
     }
 }

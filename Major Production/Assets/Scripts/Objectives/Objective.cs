@@ -34,6 +34,8 @@ public class Objective : ScriptableObject
 
     [SerializeField] private GameEventArgs QuestComplete;
 
+    [SerializeField] private UnityEvent actionsOnComplete;
+
     public string Description
     {
         get { return _description; }
@@ -106,6 +108,7 @@ public class Objective : ScriptableObject
                 break;
             case ObjectiveStatus.Complete:
                 QuestComplete.Raise(this);
+                actionsOnComplete.Invoke();
                 break;
             default:
                 throw new ArgumentOutOfRangeException();

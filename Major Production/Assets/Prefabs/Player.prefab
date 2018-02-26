@@ -22,10 +22,10 @@ GameObject:
   - component: {fileID: 33920079051754302}
   - component: {fileID: 23088344823285084}
   - component: {fileID: 114090165235389102}
-  - component: {fileID: 54116383075150526}
-  - component: {fileID: 65278166895470962}
   - component: {fileID: 114933455162699036}
   - component: {fileID: 114724766372456566}
+  - component: {fileID: 54116383075150526}
+  - component: {fileID: 65278166895470962}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -276,11 +276,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   DamageStat:
-    baseValue: 0
+    BaseValue: 0
   ArmorStat:
-    baseValue: 10
+    BaseValue: 0
   ExpStat:
-    baseValue: 0
+    BaseValue: 0
 --- !u!124 &124278663586369990
 Behaviour:
   m_ObjectHideFlags: 1

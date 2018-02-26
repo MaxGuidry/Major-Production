@@ -2,26 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyStat : MonoBehaviour, IDamageable {
+public class EntityStat : MonoBehaviour, IDamageable
+{
+    /// <summary>
+    /// Not a stat, cannot find a reason to add modifiers to health
+    /// </summary>
     public int maxHealth = 100;
     public int CurrentHealth
     {
         get;
         private set;
     }
-
     public Stat DamageStat;
     public Stat ArmorStat;
-    // Use this for initialization
-    void Start () {
+
+    private void Awake()
+    {
         CurrentHealth = maxHealth;
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
+    /// <summary>
+    /// Entity Takes Damage
+    /// </summary>
+    /// <param name="damage"></param>
     public void TakeDamage(int damage)
     {
         damage -= ArmorStat.GetValue();
@@ -33,7 +36,9 @@ public class EnemyStat : MonoBehaviour, IDamageable {
         if (CurrentHealth <= 0)
             Die();
     }
-
+    /// <summary>
+    /// Death of Entity
+    /// </summary>
     public void Die()
     {
         Debug.Log(transform.name + " died.");

@@ -277,10 +277,13 @@ MonoBehaviour:
   maxHealth: 100
   DamageStat:
     BaseValue: 0
+    _modifiers: 
   ArmorStat:
     BaseValue: 0
+    _modifiers: 
   ExpStat:
     BaseValue: 0
+    _modifiers: 
 --- !u!124 &124278663586369990
 Behaviour:
   m_ObjectHideFlags: 1

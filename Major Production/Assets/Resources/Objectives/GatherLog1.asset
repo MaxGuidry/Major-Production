@@ -13,7 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _title: Gather 1 Log
   _description: Gather Logs
-  _currentAmount: 0
   _requiredAmount: 1
   _requiredItem: {fileID: 11400000, guid: b31bfcd18116ad740841648233ee5ee9, type: 2}
   QuestStart: {fileID: 11400000, guid: b66499015cebc5940b09958a4c05f3f7, type: 2}
@@ -22,9 +21,8 @@ MonoBehaviour:
   actionsOnComplete:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114933455162699036, guid: 19e958d984c938645a9ef0aa636b09cb,
-          type: 2}
-        m_MethodName: ArmorStatUpgrade
+      - m_Target: {fileID: 11400000, guid: 8552e398b3001af468f89656b0822116, type: 2}
+        m_MethodName: TestArmorUpgrade
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

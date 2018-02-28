@@ -503,22 +503,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4695457564228576, guid: c66d37e271a5a4f4984b1e68f9d039a1,
     type: 2}
   m_PrefabInternal: {fileID: 1604352070}
---- !u!1 &501925730 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1633018823081342, guid: 3e236b5d89777a045bddc11f8345d659,
-    type: 2}
-  m_PrefabInternal: {fileID: 1309287997}
---- !u!225 &501925731
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 501925730}
-  m_Enabled: 1
-  m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!114 &507745480 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114131571581304744, guid: 3e236b5d89777a045bddc11f8345d659,
@@ -1473,7 +1457,7 @@ Prefab:
     - target: {fileID: 224084979615100764, guid: 3e236b5d89777a045bddc11f8345d659,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -51.187492
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224979910215215418, guid: 3e236b5d89777a045bddc11f8345d659,
         type: 2}
@@ -1493,32 +1477,7 @@ Prefab:
     - target: {fileID: 224979910215215418, guid: 3e236b5d89777a045bddc11f8345d659,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -69.872475
-      objectReference: {fileID: 0}
-    - target: {fileID: 114410585808091834, guid: 3e236b5d89777a045bddc11f8345d659,
-        type: 2}
-      propertyPath: m_Color.a
-      value: 0.6862745
-      objectReference: {fileID: 0}
-    - target: {fileID: 114002192090299656, guid: 3e236b5d89777a045bddc11f8345d659,
-        type: 2}
-      propertyPath: m_Color.a
-      value: 0.6862745
-      objectReference: {fileID: 0}
-    - target: {fileID: 114939513506921956, guid: 3e236b5d89777a045bddc11f8345d659,
-        type: 2}
-      propertyPath: m_Color.a
-      value: 0.6862745
-      objectReference: {fileID: 0}
-    - target: {fileID: 114627699846118276, guid: 3e236b5d89777a045bddc11f8345d659,
-        type: 2}
-      propertyPath: m_Color.a
-      value: 0.6862745
-      objectReference: {fileID: 0}
-    - target: {fileID: 114958473200747372, guid: 3e236b5d89777a045bddc11f8345d659,
-        type: 2}
-      propertyPath: Target
-      value: 
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e236b5d89777a045bddc11f8345d659, type: 2}
@@ -1951,6 +1910,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114933455162699036, guid: 19e958d984c938645a9ef0aa636b09cb,
+        type: 2}
+      propertyPath: ArmorStat._modifiers.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4346267240763632, guid: 19e958d984c938645a9ef0aa636b09cb, type: 2}
       propertyPath: m_LocalPosition.x
       value: 2.96
@@ -1988,6 +1952,11 @@ Prefab:
       propertyPath: UiInventory
       value: 
       objectReference: {fileID: 456450175}
+    - target: {fileID: 114933455162699036, guid: 19e958d984c938645a9ef0aa636b09cb,
+        type: 2}
+      propertyPath: ArmorStat._modifiers.Array.data[0]
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 19e958d984c938645a9ef0aa636b09cb, type: 2}
   m_IsPrefabParent: 0

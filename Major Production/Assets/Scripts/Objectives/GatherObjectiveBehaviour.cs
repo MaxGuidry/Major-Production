@@ -3,7 +3,6 @@
 public class GatherObjectiveBehaviour : ObjectiveBehaviour
 {
     public Text CurrentObjectiveText;
-    public AutoTyper typer;
 
     /// <summary>
     ///     Checks if you have a current objective and if the list is not empty

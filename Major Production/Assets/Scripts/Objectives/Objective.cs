@@ -22,7 +22,7 @@ public class Objective : ScriptableObject
 
     [Multiline] [SerializeField] private  string _description;
 
-    [SerializeField] private int _currentAmount;
+    private int _currentAmount;
 
     [SerializeField] private int _requiredAmount;
 

@@ -34,6 +34,7 @@ public class InventoryBehaviour : MonoBehaviour, IStorageable
     {
         if (inventory.CurrentInventory.Count >= inventory.InventoryCap) return;
         inventory.CurrentInventory.Add(newItem);
+        if (inventoryText == null) return;
         inventoryText.CheckInv();
     }
 
@@ -42,6 +43,7 @@ public class InventoryBehaviour : MonoBehaviour, IStorageable
         if (inventory.CurrentInventory == null) return;
         if (!inventory.CurrentInventory.Contains(theItem)) return;
         inventory.CurrentInventory.Remove(theItem);
+        if (inventoryText == null) return;
         inventoryText.CheckInv();
     }
 
@@ -49,6 +51,7 @@ public class InventoryBehaviour : MonoBehaviour, IStorageable
     {
         if (inventory.CurrentInventory == null) return;
         inventory.CurrentInventory.Clear();
+        if (inventoryText == null) return;
         inventoryText.CheckInv();
     }
 }

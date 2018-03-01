@@ -1,22 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerStatBehaviour : MonoBehaviour, IDamageable
 {
     public Stats stats;
     public Modifier expModifier;
-
-    void Start()
-    {
-        expModifier.Value = 0;
-        expModifier.Target = null;
-    }
-
     /// <summary>
-    /// Entity Takes Damage
-    /// TODO: calculate armor rating using standard rolling system
-    /// Reduce this incoming damage by our armor value 
+    ///     Entity Takes Damage
+    ///     TODO: calculate armor rating using standard rolling system
+    ///     Reduce this incoming damage by our armor value
     /// </summary>
     /// <param name="damage">how much damage to take</param>
     public void TakeDamage(int damage)
@@ -34,24 +25,31 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
             Die();
         }
         else
+        {
             healthStat.Value = nexthealth;
-
+        }
     }
 
     /// <summary>
-    /// Death of Entity 
-    /// TODO: Add more to death
+    ///     Death of Entity
+    ///     TODO: Add more to death
     /// </summary>
     public void Die()
     {
         Debug.Log(transform.name + " died.");
     }
 
+    private void Start()
+    {
+        expModifier.Value = 0;
+        expModifier.Target = null;
+    }
+
     /// <summary>
-    /// Sets a mod and adds and applies that mod
+    ///     Sets a mod and adds and applies that mod
     /// </summary>
     /// <param name="args"></param>
-    public void OnQuestcomplete(UnityEngine.Object[] args)
+    public void OnQuestcomplete(Object[] args)
     {
         var quest = args[0] as Objective;
         if (quest == null)
@@ -61,6 +59,8 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
         if (questReward == null)
             return;
         var affectedstat = stats.GetStat(questReward.Name);
+        if (affectedstat == null)
+            return;
         var newaffectedstat = quest._reward.RewardValue;
 
         expModifier.Value = newaffectedstat;

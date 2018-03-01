@@ -5,6 +5,7 @@ public enum ModType
     Add,
     Mult
 }
+[CreateAssetMenu]
 public class Modifier : ScriptableObject
 {
     public int ID;

@@ -11,8 +11,8 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
     /// <param name="damage">how much damage to take</param>
     public void TakeDamage(int damage)
     {
-        Stat healthStat = stats.GetStat("Health");
-        Stat armorStat = stats.GetStat("Armor");
+        Stat healthStat = stats.GetStat("PHealth");
+        Stat armorStat = stats.GetStat("PArmor");
         //TODO: calculate armor rating using standard rolling system
         //reduce this incoming damage by our armor value 
         var calculatedDamage = damage - armorStat.Value;

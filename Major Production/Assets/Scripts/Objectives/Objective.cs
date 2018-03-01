@@ -21,15 +21,12 @@ public class QuestReward
     public int RewardValue;
     public override string ToString()
     {
-        return string.Format("questreward {0} with {1} ", stat, RewardValue);
-
+        return string.Format("Quest Reward {0} with {1}", stat, RewardValue);
     }
 }
 [CreateAssetMenu]
 public class Objective : ScriptableObject
 {
-    
-    public QuestReward _reward;
     [SerializeField] private string _title;
 
     [Multiline] [SerializeField] private  string _description;
@@ -45,6 +42,8 @@ public class Objective : ScriptableObject
     [SerializeField] private GameEventArgs QuestChange;
 
     [SerializeField] private GameEventArgs QuestComplete;
+
+    public QuestReward _reward;
 
     public string Description
     {

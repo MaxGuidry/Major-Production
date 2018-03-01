@@ -29,8 +29,10 @@ public class InventoryText : MonoBehaviour
         MetalAmounttext.text = 0.ToString();
         GoopAmounttext.text = 0.ToString();
     }
-
-    // Update is called once per frame
+    /// <summary>
+    /// Checks each item in inventory then makes a number
+    ///  that is equal to the amount in inventory
+    /// </summary>
     public void CheckInv()
     {
         WoodAmount = 0;
@@ -66,8 +68,12 @@ public class InventoryText : MonoBehaviour
                     throw new ArgumentOutOfRangeException();
             }
     }
-
-    IEnumerator TextPop(Text text)
+    /// <summary>
+    /// Creates sort of a pop animation for text
+    /// </summary>
+    /// <param name="text"></param>
+    /// <returns></returns>
+    private static IEnumerator TextPop(Text text)
     {
         var test = true;
         while (test)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "GameEventArgsObject")]
 public class GameEventArgsObject : GameEventArgs
 {
     

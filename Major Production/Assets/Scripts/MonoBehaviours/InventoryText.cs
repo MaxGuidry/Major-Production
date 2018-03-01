@@ -47,22 +47,22 @@ public class InventoryText : MonoBehaviour
                 case ItemType.Wood:
                     WoodAmount++;
                     WoodAmounttext.text = WoodAmount.ToString();
-                    StartCoroutine(TextPop(WoodAmounttext));
+                    //StartCoroutine(TextPop(WoodAmounttext));
                     break;
                 case ItemType.Stone:
                     StoneAmount++;
                     StoneAmounttext.text = StoneAmount.ToString();
-                    StartCoroutine(TextPop(StoneAmounttext));
+                    //StartCoroutine(TextPop(StoneAmounttext));
                     break;
                 case ItemType.Metal:
                     MetalAmount++;
                     MetalAmounttext.text = MetalAmount.ToString();
-                    StartCoroutine(TextPop(MetalAmounttext));
+                    //StartCoroutine(TextPop(MetalAmounttext));
                     break;
                 case ItemType.Goop:
                     GoopAmount++;
                     GoopAmounttext.text = GoopAmount.ToString();
-                    StartCoroutine(TextPop(GoopAmounttext));
+                    //StartCoroutine(TextPop(GoopAmounttext));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -73,7 +73,7 @@ public class InventoryText : MonoBehaviour
     /// </summary>
     /// <param name="text"></param>
     /// <returns></returns>
-    private static IEnumerator TextPop(Text text)
+    private IEnumerator TextPop(Text text)
     {
         var test = true;
         while (test)

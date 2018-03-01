@@ -24,8 +24,8 @@ public class FixCamera : MonoBehaviour
         Quaternion origin = this.transform.rotation;
         Sensitivity = character.Sensitivity;
         var thetaY = Input.GetAxis("Mouse Y") * Mathf.Deg2Rad * Sensitivity * .25f;
-        thetaY = ((thetaY > .35f) ? .35f : thetaY);
-        thetaY = (thetaY < -.35f ? -.35f : thetaY);
+        //thetaY = ((thetaY > .35f) ? .35f : thetaY);
+        //thetaY = (thetaY < -.35f ? -.35f : thetaY);
         transform.rotation = new Quaternion(Mathf.Sin(thetaY / 2f) * transform.right.x, Mathf.Sin(thetaY / 2f)
                                                                                      * transform.right.y,
                                  Mathf.Sin(thetaY / 2f) * transform.right.z, Mathf.Cos(thetaY / 2f)) * transform.rotation;

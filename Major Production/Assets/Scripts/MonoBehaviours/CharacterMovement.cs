@@ -14,27 +14,24 @@ public class CharacterMovement : MonoBehaviour
     private Vector3 velocity = Vector3.zero;
 
     public float WalkSpeed = 1;
-    public GameObject cameraPivot;
     private void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody>();
 
     }
-    private Dictionary<string, GameEventArgs> buttonevents = new Dictionary<string, GameEventArgs>();
 
     
     
-    private Dictionary<string, float> axisValues = new Dictionary<string, float>();
+    //private Dictionary<string, float> axisValues = new Dictionary<string, float>();
 
     private void Start()
     {
         
-        var f = Resources.LoadAll<GameEventArgs>("Buttons/");
-        foreach (var button in f)
-        {
-            buttonevents.Add(button.name, button);
-            axisValues.Add(button.name,0);
-        }
+        //foreach (var button in f)
+        //{
+        //    buttonevents.Add(button.name, button);
+        //    axisValues.Add(button.name,0);
+        //}
     }
 
     public KeyCode GetKeyCode(string key)
@@ -46,25 +43,25 @@ public class CharacterMovement : MonoBehaviour
     }
     private void Update()
     {
-        Sensitivity = InputMap.Sensititivity;
-        UiInventory.SetActive(Input.GetKey(InputMap.KeyBinds["inventory"]));
+        //Sensitivity = InputMap.Sensititivity;
+        //UiInventory.SetActive(Input.GetKey(InputMap.KeyBinds["inventory"]));
     }
 
     // Update is called once per frame
     private void FixedUpdate()
     {
-        foreach (var button in buttonevents)
-        {
-            float value = Input.GetAxis(button.Key);
-            if (value > .1f)
-            {
-                StringVariable sv = ScriptableObject.CreateInstance<StringVariable>();
-                sv.Value = button.Key;
-                button.Value.Raise(sv);
-            }
+        //foreach (var button in buttonevents)
+        //{
+        //    float value = Input.GetAxis(button.Key);
+        //    if (value > .1f)
+        //    {
+        //        StringVariable sv = ScriptableObject.CreateInstance<StringVariable>();
+        //        sv.Value = button.Key;
+        //        button.Value.Raise(sv);
+        //    }
                 
-            axisValues[button.Key] = value;
-        }
+        //    axisValues[button.Key] = value;
+        //}
        
         
         //UiInventory.SetActive(Input.GetKey(KeyCode.Tab));
@@ -107,8 +104,8 @@ public class CharacterMovement : MonoBehaviour
         //this.transform.rotation = Quaternion.Slerp(q, this.transform.rotation, .2f);
         //this.transform.LookAt(this.transform.position + acceleration.normalized);
         var thetaX = Input.GetAxis("Mouse X") * Mathf.Deg2Rad * Sensitivity;
-        thetaX = ((thetaX > .35f) ? .35f : thetaX);
-        thetaX = (thetaX < -.35f ? -.35f : thetaX);
+       // thetaX = ((thetaX > .35f) ? .35f : thetaX);
+        //thetaX = (thetaX < -.35f ? -.35f : thetaX);
         transform.rotation = new Quaternion(Mathf.Sin(thetaX / 2f) * transform.up.x, Mathf.Sin(thetaX / 2f)
                                                                                                * transform.up.y,
                                  Mathf.Sin(thetaX / 2f) * transform.up.z, Mathf.Cos(thetaX / 2f)) * transform.rotation;

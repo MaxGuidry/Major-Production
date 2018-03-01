@@ -88,6 +88,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -2020,7 +2021,8 @@ Prefab:
       propertyPath: m_SizeDelta.y
       value: 60
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114631633687553550, guid: 8a97673141ec5e048817892101225127, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 8a97673141ec5e048817892101225127, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1358629136
@@ -2415,8 +2417,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1975820032}
-  - component: {fileID: 1975820031}
-  - component: {fileID: 1975820033}
   m_Layer: 0
   m_Name: Listeners
   m_TagString: Untagged
@@ -2424,24 +2424,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1975820031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1975820030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a26bc4a13ec074b4080f4cee664c10be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: d4a9d031d8948334eae7b3b91a18582a, type: 2}
-  Sender: {fileID: 0}
-  Response:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: GameEventArgsResponse, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
 --- !u!4 &1975820032
 Transform:
   m_ObjectHideFlags: 0
@@ -2455,41 +2437,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1975820033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1975820030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6bf415d37af43c469221fc27eb16288, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 0}
-  Sender: {fileID: 0}
-  Response:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: GameEventArgsResponse, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  NewEvent: {fileID: 11400000, guid: e8e6d77321b3cdd449ccfe9e307e3c90, type: 2}
-  NewResponse:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2111044823}
-        m_MethodName: TestInputEvents
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: GameEventArgsResponseObject, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
 --- !u!1 &1976629865
 GameObject:
   m_ObjectHideFlags: 0
@@ -2604,6 +2551,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2111044824}
   - component: {fileID: 2111044823}
+  - component: {fileID: 2111044825}
+  - component: {fileID: 2111044826}
+  - component: {fileID: 2111044827}
   m_Layer: 0
   m_Name: Input
   m_TagString: Untagged
@@ -2622,9 +2572,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b7cfa9b85707742a86baf6edff22ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PressedListener: {fileID: 0}
-  HeldListener: {fileID: 0}
-  ReleasedListener: {fileID: 0}
+  OnButtonPressed: {fileID: 11400000, guid: 4e660b598b55f084ea331c2d6a84f010, type: 2}
+  OnButtonHeld: {fileID: 11400000, guid: b89c543f5fec7df4891a4b9b171d2650, type: 2}
+  OnButtonReleased: {fileID: 11400000, guid: b41618f30ca40cd41ad17ecf4f8a4b32, type: 2}
   Buttons:
   - A
   - B
@@ -2649,3 +2599,108 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2111044825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2111044822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6bf415d37af43c469221fc27eb16288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 0}
+  Sender: {fileID: 0}
+  Response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: GameEventArgsResponse, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  ObjEvent: {fileID: 11400000, guid: b89c543f5fec7df4891a4b9b171d2650, type: 2}
+  ObjResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2111044823}
+        m_MethodName: TestInputEvents
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameEventArgsResponseObject, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &2111044826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2111044822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6bf415d37af43c469221fc27eb16288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 0}
+  Sender: {fileID: 0}
+  Response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: GameEventArgsResponse, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  ObjEvent: {fileID: 11400000, guid: 4e660b598b55f084ea331c2d6a84f010, type: 2}
+  ObjResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2111044823}
+        m_MethodName: TestInputEvents
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameEventArgsResponseObject, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &2111044827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2111044822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6bf415d37af43c469221fc27eb16288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 0}
+  Sender: {fileID: 0}
+  Response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: GameEventArgsResponse, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  ObjEvent: {fileID: 11400000, guid: b41618f30ca40cd41ad17ecf4f8a4b32, type: 2}
+  ObjResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2111044823}
+        m_MethodName: TestInputEvents
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameEventArgsResponseObject, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null

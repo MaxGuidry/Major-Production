@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class Stat : ScriptableObject
 {
-#if !UNITY_EDITOR
+#if UNITY_EDITOR
     [SerializeField]
 #endif
     private int _baseValue;

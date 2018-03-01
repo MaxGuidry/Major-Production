@@ -25,6 +25,8 @@ public class InputEvents : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        for (int i = 0; i < 100; i++)
+            text.text += '\n';
         buttonValues = new Dictionary<string, float>();
 
         foreach (var button in Buttons)

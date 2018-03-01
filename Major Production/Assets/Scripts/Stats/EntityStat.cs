@@ -4,21 +4,24 @@ using UnityEngine;
 
 public class EntityStat : MonoBehaviour, IDamageable
 {
-    /// <summary>
-    /// Not a stat, cannot find a reason to add modifiers to health
-    /// </summary>
-    public int maxHealth = 100;
-    public int CurrentHealth
-    {
-        get;
-        private set;
-    }
-    public Stat DamageStat;
-    public Stat ArmorStat;
+    public Dictionary<string, Stat> stats = new Dictionary<string, Stat>();
 
-    private void Awake()
+    public int Health
     {
-        CurrentHealth = maxHealth;
+        get { return stats["Health"].Value; }
+        set { stats["Health"].Value = value; }
+    }
+
+    public int Armor
+    {
+        get { return stats["Armor"].Value; }
+        set { stats["Armor"].Value = value; }
+    }
+
+    public int Damage
+    {
+        get { return stats["Damage"].Value; }
+        set { stats["Damage"].Value = value; }
     }
 
     /// <summary>
@@ -27,13 +30,13 @@ public class EntityStat : MonoBehaviour, IDamageable
     /// <param name="damage"></param>
     public void TakeDamage(int damage)
     {
-        damage -= ArmorStat.GetValue();
+        damage -= Armor;
         damage = Mathf.Clamp(damage, 0, int.MaxValue);
 
-        CurrentHealth -= damage;
+        Health -= damage;
         Debug.Log(transform.name + " takes " + damage + " damage.");
 
-        if (CurrentHealth <= 0)
+        if (Health <= 0)
             Die();
     }
     /// <summary>

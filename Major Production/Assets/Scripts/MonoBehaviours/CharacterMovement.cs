@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -116,5 +117,16 @@ public class CharacterMovement : MonoBehaviour
 
 
 
+    public void Jump(object[] args)
+    {
+        var names = Input.GetJoystickNames();
+        if (names.Contains("Controller (XBOX One For Windows)"))
+        {
+            {
+                if (args[1] as string == "A")
+                    rb.AddForce(this.transform.up * 20, ForceMode.Impulse);
+            }
 
+        }
+    }
 }

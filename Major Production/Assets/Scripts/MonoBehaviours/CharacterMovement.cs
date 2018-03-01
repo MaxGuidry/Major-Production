@@ -44,7 +44,7 @@ public class CharacterMovement : MonoBehaviour
     private void Update()
     {
         //Sensitivity = InputMap.Sensititivity;
-        //UiInventory.SetActive(Input.GetKey(InputMap.KeyBinds["inventory"]));
+        UiInventory.SetActive(Input.GetKey(InputMap.KeyBinds["inventory"]));
     }
 
     // Update is called once per frame
@@ -64,7 +64,7 @@ public class CharacterMovement : MonoBehaviour
         //}
        
         
-        //UiInventory.SetActive(Input.GetKey(KeyCode.Tab));
+        UiInventory.SetActive(Input.GetKey(KeyCode.Tab));
 
         var Speed = Input.GetKey(InputMap.KeyBinds["sprint"]) ? RunSpeed : WalkSpeed;
        

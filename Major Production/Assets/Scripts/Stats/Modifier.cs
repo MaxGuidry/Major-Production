@@ -1,9 +1,11 @@
-﻿public enum ModType
+﻿using UnityEngine;
+
+public enum ModType
 {
     Add,
     Mult
 }
-public class Modifier
+public class Modifier : ScriptableObject
 {
     public int ID;
     public int Value;

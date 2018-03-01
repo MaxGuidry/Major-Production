@@ -14,10 +14,22 @@ public enum ObjectiveStatus
     Active = 2,
     Complete = 3
 }
+[Serializable]
+public class QuestReward
+{
+    public Stat stat;
+    public int RewardValue;
+    public override string ToString()
+    {
+        return string.Format("questreward {0} with {1} ", stat, RewardValue);
 
+    }
+}
 [CreateAssetMenu]
 public class Objective : ScriptableObject
 {
+    
+    public QuestReward _reward;
     [SerializeField] private string _title;
 
     [Multiline] [SerializeField] private  string _description;
@@ -33,8 +45,6 @@ public class Objective : ScriptableObject
     [SerializeField] private GameEventArgs QuestChange;
 
     [SerializeField] private GameEventArgs QuestComplete;
-
-    [SerializeField] private UnityEvent actionsOnComplete;
 
     public string Description
     {
@@ -108,7 +118,6 @@ public class Objective : ScriptableObject
                 break;
             case ObjectiveStatus.Complete:
                 QuestComplete.Raise(this);
-                actionsOnComplete.Invoke();
                 break;
             default:
                 throw new ArgumentOutOfRangeException();

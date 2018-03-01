@@ -8,28 +8,30 @@ public class Stat : ScriptableObject
     [SerializeField] private int _baseValue;
     public string Name;
     public int Value;
-    public Dictionary<int, Modifier> Modifiers = new Dictionary<int, Modifier>();
+    public Dictionary<Modifier, Modifier> Modifiers = new Dictionary<Modifier, Modifier>();
 
     public void OnEnable()
     {
         Value = _baseValue;
+        this.Name = this.name;
     }
 
-    public string AddMod(int id, Modifier mod)
+    public bool AddMod(Modifier mod)
     {
-        Modifiers.Add(id, mod);
-        var result = string.Format("Add Mod: {0} {1} {2}", Modifiers[id].Target,
-            Modifiers[id].Type,
-            Modifiers[id].Value);
-        return result;
+        if (Modifiers.ContainsKey(mod))
+            return false;
+        Modifiers.Add(mod, mod);
+        return true;
     }
 
-    public string RemoveMod(int id)
+    public bool RemoveMod(Modifier mod)
     {
-        Modifiers.Remove(id);
-        var result = string.Format("Remove Mod: {0} {1} {2}", Modifiers[id].Target.name,
-            Modifiers[id].Type, Modifiers[id].Value);
-        return result;
+        if (Modifiers.ContainsKey(mod))
+        {
+            Modifiers.Remove(mod);
+            return true;
+        }
+        return false;
     }
 
     public void ClearModifiers()
@@ -52,7 +54,7 @@ public class Stat : ScriptableObject
         }
     }
 
-    public void RemoveMod(Modifier mod)
+    public void UnApplyMod(Modifier mod)
     {
         switch (mod.Type)
         {

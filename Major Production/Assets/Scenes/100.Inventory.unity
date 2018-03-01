@@ -2083,6 +2083,46 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1b0dc849ca5d2a64c99f7221aa671b7a, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1577266882 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1224444865195266, guid: 19e958d984c938645a9ef0aa636b09cb,
+    type: 2}
+  m_PrefabInternal: {fileID: 1959645832}
+--- !u!114 &1577266886 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114933455162699036, guid: 19e958d984c938645a9ef0aa636b09cb,
+    type: 2}
+  m_PrefabInternal: {fileID: 1959645832}
+  m_Script: {fileID: 11500000, guid: 38de8316ac68e9e4999fee6a5d5d77db, type: 3}
+--- !u!114 &1577266891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1577266882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a26bc4a13ec074b4080f4cee664c10be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 9d44f410c46f20047893219d71f48af9, type: 2}
+  Sender: {fileID: 0}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1577266886}
+        m_MethodName: OnQuestcomplete
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameEventArgsResponse, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1001 &1604352070
 Prefab:
   m_ObjectHideFlags: 0
@@ -2135,6 +2175,34 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c66d37e271a5a4f4984b1e68f9d039a1, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1608285388
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1608285389}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1608285389
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1608285388}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 652.9928, y: 218.28058, z: 5.033761}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1616442722 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4695457564228576, guid: c66d37e271a5a4f4984b1e68f9d039a1,
@@ -2256,6 +2324,18 @@ Prefab:
       propertyPath: ArmorStat._modifiers.Array.data[0]
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114933455162699036, guid: 19e958d984c938645a9ef0aa636b09cb,
+        type: 2}
+      propertyPath: stat
+      value: 
+      objectReference: {fileID: 11400000, guid: 8fad890838ffd8749a124f93ae0def64,
+        type: 2}
+    - target: {fileID: 114933455162699036, guid: 19e958d984c938645a9ef0aa636b09cb,
+        type: 2}
+      propertyPath: stats
+      value: 
+      objectReference: {fileID: 11400000, guid: c0caac30b67d91b4195cd4e2d3564400,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 19e958d984c938645a9ef0aa636b09cb, type: 2}
   m_IsPrefabParent: 0

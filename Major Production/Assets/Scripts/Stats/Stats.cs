@@ -21,7 +21,7 @@ public class Stats : ScriptableObject
         if (_stats != null)
         {
             _statsDict = new Dictionary<string, Stat>();
-            _stats.ForEach(s => _statsDict.Add(s.Name, Instantiate(s)));
+            _stats.ForEach(s => _statsDict.Add(s.Name, s));
         }
     }
 

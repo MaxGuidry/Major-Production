@@ -8,8 +8,8 @@ public class EnemyStatBehaviour : MonoBehaviour, IDamageable {
 
     public void TakeDamage(int damage)
     {
-        Stat healthStat = stats.GetStat("EHealth");
-        Stat armorStat = stats.GetStat("EArmor");
+        var healthStat = stats.GetStat("EHealth");
+        var armorStat = stats.GetStat("EArmor");
         //TODO: calculate armor rating using standard rolling system
         //reduce this incoming damage by our armor value 
         var calculatedDamage = damage - armorStat.Value;

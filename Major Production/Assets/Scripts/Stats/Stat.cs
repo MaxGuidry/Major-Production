@@ -5,7 +5,10 @@ using UnityEngine;
 [CreateAssetMenu]
 public class Stat : ScriptableObject
 {
-    [SerializeField] private int _baseValue;
+#if !UNITY_EDITOR
+    [SerializeField]
+#endif
+    private int _baseValue;
     public string Name;
     public int Value;
     public Dictionary<Modifier, Modifier> Modifiers = new Dictionary<Modifier, Modifier>();

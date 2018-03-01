@@ -103,12 +103,15 @@ public class CharacterMovement : MonoBehaviour
         //Debug.Log(InputManager.Controller());
         //this.transform.rotation = Quaternion.Slerp(q, this.transform.rotation, .2f);
         //this.transform.LookAt(this.transform.position + acceleration.normalized);
+        //float sens = (Input.GetJoystickNames()[0] == "")
         var thetaX = Input.GetAxis("Mouse X") * Mathf.Deg2Rad * Sensitivity;
        // thetaX = ((thetaX > .35f) ? .35f : thetaX);
         //thetaX = (thetaX < -.35f ? -.35f : thetaX);
-        transform.rotation = new Quaternion(Mathf.Sin(thetaX / 2f) * transform.up.x, Mathf.Sin(thetaX / 2f)
-                                                                                               * transform.up.y,
-                                 Mathf.Sin(thetaX / 2f) * transform.up.z, Mathf.Cos(thetaX / 2f)) * transform.rotation;
+        var rotx = Mathf.Sin(thetaX / 2f) * transform.up.x;
+        var roty = Mathf.Sin(thetaX / 2f) * transform.up.y;
+        var rotz = Mathf.Sin(thetaX / 2f) * transform.up.z;
+        var rotw = Mathf.Cos(thetaX / 2f);
+        transform.rotation = new Quaternion(rotx, roty, rotz, rotw) * transform.rotation;
     }
 
 

@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114724766372456566}
   - component: {fileID: 54116383075150526}
   - component: {fileID: 65278166895470962}
+  - component: {fileID: 114339253733390348}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -235,7 +236,35 @@ MonoBehaviour:
   RunSpeed: 12
   UiInventory: {fileID: 0}
   WalkSpeed: 5
-  cameraPivot: {fileID: 0}
+--- !u!114 &114339253733390348
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1224444865195266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a26bc4a13ec074b4080f4cee664c10be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 9d44f410c46f20047893219d71f48af9, type: 2}
+  Sender: {fileID: 0}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114933455162699036}
+        m_MethodName: OnQuestcomplete
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameEventArgsResponse, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &114486914742647440
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -274,16 +303,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38de8316ac68e9e4999fee6a5d5d77db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  DamageStat:
-    BaseValue: 0
-    _modifiers: 
-  ArmorStat:
-    BaseValue: 0
-    _modifiers: 
-  ExpStat:
-    BaseValue: 0
-    _modifiers: 
+  stats: {fileID: 11400000, guid: c0caac30b67d91b4195cd4e2d3564400, type: 2}
+  expModifier: {fileID: 11400000, guid: 86892d6b26bead74d84e7dc860e6644e, type: 2}
 --- !u!124 &124278663586369990
 Behaviour:
   m_ObjectHideFlags: 1

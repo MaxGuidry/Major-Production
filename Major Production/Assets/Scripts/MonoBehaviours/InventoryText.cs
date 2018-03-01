@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -44,21 +45,38 @@ public class InventoryText : MonoBehaviour
                 case ItemType.Wood:
                     WoodAmount++;
                     WoodAmounttext.text = WoodAmount.ToString();
+                    StartCoroutine(TextPop(WoodAmounttext));
                     break;
                 case ItemType.Stone:
                     StoneAmount++;
                     StoneAmounttext.text = StoneAmount.ToString();
+                    StartCoroutine(TextPop(StoneAmounttext));
                     break;
                 case ItemType.Metal:
                     MetalAmount++;
                     MetalAmounttext.text = MetalAmount.ToString();
+                    StartCoroutine(TextPop(MetalAmounttext));
                     break;
                 case ItemType.Goop:
                     GoopAmount++;
                     GoopAmounttext.text = GoopAmount.ToString();
+                    StartCoroutine(TextPop(GoopAmounttext));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+    }
+
+    IEnumerator TextPop(Text text)
+    {
+        var test = true;
+        while (test)
+        {
+            text.fontSize = 50;
+            yield return new WaitForSeconds(1);
+            text.fontSize = 40;
+            test = false;
+        }
+        yield return null;
     }
 }

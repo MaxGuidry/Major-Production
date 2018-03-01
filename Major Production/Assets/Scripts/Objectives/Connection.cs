@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if UNITY_EDITOR
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -33,3 +34,4 @@ public class Connection
                 OnClickRemoveConnection(this);
     }
 }
+#endif

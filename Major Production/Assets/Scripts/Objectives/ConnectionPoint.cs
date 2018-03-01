@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if UNITY_EDITOR
+using System;
 using UnityEngine;
 
 public enum ConnectionPointType
@@ -48,3 +49,4 @@ public class ConnectionPoint
                 OnClickConnectionPoint(this);
     }
 }
+#endif

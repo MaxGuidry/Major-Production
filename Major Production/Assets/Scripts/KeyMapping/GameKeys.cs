@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "GameKeys", menuName = "Game Keys", order = 0)]
@@ -9,7 +11,7 @@ public class GameKeys : ScriptableObject
 {
     public List<string> optionsList;
     public List<KeyCode> keysList;
-
+#if UNITY_EDITOR
     [CustomEditor(typeof(GameKeys))]
     public class GameKeysEditor : Editor
     {
@@ -93,7 +95,7 @@ public class GameKeys : ScriptableObject
             base.OnInspectorGUI();
         }
     }
-
+#endif
     private Dictionary<string, Action> actions;
     //public enum keys
     //{

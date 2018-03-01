@@ -9,17 +9,12 @@ public class InputEvents : MonoBehaviour
 
 
 
-    public void TestListener(object[] args)
-    {
-        Debug.Log(args[0]);
-    }
+    
 
-    public GameEventArgsListenerObject PressedListener;
-    public GameEventArgsListenerObject HeldListener; 
-    public GameEventArgsListenerObject ReleasedListener;
-    private GameEventArgsObject OnButtonPressed;
-    private GameEventArgsObject OnButtonHeld; 
-    private GameEventArgsObject OnButtonReleased ;
+   
+    public GameEventArgsObject OnButtonPressed;
+    public GameEventArgsObject OnButtonHeld; 
+    public GameEventArgsObject OnButtonReleased ;
 
     public List<string> Buttons = new List<string>();
 
@@ -29,22 +24,12 @@ public class InputEvents : MonoBehaviour
     void Start()
     {
         buttonValues = new Dictionary<string, float>();
-        PressedListener = this.gameObject.AddComponent<GameEventArgsListenerObject>();
-        HeldListener = this.gameObject.AddComponent<GameEventArgsListenerObject>();
-        ReleasedListener = this.gameObject.AddComponent<GameEventArgsListenerObject>();
-        OnButtonPressed = ScriptableObject.CreateInstance<GameEventArgsObject>();
-        OnButtonHeld = ScriptableObject.CreateInstance<GameEventArgsObject>();
-        OnButtonReleased = ScriptableObject.CreateInstance<GameEventArgsObject>();
+       
         foreach (var button in Buttons)
         {
             buttonValues.Add(button, 0);
         }
-        PressedListener.NewEvent = OnButtonPressed;
-        PressedListener.NewEvent.NewRegisterListener(PressedListener);
-        HeldListener.NewEvent = OnButtonHeld;
-        ReleasedListener.NewEvent = OnButtonReleased;
-        PressedListener.NewResponse = new GameEventArgsResponseObject();
-        PressedListener.NewResponse.AddListener(TestInputEvents);
+        
     }
 
     void Update()
@@ -53,16 +38,17 @@ public class InputEvents : MonoBehaviour
         {
             float value = Input.GetAxis(button);
             if (value > .1f && buttonValues[button] < .1f)
-                OnButtonPressed.newRaise(button);
+                OnButtonPressed.ObjRaise("Pressed",button);
             else if (value > .1f)
-                OnButtonHeld.newRaise(button);
+                OnButtonHeld.ObjRaise("Held",button);
             else if (value < .1f && buttonValues[button] > .1f)
-                OnButtonReleased.newRaise(button);
+                OnButtonReleased.ObjRaise("Released",button);
+            buttonValues[button] = value;
         }
     }
 
     public void TestInputEvents(object[] args)
     {
-        Debug.Log(args[0]);
+        Debug.Log(args[0] + ":" + args[1]);
     }
 }

@@ -10,17 +10,20 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
     void Start()
     {
         expModifier.Value = 0;
+        expModifier.Target = null;
     }
+
     /// <summary>
     /// Entity Takes Damage
+    /// TODO: calculate armor rating using standard rolling system
+    /// Reduce this incoming damage by our armor value 
     /// </summary>
     /// <param name="damage">how much damage to take</param>
     public void TakeDamage(int damage)
     {
         var healthStat = stats.GetStat("PHealth");
         var armorStat = stats.GetStat("PArmor");
-        //TODO: calculate armor rating using standard rolling system
-        //reduce this incoming damage by our armor value 
+
         var calculatedDamage = damage - armorStat.Value;
 
         var nexthealth = healthStat.Value - calculatedDamage;
@@ -34,14 +37,20 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
             healthStat.Value = nexthealth;
 
     }
+
     /// <summary>
-    /// Death of Entity
+    /// Death of Entity 
+    /// TODO: Add more to death
     /// </summary>
     public void Die()
     {
         Debug.Log(transform.name + " died.");
     }
 
+    /// <summary>
+    /// Sets a mod and adds and applies that mod
+    /// </summary>
+    /// <param name="args"></param>
     public void OnQuestcomplete(UnityEngine.Object[] args)
     {
         var quest = args[0] as Objective;
@@ -52,7 +61,7 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
         if (questReward == null)
             return;
         var affectedstat = stats.GetStat(questReward.Name);
-        var newaffectedstat = affectedstat.Value + quest._reward.RewardValue;
+        var newaffectedstat = quest._reward.RewardValue;
 
         expModifier.Value = newaffectedstat;
         expModifier.Target = affectedstat;

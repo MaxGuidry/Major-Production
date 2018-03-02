@@ -23,7 +23,7 @@ public class PlanetBehaviour : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         foreach (var rb in rbs)
@@ -44,7 +44,7 @@ public class PlanetBehaviour : MonoBehaviour
             rbrs.Add(rb);
             return;
         }
-        rb.AddForce(((planet.center - rb.transform.position).normalized * planet.gravity));
+        rb.AddForce(((planet.center - rb.transform.position).normalized * planet.gravity)/.2f,ForceMode.Acceleration);
         //float y = rb.transform.rotation.eulerAngles.y;
         //rb.transform.up = (rb.gameObject.transform.position - planet.center).normalized;
         //rb.transform.rotation = Quaternion.Euler(rb.transform.rotation.eulerAngles.x, y, rb.transform.rotation.eulerAngles.z);

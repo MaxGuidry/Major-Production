@@ -3,7 +3,7 @@
 public class PlayerStatBehaviour : MonoBehaviour, IDamageable
 {
     public Stats stats;
-    public Modifier expModifier;
+    [SerializeField] private int Level;
     /// <summary>
     ///     Entity Takes Damage
     ///     TODO: calculate armor rating using standard rolling system
@@ -38,36 +38,37 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
     {
         Debug.Log(transform.name + " died.");
     }
-
-    private void Start()
-    {
-        expModifier.Value = 0;
-        expModifier.Target = null;
-    }
-
     /// <summary>
     ///     Sets a mod and adds and applies that mod
     /// </summary>
     /// <param name="args"></param>
-    public void OnQuestcomplete(Object[] args)
+    public void OnQuestComplete(Object[] args)
     {
         var quest = args[0] as Objective;
         if (quest == null)
             return;
+
         Debug.Log(quest._reward.ToString());
+
         var questReward = quest._reward.stat;
-        if (questReward == null)
-            return;
+
+        if (questReward == null) return;
+
         var affectedstat = stats.GetStat(questReward.Name);
-        if (affectedstat == null)
-            return;
+
+        if (affectedstat == null) return;
+
         var newaffectedstat = quest._reward.RewardValue;
 
-        expModifier.Value = newaffectedstat;
-        expModifier.Target = affectedstat;
-        expModifier.Type = ModType.Add;
+        var expMod = Modifier.CreateModifier(newaffectedstat, affectedstat, ModType.Add);
 
-        affectedstat.AddMod(expModifier);
-        affectedstat.ApplyMod(expModifier);
+        affectedstat.AddMod(expMod);
+        affectedstat.ApplyMod(expMod);
+
+        if (affectedstat.Value == 100)
+        {
+            affectedstat.Value = 0;
+            Level++;
+        }
     }
 }

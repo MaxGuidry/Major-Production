@@ -11,6 +11,12 @@ public class ItemInteractionBehaviour : MonoBehaviour
     public float SpoilerTime;
     public Item item;
     public GameEventArgs ItemPickedUp;
+    private ObjectPooler pooler;
+
+    private void Start()
+    {
+        pooler = FindObjectOfType<ObjectPooler>();
+    }
 
     private void Update()
     {
@@ -34,7 +40,7 @@ public class ItemInteractionBehaviour : MonoBehaviour
             ItemPickedUp.Raise(item);
             var ib = other.gameObject.GetComponent<IStorageable>();
             ib.AddToInventory(item);
-            Destroy(gameObject);
+            pooler.AddToPool(item.name, gameObject);
         }
     }
 }

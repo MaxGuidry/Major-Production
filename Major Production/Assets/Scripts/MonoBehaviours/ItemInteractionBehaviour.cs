@@ -15,7 +15,7 @@ public class ItemInteractionBehaviour : MonoBehaviour
 
     private void Start()
     {
-        pooler = FindObjectOfType<ObjectPooler>();
+        //pooler = FindObjectOfType<ObjectPooler>();
     }
 
     private void Update()
@@ -40,7 +40,7 @@ public class ItemInteractionBehaviour : MonoBehaviour
             ItemPickedUp.Raise(item);
             var ib = other.gameObject.GetComponent<IStorageable>();
             ib.AddToInventory(item);
-            pooler.AddToPool(item.name, gameObject);
+           // pooler.AddToPool(item.name, gameObject);
         }
     }
 }

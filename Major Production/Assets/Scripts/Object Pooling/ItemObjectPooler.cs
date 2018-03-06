@@ -8,7 +8,6 @@ public class ItemObjectPooler : MonoBehaviour
     public GameObject PooledObject;
     public int PooledAmount;
     public bool willGrow = true;
-    [HideInInspector]
     public List<GameObject> PooledObjects;
 
     public List<GameObject> RandomGameObjects;
@@ -16,10 +15,6 @@ public class ItemObjectPooler : MonoBehaviour
     void Awake()
     {
         current = this;
-    }
-    // Use this for initialization
-    void Start()
-    {
         PooledObjects = new List<GameObject>();
         for (var i = 0; i < PooledAmount; i++)
         {
@@ -30,6 +25,7 @@ public class ItemObjectPooler : MonoBehaviour
             PooledObjects.Add(obj);
         }
     }
+
     /// <summary>
     /// Cant figure out how to use properly
     /// </summary>

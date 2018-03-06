@@ -6,6 +6,8 @@ public class ItemObjectSpawner : MonoBehaviour
 {
     public ItemObjectPooler Pooler;
     public GameObject ObjectToSpawnOn;
+
+    public GameEventArgs ItemPickedUp;
     // Use this for initialization
     void Start()
     {
@@ -18,6 +20,7 @@ public class ItemObjectSpawner : MonoBehaviour
     private void SpawnItemOnSphere()
     {
         var obj = ItemObjectPooler.current.GetPooledGameObject();
+        obj.GetComponent<ItemInteractionBehaviour>().ItemPickedUp = ItemPickedUp;
         if (obj == null) return;
 
         var spawnPos = Random.onUnitSphere * ((ObjectToSpawnOn.transform.localScale.x / 2) + obj.transform.localScale.y * 0.5f) + ObjectToSpawnOn.transform.position;

@@ -1,30 +1,44 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class DisplayPlayerStats : MonoBehaviour
 {
+    [SerializeField] private bool created;
+
     public PlayerStatBehaviour PlayerStats;
+
+    [SerializeField] private List<Text> TempText;
+
     public Text TextPrefab;
+
     // Use this for initialization
-    void Start()
+    private void Start()
     {
         PlayerStats = FindObjectOfType<PlayerStatBehaviour>();
+        TempText = new List<Text>();
+    }
+
+    private void Update()
+    {
         CreateText();
     }
-    void CreateText()
+
+    public void CreateText()
     {
         var textPos = Vector3.zero;
-        var temp = TextPrefab;
-        for (var i = 0; i < PlayerStats.stats._stats.Count; i++)
-        {
-            temp = Instantiate(TextPrefab, textPos, transform.rotation) as Text;
-            temp.transform.SetParent(gameObject.transform);
-        }
+        if (!created)
+            for (var i = 0; i < PlayerStats.stats._stats.Count; i++)
+            {
+                var temp = Instantiate(TextPrefab, textPos, transform.rotation);
+                TempText.Add(temp);
 
-        foreach (var stat in PlayerStats.stats._stats)
-        {
-            temp.text = stat.Name + " " +stat.Value.ToString();
-        }
+                temp.transform.SetParent(gameObject.transform);
+                temp.text = PlayerStats.stats._stats[i].Name + ": " + PlayerStats.stats._stats[i].Value;
+                created = true;
+            }
+        else
+            for (var i = 0; i < PlayerStats.stats._stats.Count; i++)
+                TempText[i].text = PlayerStats.stats._stats[i].Name + ": " + PlayerStats.stats._stats[i].Value;
     }
 }

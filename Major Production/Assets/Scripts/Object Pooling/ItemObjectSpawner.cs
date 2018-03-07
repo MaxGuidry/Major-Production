@@ -6,31 +6,28 @@ public class ItemObjectSpawner : MonoBehaviour
 {
     public ItemObjectPooler Pooler;
     public GameObject ObjectToSpawnOn;
-
     public GameEventArgs ItemPickedUp;
+
+    private GameObject _obj;
+    private Vector3 _spawnPos;
     // Use this for initialization
-    void Start()
+    private void Start()
     {
-        for (var i = 0; i < Pooler.PooledObjects.Count; i ++)
+        for (var i = 0; i <= Pooler.PooledAmount; i++)
         {
             SpawnItemOnSphere();
         }
     }
 
+    /// <summary>
+    /// Sets the GameEventArgs of the object being spawned
+    /// Calls the create function from the ItemObjectPooler class
+    /// </summary>
     private void SpawnItemOnSphere()
     {
-        var obj = ItemObjectPooler.current.GetPooledGameObject();
-        obj.GetComponent<ItemInteractionBehaviour>().ItemPickedUp = ItemPickedUp;
-        if (obj == null) return;
-
-        var spawnPos = Random.onUnitSphere * ((ObjectToSpawnOn.transform.localScale.x / 2) + obj.transform.localScale.y * 0.5f) + ObjectToSpawnOn.transform.position;
-
-        var spawnRot = Quaternion.identity;
-
-        obj.transform.position = spawnPos;
-        obj.transform.rotation = spawnRot;
-        obj.transform.LookAt(obj.transform);
-        obj.transform.Rotate(-90, 0, 0);
-        obj.SetActive(true);
+        _obj = ItemObjectPooler.current.GetPooledGameObject();
+        _spawnPos = Random.onUnitSphere * (ObjectToSpawnOn.transform.localScale.x / 2 + _obj.transform.localScale.y * 0.5f) + ObjectToSpawnOn.transform.position;
+        _obj.GetComponent<ItemInteractionBehaviour>().ItemPickedUp = ItemPickedUp;
+        Pooler.Create(_obj, _spawnPos, Quaternion.identity);
     }
 }

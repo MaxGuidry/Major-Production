@@ -40,7 +40,7 @@ public class ItemInteractionBehaviour : MonoBehaviour
             ItemPickedUp.Raise(item);
             var ib = other.gameObject.GetComponent<IStorageable>();
             ib.AddToInventory(item);
-            gameObject.SetActive(false);
+            pooler.Destroy(gameObject);
         }
     }
 }

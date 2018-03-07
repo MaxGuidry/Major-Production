@@ -11,7 +11,6 @@ public class CharacterMovement : MonoBehaviour
     [Range(1, 20)] public float Sensitivity = 1;
     private Rigidbody rb;
     public float RunSpeed = 2;
-    public GameObject UiInventory;
     private Vector3 velocity = Vector3.zero;
     private bool grounded = false;
     public float WalkSpeed = 1;
@@ -46,7 +45,6 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        UiInventory.SetActive(Input.GetKey(InputMap.KeyBinds["inventory"]));
 
         //foreach (var button in buttonevents)
         //{
@@ -61,8 +59,6 @@ public class CharacterMovement : MonoBehaviour
         //    axisValues[button.Key] = value;
         //}
 
-
-        UiInventory.SetActive(Input.GetKey(KeyCode.Tab));
 
         var Speed = Input.GetKey(InputMap.KeyBinds["sprint"]) ? RunSpeed : WalkSpeed;
 

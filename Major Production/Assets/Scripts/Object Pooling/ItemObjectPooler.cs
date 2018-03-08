@@ -15,6 +15,8 @@ public class ItemObjectPooler : MonoBehaviour
     {
         s_instance = this;
         PooledObjects = new List<GameObject>();
+        if (RandomGameObjects.Count == 0)
+            return;
         for (var i = 0; i <= PooledAmount; i++)
         {
             PooledObject = RandomGameObjects[Random.Range(0, RandomGameObjects.Count)];
@@ -44,7 +46,7 @@ public class ItemObjectPooler : MonoBehaviour
     /// <param name="prefab"></param>
     /// <param name="objPos"></param>
     /// <param name="rot"></param>
-    public void Create(GameObject prefab, Vector3 objPos, Quaternion rot)
+    public GameObject Create(GameObject prefab, Vector3 objPos, Quaternion rot)
     {
         var newActiveCount = activeCount + 1;
         if (newActiveCount < PooledAmount)
@@ -58,10 +60,12 @@ public class ItemObjectPooler : MonoBehaviour
             AddToPool(newObj);
             newObj.transform.SetParent(gameObject.transform);
             activeCount++;
+            return newObj;
         }
 
         prefab.transform.position = objPos;
         prefab.transform.rotation = rot;
+        return prefab;
     }
 
     /// <summary>

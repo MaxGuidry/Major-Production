@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 33785489155605298}
   - component: {fileID: 65799058184884370}
   - component: {fileID: 23870459746522974}
-  - component: {fileID: 114423939270445892}
   - component: {fileID: 54296395920142970}
   - component: {fileID: 114025823587491778}
   - component: {fileID: 114856264948570188}
@@ -128,24 +127,6 @@ MonoBehaviour:
   Speed: 5.7
   MinDistance: 5
   MaxDistance: 10
---- !u!114 &114423939270445892
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1254278111918038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 783130fe78a30b348874d2f94b4c322d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpoilerTime: 0
-  item: {fileID: 11400000, guid: 192499123d279744887a0100c3c60466, type: 2}
-  collisionEvent:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: CollisionEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
 --- !u!114 &114856264948570188
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -157,8 +138,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c9c9bb50aae1a147a5774b1cba4ad94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  DamageStat:
-    baseValue: 5
-  ArmorStat:
-    baseValue: 5
+  stats: {fileID: 11400000, guid: 78d6995c0dcf77b42a2777e1208326e0, type: 2}

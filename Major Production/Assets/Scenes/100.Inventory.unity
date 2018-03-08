@@ -98,21 +98,21 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.04
+    agentRadius: 1.78
     agentHeight: 2
     agentSlope: 60
-    agentClimb: 0.4
+    agentClimb: 2
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.013333333
+    cellSize: 0.5933333
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: ec09ed94a933a1246b3fe089ef0cc30b, type: 2}
+  m_NavMeshData: {fileID: 0}
 --- !u!1001 &198736413
 Prefab:
   m_ObjectHideFlags: 0
@@ -199,6 +199,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 114010457869884018, guid: 449e04cdb3d91274581143d8b5c240e2,
+        type: 2}
+      propertyPath: PooledAmount
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 449e04cdb3d91274581143d8b5c240e2, type: 2}
   m_IsPrefabParent: 0
@@ -225,7 +230,7 @@ GameObject:
   m_TagString: Planet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &531900247
 Transform:
@@ -280,7 +285,7 @@ SphereCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 531900246}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: b508feda5cc801f4dad83ae0e5f5b997, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -675,6 +680,12 @@ Prefab:
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1546933815}
+    - target: {fileID: 65278166895470962, guid: 19e958d984c938645a9ef0aa636b09cb,
+        type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: b508feda5cc801f4dad83ae0e5f5b997,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 19e958d984c938645a9ef0aa636b09cb, type: 2}
   m_IsPrefabParent: 0

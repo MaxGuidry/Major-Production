@@ -38,10 +38,6 @@ public class ObjectiveBehaviour : MonoBehaviour
     {
         if (CurrentObjective == null)
             return;
-        if (PlayerObjectives.Count <= 0)
-        {
-            Destroy(gameObject);
-        }
 
         //Set Next Objective
         PlayerObjectives.Remove(CurrentObjective);

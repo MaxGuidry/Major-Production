@@ -3,7 +3,7 @@
 public class PlayerStatBehaviour : MonoBehaviour, IDamageable
 {
     public Stats stats;
-    [SerializeField] private int Level;
+
     /// <summary>
     ///     Entity Takes Damage
     ///     TODO: calculate armor rating using standard rolling system
@@ -38,12 +38,14 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
     {
         Debug.Log(transform.name + " died.");
     }
+
     /// <summary>
     ///     Sets a mod and adds and applies that mod
     /// </summary>
     /// <param name="args"></param>
     public void OnQuestComplete(Object[] args)
     {
+        var levelStat = stats.GetStat("PLevel");
         var quest = args[0] as Objective;
         if (quest == null)
             return;
@@ -65,10 +67,10 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
         affectedstat.AddMod(expMod);
         affectedstat.ApplyMod(expMod);
 
-        if (affectedstat.Value == 100)
+        if (affectedstat.Value >= 100)
         {
-            affectedstat.Value = 0;
-            Level++;
+            affectedstat.Value -= 100;
+            levelStat.Value++;
         }
     }
 }

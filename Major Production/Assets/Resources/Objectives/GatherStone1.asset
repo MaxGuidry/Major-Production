@@ -13,14 +13,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _title: Gather 1 Stone
   _description: Gather Stone
-  _currentAmount: 0
   _requiredAmount: 1
   _requiredItem: {fileID: 11400000, guid: a56e6035ae842e34d876ec8aaa27c90f, type: 2}
   QuestStart: {fileID: 11400000, guid: b66499015cebc5940b09958a4c05f3f7, type: 2}
   QuestChange: {fileID: 11400000, guid: 6be7e7f74f09fb34d9cddb58bda687b9, type: 2}
   QuestComplete: {fileID: 11400000, guid: 9d44f410c46f20047893219d71f48af9, type: 2}
-  actionsOnComplete:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+  _reward:
+    stat: {fileID: 11400000, guid: 111211242cb943d4aa267018568bfbbb, type: 2}
+    RewardValue: 100

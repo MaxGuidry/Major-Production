@@ -199,6 +199,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 114010457869884018, guid: 449e04cdb3d91274581143d8b5c240e2,
+        type: 2}
+      propertyPath: PooledAmount
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 449e04cdb3d91274581143d8b5c240e2, type: 2}
   m_IsPrefabParent: 0
@@ -280,7 +285,7 @@ SphereCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 531900246}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: b508feda5cc801f4dad83ae0e5f5b997, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -626,7 +631,7 @@ Prefab:
     - target: {fileID: 224084979615100764, guid: 3e236b5d89777a045bddc11f8345d659,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -66.90399
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e236b5d89777a045bddc11f8345d659, type: 2}
@@ -675,6 +680,12 @@ Prefab:
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1546933815}
+    - target: {fileID: 65278166895470962, guid: 19e958d984c938645a9ef0aa636b09cb,
+        type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: b508feda5cc801f4dad83ae0e5f5b997,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 19e958d984c938645a9ef0aa636b09cb, type: 2}
   m_IsPrefabParent: 0

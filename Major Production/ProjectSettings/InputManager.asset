@@ -58,7 +58,7 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: 
+    positiveButton: mouse 0
     altNegativeButton: 
     altPositiveButton: 
     gravity: 10000
@@ -278,6 +278,22 @@ InputManager:
     axis: 0
     joyNum: 1
   - serializedVersion: 3
+    m_Name: Submit
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: i
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 10000
+    dead: 0
+    sensitivity: 10000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 1
+  - serializedVersion: 3
     m_Name: Cancel
     descriptiveName: 
     descriptiveNegativeName: 
@@ -292,7 +308,7 @@ InputManager:
     invert: 0
     type: 2
     axis: 1
-    joyNum: 0
+    joyNum: 1
   - serializedVersion: 3
     m_Name: Left Stick Button
     descriptiveName: 

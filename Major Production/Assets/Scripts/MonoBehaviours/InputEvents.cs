@@ -12,7 +12,7 @@ public class InputEvents : MonoBehaviour
 
 
 
-    public Text text;
+   // public Text text;
 
     public GameEventArgsObject OnButtonPressed;
     public GameEventArgsObject OnButtonHeld;
@@ -25,8 +25,8 @@ public class InputEvents : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        for (int i = 0; i < 100; i++)
-            text.text += '\n';
+        //for (int i = 0; i < 100; i++)
+        //    text.text += '\n';
         buttonValues = new Dictionary<string, float>();
 
         foreach (var button in Buttons)
@@ -51,31 +51,31 @@ public class InputEvents : MonoBehaviour
         }
     }
 
-    public void TestInputEvents(object[] args)
-    {
-        //GameObject Text = new GameObject();
-        //Text.AddComponent<RectTransform>();
-        //Text.AddComponent<Text>();
-        //Text.transform.SetParent(panel.transform, false);
-        text.text += "\n" + (args[0] + ":" + args[1]);
-        int newlines = 0;
-        foreach (var c in text.text)
-        {
-            if (c == '\n')
-                newlines++;
-        }
-        if (newlines > 100)
-        {
-            int count = 0;
-            char c = '\0';
-            while (c != '\n')
-            {
-                c = text.text[count];
-                count++;
-            }
+    //public void TestInputEvents(object[] args)
+    //{
+    //    //GameObject Text = new GameObject();
+    //    //Text.AddComponent<RectTransform>();
+    //    //Text.AddComponent<Text>();
+    //    //Text.transform.SetParent(panel.transform, false);
+    //    //text.text += "\n" + (args[0] + ":" + args[1]);
+    //    int newlines = 0;
+    //    foreach (var c in text.text)
+    //    {
+    //        if (c == '\n')
+    //            newlines++;
+    //    }
+    //    if (newlines > 100)
+    //    {
+    //        int count = 0;
+    //        char c = '\0';
+    //        while (c != '\n')
+    //        {
+    //            c = text.text[count];
+    //            count++;
+    //        }
 
-            text.text = text.text.Remove(0, count);
-        }
-        //Text.GetComponent<Text>().font = Resources.GetBuiltinResource<Font>("Arial.ttf");
-    }
+    //        text.text = text.text.Remove(0, count);
+    //    }
+    //    //Text.GetComponent<Text>().font = Resources.GetBuiltinResource<Font>("Arial.ttf");
+    //}
 }

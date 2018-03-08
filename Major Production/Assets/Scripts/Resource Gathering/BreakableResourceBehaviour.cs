@@ -8,11 +8,10 @@ public class BreakableResourceBehaviour : MonoBehaviour,IDamageable
 
     public GameObject Resource;
     // Use this for initialization
-    private ItemObjectPooler pooler;
+   
 
     void Start()
     {
-        pooler = FindObjectOfType<ItemObjectPooler>();
     }
 
     public void SpawnResources(object[] args)

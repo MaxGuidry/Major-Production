@@ -99,4 +99,5 @@ public class ItemObjectPooler : MonoBehaviour
         prefab.SetActive(false);
         PooledObjects.Add(prefab);
     }
+    
 }

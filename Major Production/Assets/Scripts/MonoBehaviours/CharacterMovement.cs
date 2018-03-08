@@ -14,6 +14,7 @@ public class CharacterMovement : MonoBehaviour
     private Vector3 velocity = Vector3.zero;
     private bool grounded = false;
     public float WalkSpeed = 1;
+    [SerializeField] private GameEventArgsObject BreakObject;
     private void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody>();
@@ -46,18 +47,11 @@ public class CharacterMovement : MonoBehaviour
     private void Update()
     {
 
-        //foreach (var button in buttonevents)
-        //{
-        //    float value = Input.GetAxis(button.Key);
-        //    if (value > .1f)
-        //    {
-        //        StringVariable sv = ScriptableObject.CreateInstance<StringVariable>();
-        //        sv.Value = button.Key;
-        //        button.Value.Raise(sv);
-        //    }
+        //FOR TESTING WHEN ANIMATIONS ARE IN THIS WILL BE CALLED ON AN ANIMATION EVENT
+        if(Input.GetAxis("X")>0||Input.GetKeyDown(KeyCode.Mouse0))
+            HitObject();
 
-        //    axisValues[button.Key] = value;
-        //}
+
 
 
         var Speed = Input.GetKey(InputMap.KeyBinds["sprint"]) ? RunSpeed : WalkSpeed;
@@ -140,6 +134,12 @@ public class CharacterMovement : MonoBehaviour
             //needs check for if the object is below the player relative to the players up axis.
             grounded = true;
         }
+    }
+
+    public void HitObject()
+    {
+
+        BreakObject.ObjRaise(this);
     }
 
 }

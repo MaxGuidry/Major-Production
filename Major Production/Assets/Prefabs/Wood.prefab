@@ -24,8 +24,8 @@ GameObject:
   - component: {fileID: 23290166807707486}
   - component: {fileID: 114558418982918460}
   - component: {fileID: 54077215937234668}
-  - component: {fileID: 114098027670059024}
   - component: {fileID: 114259546932491414}
+  - component: {fileID: 114803848306405462}
   m_Layer: 0
   m_Name: Wood
   m_TagString: Untagged
@@ -114,17 +114,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114098027670059024
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1464351142015108}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80c9540e279ba8c45ba3361d9084a586, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114259546932491414
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -150,3 +139,14 @@ MonoBehaviour:
   SpoilerTime: 0
   Item: {fileID: 11400000, guid: b31bfcd18116ad740841648233ee5ee9, type: 2}
   ItemPickedUp: {fileID: 11400000, guid: c913b0e6817fa654d9da16c8ca35575b, type: 2}
+--- !u!114 &114803848306405462
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1464351142015108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3564fec715b5a8044b5f00c9d1c52725, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

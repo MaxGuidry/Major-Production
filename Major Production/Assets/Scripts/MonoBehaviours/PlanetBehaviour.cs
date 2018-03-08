@@ -45,6 +45,10 @@ public class PlanetBehaviour : MonoBehaviour
             rbrs.Add(rb);
             return;
         }
+
+        //var cent = GetComponent<Collider>().ClosestPoint(rb.gameObject.transform.position);
+        
+        
         rb.AddForce(((planet.center - rb.transform.position).normalized * planet.gravity)/.2f);
         //float y = rb.transform.rotation.eulerAngles.y;
         //rb.transform.up = (rb.gameObject.transform.position - planet.center).normalized;

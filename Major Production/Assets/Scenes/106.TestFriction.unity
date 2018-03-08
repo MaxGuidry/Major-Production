@@ -130,7 +130,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4727181434737746, guid: 4dd10e2fb4c07b345ac952d1b7fdaad9, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 96.1
+      value: 133.6
       objectReference: {fileID: 0}
     - target: {fileID: 4727181434737746, guid: 4dd10e2fb4c07b345ac952d1b7fdaad9, type: 2}
       propertyPath: m_LocalRotation.x
@@ -237,6 +237,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 10.742001, y: 177.42001, z: 0}
+--- !u!1 &104833388 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1464351142015108, guid: 4dd10e2fb4c07b345ac952d1b7fdaad9,
+    type: 2}
+  m_PrefabInternal: {fileID: 40939853}
+--- !u!114 &104833397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 104833388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3564fec715b5a8044b5f00c9d1c52725, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &140810393
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,6 +329,7 @@ GameObject:
   - component: {fileID: 1033423051}
   - component: {fileID: 1033423050}
   - component: {fileID: 1033423049}
+  - component: {fileID: 1033423053}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -386,6 +403,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1033423053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1033423048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de6fd6642fd338246bcf8ad6a489e691, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rbs: []
+  planet: {fileID: 11400000, guid: 0c0da09bcc5af5b499965df2e4c62dd1, type: 2}
+  rbrs: []
 --- !u!1 &1346110597
 GameObject:
   m_ObjectHideFlags: 0

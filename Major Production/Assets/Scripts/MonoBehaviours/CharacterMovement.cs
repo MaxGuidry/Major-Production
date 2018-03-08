@@ -48,8 +48,8 @@ public class CharacterMovement : MonoBehaviour
     {
 
         //FOR TESTING WHEN ANIMATIONS ARE IN THIS WILL BE CALLED ON AN ANIMATION EVENT
-        if(Input.GetAxis("X")>0||Input.GetKeyDown(KeyCode.Mouse0))
-            HitObject();
+       // if (Input.GetAxis("X") > 0 || Input.GetKeyDown(KeyCode.Mouse0))
+       //     HitObject();
 
 
 
@@ -136,10 +136,13 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-    public void HitObject()
+    public void HitObject(object[] args)
     {
+        if (args.Length < 2)
+            return;
+        if(args[1] as string== "X")
+            BreakObject.ObjRaise(this);
 
-        BreakObject.ObjRaise(this);
     }
 
 }

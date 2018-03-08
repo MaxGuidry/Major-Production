@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BreakableResourceBehaviour : MonoBehaviour
+public class BreakableResourceBehaviour : MonoBehaviour,IDamageable
 {
 
 
@@ -29,5 +29,15 @@ public class BreakableResourceBehaviour : MonoBehaviour
                 return;
             rb.AddForce((obj.transform.position - this.transform.position) + new Vector3(0, 1, 0));
         }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Die()
+    {
+        throw new System.NotImplementedException();
     }
 }

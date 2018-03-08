@@ -13,10 +13,8 @@ public class InventoryBehaviour : MonoBehaviour, IStorageable
     [Header("For Viewing Purposes")]
     public List<Item> ActiveInventory;
 
-    private InventoryText inventoryText;
     void Start()
     {
-        inventoryText = FindObjectOfType<InventoryText>();
         inventory.StartingInventory = new List<Item>();
         if (inventory.InventoryCap <= 0)
         {
@@ -34,8 +32,6 @@ public class InventoryBehaviour : MonoBehaviour, IStorageable
     {
         if (inventory.CurrentInventory.Count >= inventory.InventoryCap) return;
         inventory.CurrentInventory.Add(newItem);
-        if (inventoryText == null) return;
-        inventoryText.CheckInv();
     }
 
     public void RemoveFromInventory(Item theItem)
@@ -43,15 +39,12 @@ public class InventoryBehaviour : MonoBehaviour, IStorageable
         if (inventory.CurrentInventory == null) return;
         if (!inventory.CurrentInventory.Contains(theItem)) return;
         inventory.CurrentInventory.Remove(theItem);
-        if (inventoryText == null) return;
-        inventoryText.CheckInv();
     }
 
     public void RemoveAllFromInventory()
     {
         if (inventory.CurrentInventory == null) return;
         inventory.CurrentInventory.Clear();
-        if (inventoryText == null) return;
-        inventoryText.CheckInv();
+
     }
 }

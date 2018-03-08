@@ -17,7 +17,8 @@ public class ObjectsFriction : MonoBehaviour
     // Update is called once per frame
     void OnCollisionStay(Collision other)
     {
-
+        if (!rb)
+            return;
         if (rb.velocity.magnitude > 0)
         {
 

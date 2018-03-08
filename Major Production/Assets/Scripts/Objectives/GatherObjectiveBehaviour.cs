@@ -5,6 +5,7 @@ public class GatherObjectiveBehaviour : ObjectiveBehaviour
 {
     public Text CurrentObjectiveText;
     public AutoTyper typer;
+
     /// <summary>
     ///     Checks if you have a current objective and if the list is not empty
     ///     Sets the text
@@ -22,6 +23,9 @@ public class GatherObjectiveBehaviour : ObjectiveBehaviour
                                     CurrentObjective.RequiredAmount;
     }
 
+    /// <summary>
+    ///     If quest is complete set the text and call AutoType function
+    /// </summary>
     public void AutoType()
     {
         if (typer == null) return;

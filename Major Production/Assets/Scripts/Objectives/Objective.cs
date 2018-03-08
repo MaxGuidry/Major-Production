@@ -14,6 +14,7 @@ public enum ObjectiveStatus
     Active = 2,
     Complete = 3
 }
+
 [Serializable]
 public class QuestReward
 {
@@ -24,6 +25,7 @@ public class QuestReward
         return string.Format("Quest Reward {0} with {1}", stat, RewardValue);
     }
 }
+
 [CreateAssetMenu]
 public class Objective : ScriptableObject
 {

@@ -11,7 +11,7 @@ public class InventoryText : MonoBehaviour
     public static Text StoneAmounttext;
     public static Text WoodAmounttext;
 
-    public static int woodAmount, stoneAmount, metalAmount, goopAmount;
+    public static uint woodAmount, stoneAmount, metalAmount, goopAmount;
     // Use this for initialization
     private void Start()
     {

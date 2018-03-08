@@ -51,9 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 416cabaace6d8cf4899aa893db2d4f35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PooledAmount: 100
   PooledObject: {fileID: 0}
-  PooledAmount: 20
-  willGrow: 1
   PooledObjects: []
   RandomGameObjects:
   - {fileID: 1464351142015108, guid: 4dd10e2fb4c07b345ac952d1b7fdaad9, type: 2}

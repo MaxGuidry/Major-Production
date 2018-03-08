@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using ScriptableObjects;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ObjectiveBehaviour : MonoBehaviour
 {
     public Objective CurrentObjective;
     public List<Objective> PlayerObjectives;
+    public GameEvent AllQuestComplete;
 
     private void Start()
     {
@@ -37,7 +39,9 @@ public class ObjectiveBehaviour : MonoBehaviour
         if (CurrentObjective == null)
             return;
         if (PlayerObjectives.Count <= 0)
+        {
             Destroy(gameObject);
+        }
 
         //Set Next Objective
         PlayerObjectives.Remove(CurrentObjective);

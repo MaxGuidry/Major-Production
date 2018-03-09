@@ -46,12 +46,13 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        object[] test = { this, "A" };
+        if (Input.GetKeyDown(KeyCode.Space))
+            Jump(test);
 
-        //FOR TESTING WHEN ANIMATIONS ARE IN THIS WILL BE CALLED ON AN ANIMATION EVENT
-       // if (Input.GetAxis("X") > 0 || Input.GetKeyDown(KeyCode.Mouse0))
-       //     HitObject();
-
-
+        //RaycastHit rh;
+        //Physics.Raycast(this.transform.position, -this.transform.up, out rh, 1.5f);
+        //rh.
 
 
         var Speed = Input.GetKey(InputMap.KeyBinds["sprint"]) ? RunSpeed : WalkSpeed;
@@ -108,21 +109,21 @@ public class CharacterMovement : MonoBehaviour
 
     public void Jump(object[] args)
     {
-        var names = Input.GetJoystickNames();
-        if (names.Contains("Controller (XBOX One For Windows)"))
-        {
-            {
-                if (args[1] as string == "A")
-                {
-                    if (!grounded)
-                        return;
-                    rb.AddForce(this.transform.up * 25, ForceMode.Impulse);
-                    grounded = false;
+        // var names = Input.GetJoystickNames();
+        // if (names.Contains("Controller (XBOX One For Windows)"))
+        // {
 
-                }
-            }
+        if (args[1] as string == "A")
+        {
+            if (!grounded)
+                return;
+            rb.AddForce(this.transform.up * 25, ForceMode.Impulse);
+            grounded = false;
 
         }
+
+
+        // }
     }
     //todo MAKE SURE THE DELTA TIME IS CORRECT
     //
@@ -140,7 +141,7 @@ public class CharacterMovement : MonoBehaviour
     {
         if (args.Length < 2)
             return;
-        if(args[1] as string== "X")
+        if (args[1] as string == "X")
             BreakObject.ObjRaise(this);
 
     }

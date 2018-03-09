@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -12,10 +13,12 @@ public class MainMenuUI : MonoBehaviour
     public Slider sensitivity;
     public Toggle invertMouse;
     private AudioSource _backSound;
+    private EventSystem eventSystem;
 
     private void Start()
     {
         MainCanvas = GetComponent<Canvas>();
+        eventSystem = FindObjectOfType<EventSystem>();
         MainCanvas.gameObject.SetActive(true);
         OptionsCanvas.gameObject.SetActive(false);
 
@@ -51,6 +54,7 @@ public class MainMenuUI : MonoBehaviour
                     child.gameObject.SetActive(false);
                 }
                 OptionsCanvas.gameObject.SetActive(true);
+                eventSystem.SetSelectedGameObject(GameObject.FindGameObjectWithTag("BackButton"));
                 break;
             case false:
                 MainCanvas.gameObject.SetActive(true);
@@ -60,6 +64,7 @@ public class MainMenuUI : MonoBehaviour
                     MainCanvas.transform.GetChild(i).GetChild(0).gameObject.SetActive(true);
                 }
                 OptionsCanvas.gameObject.SetActive(false);
+                eventSystem.SetSelectedGameObject(GameObject.FindGameObjectWithTag("StartButton"));
                 break;
         }
     }

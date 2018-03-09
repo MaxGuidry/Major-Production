@@ -38,7 +38,9 @@ public class DisplayPlayerStats : MonoBehaviour
                 created = true;
             }
         else
+        {
             for (var i = 0; i < PlayerStats.stats._stats.Count; i++)
                 TempText[i].text = PlayerStats.stats._stats[i].Name + ": " + PlayerStats.stats._stats[i].Value;
+        }
     }
 }

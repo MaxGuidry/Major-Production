@@ -28,7 +28,6 @@ public class ItemInteractionBehaviour : MonoBehaviour
         {
             ItemPickedUp.Raise(Item);
             var ib = other.gameObject.GetComponent<IStorageable>();
-            ib.AddToInventory(Item);
             switch (Item.ItemType)
             {
                 case ItemType.None:
@@ -60,6 +59,7 @@ public class ItemInteractionBehaviour : MonoBehaviour
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+            ib.AddToInventory(Item, gameObject);
             ItemObjectPooler.s_instance.Destroy(gameObject);
         }
     }

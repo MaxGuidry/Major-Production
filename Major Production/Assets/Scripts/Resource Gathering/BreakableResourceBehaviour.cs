@@ -8,7 +8,7 @@ public class BreakableResourceBehaviour : MonoBehaviour,IDamageable
 
     public GameObject Resource;
     // Use this for initialization
-   
+    public int hits;
 
     void Start()
     {

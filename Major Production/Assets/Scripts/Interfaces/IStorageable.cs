@@ -1,8 +1,9 @@
 ﻿using ScriptableObjects;
+using UnityEngine;
 
 public interface IStorageable
 {
-    void AddToInventory(Item theItem);
-    void RemoveFromInventory(Item theItem);
-    void RemoveAllFromInventory();
+    void AddToInventory(Item theItem, GameObject obj);
+    void RemoveFromInventory(Item theItem, GameObject obj);
+    void RemoveAllFromInventory(GameObject obj);
 }

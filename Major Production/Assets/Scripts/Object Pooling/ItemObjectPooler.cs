@@ -68,6 +68,15 @@ public class ItemObjectPooler : MonoBehaviour
         return prefab;
     }
 
+    public GameObject CreateSingle(GameObject prefab, Vector3 objPos, Quaternion rot)
+    {
+        RemoveFromPool(prefab);
+        prefab.transform.position = objPos;
+        prefab.transform.rotation = rot;
+        activeCount--;
+        return prefab;
+    }
+
     /// <summary>
     ///     End User use case
     /// </summary>

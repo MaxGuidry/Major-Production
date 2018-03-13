@@ -18,6 +18,7 @@ public class NodeBasedEditor : EditorWindow
     private ConnectionPoint selectedInPoint;
     private GUIStyle selectedNodeStyle;
     private ConnectionPoint selectedOutPoint;
+    private string title;
 
     [MenuItem("Window/Objective Manager")]
     private static void OpenWindow()
@@ -190,7 +191,7 @@ public class NodeBasedEditor : EditorWindow
         if (nodes == null) nodes = new List<Node>();
 
         nodes.Add(new Node(mousePosition, 200, 50, nodeStyle, selectedNodeStyle, inPointStyle, outPointStyle,
-            OnClickInPoint, OnClickOutPoint, OnClickRemoveNode));
+            OnClickInPoint, OnClickOutPoint, OnClickRemoveNode, title));
     }
 
     private void OnClickInPoint(ConnectionPoint inPoint)

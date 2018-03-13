@@ -21,7 +21,7 @@ public class Node
 
     public Node(Vector2 position, float width, float height, GUIStyle nodeStyle, GUIStyle selectedStyle,
         GUIStyle inPointStyle, GUIStyle outPointStyle, Action<ConnectionPoint> OnClickInPoint,
-        Action<ConnectionPoint> OnClickOutPoint, Action<Node> OnClickRemoveNode)
+        Action<ConnectionPoint> OnClickOutPoint, Action<Node> OnClickRemoveNode, string thetitle)
     {
         rect = new Rect(position.x, position.y, width, height);
         style = nodeStyle;
@@ -30,6 +30,7 @@ public class Node
         defaultNodeStyle = nodeStyle;
         selectedNodeStyle = selectedStyle;
         OnRemoveNode = OnClickRemoveNode;
+        title = thetitle;
     }
 
     public void Drag(Vector2 delta)

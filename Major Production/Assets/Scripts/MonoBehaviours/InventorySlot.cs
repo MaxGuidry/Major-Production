@@ -18,6 +18,15 @@ public class InventorySlot : MonoBehaviour
         inventoryBehaviour = FindObjectOfType<InventoryBehaviour>();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if(InventoryText.inInventory)
+                DropItem();
+        }
+    }
+
     public void DropItem()
     {
         if (item == null) return;

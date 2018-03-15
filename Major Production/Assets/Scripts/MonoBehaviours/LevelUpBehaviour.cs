@@ -39,22 +39,22 @@ public class LevelUpBehaviour : MonoBehaviour
     {
         while (!statUpGraded)
         {
-            if (Input.GetAxis("DPad Horizontal") == -1)
+            if (Input.GetAxis("DPad Horizontal") == -1 || Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 UpgradeStatsProcess("PHealth");
             }
 
-            if (Input.GetAxis("DPad Horizontal") == 1)
+            if (Input.GetAxis("DPad Horizontal") == 1 || Input.GetKeyDown(KeyCode.RightArrow))
             {
                 UpgradeStatsProcess("PDamage");
             }
 
-            if (Input.GetAxis("DPad Vertical") == 1)
+            if (Input.GetAxis("DPad Vertical") == 1 || Input.GetKeyDown(KeyCode.UpArrow))
             {
                 UpgradeStatsProcess("PArmor");
             }
 
-            if (Input.GetAxis("DPad Vertical") == -1)
+            if (Input.GetAxis("DPad Vertical") == -1 || Input.GetKeyDown(KeyCode.DownArrow))
             {
                 UpgradeStatsProcess("PSpeed");
             }
@@ -68,7 +68,7 @@ public class LevelUpBehaviour : MonoBehaviour
     /// <param name="statName"></param>
     private void UpgradeStatsProcess(string statName)
     {
-        playerStat.stats.GetStat(statName).Value++;
+        playerStat.stats.GetStat(statName).Value += 10;
         ShowUI();
         statUpGraded = true;
     }

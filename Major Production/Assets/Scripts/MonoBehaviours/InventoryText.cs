@@ -13,7 +13,7 @@ public class InventoryText : MonoBehaviour
     public static Text WoodAmounttext;
 
     public static uint woodAmount, stoneAmount, metalAmount, goopAmount;
-
+    public static bool inInventory;
     private CharacterMovement characterMovement;
     private EventSystem eventSystem;
     private GameObject inputEvents;
@@ -28,6 +28,28 @@ public class InventoryText : MonoBehaviour
         characterMovement = FindObjectOfType<CharacterMovement>();
         eventSystem = FindObjectOfType<EventSystem>();
         inputEvents = GameObject.FindGameObjectWithTag("Input");
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (characterMovement.enabled)
+            {
+                if (Input.GetKeyDown(KeyCode.Escape)) return;
+                inInventory = true;
+                characterMovement.enabled = false;
+                inputEvents.gameObject.SetActive(false);
+                eventSystem.SetSelectedGameObject(GameObject.FindGameObjectWithTag("Wood"));
+            }
+            else
+            {
+                inInventory = false;
+                characterMovement.enabled = true;
+                inputEvents.gameObject.SetActive(true);
+                eventSystem.SetSelectedGameObject(null);
+            }
+        }
     }
 
     public void CycleThroughUI(object[] args)

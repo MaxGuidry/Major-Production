@@ -813,6 +813,20 @@ MonoBehaviour:
   rbs: []
   planet: {fileID: 11400000, guid: 0c0da09bcc5af5b499965df2e4c62dd1, type: 2}
   rbrs: []
+--- !u!64 &364860256
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 364860250}
+  m_Material: {fileID: 13400000, guid: b508feda5cc801f4dad83ae0e5f5b997, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 03a846bfbbdaf5d4d96ca52198f41768, type: 3}
 --- !u!1 &445402634
 GameObject:
   m_ObjectHideFlags: 0
@@ -1499,7 +1513,7 @@ GameObject:
   m_Component:
   - component: {fileID: 970420695}
   - component: {fileID: 970420696}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CameraPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2013,7 +2027,7 @@ GameObject:
   - component: {fileID: 1358629139}
   - component: {fileID: 1358629138}
   - component: {fileID: 1358629141}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -2470,6 +2484,14 @@ Prefab:
       value: 
       objectReference: {fileID: 11400000, guid: c0caac30b67d91b4195cd4e2d3564400,
         type: 2}
+    - target: {fileID: 1345527714582648, guid: e655f24238d25c34ea6d4c33f482cddd, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1440876229717566, guid: e655f24238d25c34ea6d4c33f482cddd, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 136058188168431356, guid: e655f24238d25c34ea6d4c33f482cddd, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: e655f24238d25c34ea6d4c33f482cddd, type: 2}
@@ -2512,6 +2534,10 @@ Prefab:
     - target: {fileID: 400002, guid: f761bb228fdb41d45a6de9bed3dab0b9, type: 3}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: f761bb228fdb41d45a6de9bed3dab0b9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f761bb228fdb41d45a6de9bed3dab0b9, type: 3}
@@ -2796,7 +2822,7 @@ Prefab:
     - target: {fileID: 224084979615100764, guid: 3e236b5d89777a045bddc11f8345d659,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 100.295654
+      value: 143.79742
       objectReference: {fileID: 0}
     - target: {fileID: 224084979615100764, guid: 3e236b5d89777a045bddc11f8345d659,
         type: 2}

@@ -56,18 +56,42 @@ public class PlanetBehaviour : MonoBehaviour
         //GET VERTS SORT AND FIX VELOCITY
         if (rb.GetComponent<CharacterMovement>() != null)
         {
-            var mc = GetComponentInChildren<MeshCollider>();
-            var verts = mc.sharedMesh.vertices.ToList();
+            //var mc = GetComponentInChildren<MeshCollider>();
+            //var verts = mc.sharedMesh.vertices.ToList();
 
-            //verts = verts.OrderBy(( Vector3 x,Vector3 y) => Vector3.Distance(rb.transform.position, x).CompareTo(Vector3.Distance(rb.transform.position,y)));
-            var newlist = verts.OrderBy(x => Vector3.Distance(rb.transform.position, x + planet.center)).ToList();
+            ////verts = verts.OrderBy(( Vector3 x,Vector3 y) => Vector3.Distance(rb.transform.position, x).CompareTo(Vector3.Distance(rb.transform.position,y)));
+            //var newlist = verts.OrderBy(x => Vector3.Distance(rb.transform.position, x + planet.center)).ToList();
 
-            var closestvert = newlist[0];
-            Debug.Log(closestvert + "|||||" + (closestvert + planet.center));
-            rb.transform.rotation =
-                Quaternion.FromToRotation(rb.transform.up, rb.transform.position - (closestvert + planet.center)) *
-                rb.transform.rotation;
-            rb.AddForce((((closestvert + planet.center) - rb.transform.position).normalized * planet.gravity) / .2f);
+            //var closestvert = newlist[0];
+            //Debug.Log(closestvert + "|||||" + (closestvert + planet.center));
+            //rb.transform.rotation =
+            //    Quaternion.FromToRotation(rb.transform.up, rb.transform.position - (closestvert + planet.center)) *
+            //    rb.transform.rotation;
+            //rb.AddForce((((closestvert + planet.center) - rb.transform.position).normalized * planet.gravity) / .2f);
+            
+            RaycastHit hit;
+            Physics.Raycast(rb.transform.position, -rb.transform.up, out hit, 1.5f,~LayerMask.GetMask("Player"));
+            //Debug.DrawLine(rb.transform.position,rb.transform.position + (thi));
+            if (!hit.transform)
+            {
+                rb.AddForce((((planet.center - rb.transform.position).normalized * planet.gravity) / .2f));
+            }
+            else if (hit.transform.GetComponent<PlanetBehaviour>() != null)
+            {
+                Physics.Raycast(rb.transform.position, -hit.normal, out hit, 1.5f, ~LayerMask.GetMask("Player"));
+                Debug.Log(hit.normal + "," +  rb.transform.up);
+                rb.AddForce((((planet.center - rb.transform.position).normalized * planet.gravity) / .2f)*.25f);
+                //rb.transform.rotation = Quaternion.FromToRotation(rb.transform.up, (hit.normal + (rb.transform.position - planet.center)).normalized ) *
+                 //                       rb.transform.rotation;
+                rb.AddForce((((-hit.normal).normalized * planet.gravity) / .2f)*.75f);
+            }
+            else
+            {
+                rb.transform.rotation = Quaternion.FromToRotation(rb.transform.up, rb.transform.position - planet.center) *
+                                        rb.transform.rotation;
+                rb.AddForce((((planet.center - rb.transform.position).normalized * planet.gravity) / .2f));
+            }
+
         }
         //var cent = mc.ClosestPoint(rb.gameObject.transform.position);
 
@@ -105,14 +129,14 @@ public class PlanetBehaviour : MonoBehaviour
         else
         {
             //ORIGINAL CODE:
-            rb.transform.rotation = Quaternion.FromToRotation(rb.transform.up, rb.transform.position - planet.center) *
-                                     rb.transform.rotation;
+           
             rb.AddForce(((planet.center - rb.transform.position).normalized * planet.gravity) / .2f);
-
+            rb.transform.rotation = Quaternion.FromToRotation(rb.transform.up, rb.transform.position - planet.center) *
+                                    rb.transform.rotation;
             //END ORIGINAL CODE.
 
         }
-
+        
 
         //float y = rb.transform.rotation.eulerAngles.y;
         //rb.transform.up = (rb.gameObject.transform.position - planet.center).normalized;

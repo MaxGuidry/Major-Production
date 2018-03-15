@@ -74,11 +74,22 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
         {
             affectedstat.Value -= 100;
             levelStat.Value++;
-            StartCoroutine(SpawnEffect());
             LevelUpEvent.Raise(this);
         }
     }
+    
+    /// <summary>
+    ///     Start Coroutine 
+    /// </summary>
+    public void StartSpawnEffect()
+    {
+        StartCoroutine(SpawnEffect());
+    }
 
+    /// <summary>
+    ///     Instatiates LevelUpEffect 
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator SpawnEffect()
     {
         var done = false;

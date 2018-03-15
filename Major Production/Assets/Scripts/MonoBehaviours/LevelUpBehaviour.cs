@@ -6,10 +6,12 @@ public class LevelUpBehaviour : MonoBehaviour
 {
     public GameObject panel;
     private PlayerStatBehaviour playerStat;
+    private bool statUpGraded;
 
     void Start()
     {
         playerStat = FindObjectOfType<PlayerStatBehaviour>();
+        statUpGraded = false;
     }
 
     /// <summary>
@@ -25,6 +27,7 @@ public class LevelUpBehaviour : MonoBehaviour
     /// </summary>
     public void StartUpgrade()
     {
+        statUpGraded = false;
         StartCoroutine(UpgradeStat());
     }
 
@@ -34,37 +37,39 @@ public class LevelUpBehaviour : MonoBehaviour
     /// <returns></returns>
     private IEnumerator UpgradeStat()
     {
-        var StatUpGraded = false;
-        while (!StatUpGraded)
+        while (!statUpGraded)
         {
             if (Input.GetAxis("DPad Horizontal") == -1)
             {
-                playerStat.stats.GetStat("PHealth").Value++;
-                ShowUI();
-                StatUpGraded = true;
+                UpgradeStatsProcess("PHealth");
             }
 
             if (Input.GetAxis("DPad Horizontal") == 1)
             {
-                playerStat.stats.GetStat("PDamage").Value++;
-                ShowUI();
-                StatUpGraded = true;
+                UpgradeStatsProcess("PDamage");
             }
 
             if (Input.GetAxis("DPad Vertical") == 1)
             {
-                playerStat.stats.GetStat("PArmor").Value++;
-                ShowUI();
-                StatUpGraded = true;
+                UpgradeStatsProcess("PArmor");
             }
 
             if (Input.GetAxis("DPad Vertical") == -1)
             {
-                playerStat.stats.GetStat("PSpeed").Value++;
-                ShowUI();
-                StatUpGraded = true;
+                UpgradeStatsProcess("PSpeed");
             }
             yield return null;
         }
+    }
+
+    /// <summary>
+    ///     Used to remove redundancy
+    /// </summary>
+    /// <param name="statName"></param>
+    private void UpgradeStatsProcess(string statName)
+    {
+        playerStat.stats.GetStat(statName).Value++;
+        ShowUI();
+        statUpGraded = true;
     }
 }

@@ -386,8 +386,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38de8316ac68e9e4999fee6a5d5d77db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: c0caac30b67d91b4195cd4e2d3564400, type: 2}
+  LevelUpEffect: {fileID: 1312290303348374, guid: b332a17d234c6c743bfe90b675f7dbdc,
+    type: 2}
   LevelUpEvent: {fileID: 11400000, guid: d6803b8f86c9da04cbdfd871f239adc6, type: 2}
+  stats: {fileID: 11400000, guid: c0caac30b67d91b4195cd4e2d3564400, type: 2}
 --- !u!124 &124278663586369990
 Behaviour:
   m_ObjectHideFlags: 1

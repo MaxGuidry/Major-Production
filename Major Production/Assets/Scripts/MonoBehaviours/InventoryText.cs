@@ -35,19 +35,22 @@ public class InventoryText : MonoBehaviour
         if (args.Length < 2)
             return;
 
-        if (args[1] as string != "Submit")
-            return;
-        if (characterMovement.enabled)
+        if (args[1] as string == "Submit" || args[1] as string == "B")
         {
-            characterMovement.enabled = false;
-            inputEvents.gameObject.SetActive(false);
-            eventSystem.SetSelectedGameObject(GameObject.FindGameObjectWithTag("Wood"));
-        }
-        else
-        {
-            characterMovement.enabled = true;
-            inputEvents.gameObject.SetActive(true);
-            eventSystem.SetSelectedGameObject(null);
+
+            if (characterMovement.enabled)
+            {
+                if (args[1] as string == "B") return;
+                characterMovement.enabled = false;
+                inputEvents.gameObject.SetActive(false);
+                eventSystem.SetSelectedGameObject(GameObject.FindGameObjectWithTag("Wood"));
+            }
+            else
+            {
+                characterMovement.enabled = true;
+                inputEvents.gameObject.SetActive(true);
+                eventSystem.SetSelectedGameObject(null);
+            }
         }
     }
 

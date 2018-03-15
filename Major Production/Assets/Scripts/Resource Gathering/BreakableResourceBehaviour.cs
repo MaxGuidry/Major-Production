@@ -17,6 +17,8 @@ public class BreakableResourceBehaviour : MonoBehaviour,IDamageable
 
     public void SpawnResources()
     {
+        if (hits > maxHits)
+            return;
         
         int r = Random.Range(1, 2);
         for (int i = 0; i < r; i++)
@@ -37,17 +39,18 @@ public class BreakableResourceBehaviour : MonoBehaviour,IDamageable
     public IEnumerator DestroyBreakable()
     {
         var peices =  this.gameObject.transform.GetComponentsInChildren<Transform>().ToList();
-        Rigidbody rb2 = new Rigidbody();
         foreach (var peice in peices)
         {
             var rb = peice.gameObject.AddComponent<Rigidbody>();
             rb.useGravity = false;
-            rb2 = rb;
+            rb.AddExplosionForce(200, rb.transform.position, 7);
+            rb.Sleep();
         }
 
         
+       
         
-        rb2.AddExplosionForce(20,this.transform.position,3);
+
         yield return new WaitForSeconds(2);
         ItemObjectPooler.s_instance.Destroy(this.gameObject);
 

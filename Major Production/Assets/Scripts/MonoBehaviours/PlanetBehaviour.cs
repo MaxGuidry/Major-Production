@@ -49,6 +49,12 @@ public class PlanetBehaviour : MonoBehaviour
             rbrs.Add(rb);
             return;
         }
+        else if (rb.IsSleeping())
+        {
+            rbrs.Add(rb);
+            return;
+
+        }
 
 
 

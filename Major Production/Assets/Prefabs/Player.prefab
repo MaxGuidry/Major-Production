@@ -24,10 +24,12 @@ GameObject:
   - component: {fileID: 114090165235389102}
   - component: {fileID: 114933455162699036}
   - component: {fileID: 114724766372456566}
+  - component: {fileID: 114103413659911850}
   - component: {fileID: 54116383075150526}
   - component: {fileID: 65278166895470962}
   - component: {fileID: 114339253733390348}
   - component: {fileID: 114417275574132102}
+  - component: {fileID: 114541263411276986}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -237,6 +239,18 @@ MonoBehaviour:
   RunSpeed: 12
   WalkSpeed: 5
   BreakObject: {fileID: 0}
+--- !u!114 &114103413659911850
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1224444865195266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 187cea5d76ae70445bf7f155ae54bc52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 0}
 --- !u!114 &114339253733390348
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -308,6 +322,46 @@ MonoBehaviour:
   menu: {fileID: 0}
   ButtonPrefab: {fileID: 0}
   KeyOptions: {fileID: 11400000, guid: e794c81abb62df548af3adfee9246f31, type: 2}
+--- !u!114 &114541263411276986
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1224444865195266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a26bc4a13ec074b4080f4cee664c10be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: d6803b8f86c9da04cbdfd871f239adc6, type: 2}
+  Sender: {fileID: 0}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114103413659911850}
+        m_MethodName: ShowUI
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameEventArgsResponse, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &114724766372456566
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -333,6 +387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: c0caac30b67d91b4195cd4e2d3564400, type: 2}
+  LevelUpEvent: {fileID: 11400000, guid: d6803b8f86c9da04cbdfd871f239adc6, type: 2}
 --- !u!124 &124278663586369990
 Behaviour:
   m_ObjectHideFlags: 1

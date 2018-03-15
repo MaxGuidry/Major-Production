@@ -3,7 +3,7 @@
 public class PlayerStatBehaviour : MonoBehaviour, IDamageable
 {
     public Stats stats;
-
+    public GameEventArgs LevelUpEvent;
     /// <summary>
     ///     Entity Takes Damage
     ///     TODO: calculate armor rating using standard rolling system
@@ -71,6 +71,7 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
         {
             affectedstat.Value -= 100;
             levelStat.Value++;
+            LevelUpEvent.Raise(this);
         }
     }
 }

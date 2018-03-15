@@ -88,11 +88,12 @@ public class InventoryBehaviour : MonoBehaviour, IStorageable
             return;
         if (args[1] as string != "Submit")
             return;
-        objectList.Clear();
         foreach (var obj in objectList.Values)
         {
             RemoveAllFromInventory(obj);
         }
+        objectList.Clear();
+        
     }
 
     public void RemoveAllFromInventory(GameObject obj)

@@ -13,6 +13,7 @@ public class CharacterMovement : MonoBehaviour
     public float RunSpeed = 2;
     private Vector3 velocity = Vector3.zero;
     private bool grounded = false;
+    private bool jumping = false;
     public float WalkSpeed = 1;
     [SerializeField] private GameEventArgsObject BreakObject;
     private void Awake()
@@ -114,14 +115,16 @@ public class CharacterMovement : MonoBehaviour
         // var names = Input.GetJoystickNames();
         // if (names.Contains("Controller (XBOX One For Windows)"))
         // {
-
+        if (!grounded)
+            return;
         if (args[1] as string == "A")
         {
             if (!grounded)
                 return;
-            rb.AddForce(this.transform.up * 25, ForceMode.Impulse);
             grounded = false;
 
+            rb.AddForce(this.transform.up * 25, ForceMode.Impulse);
+            jumping = true;
         }
 
 
@@ -136,9 +139,24 @@ public class CharacterMovement : MonoBehaviour
         {
             //needs check for if the object is below the player relative to the players up axis.
             grounded = true;
+            jumping = false;
         }
     }
 
+    void OnCollisionStay(Collision other)
+    {
+        
+        if (other.gameObject.GetComponent<Collider>())
+        {
+           //needs check for if the object is below the player relative to the players up axis.
+            if (!jumping)
+            {
+                grounded = true;
+                //jumping = false;
+
+            }
+        }
+    }
     public void HitObject(object[] args)
     {
         if (args.Length < 2)

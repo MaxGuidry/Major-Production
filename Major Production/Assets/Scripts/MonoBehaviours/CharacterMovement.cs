@@ -21,13 +21,15 @@ public class CharacterMovement : MonoBehaviour
 
     }
 
+    public Animator anim;
 
 
     //private Dictionary<string, float> axisValues = new Dictionary<string, float>();
 
     private void Start()
     {
-
+        if (!anim)
+            anim = GetComponent<Animator>();
         //foreach (var button in f)
         //{
         //    buttonevents.Add(button.name, button);
@@ -90,7 +92,7 @@ public class CharacterMovement : MonoBehaviour
 
 
         transform.position += velocity * Time.deltaTime;
-
+        anim.SetFloat("Velocity", velocity.magnitude);
         //Debug.Log(InputManager.Controller());
         //this.transform.rotation = Quaternion.Slerp(q, this.transform.rotation, .2f);
         //this.transform.LookAt(this.transform.position + acceleration.normalized);
@@ -142,8 +144,38 @@ public class CharacterMovement : MonoBehaviour
         if (args.Length < 2)
             return;
         if (args[1] as string == "X")
-            BreakObject.ObjRaise(this);
+        {
+            anim.SetTrigger("AttackBasic");
+            //BreakObject.ObjRaise(this);
+        }
+    }
 
+    public void Raycastattack()
+    {
+        RaycastHit[] hits;
+        
+        hits = Physics.RaycastAll(this.transform.position, this.transform.forward, 6, ~LayerMask.GetMask("Player"));
+        GameObject breakableObj = null;
+        foreach (var rayhit in hits)
+        {
+            var toplevel = rayhit.transform;
+            while (toplevel.parent != null)
+            {
+                toplevel = toplevel.parent;
+            }
+            if (toplevel.transform.GetComponent<BreakableResourceBehaviour>()== null)
+                continue;
+            breakableObj = toplevel.gameObject;
+        }
+
+
+        if (!breakableObj)
+            return;
+        var breakable = breakableObj.transform.GetComponent<BreakableResourceBehaviour>();
+        if(breakable)
+        {
+           breakable.SpawnResources(); 
+        }
     }
 
 }

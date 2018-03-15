@@ -68,9 +68,9 @@ public class PlanetBehaviour : MonoBehaviour
             //    Quaternion.FromToRotation(rb.transform.up, rb.transform.position - (closestvert + planet.center)) *
             //    rb.transform.rotation;
             //rb.AddForce((((closestvert + planet.center) - rb.transform.position).normalized * planet.gravity) / .2f);
-            
+
             RaycastHit hit;
-            Physics.Raycast(rb.transform.position, -rb.transform.up, out hit, 1.5f,~LayerMask.GetMask("Player"));
+            Physics.Raycast(rb.transform.position, -rb.transform.up, out hit, 1.5f, ~LayerMask.GetMask("Player"));
             //Debug.DrawLine(rb.transform.position,rb.transform.position + (thi));
             if (!hit.transform)
             {
@@ -78,12 +78,13 @@ public class PlanetBehaviour : MonoBehaviour
             }
             else if (hit.transform.GetComponent<PlanetBehaviour>() != null)
             {
-                Physics.Raycast(rb.transform.position, -hit.normal, out hit, 1.5f, ~LayerMask.GetMask("Player"));
-                Debug.Log(hit.normal + "," +  rb.transform.up);
-                rb.AddForce((((planet.center - rb.transform.position).normalized * planet.gravity) / .2f)*.25f);
+               // Physics.Raycast(rb.transform.position, -hit.normal, out hit, 1.5f, ~LayerMask.GetMask("Player"));
+
+                //Debug.Log(hit.normal + "," +  rb.transform.up);
+                rb.AddForce((((planet.center - rb.transform.position).normalized * planet.gravity) / .2f) * .05f);
                 //rb.transform.rotation = Quaternion.FromToRotation(rb.transform.up, (hit.normal + (rb.transform.position - planet.center)).normalized ) *
-                 //                       rb.transform.rotation;
-                rb.AddForce((((-hit.normal).normalized * planet.gravity) / .2f)*.75f);
+                //                       rb.transform.rotation;
+                rb.AddForce((((-hit.normal).normalized * planet.gravity) / .2f) * .2f);
             }
             else
             {
@@ -129,14 +130,14 @@ public class PlanetBehaviour : MonoBehaviour
         else
         {
             //ORIGINAL CODE:
-           
+
             rb.AddForce(((planet.center - rb.transform.position).normalized * planet.gravity) / .2f);
-            rb.transform.rotation = Quaternion.FromToRotation(rb.transform.up, rb.transform.position - planet.center) *
-                                    rb.transform.rotation;
+
             //END ORIGINAL CODE.
 
         }
-        
+        rb.transform.rotation = Quaternion.FromToRotation(rb.transform.up, rb.transform.position - planet.center) *
+                                rb.transform.rotation;
 
         //float y = rb.transform.rotation.eulerAngles.y;
         //rb.transform.up = (rb.gameObject.transform.position - planet.center).normalized;

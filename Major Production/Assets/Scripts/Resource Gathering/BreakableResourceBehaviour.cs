@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BreakableResourceBehaviour : MonoBehaviour,IDamageable
@@ -8,17 +9,16 @@ public class BreakableResourceBehaviour : MonoBehaviour,IDamageable
 
     public GameObject Resource;
     // Use this for initialization
-    public int hits;
-
+    private int hits;
+    public int maxHits;
     void Start()
     {
     }
 
-    public void SpawnResources(object[] args)
+    public void SpawnResources()
     {
-        if ((args[0]) as CharacterMovement == null)
-            return;
-        int r = Random.Range(1, 4);
+        
+        int r = Random.Range(1, 2);
         for (int i = 0; i < r; i++)
         {
             var obj = ItemObjectPooler.s_instance.Create(Resource, this.transform.position + new Vector3(Random.Range(-3, 3), Random.Range(1, 3), Random.Range(-3, 3)), Quaternion.identity);
@@ -28,8 +28,30 @@ public class BreakableResourceBehaviour : MonoBehaviour,IDamageable
                 return;
             rb.AddForce((obj.transform.position - this.transform.position) + new Vector3(0, 1, 0));
         }
+
+        hits++;
+        if(hits > maxHits)
+            StartCoroutine(DestroyBreakable());
     }
 
+    public IEnumerator DestroyBreakable()
+    {
+        var peices =  this.gameObject.transform.GetComponentsInChildren<Transform>().ToList();
+        Rigidbody rb2 = new Rigidbody();
+        foreach (var peice in peices)
+        {
+            var rb = peice.gameObject.AddComponent<Rigidbody>();
+            rb.useGravity = false;
+            rb2 = rb;
+        }
+
+        
+        
+        rb2.AddExplosionForce(20,this.transform.position,3);
+        yield return new WaitForSeconds(2);
+        ItemObjectPooler.s_instance.Destroy(this.gameObject);
+
+    }
     public void TakeDamage(int damage)
     {
         throw new System.NotImplementedException();

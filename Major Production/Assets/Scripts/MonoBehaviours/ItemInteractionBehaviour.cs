@@ -11,7 +11,6 @@ public class ItemInteractionBehaviour : MonoBehaviour
     public float SpoilerTime;
     public Item Item;
     public GameEventArgs ItemPickedUp;
-
     private void Update()
     {
         var timer = 0f;
@@ -26,7 +25,7 @@ public class ItemInteractionBehaviour : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            ItemPickedUp.Raise(Item);
+            ItemPickedUp.Raise(Item, this.gameObject);
             var ib = other.gameObject.GetComponent<IStorageable>();
             switch (Item.ItemType)
             {

@@ -86,7 +86,7 @@ public class InventoryBehaviour : MonoBehaviour, IStorageable
     {
         if (args.Length < 2)
             return;
-        if (args[1] as string != "Submit")
+        if (args[1] as string != "Right Stick Button")
             return;
         foreach (var obj in objectList.Values)
         {

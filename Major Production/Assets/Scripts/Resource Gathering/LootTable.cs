@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu()]
 public class LootTable : ScriptableObject
 {
     public List<GameObject> items = new List<GameObject>();

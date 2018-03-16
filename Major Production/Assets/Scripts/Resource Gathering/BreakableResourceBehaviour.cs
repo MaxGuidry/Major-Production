@@ -7,7 +7,7 @@ public class BreakableResourceBehaviour : MonoBehaviour,IDamageable
 {
 
 
-    public GameObject Resource;
+    public LootTable Resources;
     // Use this for initialization
     private int hits;
     public int maxHits;
@@ -23,14 +23,22 @@ public class BreakableResourceBehaviour : MonoBehaviour,IDamageable
         int r = Random.Range(1, 2);
         for (int i = 0; i < r; i++)
         {
-            var obj = ItemObjectPooler.s_instance.Create(Resource, this.transform.position + new Vector3(Random.Range(-3, 3), Random.Range(1, 3), Random.Range(-3, 3)), Quaternion.identity);
-            obj.SetActive(true);
-            var rb = obj.GetComponent<Rigidbody>();
-            if (!rb)
-                return;
-            rb.AddForce((obj.transform.position - this.transform.position) + new Vector3(0, 1, 0));
+            foreach (var resource in Resources.items)
+            {
+                var obj = ItemObjectPooler.s_instance.Create(resource, this.transform.position + new Vector3(Random.Range(-3, 3), Random.Range(1, 3), Random.Range(-3, 3)), Quaternion.identity);
+                obj.SetActive(true);
+                var rb = obj.GetComponent<Rigidbody>();
+                if (!rb)
+                    return;
+                rb.AddForce((obj.transform.position - this.transform.position) + new Vector3(0, 1, 0));
+            }
+            //var obj = ItemObjectPooler.s_instance.Create(Resources, this.transform.position + new Vector3(Random.Range(-3, 3), Random.Range(1, 3), Random.Range(-3, 3)), Quaternion.identity);
+            //obj.SetActive(true);
+            //var rb = obj.GetComponent<Rigidbody>();
+            //if (!rb)
+            //    return;
+            //rb.AddForce((obj.transform.position - this.transform.position) + new Vector3(0, 1, 0));
         }
-
         hits++;
         if(hits > maxHits)
             StartCoroutine(DestroyBreakable());
@@ -46,10 +54,6 @@ public class BreakableResourceBehaviour : MonoBehaviour,IDamageable
             rb.AddExplosionForce(200, rb.transform.position, 7);
             rb.Sleep();
         }
-
-        
-       
-        
 
         yield return new WaitForSeconds(2);
         ItemObjectPooler.s_instance.Destroy(this.gameObject);

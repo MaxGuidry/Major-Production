@@ -93,7 +93,7 @@ public class CharacterMovement : MonoBehaviour
 
 
         transform.position += velocity * Time.deltaTime;
-        anim.SetFloat("Velocity", velocity.magnitude);
+        anim.SetFloat("Velocity", velocity.magnitude * Mathf.Sign(Vector3.Dot(this.transform.forward,velocity.normalized)));
         //Debug.Log(InputManager.Controller());
         //this.transform.rotation = Quaternion.Slerp(q, this.transform.rotation, .2f);
         //this.transform.LookAt(this.transform.position + acceleration.normalized);

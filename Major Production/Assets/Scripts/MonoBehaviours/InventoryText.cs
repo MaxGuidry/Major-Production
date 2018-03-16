@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class InventoryText : MonoBehaviour
 {
+    public GameObject SelectionObject;
     public static Text GoopAmounttext;
     public static Text MetalAmounttext;
     public static Text StoneAmounttext;
@@ -28,6 +29,7 @@ public class InventoryText : MonoBehaviour
         characterMovement = FindObjectOfType<CharacterMovement>();
         eventSystem = FindObjectOfType<EventSystem>();
         inputEvents = GameObject.FindGameObjectWithTag("Input");
+        SelectionObject.SetActive(false);
     }
 
     private void Update()
@@ -59,16 +61,18 @@ public class InventoryText : MonoBehaviour
 
         if (args[1] as string == "Submit" || args[1] as string == "B")
         {
-
             if (characterMovement.enabled)
             {
                 if (args[1] as string == "B") return;
+                SelectionObject.SetActive(true);
+                SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
                 characterMovement.enabled = false;
                 inputEvents.gameObject.SetActive(false);
                 eventSystem.SetSelectedGameObject(GameObject.FindGameObjectWithTag("Wood"));
             }
             else
             {
+                SelectionObject.SetActive(false);
                 characterMovement.enabled = true;
                 inputEvents.gameObject.SetActive(true);
                 eventSystem.SetSelectedGameObject(null);

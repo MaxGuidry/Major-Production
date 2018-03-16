@@ -10,7 +10,7 @@ public class InventoryBehaviour : MonoBehaviour, IStorageable
     [Space] public Inventory inventory;
     public Dictionary<string, GameObject> objectList;
     [Header("For Viewing Purposes")] public List<Item> ActiveInventory;
-    public Vector3 dropPosition;
+    public Transform dropPosition;
     private void Start()
     {
         objectList = new Dictionary<string, GameObject>();
@@ -113,7 +113,7 @@ public class InventoryBehaviour : MonoBehaviour, IStorageable
     private void CheckForGameObject(GameObject obj)
     {
         var go = ItemObjectPooler.s_instance.CreateSingle(obj,
-            gameObject.transform.position + new Vector3(Random.Range(2, 4), 0, Random.Range(2, 4)),
+            dropPosition.position,
             Quaternion.identity);
         go.SetActive(true);
     }

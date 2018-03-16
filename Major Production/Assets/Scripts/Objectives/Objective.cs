@@ -55,6 +55,7 @@ public class Objective : ScriptableObject
     public int CurrentAmount
     {
         get { return _currentAmount; }
+        set { _currentAmount = value; }
     }
 
     public int RequiredAmount

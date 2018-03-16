@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class GatherObjectiveBehaviour : ObjectiveBehaviour
@@ -33,8 +34,15 @@ public class GatherObjectiveBehaviour : ObjectiveBehaviour
         typer.TypeSpeed = 0.1f;
         typer.path = "Assets/Resources/Dialogue/" + typer.ChooseFile + ".txt";
         StartCoroutine(typer.AutoType());
+        StartCoroutine(Restart());
     }
 
+
+    private IEnumerator Restart()
+    {
+        yield return new WaitForSeconds(3);
+        GameManagerBehaviour.RestartGame();
+    }
     /// <summary>
     ///     Not important for now
     /// </summary>

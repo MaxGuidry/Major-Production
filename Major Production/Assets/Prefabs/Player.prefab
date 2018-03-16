@@ -239,6 +239,7 @@ MonoBehaviour:
   RunSpeed: 12
   WalkSpeed: 5
   BreakObject: {fileID: 0}
+  anim: {fileID: 0}
 --- !u!114 &114103413659911850
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -306,6 +307,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: a5bb3f8321b029b45858daced33815ff, type: 2}
+        m_MethodName: RestartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114486914742647440
@@ -351,6 +363,17 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 114103413659911850}
         m_MethodName: StartUpgrade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 114933455162699036}
+        m_MethodName: StartSpawnEffect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

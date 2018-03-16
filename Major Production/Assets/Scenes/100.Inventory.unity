@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.20486882, g: 0.39460626, b: 0.50774884, a: 1}
+  m_IndirectSpecularColor: {r: Infinity, g: Infinity, b: NaN, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -120,10 +120,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114541263411276986, guid: 19e958d984c938645a9ef0aa636b09cb,
+    - target: {fileID: 114417275574132102, guid: 19e958d984c938645a9ef0aa636b09cb,
         type: 2}
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4346267240763632, guid: 19e958d984c938645a9ef0aa636b09cb, type: 2}
       propertyPath: m_LocalPosition.x
@@ -167,30 +167,31 @@ Prefab:
       propertyPath: panel
       value: 
       objectReference: {fileID: 966895116}
-    - target: {fileID: 114541263411276986, guid: 19e958d984c938645a9ef0aa636b09cb,
+    - target: {fileID: 114417275574132102, guid: 19e958d984c938645a9ef0aa636b09cb,
         type: 2}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: a5bb3f8321b029b45858daced33815ff,
+        type: 2}
+    - target: {fileID: 114417275574132102, guid: 19e958d984c938645a9ef0aa636b09cb,
+        type: 2}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: RestartGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 114417275574132102, guid: 19e958d984c938645a9ef0aa636b09cb,
+        type: 2}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114541263411276986, guid: 19e958d984c938645a9ef0aa636b09cb,
+    - target: {fileID: 114417275574132102, guid: 19e958d984c938645a9ef0aa636b09cb,
         type: 2}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114541263411276986, guid: 19e958d984c938645a9ef0aa636b09cb,
-        type: 2}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 405508291}
-    - target: {fileID: 114541263411276986, guid: 19e958d984c938645a9ef0aa636b09cb,
-        type: 2}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: StartSpawnEffect
-      objectReference: {fileID: 0}
-    - target: {fileID: 114541263411276986, guid: 19e958d984c938645a9ef0aa636b09cb,
-        type: 2}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114417275574132102, guid: 19e958d984c938645a9ef0aa636b09cb,
+        type: 2}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 19e958d984c938645a9ef0aa636b09cb, type: 2}
@@ -413,12 +414,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 03341cfb63087e84ca208056ed138ab2, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &405508291 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114933455162699036, guid: 19e958d984c938645a9ef0aa636b09cb,
-    type: 2}
-  m_PrefabInternal: {fileID: 41656839}
-  m_Script: {fileID: 11500000, guid: 38de8316ac68e9e4999fee6a5d5d77db, type: 3}
 --- !u!114 &507745480 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114131571581304744, guid: 3e236b5d89777a045bddc11f8345d659,
@@ -855,12 +850,12 @@ Prefab:
     - target: {fileID: 224084979615100764, guid: 3e236b5d89777a045bddc11f8345d659,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 153.9823
+      value: 131.36832
       objectReference: {fileID: 0}
     - target: {fileID: 224084979615100764, guid: 3e236b5d89777a045bddc11f8345d659,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -71.61153
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e236b5d89777a045bddc11f8345d659, type: 2}

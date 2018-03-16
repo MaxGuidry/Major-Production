@@ -13,7 +13,11 @@ public class ObjectiveBehaviour : MonoBehaviour
     {
         //null should be used to check validity of the token
         if (PlayerObjectives == null) return;
+
+        PlayerObjectives.ForEach(objective => objective.CurrentAmount = 0);
+
         PlayerObjectives.ForEach(objective => objective.ProgressQuest("initialize"));
+        PlayerObjectives.ForEach(objective => objective.Status = ObjectiveStatus.Inactive);
         //set the current objective
         CurrentObjective = PlayerObjectives[0];
         //activate the currentobjective

@@ -7,6 +7,12 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
     public GameEventArgs LevelUpEvent;
     public Stats stats;
 
+    private void Start()
+    {
+        stats._stats.ForEach(stat => stat.Value = 0);
+        stats.GetStat("PHealth").Value = 100;
+    }
+
     /// <summary>
     ///     Entity Takes Damage
     ///     TODO: calculate armor rating using standard rolling system

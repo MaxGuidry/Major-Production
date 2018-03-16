@@ -24,4 +24,9 @@ public class ItemObjectSpawner : MonoBehaviour
         _spawnPos = Random.onUnitSphere * (150 / 2 + 150 * 0.5f) + ObjectToSpawnOn.transform.position;
         ItemObjectPooler.s_instance.Create(_obj, _spawnPos, Quaternion.identity);
     }
+
+    void OnCollisionEnter(Collision other)
+    {
+        other.transform.position = Random.onUnitSphere * (150 / 2 + 150 * 0.5f) + ObjectToSpawnOn.transform.position;
+    }
 }

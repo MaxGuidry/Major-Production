@@ -627,7 +627,7 @@ GameObject:
   - component: {fileID: 907331790}
   - component: {fileID: 907331789}
   m_Layer: 5
-  m_Name: StarGameButton
+  m_Name: StartGameButton
   m_TagString: StartButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -647,8 +647,8 @@ RectTransform:
   m_Father: {fileID: 1286661949}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.25971222, y: 0.39339018}
-  m_AnchorMax: {x: 0.3796163, y: 0.6066098}
+  m_AnchorMin: {x: 0.24471761, y: 0.39339018}
+  m_AnchorMax: {x: 0.3796109, y: 0.60082436}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1854,7 +1854,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: StartGame
+  m_Text: Start Local Game
 --- !u!222 &1562780385
 CanvasRenderer:
   m_ObjectHideFlags: 0

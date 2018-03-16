@@ -39,7 +39,7 @@ public class FixCamera : MonoBehaviour
         
         //if(dp!=lastDot)
            // Debug.Log(dp + ", " + lastDot);
-        if (dp < .90f)
+        if (dp < .875f)
         {
             //if (lastDot >= dp)
             //{

@@ -12,6 +12,7 @@ public enum ItemType
 }
 namespace ScriptableObjects
 {
+    
     [CreateAssetMenu(fileName = "Item", menuName = "Item")]
     public class Item : ScriptableObject
     {

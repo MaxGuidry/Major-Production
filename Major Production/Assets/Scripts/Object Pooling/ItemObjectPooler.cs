@@ -7,19 +7,22 @@ public class ItemObjectPooler : MonoBehaviour
 
     private int activeCount;
     public int PooledAmount;
-    public GameObject PooledObject;
+    public List<GameObject> PooledObject;
     public List<GameObject> PooledObjects;
 
     private void Awake()
     {
         s_instance = this;
         PooledObjects = new List<GameObject>();
-        for (var i = 0; i <= PooledAmount; i++)
+        foreach (var po in PooledObject)
         {
-            var obj = Instantiate(PooledObject);
-            obj.SetActive(false);
-            obj.transform.SetParent(gameObject.transform);
-            PooledObjects.Add(obj);
+            for (var i = 0; i <= PooledAmount; i++)
+            {
+                var obj = Instantiate(po) as GameObject;
+                obj.SetActive(false);
+                obj.transform.SetParent(gameObject.transform);
+                PooledObjects.Add(obj);
+            }
         }
     }
 

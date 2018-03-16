@@ -6,10 +6,20 @@ public class LevelUpBehaviour : MonoBehaviour
 {
     public GameObject panel;
     private PlayerStatBehaviour playerStat;
-
+    private int UpgradePoint;
     void Start()
     {
         playerStat = FindObjectOfType<PlayerStatBehaviour>();
+    }
+
+    void Update()
+    {
+        if (UpgradePoint > 0)
+            panel.SetActive(true);
+        else
+        {
+            panel.SetActive(false);
+        }
     }
 
     /// <summary>
@@ -25,7 +35,7 @@ public class LevelUpBehaviour : MonoBehaviour
     /// </summary>
     public void StartUpgrade()
     {
-
+        UpgradePoint++;
         StartCoroutine(UpgradeStat());
     }
 
@@ -81,6 +91,7 @@ public class LevelUpBehaviour : MonoBehaviour
                     {
                         doubleClicked = true;
                         UpgradeStatsProcess("PHealth");
+                        UpgradePoint--;
                     }
                     else if (haxis != 0 || vaxis != 0)
                     {
@@ -94,6 +105,7 @@ public class LevelUpBehaviour : MonoBehaviour
                     {
                         doubleClicked = true;
                         UpgradeStatsProcess("PDamage");
+                        UpgradePoint--;
                     }
                     else if (haxis != 0 || vaxis != 0)
                     {
@@ -107,6 +119,7 @@ public class LevelUpBehaviour : MonoBehaviour
                     {
                         doubleClicked = true;
                         UpgradeStatsProcess("PArmor");
+                        UpgradePoint--;
                     }
                     else if (haxis != 0 || vaxis != 0)
                     {
@@ -120,6 +133,7 @@ public class LevelUpBehaviour : MonoBehaviour
                     {
                         doubleClicked = true;
                         UpgradeStatsProcess("PSpeed");
+                        UpgradePoint--;
                     }
                     else if (haxis != 0 || vaxis != 0)
                     {
@@ -139,6 +153,5 @@ public class LevelUpBehaviour : MonoBehaviour
     private void UpgradeStatsProcess(string statName)
     {
         playerStat.stats.GetStat(statName).Value += 10;
-        ShowUI();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ScriptableObjects;
 using UnityEngine;
@@ -29,9 +30,11 @@ public class QuestReward
 [CreateAssetMenu]
 public class Objective : ScriptableObject
 {
+    private List<int> pickedUp = new List<int>();
+
     [SerializeField] private string _title;
 
-    [Multiline] [SerializeField] private  string _description;
+    [Multiline] [SerializeField] private string _description;
 
     private int _currentAmount;
 
@@ -77,7 +80,7 @@ public class Objective : ScriptableObject
 
         Debug.Log("Quest Progress: " + _title + " " + args[0]);
 
-        var valids = new object[] {_requiredItem, "initialize", "start"};
+        var valids = new object[] { _requiredItem, "initialize", "start" };
 
         if (!valids.Contains(args[0]))
             return;
@@ -91,7 +94,11 @@ public class Objective : ScriptableObject
                 ChangeState(ObjectiveStatus.Active);
                 break;
             case ObjectiveStatus.Active:
+                var go = args[1] as GameObject;
+                if (pickedUp.Contains(go.GetInstanceID()))
+                    break;
                 _currentAmount++;
+                pickedUp.Add(go.GetInstanceID());
                 ChangeState(AmountCheck() ? ObjectiveStatus.Complete : ObjectiveStatus.Active);
                 break;
             case ObjectiveStatus.Complete:

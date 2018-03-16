@@ -11,20 +11,20 @@ public class FixCamera : MonoBehaviour
 
     public Transform follow, pivotX, pivotY;
 
-    private float lastDot;
+    //private float lastDot;
     // Use this for initialization
     void Start()
     {
         character = follow.GetComponentInParent<CharacterMovement>();
-        lastDot = Vector3.Dot(pivotX.up, follow.up);
+        //lastDot = Vector3.Dot(pivotX.up, follow.up);
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
-        var originY = pivotY.rotation;
+        
         this.transform.position = follow.transform.position;
-        this.transform.rotation = follow.transform.rotation;
+        this.transform.rotation = Quaternion.FromToRotation(this.transform.up,follow.transform.up) * this.transform.rotation;// follow.transform.rotation;
 
         Quaternion origin = pivotX.rotation;
         Sensitivity = character.Sensitivity;
@@ -35,29 +35,30 @@ public class FixCamera : MonoBehaviour
                                                                                      * pivotX.right.y,
                                  Mathf.Sin(thetaY / 2f) * pivotX.right.z, Mathf.Cos(thetaY / 2f)) * pivotX.rotation;
 
-        var dp = Vector3.Dot(pivotX.up, follow.up);
-        if(dp!=lastDot)
-            Debug.Log(dp + ", " + lastDot);
+        var dp = Vector3.Dot(pivotX.up, follow.up); //(int)(Vector3.Dot(pivotX.up, follow.up) * 10000f)/10000f;
+        
+        //if(dp!=lastDot)
+           // Debug.Log(dp + ", " + lastDot);
         if (dp < .90f)
         {
-            if (lastDot+.005f >= dp)
-            {
+            //if (lastDot >= dp)
+            //{
                 pivotX.transform.rotation = origin;
-                Debug.Log("FUCK");
-            }
+                //Debug.Log("FUCK");
+           // }
 
 
         }
-        lastDot = dp;
+       // lastDot = dp;
 
-        pivotY.rotation = originY;
+        //pivotY.rotation = originROT;//.FromToRotation(originUP,pivotY.up) * originROT;
 
         var thetaX = Input.GetAxis("Mouse X") * Mathf.Deg2Rad * Sensitivity;
         // thetaX = ((thetaX > .35f) ? .35f : thetaX);
         //thetaX = (thetaX < -.35f ? -.35f : thetaX);
-        var rotx = Mathf.Sin(thetaX / 2f) * pivotY.up.x;
-        var roty = Mathf.Sin(thetaX / 2f) * pivotY.up.y;
-        var rotz = Mathf.Sin(thetaX / 2f) * pivotY.up.z;
+        var rotx = Mathf.Sin(thetaX / 2f) * follow.up.x;
+        var roty = Mathf.Sin(thetaX / 2f) * follow.up.y;
+        var rotz = Mathf.Sin(thetaX / 2f) * follow.up.z;
         var rotw = Mathf.Cos(thetaX / 2f);
         pivotY.rotation = new Quaternion(rotx, roty, rotz, rotw) * pivotY.rotation;
     }

@@ -25,7 +25,7 @@ public class FixCamera : MonoBehaviour
         
         this.transform.position = follow.transform.position;
         this.transform.rotation = Quaternion.FromToRotation(this.transform.up,follow.transform.up) * this.transform.rotation;// follow.transform.rotation;
-
+       // this.transform.rotation = Quaternion.FromToRotation(this.transform.right, follow.transform.right) * this.transform.rotation;// follow.transform.rotation;
         Quaternion origin = pivotX.rotation;
         Sensitivity = character.Sensitivity;
         var thetaY = Input.GetAxis("Mouse Y") * Mathf.Deg2Rad * Sensitivity * .5f;

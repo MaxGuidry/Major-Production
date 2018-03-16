@@ -7,7 +7,6 @@ public class CharacterMovement : MonoBehaviour
 {
     private Vector3 acceleration = Vector3.zero;
     public Planet currentPlanet;
-    private Vector3 position;
     [Range(1, 20)] public float Sensitivity = 1;
     private Rigidbody rb;
     public float RunSpeed = 2;
@@ -15,6 +14,7 @@ public class CharacterMovement : MonoBehaviour
     private bool grounded = false;
     private bool jumping = false;
     public float WalkSpeed = 1;
+    public Transform cameraPivot;
     [SerializeField] private GameEventArgsObject BreakObject;
     private void Awake()
     {
@@ -63,9 +63,9 @@ public class CharacterMovement : MonoBehaviour
         var vert = Input.GetAxis("Vertical");
         var hor = Input.GetAxis("Horizontal");
 
-        acceleration = transform.forward;
-        var afor = this.transform.forward * ((vert < .1f && vert > -.1f) ? 0 : vert);
-        var aright = this.transform.right * ((hor < .1f && hor > -.1f) ? 0 : hor);
+        acceleration = cameraPivot.transform.forward;
+        var afor = cameraPivot.transform.forward * ((vert < .1f && vert > -.1f) ? 0 : vert);
+        var aright = cameraPivot.transform.right * ((hor < .1f && hor > -.1f) ? 0 : hor);
 
         acceleration = (afor + aright) * 10;
 
@@ -93,19 +93,22 @@ public class CharacterMovement : MonoBehaviour
 
 
         transform.position += velocity * Time.deltaTime;
+
+        Quaternion to = Quaternion.FromToRotation(this.transform.forward, velocity.normalized) * this.transform.rotation;
+        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, to, .05f);
         anim.SetFloat("Velocity", velocity.magnitude * Mathf.Sign(Vector3.Dot(this.transform.forward,velocity.normalized)));
         //Debug.Log(InputManager.Controller());
         //this.transform.rotation = Quaternion.Slerp(q, this.transform.rotation, .2f);
         //this.transform.LookAt(this.transform.position + acceleration.normalized);
         //float sens = (Input.GetJoystickNames()[0] == "")
-        var thetaX = Input.GetAxis("Mouse X") * Mathf.Deg2Rad * Sensitivity * Time.deltaTime * 60;
+        //var thetaX = Input.GetAxis("Mouse X") * Mathf.Deg2Rad * Sensitivity * Time.deltaTime * 60;
         // thetaX = ((thetaX > .35f) ? .35f : thetaX);
         //thetaX = (thetaX < -.35f ? -.35f : thetaX);
-        var rotx = Mathf.Sin(thetaX / 2f) * transform.up.x;
-        var roty = Mathf.Sin(thetaX / 2f) * transform.up.y;
-        var rotz = Mathf.Sin(thetaX / 2f) * transform.up.z;
-        var rotw = Mathf.Cos(thetaX / 2f);
-        transform.rotation = new Quaternion(rotx, roty, rotz, rotw) * transform.rotation;
+        //var rotx = Mathf.Sin(thetaX / 2f) * transform.up.x;
+        //var roty = Mathf.Sin(thetaX / 2f) * transform.up.y;
+        //var rotz = Mathf.Sin(thetaX / 2f) * transform.up.z;
+        //var rotw = Mathf.Cos(thetaX / 2f);
+        //transform.rotation = new Quaternion(rotx, roty, rotz, rotw) * transform.rotation;
     }
 
 

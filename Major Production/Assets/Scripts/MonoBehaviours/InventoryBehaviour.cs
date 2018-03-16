@@ -10,7 +10,7 @@ public class InventoryBehaviour : MonoBehaviour, IStorageable
     [Space] public Inventory inventory;
     public Dictionary<string, GameObject> objectList;
     [Header("For Viewing Purposes")] public List<Item> ActiveInventory;
-
+    public Vector3 dropPosition;
     private void Start()
     {
         objectList = new Dictionary<string, GameObject>();

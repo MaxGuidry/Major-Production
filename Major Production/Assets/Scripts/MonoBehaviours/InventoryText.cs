@@ -39,19 +39,24 @@ public class InventoryText : MonoBehaviour
             if (characterMovement.enabled)
             {
                 if (Input.GetKeyDown(KeyCode.Escape)) return;
-                inInventory = true;
+                SelectionObject.SetActive(true);
                 characterMovement.enabled = false;
                 inputEvents.gameObject.SetActive(false);
                 eventSystem.SetSelectedGameObject(GameObject.FindGameObjectWithTag("Wood"));
+                inInventory = true;
             }
             else
             {
                 inInventory = false;
+                SelectionObject.SetActive(false);
                 characterMovement.enabled = true;
                 inputEvents.gameObject.SetActive(true);
                 eventSystem.SetSelectedGameObject(null);
             }
         }
+
+        if (inInventory)
+            SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
     }
 
     public void CycleThroughUI(object[] args)
@@ -65,13 +70,14 @@ public class InventoryText : MonoBehaviour
             {
                 if (args[1] as string == "B") return;
                 SelectionObject.SetActive(true);
-                SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
                 characterMovement.enabled = false;
                 inputEvents.gameObject.SetActive(false);
                 eventSystem.SetSelectedGameObject(GameObject.FindGameObjectWithTag("Wood"));
+                inInventory = true;      
             }
             else
             {
+                inInventory = false;
                 SelectionObject.SetActive(false);
                 characterMovement.enabled = true;
                 inputEvents.gameObject.SetActive(true);

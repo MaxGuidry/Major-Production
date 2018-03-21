@@ -15,6 +15,7 @@ public class InventorySlot : MonoBehaviour
         if (item == null) return;
         icon.sprite = item.icon;
         icon.enabled = true;
+        inventoryBehaviour = gameObject.transform.parent.GetComponent<InventoryText>().gameObject.transform.parent.gameObject.transform.parent.GetComponentInChildren<InventoryBehaviour>();
     }
 
     private void Update()

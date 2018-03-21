@@ -59,6 +59,6 @@ public class ObjectiveBehaviour : MonoBehaviour
     public void ProgressObjective(Object[] args)
     {
         var sender = args[0];
-        CurrentObjective.ProgressQuest(sender as Item,args[1]);
+        CurrentObjective.ProgressQuest(sender as Item, args[1]);
     }
 }

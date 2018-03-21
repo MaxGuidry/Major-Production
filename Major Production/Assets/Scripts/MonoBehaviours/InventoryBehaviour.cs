@@ -3,22 +3,58 @@ using System.Collections.Generic;
 using System.Linq;
 using ScriptableObjects;
 using UnityEngine;
-using Random = UnityEngine.Random;
+using UnityEngine.UI;
 
 public class InventoryBehaviour : MonoBehaviour, IStorageable
 {
     [Space] public Inventory inventory;
-    public Dictionary<string, GameObject> objectList;
+    public Dictionary<string, GameObject> objectList, objectList1, objectList2, objectList3;
     [Header("For Viewing Purposes")] public List<Item> ActiveInventory;
     public Transform dropPosition;
+
+    public InventoryText P1, P2, P3, P4;
+
     private void Start()
     {
         objectList = new Dictionary<string, GameObject>();
+        objectList1 = new Dictionary<string, GameObject>();
+        objectList2 = new Dictionary<string, GameObject>();
+        objectList3 = new Dictionary<string, GameObject>();
         inventory.StartingInventory = new List<Item>();
         if (inventory.InventoryCap <= 0)
         {
             Debug.LogWarning("Inventory Size must be Greater than 0");
             inventory.InventoryCap = 1;
+        }
+
+        switch (GetComponent<Transform>().tag)
+        {
+            case "P1":
+                P1 = gameObject.transform.parent.GetComponentInChildren<InventoryText>();
+                P2 = null;
+                P3 = null;
+                P4 = null;
+                break;
+            case "P2":
+                P1 = null;
+                P2 = gameObject.transform.parent.GetComponentInChildren<InventoryText>();
+                P3 = null;
+                P4 = null;
+                break;
+            case "P3":
+                P1 = null;
+                P2 = null;
+                P3 = gameObject.transform.parent.GetComponentInChildren<InventoryText>();
+                P4 = null;
+                break;
+            case "P4":
+                P1 = null;
+                P2 = null;
+                P3 = null;
+                P4 = gameObject.transform.parent.GetComponentInChildren<InventoryText>();
+                break;
+            default:
+                break;
         }
     }
 
@@ -31,7 +67,60 @@ public class InventoryBehaviour : MonoBehaviour, IStorageable
     {
         if (inventory.CurrentInventory.Count >= inventory.InventoryCap) return;
         inventory.CurrentInventory.Add(newItem);
-        objectList.Add(newItem.ItemType.ToString() + InventoryText.GetNumberItems(newItem.ItemType), obj);
+
+        switch (GetComponent<Transform>().tag)
+        {
+            case "P1":
+                objectList.Add(newItem.ItemType.ToString() + P1.GetNumberItems(newItem.ItemType), obj);
+                break;
+            case "P2":
+                objectList1.Add(newItem.ItemType.ToString() + P2.GetNumberItems(newItem.ItemType), obj);
+                break;
+            case "P3":
+                objectList2.Add(newItem.ItemType.ToString() + P3.GetNumberItems(newItem.ItemType), obj);
+                break;
+            case "P4":
+                objectList3.Add(newItem.ItemType.ToString() + P4.GetNumberItems(newItem.ItemType), obj);
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    private void RemoveItem(uint amount, Text itemText, Item theItem)
+    {
+        if (amount <= 0) return;
+        objectList.Remove(theItem.ItemType.ToString() + amount);
+        amount--;
+        itemText.text = amount.ToString();
+    }
+
+    private void SwitchCheck(InventoryText player, Item theItem, GameObject obj)
+    {
+        switch (theItem.ItemType)
+        {
+            case ItemType.None:
+                break;
+            case ItemType.Wood:
+                RemoveItem(player.woodAmount, player.WoodAmounttext, theItem);
+                CheckForGameObject(obj);
+                break;
+            case ItemType.Stone:
+                RemoveItem(player.stoneAmount, player.StoneAmounttext, theItem);
+                CheckForGameObject(obj);
+                break;
+            case ItemType.Metal:
+                RemoveItem(player.metalAmount, player.MetalAmounttext, theItem);
+                CheckForGameObject(obj);
+                break;
+            case ItemType.Goop:
+                RemoveItem(player.goopAmount, player.GoopAmounttext, theItem);
+                CheckForGameObject(obj);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
     }
 
     public void RemoveFromInventory(Item theItem, GameObject obj)
@@ -39,46 +128,23 @@ public class InventoryBehaviour : MonoBehaviour, IStorageable
         if (inventory.CurrentInventory == null) return;
         if (!inventory.CurrentInventory.Contains(theItem)) return;
         inventory.CurrentInventory.Remove(theItem);
-       
-        switch (theItem.ItemType)
+
+        switch (GetComponent<Transform>().tag)
         {
-            case ItemType.Wood:
-                if (InventoryText.woodAmount <= 0) return;
-                objectList.Remove(theItem.ItemType.ToString() + InventoryText.woodAmount);
-                InventoryText.woodAmount--;
-                InventoryText.WoodAmounttext.text = InventoryText.woodAmount.ToString();
-                CheckForGameObject(obj);
+            case "P1":
+                SwitchCheck(P1, theItem, obj);
                 break;
-
-            case ItemType.Stone:
-                if (InventoryText.stoneAmount <= 0) return;
-                objectList.Remove(theItem.ItemType.ToString() + InventoryText.stoneAmount);
-                InventoryText.stoneAmount--;
-                InventoryText.StoneAmounttext.text = InventoryText.stoneAmount.ToString();
-                CheckForGameObject(obj);
+            case "P2":
+                SwitchCheck(P2, theItem, obj);
                 break;
-
-            case ItemType.Metal:
-                if (InventoryText.metalAmount <= 0) return;
-                objectList.Remove(theItem.ItemType.ToString() + InventoryText.metalAmount);
-                InventoryText.metalAmount--;
-                InventoryText.MetalAmounttext.text = InventoryText.metalAmount.ToString();
-                CheckForGameObject(obj);
+            case "P3":
+                SwitchCheck(P3, theItem, obj);
                 break;
-
-            case ItemType.Goop:
-                if (InventoryText.goopAmount <= 0) return;
-                objectList.Remove(theItem.ItemType.ToString() + InventoryText.goopAmount);
-                InventoryText.goopAmount--;
-                InventoryText.GoopAmounttext.text = InventoryText.goopAmount.ToString();
-                CheckForGameObject(obj);
+            case "P4":
+                SwitchCheck(P4, theItem, obj);
                 break;
-
-            case ItemType.None:
-                break;
-
             default:
-                throw new ArgumentOutOfRangeException();
+                break;
         }
     }
 
@@ -88,26 +154,52 @@ public class InventoryBehaviour : MonoBehaviour, IStorageable
             return;
         if (args[1] as string != "Right Stick Button")
             return;
-        foreach (var obj in objectList.Values)
+
+        switch (GetComponent<Transform>().tag)
         {
-            RemoveAllFromInventory(obj);
+            case "P1":
+                foreach (var obj in objectList.Values)
+                {
+                    RemoveAllFromInventory(obj, P1);
+                }
+                break;
+            case "P2":
+                foreach (var obj in objectList1.Values)
+                {
+                    RemoveAllFromInventory(obj, P2);
+                }
+                break;
+            case "P3":
+                foreach (var obj in objectList2.Values)
+                {
+                    RemoveAllFromInventory(obj, P3);
+                }
+                break;
+            case "P4":
+                foreach (var obj in objectList3.Values)
+                {
+                    RemoveAllFromInventory(obj, P4);
+                }
+                break;
+            default:
+                break;
         }
         objectList.Clear();
-        
     }
 
-    public void RemoveAllFromInventory(GameObject obj)
+    public void RemoveAllFromInventory(GameObject obj, InventoryText player)
     {
         CheckForGameObject(obj);
         inventory.CurrentInventory.Clear();
-        InventoryText.woodAmount = 0;
-        InventoryText.WoodAmounttext.text = InventoryText.woodAmount.ToString();
-        InventoryText.stoneAmount = 0;
-        InventoryText.StoneAmounttext.text = InventoryText.stoneAmount.ToString();
-        InventoryText.metalAmount = 0;
-        InventoryText.MetalAmounttext.text = InventoryText.metalAmount.ToString();
-        InventoryText.goopAmount = 0;
-        InventoryText.GoopAmounttext.text = InventoryText.goopAmount.ToString();
+
+        player.woodAmount = 0;
+        player.WoodAmounttext.text = player.woodAmount.ToString();
+        player.stoneAmount = 0;
+        player.StoneAmounttext.text = player.stoneAmount.ToString();
+        player.metalAmount = 0;
+        player.MetalAmounttext.text = player.metalAmount.ToString();
+        player.goopAmount = 0;
+        player.GoopAmounttext.text = player.goopAmount.ToString();
     }
 
     private void CheckForGameObject(GameObject obj)

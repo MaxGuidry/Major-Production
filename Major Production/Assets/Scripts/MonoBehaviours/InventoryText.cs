@@ -8,23 +8,44 @@ using UnityEngine.UI;
 public class InventoryText : MonoBehaviour
 {
     public GameObject SelectionObject;
-    public static Text GoopAmounttext;
-    public static Text MetalAmounttext;
-    public static Text StoneAmounttext;
-    public static Text WoodAmounttext;
+    public Text GoopAmounttext;
+    public Text MetalAmounttext;
+    public Text StoneAmounttext;
+    public Text WoodAmounttext;
 
-    public static uint woodAmount, stoneAmount, metalAmount, goopAmount;
-    public static bool inInventory;
+    public uint woodAmount, stoneAmount, metalAmount, goopAmount;
+    public bool inInventory;
     private CharacterMovement characterMovement;
     private EventSystem eventSystem;
     private GameObject inputEvents;
     // Use this for initialization
     private void Start()
     {
-        WoodAmounttext = GameObject.FindGameObjectWithTag("Wood").GetComponentInChildren<Text>();
-        StoneAmounttext = GameObject.FindGameObjectWithTag("Stone").GetComponentInChildren<Text>();
-        MetalAmounttext = GameObject.FindGameObjectWithTag("Metal").GetComponentInChildren<Text>();
-        GoopAmounttext = GameObject.FindGameObjectWithTag("Goop").GetComponentInChildren<Text>();
+        //WoodAmounttext = GameObject.FindGameObjectWithTag("Wood").GetComponentInChildren<Text>();
+        //StoneAmounttext = GameObject.FindGameObjectWithTag("Stone").GetComponentInChildren<Text>();
+        //MetalAmounttext = GameObject.FindGameObjectWithTag("Metal").GetComponentInChildren<Text>();
+        //GoopAmounttext = GameObject.FindGameObjectWithTag("Goop").GetComponentInChildren<Text>();
+
+        foreach (var slot in GetComponentsInChildren<Transform>())
+        {
+            switch (slot.tag)
+            {
+                case "Wood":
+                    WoodAmounttext = slot.GetComponentInChildren<Text>();
+                    break;
+                case "Stone":
+                    StoneAmounttext = slot.GetComponentInChildren<Text>();
+                    break;
+                case "Metal":
+                    MetalAmounttext = slot.GetComponentInChildren<Text>();
+                    break;
+                case "Goop":
+                    GoopAmounttext = slot.GetComponentInChildren<Text>();
+                    break;
+                default:
+                    break;
+            }
+        }
 
         characterMovement = FindObjectOfType<CharacterMovement>();
         eventSystem = FindObjectOfType<EventSystem>();
@@ -73,7 +94,7 @@ public class InventoryText : MonoBehaviour
                 characterMovement.enabled = false;
                 inputEvents.gameObject.SetActive(false);
                 eventSystem.SetSelectedGameObject(GameObject.FindGameObjectWithTag("Wood"));
-                inInventory = true;      
+                inInventory = true;
             }
             else
             {
@@ -86,7 +107,7 @@ public class InventoryText : MonoBehaviour
         }
     }
 
-    public static uint GetNumberItems(ItemType type)
+    public uint GetNumberItems(ItemType type)
     {
         switch (type)
         {

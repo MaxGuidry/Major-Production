@@ -34,7 +34,7 @@ public class GatherObjectiveBehaviour : ObjectiveBehaviour
         typer.TypeSpeed = 0.1f;
         typer.path = "Assets/Resources/Dialogue/" + typer.ChooseFile + ".txt";
         StartCoroutine(typer.AutoType());
-        StartCoroutine(Restart());
+        //StartCoroutine(Restart());
     }
 
 

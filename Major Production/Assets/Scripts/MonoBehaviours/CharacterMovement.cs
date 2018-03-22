@@ -33,6 +33,8 @@ public class CharacterMovement : NetworkBehaviour
     {
         if (!anim)
             anim = GetComponent<Animator>();
+        if (!cameraPivot)
+            cameraPivot = Camera.main.transform.parent.parent;
         //foreach (var button in f)
         //{
         //    buttonevents.Add(button.name, button);

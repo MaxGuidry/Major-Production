@@ -1351,6 +1351,8 @@ GameObject:
   - component: {fileID: 114543404289022258}
   - component: {fileID: 114717120489986994}
   - component: {fileID: 114879448581834402}
+  - component: {fileID: 114707270775926918}
+  - component: {fileID: 114997161021350154}
   m_Layer: 0
   m_Name: TvPlayer
   m_TagString: Player
@@ -7045,6 +7047,38 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: GameEventArgsResponse, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!114 &114707270775926918
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1398798868300312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 210
+    i1: 14
+    i2: 181
+    i3: 188
+    i4: 163
+    i5: 140
+    i6: 241
+    i7: 164
+    i8: 90
+    i9: 211
+    i10: 96
+    i11: 100
+    i12: 178
+    i13: 155
+    i14: 99
+    i15: 223
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114717120489986994
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7118,6 +7152,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 0}
+--- !u!114 &114997161021350154
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1398798868300312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 3
+  m_SendInterval: 0.0625
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!137 &137000775774954174
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

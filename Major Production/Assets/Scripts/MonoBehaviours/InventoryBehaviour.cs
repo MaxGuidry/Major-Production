@@ -152,8 +152,20 @@ public class InventoryBehaviour : MonoBehaviour, IStorageable
     {
         if (args.Length < 2)
             return;
-        if (args[1] as string != "Right Stick Button")
-            return;
+
+        switch (args[1] as string)
+        {
+            case "Right Stick Button":
+                break;
+            case "Right Stick Button1":
+                break;
+            case "Right Stick Button2":
+                break;
+            case "Right Stick Button3":
+                break;
+            default:
+               return;
+        }
 
         switch (GetComponent<Transform>().tag)
         {

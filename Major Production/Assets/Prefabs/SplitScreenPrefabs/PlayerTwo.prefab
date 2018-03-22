@@ -1497,6 +1497,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1405002157617520
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4641714547247186}
+  - component: {fileID: 114682228998157440}
+  - component: {fileID: 114415749497561912}
+  m_Layer: 0
+  m_Name: UIInputP2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1413111638765372
 GameObject:
   m_ObjectHideFlags: 1
@@ -2177,6 +2194,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1526087088628070
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4941864151354768}
+  - component: {fileID: 114230281676417458}
+  - component: {fileID: 114247266198193322}
+  - component: {fileID: 114680086251956686}
+  - component: {fileID: 114886572479916298}
+  m_Layer: 0
+  m_Name: InputP2
+  m_TagString: Input 1
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1528815812275936
 GameObject:
   m_ObjectHideFlags: 1
@@ -2683,7 +2719,7 @@ GameObject:
   - component: {fileID: 114120996357470804}
   - component: {fileID: 114622161588793766}
   - component: {fileID: 114559053089621262}
-  - component: {fileID: 114510568928819766}
+  - component: {fileID: 114282789484846034}
   m_Layer: 0
   m_Name: TvPlayerP2
   m_TagString: P2
@@ -4391,6 +4427,8 @@ Transform:
   - {fileID: 224888036428967506}
   - {fileID: 4299381548200910}
   - {fileID: 4577370259983908}
+  - {fileID: 4941864151354768}
+  - {fileID: 4641714547247186}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6136,6 +6174,19 @@ Transform:
   m_Father: {fileID: 4874738699191308}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4641714547247186
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1405002157617520}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 719.48706, y: 16.14058, z: -50}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4120306772957984}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4652448581647478
 Transform:
   m_ObjectHideFlags: 1
@@ -7228,6 +7279,19 @@ Transform:
   m_Father: {fileID: 4774600393385180}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4941864151354768
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1526087088628070}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 594.1185, y: 147.35397, z: 443.8833}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4120306772957984}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4948271112702068
 Transform:
   m_ObjectHideFlags: 1
@@ -7844,7 +7908,7 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114510568928819766}
+      - m_Target: {fileID: 114282789484846034}
         m_MethodName: StartUpgrade
         m_Mode: 1
         m_Arguments:
@@ -7866,7 +7930,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 114510568928819766}
+      - m_Target: {fileID: 114282789484846034}
         m_MethodName: ShowUI
         m_Mode: 1
         m_Arguments:
@@ -7939,6 +8003,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 114240562456459702}
   item: {fileID: 11400000, guid: a56e6035ae842e34d876ec8aaa27c90f, type: 2}
+--- !u!114 &114230281676417458
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1526087088628070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b7cfa9b85707742a86baf6edff22ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnButtonPressed: {fileID: 11400000, guid: 4e660b598b55f084ea331c2d6a84f010, type: 2}
+  OnButtonHeld: {fileID: 11400000, guid: b89c543f5fec7df4891a4b9b171d2650, type: 2}
+  OnButtonReleased: {fileID: 11400000, guid: b41618f30ca40cd41ad17ecf4f8a4b32, type: 2}
+  Buttons:
+  - A1
+  - B1
+  - Y1
+  - X1
+  - Right Bumper1
+  - Left Bumper1
+  - Left Stick Button1
+  - Right Stick Button1
+  - Submit1
+  - Start1
 --- !u!114 &114240562456459702
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7966,6 +8055,75 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114247266198193322
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1526087088628070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6bf415d37af43c469221fc27eb16288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 0}
+  Sender: {fileID: 0}
+  Response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: GameEventArgsResponse, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  ObjEvent: {fileID: 11400000, guid: 4e660b598b55f084ea331c2d6a84f010, type: 2}
+  ObjResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114763777653867646}
+        m_MethodName: Jump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 114763777653867646}
+        m_MethodName: HitObject
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 114392108809084380}
+        m_MethodName: ClearInventory
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameEventArgsResponseObject, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &114282789484846034
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1661519802291668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bbd871c11783464bbb5a6c57a68e19b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 1144054496994580}
 --- !u!114 &114320369741394292
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8119,10 +8277,10 @@ MonoBehaviour:
   m_Script: {fileID: 1077351063, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: A
-  m_CancelButton: Cancel
+  m_HorizontalAxis: Horizontal1
+  m_VerticalAxis: Vertical1
+  m_SubmitButton: A1
+  m_CancelButton: Cancel1
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
   m_ForceModuleActive: 0
@@ -8180,6 +8338,31 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114415749497561912
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1405002157617520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b7cfa9b85707742a86baf6edff22ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnButtonPressed: {fileID: 11400000, guid: 4e660b598b55f084ea331c2d6a84f010, type: 2}
+  OnButtonHeld: {fileID: 11400000, guid: b89c543f5fec7df4891a4b9b171d2650, type: 2}
+  OnButtonReleased: {fileID: 11400000, guid: b41618f30ca40cd41ad17ecf4f8a4b32, type: 2}
+  Buttons:
+  - A1
+  - B1
+  - Y1
+  - X1
+  - Right Bumper1
+  - Left Bumper1
+  - Left Stick Button1
+  - Right Stick Button1
+  - Submit1
+  - Start1
 --- !u!114 &114425660507378638
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8207,18 +8390,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114510568928819766
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1661519802291668}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 187cea5d76ae70445bf7f155ae54bc52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  panel: {fileID: 0}
 --- !u!114 &114528830790366230
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8485,6 +8656,30 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114680086251956686
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1526087088628070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6bf415d37af43c469221fc27eb16288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 0}
+  Sender: {fileID: 0}
+  Response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: GameEventArgsResponse, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  ObjEvent: {fileID: 11400000, guid: b89c543f5fec7df4891a4b9b171d2650, type: 2}
+  ObjResponse:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: GameEventArgsResponseObject, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &114680610685324896
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8528,6 +8723,41 @@ MonoBehaviour:
     m_RotationOrder: 0
   duration: 0.2
   tweened: {fileID: 1792061276356966}
+--- !u!114 &114682228998157440
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1405002157617520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6bf415d37af43c469221fc27eb16288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 0}
+  Sender: {fileID: 0}
+  Response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: GameEventArgsResponse, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  ObjEvent: {fileID: 11400000, guid: 4e660b598b55f084ea331c2d6a84f010, type: 2}
+  ObjResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114850432214523686}
+        m_MethodName: CycleThroughUI
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameEventArgsResponseObject, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &114688282720544264
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8824,6 +9054,30 @@ MonoBehaviour:
   metalAmount: 0
   goopAmount: 0
   inInventory: 0
+--- !u!114 &114886572479916298
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1526087088628070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6bf415d37af43c469221fc27eb16288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 0}
+  Sender: {fileID: 0}
+  Response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: GameEventArgsResponse, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  ObjEvent: {fileID: 11400000, guid: b41618f30ca40cd41ad17ecf4f8a4b32, type: 2}
+  ObjResponse:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: GameEventArgsResponseObject, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &114887637601172746
 MonoBehaviour:
   m_ObjectHideFlags: 1

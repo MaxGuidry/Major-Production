@@ -119,7 +119,21 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
         if (affectedstat.Value >= 100)
         {
             affectedstat.Value -= 100;
-            Level++;
+            switch (GetComponent<Transform>().tag)
+            {
+                case "P1":
+                    stats.GetStat("PLevel").Value++;
+                    break;
+                case "P2":
+                    stats.GetStat("PLevel 1").Value++;
+                    break;
+                case "P3":
+                    stats.GetStat("PLevel 2").Value++;
+                    break;
+                case "P4":
+                    stats.GetStat("PLevel 3").Value++;
+                    break;
+            }
             LevelUpEvent.Raise(this);
         }
     }

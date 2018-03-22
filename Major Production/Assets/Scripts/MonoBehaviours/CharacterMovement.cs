@@ -3,8 +3,9 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Advertisements;
 using UnityEngine.Events;
+using UnityEngine.Networking;
 
-public class CharacterMovement : MonoBehaviour
+public class CharacterMovement : NetworkBehaviour
 {
     private Vector3 acceleration = Vector3.zero;
     public Planet currentPlanet;
@@ -50,6 +51,8 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (!isLocalPlayer)
+            return;
         object[] test = { this, "A" };
         if (Input.GetKeyDown(KeyCode.Space))
             Jump(test);
@@ -96,7 +99,7 @@ public class CharacterMovement : MonoBehaviour
         transform.position += velocity * Time.deltaTime;
 
         Quaternion to = Quaternion.FromToRotation(this.transform.forward, velocity.normalized) * this.transform.rotation;
-        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, to, .05f);
+        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, to, .1f);
         anim.SetFloat("Velocity", velocity.magnitude * Mathf.Sign(Vector3.Dot(this.transform.forward,velocity.normalized)));
         //Debug.Log(InputManager.Controller());
         //this.transform.rotation = Quaternion.Slerp(q, this.transform.rotation, .2f);

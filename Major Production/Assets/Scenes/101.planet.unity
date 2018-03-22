@@ -688,11 +688,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!4 &260593624 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4516136308637906, guid: 3341fb1a670010e47b6246613072946d,
-    type: 2}
-  m_PrefabInternal: {fileID: 1340776324}
 --- !u!1001 &341307896
 Prefab:
   m_ObjectHideFlags: 0
@@ -1909,7 +1904,7 @@ Prefab:
         type: 2}
       propertyPath: cameraPivot
       value: 
-      objectReference: {fileID: 260593624}
+      objectReference: {fileID: 1528195663}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d20eb5bca38cf1a45ad36064b29b63df, type: 2}
   m_IsPrefabParent: 0
@@ -2172,6 +2167,11 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: GameEventArgsResponseObject, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!4 &1528195663 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4662345456160450, guid: 3341fb1a670010e47b6246613072946d,
+    type: 2}
+  m_PrefabInternal: {fileID: 1340776324}
 --- !u!1 &1669495403
 GameObject:
   m_ObjectHideFlags: 0
@@ -2600,7 +2600,7 @@ Prefab:
     - target: {fileID: 224084979615100764, guid: 3e236b5d89777a045bddc11f8345d659,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 164.33987
+      value: 86.48561
       objectReference: {fileID: 0}
     - target: {fileID: 224084979615100764, guid: 3e236b5d89777a045bddc11f8345d659,
         type: 2}

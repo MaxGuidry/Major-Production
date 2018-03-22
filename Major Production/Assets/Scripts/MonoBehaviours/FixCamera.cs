@@ -5,8 +5,9 @@ using Cinemachine;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class FixCamera : NetworkBehaviour
+public class FixCamera : MonoBehaviour
 {
+    private string PlayerNumber;
     private float Sensitivity = 1;
 
     private CharacterMovement character;
@@ -18,6 +19,8 @@ public class FixCamera : NetworkBehaviour
     void Start()
     {
 
+
+
         StartCoroutine(GetCharacter());
 
         //lastDot = Vector3.Dot(pivotX.up, follow.up);
@@ -26,7 +29,7 @@ public class FixCamera : NetworkBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        
+
         if (!follow)
             return;
 
@@ -34,8 +37,8 @@ public class FixCamera : NetworkBehaviour
         this.transform.rotation = Quaternion.FromToRotation(this.transform.up, follow.transform.up) * this.transform.rotation;// follow.transform.rotation;
                                                                                                                               // this.transform.rotation = Quaternion.FromToRotation(this.transform.right, follow.transform.right) * this.transform.rotation;// follow.transform.rotation;
         Quaternion origin = pivotX.rotation;
-        //Sensitivity = character.Sensitivity;
-        var thetaY = Input.GetAxis("Mouse Y") * Mathf.Deg2Rad * Sensitivity * .5f;
+        Sensitivity = character.Sensitivity;
+        var thetaY = Input.GetAxis("Mouse Y" + PlayerNumber) * Mathf.Deg2Rad * Sensitivity * .5f;
         //thetaY = ((thetaY > .35f) ? .35f : thetaY);
         //thetaY = (thetaY < -.35f ? -.35f : thetaY);
         pivotX.rotation = new Quaternion(Mathf.Sin(thetaY / 2f) * pivotX.right.x, Mathf.Sin(thetaY / 2f)
@@ -60,7 +63,7 @@ public class FixCamera : NetworkBehaviour
 
         //pivotY.rotation = originROT;//.FromToRotation(originUP,pivotY.up) * originROT;
 
-        var thetaX = Input.GetAxis("Mouse X") * Mathf.Deg2Rad * Sensitivity;
+        var thetaX = Input.GetAxis("Mouse X" + PlayerNumber) * Mathf.Deg2Rad * Sensitivity;
         // thetaX = ((thetaX > .35f) ? .35f : thetaX);
         //thetaX = (thetaX < -.35f ? -.35f : thetaX);
         var rotx = Mathf.Sin(thetaX / 2f) * follow.up.x;
@@ -70,12 +73,12 @@ public class FixCamera : NetworkBehaviour
         pivotY.rotation = new Quaternion(rotx, roty, rotz, rotw) * pivotY.rotation;
     }
 
-    private IEnumerator GetCharacter()
+    public IEnumerator GetCharacter()
     {
         bool done = false;
-        while (true)
+        while (!done)
         {
-            cms = GetComponents<CharacterMovement>().ToList();
+            cms = GameObject.FindObjectsOfType<CharacterMovement>().ToList();
             foreach (var c in cms)
             {
                 if (c.isLocalPlayer)
@@ -83,14 +86,33 @@ public class FixCamera : NetworkBehaviour
                     follow = c.transform;
                     character = c;
                     done = true;
+
+                    switch (gameObject.tag)
+                    {
+                        case "P1":
+                            PlayerNumber = "";
+                            break;
+                        case "P2":
+                            PlayerNumber = "1";
+                            break;
+                        case "P3":
+                            PlayerNumber = "2";
+                            break;
+                        case "P4":
+                            PlayerNumber = "3";
+                            break;
+
+
+                    }
+
                 }
 
             }
 
-            yield return null;
+            yield return new WaitForSeconds(.1f);
         }
 
-        
+
     }
 
 }

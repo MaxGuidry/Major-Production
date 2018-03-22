@@ -1353,6 +1353,7 @@ GameObject:
   - component: {fileID: 114879448581834402}
   - component: {fileID: 114707270775926918}
   - component: {fileID: 114997161021350154}
+  - component: {fileID: 114327222407528642}
   m_Layer: 0
   m_Name: TvPlayer
   m_TagString: Player
@@ -6932,6 +6933,25 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114327222407528642
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1398798868300312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1590678366, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Animator: {fileID: 95507726503867504}
+  m_ParameterSendBits: 3
+  param0: 
+  param1: 
+  param2: 
+  param3: 
+  param4: 
+  param5: 
 --- !u!114 &114430343626586604
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6944,7 +6964,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentPlanet: {fileID: 11400000, guid: 0c0da09bcc5af5b499965df2e4c62dd1, type: 2}
-  Sensitivity: 4
+  Sensitivity: 6
   RunSpeed: 10
   WalkSpeed: 6
   cameraPivot: {fileID: 0}
@@ -7078,7 +7098,7 @@ MonoBehaviour:
     i14: 99
     i15: 223
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &114717120489986994
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7163,8 +7183,8 @@ MonoBehaviour:
   m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TransformSyncMode: 3
-  m_SendInterval: 0.0625
+  m_TransformSyncMode: 1
+  m_SendInterval: 0.033333335
   m_SyncRotationAxis: 7
   m_RotationSyncCompression: 0
   m_SyncSpin: 0

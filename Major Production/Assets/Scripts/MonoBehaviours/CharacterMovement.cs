@@ -7,6 +7,8 @@ using UnityEngine.Networking;
 
 public class CharacterMovement : NetworkBehaviour
 {
+
+    private string PlayerNumber;
     private Vector3 acceleration = Vector3.zero;
     public Planet currentPlanet;
     [Range(1, 20)] public float Sensitivity = 1;
@@ -24,6 +26,7 @@ public class CharacterMovement : NetworkBehaviour
 
     }
 
+
     public Animator anim;
 
 
@@ -35,6 +38,25 @@ public class CharacterMovement : NetworkBehaviour
             anim = GetComponent<Animator>();
         if (!cameraPivot)
             cameraPivot = Camera.main.transform.parent.parent;
+
+        switch (gameObject.tag)
+        {
+            case "P1":
+                PlayerNumber = "";
+                break;
+            case "P2":
+                PlayerNumber = "1";
+                break;
+            case "P3":
+                PlayerNumber = "2";
+                break;
+            case "P4":
+                PlayerNumber = "3";
+                break;
+
+
+        }
+
         //foreach (var button in f)
         //{
         //    buttonevents.Add(button.name, button);
@@ -62,12 +84,12 @@ public class CharacterMovement : NetworkBehaviour
         //RaycastHit rh;
         //Physics.Raycast(this.transform.position, -this.transform.up, out rh, 1.5f);
         //rh.
-        
+
 
         var Speed = Input.GetKey(InputMap.KeyBinds["sprint"]) ? RunSpeed : WalkSpeed;
 
-        var vert = Input.GetAxis("Vertical");
-        var hor = Input.GetAxis("Horizontal");
+        var vert = Input.GetAxis("Vertical" + PlayerNumber);
+        var hor = Input.GetAxis("Horizontal"+PlayerNumber);
 
         acceleration = cameraPivot.transform.forward;
         var afor = cameraPivot.transform.forward * ((vert < .1f && vert > -.1f) ? 0 : vert);
@@ -98,11 +120,12 @@ public class CharacterMovement : NetworkBehaviour
 
 
 
-        transform.position += velocity * Time.deltaTime;
-
+        transform.position += (velocity * Time.deltaTime);
+        //rb.MovePosition(pos);
         Quaternion to = Quaternion.FromToRotation(this.transform.forward, velocity.normalized) * this.transform.rotation;
-        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, to, .1f);
-        anim.SetFloat("Velocity", velocity.magnitude * Mathf.Sign(Vector3.Dot(this.transform.forward,velocity.normalized)));
+        transform.rotation = Quaternion.Slerp(this.transform.rotation, to, .1f);
+       // transform.Rotate(to.eulerAngles);
+        anim.SetFloat("Velocity", velocity.magnitude * Mathf.Sign(Vector3.Dot(this.transform.forward, velocity.normalized)));
         //Debug.Log(InputManager.Controller());
         //this.transform.rotation = Quaternion.Slerp(q, this.transform.rotation, .2f);
         //this.transform.LookAt(this.transform.position + acceleration.normalized);
@@ -126,7 +149,7 @@ public class CharacterMovement : NetworkBehaviour
         // {
         if (!grounded)
             return;
-        if (args[1] as string == "A")
+        if (args[1] as string == "A"+PlayerNumber)
         {
             if (!grounded)
                 return;
@@ -154,10 +177,10 @@ public class CharacterMovement : NetworkBehaviour
 
     void OnCollisionStay(Collision other)
     {
-        
+
         if (other.gameObject.GetComponent<Collider>())
         {
-           //needs check for if the object is below the player relative to the players up axis.
+            //needs check for if the object is below the player relative to the players up axis.
             if (!jumping)
             {
                 grounded = true;
@@ -170,7 +193,7 @@ public class CharacterMovement : NetworkBehaviour
     {
         if (args.Length < 2)
             return;
-        if (args[1] as string == "X")
+        if (args[1] as string == "X" + PlayerNumber)
         {
             anim.SetTrigger("AttackBasic");
             //BreakObject.ObjRaise(this);
@@ -180,7 +203,7 @@ public class CharacterMovement : NetworkBehaviour
     public void Raycastattack()
     {
         RaycastHit[] hits;
-        
+
         hits = Physics.RaycastAll(this.transform.position, this.transform.forward, 6, ~LayerMask.GetMask("Player"));
         GameObject breakableObj = null;
         foreach (var rayhit in hits)
@@ -190,7 +213,7 @@ public class CharacterMovement : NetworkBehaviour
             {
                 toplevel = toplevel.parent;
             }
-            if (toplevel.transform.GetComponent<BreakableResourceBehaviour>()== null)
+            if (toplevel.transform.GetComponent<BreakableResourceBehaviour>() == null)
                 continue;
             breakableObj = toplevel.gameObject;
         }
@@ -199,9 +222,9 @@ public class CharacterMovement : NetworkBehaviour
         if (!breakableObj)
             return;
         var breakable = breakableObj.transform.GetComponent<BreakableResourceBehaviour>();
-        if(breakable)
+        if (breakable)
         {
-           breakable.SpawnResources(); 
+            breakable.SpawnResources();
         }
     }
 

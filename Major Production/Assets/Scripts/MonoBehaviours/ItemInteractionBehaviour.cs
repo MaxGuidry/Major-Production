@@ -63,9 +63,7 @@ public class ItemInteractionBehaviour : MonoBehaviour
                 {
                     ItemPickedUp.Raise(Item, this.gameObject);
                     var ib = other.gameObject.GetComponent<IStorageable>();
-
                     var player = other.gameObject.transform.parent.gameObject.GetComponentInChildren<Canvas>().GetComponentInChildren<InventoryText>();
-
                     SwitchCheck(player);
                     ib.AddToInventory(Item, gameObject);
                     ItemObjectPooler.s_instance.Destroy(gameObject);

@@ -15,7 +15,7 @@ public class DisplayPlayerStats : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        PlayerStats = FindObjectOfType<PlayerStatBehaviour>();
+        PlayerStats = gameObject.transform.parent.parent.GetComponentInChildren<PlayerStatBehaviour>();
         TempText = new List<Text>();
     }
 
@@ -26,7 +26,7 @@ public class DisplayPlayerStats : MonoBehaviour
 
     public void CreateText()
     {
-        var textPos = Vector3.zero;
+        var textPos = gameObject.transform.position;
         if (!created)
             for (var i = 0; i < PlayerStats.stats._stats.Count; i++)
             {

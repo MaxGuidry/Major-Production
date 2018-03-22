@@ -47,8 +47,8 @@ public class InventoryText : MonoBehaviour
             }
         }
 
-        characterMovement = FindObjectOfType<CharacterMovement>();
-        eventSystem = FindObjectOfType<EventSystem>();
+        characterMovement = gameObject.transform.parent.parent.GetComponentInChildren<CharacterMovement>();
+        eventSystem = gameObject.transform.parent.parent.GetComponentInChildren<EventSystem>();
         inputEvents = GameObject.FindGameObjectWithTag("Input");
         SelectionObject.SetActive(false);
     }
@@ -63,7 +63,7 @@ public class InventoryText : MonoBehaviour
                 SelectionObject.SetActive(true);
                 characterMovement.enabled = false;
                 inputEvents.gameObject.SetActive(false);
-                eventSystem.SetSelectedGameObject(GameObject.FindGameObjectWithTag("Wood"));
+                eventSystem.SetSelectedGameObject(gameObject.transform.GetChild(0).gameObject);
                 inInventory = true;
             }
             else
@@ -93,7 +93,7 @@ public class InventoryText : MonoBehaviour
                 SelectionObject.SetActive(true);
                 characterMovement.enabled = false;
                 inputEvents.gameObject.SetActive(false);
-                eventSystem.SetSelectedGameObject(GameObject.FindGameObjectWithTag("Wood"));
+                eventSystem.SetSelectedGameObject(gameObject.transform.GetChild(0).gameObject);
                 inInventory = true;
             }
             else

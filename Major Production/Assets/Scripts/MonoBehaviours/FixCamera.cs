@@ -79,7 +79,7 @@ public class FixCamera : MonoBehaviour
         string playernumber = "";
         while (!done)
         {
-            if (FindObjectOfType<NetworkManager>() != null)
+            if (GLOBALS.SplitscreenLocal || GLOBALS.SplitscreenOnline)
                 playernumber = this.gameObject.transform.parent.GetChild(0).name;
             cms = GameObject.FindObjectsOfType<CharacterMovement>().ToList();
 
@@ -87,7 +87,7 @@ public class FixCamera : MonoBehaviour
             {
                 if (c.cameraPivot != null)
                     continue;
-                if (FindObjectOfType<NetworkManager>() != null)
+                if (GLOBALS.SplitscreenLocal || GLOBALS.SplitscreenOnline)
                 {
                     if (playernumber != c.gameObject.name)
                         continue;

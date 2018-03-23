@@ -34,11 +34,11 @@ public class CharacterMovement : NetworkBehaviour
 
     private void Start()
     {
-        nm = FindObjectOfType<NetworkManager>();
+
         if (!anim)
             anim = GetComponent<Animator>();
         //if (!cameraPivot)
-         //   cameraPivot = Camera.main.transform.parent.parent;
+        //   cameraPivot = Camera.main.transform.parent.parent;
 
         switch (gameObject.tag)
         {
@@ -76,8 +76,9 @@ public class CharacterMovement : NetworkBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (!isLocalPlayer && nm)
-            return;
+        if (!GLOBALS.SplitscreenOnline)
+            if (!isLocalPlayer)
+                return;
         if (!cameraPivot)
             return;
         object[] test = { this, "A" };
@@ -92,7 +93,7 @@ public class CharacterMovement : NetworkBehaviour
         var Speed = Input.GetKey(InputMap.KeyBinds["sprint"]) ? RunSpeed : WalkSpeed;
 
         var vert = Input.GetAxis("Vertical" + PlayerNumber);
-        var hor = Input.GetAxis("Horizontal"+PlayerNumber);
+        var hor = Input.GetAxis("Horizontal" + PlayerNumber);
 
         acceleration = cameraPivot.transform.forward;
         var afor = cameraPivot.transform.forward * ((vert < .1f && vert > -.1f) ? 0 : vert);
@@ -127,7 +128,7 @@ public class CharacterMovement : NetworkBehaviour
         //rb.MovePosition(pos);
         Quaternion to = Quaternion.FromToRotation(this.transform.forward, velocity.normalized) * this.transform.rotation;
         transform.rotation = Quaternion.Slerp(this.transform.rotation, to, .1f);
-       // transform.Rotate(to.eulerAngles);
+        // transform.Rotate(to.eulerAngles);
         anim.SetFloat("Velocity", velocity.magnitude * Mathf.Sign(Vector3.Dot(this.transform.forward, velocity.normalized)));
         //Debug.Log(InputManager.Controller());
         //this.transform.rotation = Quaternion.Slerp(q, this.transform.rotation, .2f);
@@ -152,7 +153,7 @@ public class CharacterMovement : NetworkBehaviour
         // {
         if (!grounded)
             return;
-        if (args[1] as string == "A"+PlayerNumber)
+        if (args[1] as string == "A" + PlayerNumber)
         {
             if (!grounded)
                 return;

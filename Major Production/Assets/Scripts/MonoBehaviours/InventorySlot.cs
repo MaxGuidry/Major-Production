@@ -20,38 +20,40 @@ public class InventorySlot : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            switch (inventoryBehaviour.GetComponent<Transform>().tag)
-            {
-                case "P1":
-                    if(inventoryBehaviour.P1.inInventory)
-                        DropItem(); 
-                    break;
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    switch (inventoryBehaviour.GetComponent<Transform>().tag)
+        //    {
+        //        case "P1":
+        //            if(inventoryBehaviour.P1.inInventory)
+        //                DropItem(); 
+        //            break;
 
-                case "P2":
-                    if (inventoryBehaviour.P2.inInventory)
-                        DropItem();
-                    break;
+        //        case "P2":
+        //            if (inventoryBehaviour.P2.inInventory)
+        //                DropItem();
+        //            break;
 
-                case "P3":
-                    if (inventoryBehaviour.P3.inInventory)
-                        DropItem();
-                    break;
+        //        case "P3":
+        //            if (inventoryBehaviour.P3.inInventory)
+        //                DropItem();
+        //            break;
 
-                case "P4":
-                    if (inventoryBehaviour.P4.inInventory)
-                        DropItem();
-                    break;
-            }
-        }
+        //        case "P4":
+        //            if (inventoryBehaviour.P4.inInventory)
+        //                DropItem();
+        //            break;
+        //    }
+        //}
     }
 
     public void DropItem()
     {
+        if (inventoryBehaviour == null)
+            inventoryBehaviour = gameObject.transform.parent.GetComponent<InventoryText>().gameObject.transform.parent.gameObject.transform.parent.GetComponentInChildren<InventoryBehaviour>();
         if (item == null) return;
         Debug.Log("Droping: " + item.name);
-        switch (inventoryBehaviour.GetComponent<Transform>().tag)
+        switch (inventoryBehaviour.gameObject.tag)
         {
             case "P1":
                 if (inventoryBehaviour.inventory.CurrentInventory.Contains(item))

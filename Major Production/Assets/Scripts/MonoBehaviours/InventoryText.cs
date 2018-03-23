@@ -18,6 +18,8 @@ public class InventoryText : MonoBehaviour
     private CharacterMovement characterMovement;
     private EventSystem eventSystem;
     private GameObject inputEvents;
+
+    private string Input;
     // Use this for initialization
     private void Start()
     {
@@ -49,25 +51,9 @@ public class InventoryText : MonoBehaviour
 
         characterMovement = gameObject.transform.parent.parent.GetComponentInChildren<CharacterMovement>();
         eventSystem = gameObject.transform.parent.parent.GetComponentInChildren<EventSystem>();
-        string Input = "";
+        Input = "";
         if (characterMovement == null)
             return;
-        switch (gameObject.transform.parent.parent.GetComponentInChildren<CharacterMovement>().gameObject.transform.tag)
-        {
-            case "P1":
-                Input = "Input";
-                break;
-            case "P2":
-                Input = "Input 1";
-                break;
-            case "P3":
-                Input = "Input 2";
-                break;
-            case "P4":
-                Input = "Input 3";
-                break;
-        }
-        inputEvents = GameObject.FindGameObjectWithTag(Input);
         SelectionObject.SetActive(false);
     }
 
@@ -100,6 +86,26 @@ public class InventoryText : MonoBehaviour
 
     public void CycleThroughUI(object[] args)
     {
+        switch (gameObject.transform.parent.parent.GetComponentInChildren<CharacterMovement>().gameObject.transform.tag)
+        {
+            case "P1":
+                Input = "Input";
+                break;
+            case "P2":
+                Input = "Input 1";
+                break;
+            case "P3":
+                Input = "Input 2";
+                break;
+            case "P4":
+                Input = "Input 3";
+                break;
+        }
+
+        if (inputEvents == null)
+            inputEvents = GameObject.FindGameObjectWithTag(Input);
+        if (characterMovement == null)
+            characterMovement = gameObject.transform.parent.parent.GetComponentInChildren<CharacterMovement>();
         if (args.Length < 2)
             return;
         string Bbutton = "", SubmitButton = "";

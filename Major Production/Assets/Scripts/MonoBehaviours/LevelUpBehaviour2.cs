@@ -66,7 +66,7 @@ public class LevelUpBehaviour2 : MonoBehaviour
                 StartCoroutine(DoubleClicked("PArmor 2"));
             }
 
-            if (Input.GetAxis("DPad Vertical 2") == -1 || Input.GetKeyDown(KeyCode.DownArrow))
+            if (Input.GetAxis("DPad Vertical2") == -1 || Input.GetKeyDown(KeyCode.DownArrow))
             {
                 statUpGraded = true;
                 StartCoroutine(DoubleClicked("PSpeed 2"));

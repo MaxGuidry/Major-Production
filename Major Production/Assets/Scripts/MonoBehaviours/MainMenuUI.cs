@@ -9,7 +9,7 @@ public class MainMenuUI : MonoBehaviour
 {
     public AudioClip MusicClip;
     private Canvas MainCanvas;
-    public Canvas OptionsCanvas;
+    public Canvas OptionsCanvas, StartLocalGameCanvas;
     public Slider sensitivity;
     public Toggle invertMouse;
     private AudioSource _backSound;
@@ -21,6 +21,7 @@ public class MainMenuUI : MonoBehaviour
         eventSystem = FindObjectOfType<EventSystem>();
         MainCanvas.gameObject.SetActive(true);
         OptionsCanvas.gameObject.SetActive(false);
+        StartLocalGameCanvas.gameObject.SetActive(false);
 
         _backSound = FindObjectOfType<AudioSource>();
         _backSound.volume = 1;
@@ -39,12 +40,22 @@ public class MainMenuUI : MonoBehaviour
         SceneManager.LoadScene(scene);
     }
 
+    public void StartLocalGame()
+    {
+        SwitchCanvas(StartLocalGameCanvas);
+    }
+
     public void ExitGame()
     {
         Application.Quit();
     }
 
     public void Options()
+    {
+       SwitchCanvas(OptionsCanvas);
+    }
+
+    private void SwitchCanvas(Canvas otherCanvas)
     {
         switch (MainCanvas.GetComponentInChildren<Transform>().gameObject.activeInHierarchy)
         {
@@ -53,7 +64,7 @@ public class MainMenuUI : MonoBehaviour
                 {
                     child.gameObject.SetActive(false);
                 }
-                OptionsCanvas.gameObject.SetActive(true);
+                otherCanvas.gameObject.SetActive(true);
                 eventSystem.SetSelectedGameObject(GameObject.FindGameObjectWithTag("BackButton"));
                 break;
             case false:
@@ -63,7 +74,7 @@ public class MainMenuUI : MonoBehaviour
                     MainCanvas.transform.GetChild(i).gameObject.SetActive(true);
                     MainCanvas.transform.GetChild(i).GetChild(0).gameObject.SetActive(true);
                 }
-                OptionsCanvas.gameObject.SetActive(false);
+                otherCanvas.gameObject.SetActive(false);
                 eventSystem.SetSelectedGameObject(GameObject.FindGameObjectWithTag("StartButton"));
                 break;
         }

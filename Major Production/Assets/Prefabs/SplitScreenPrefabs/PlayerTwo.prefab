@@ -35,6 +35,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4120306772957984}
+  - component: {fileID: 114337621666972744}
   m_Layer: 0
   m_Name: PlayerTwo
   m_TagString: Untagged
@@ -2720,6 +2721,7 @@ GameObject:
   - component: {fileID: 114622161588793766}
   - component: {fileID: 114559053089621262}
   - component: {fileID: 114282789484846034}
+  - component: {fileID: 114395333884603190}
   m_Layer: 0
   m_Name: TvPlayerP2
   m_TagString: P2
@@ -8199,6 +8201,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 114591395551255874}
   item: {fileID: 11400000, guid: b31bfcd18116ad740841648233ee5ee9, type: 2}
+--- !u!114 &114337621666972744
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1014083832382958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5935b300dca47a4689909c3caa4043c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114372223804973264
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8266,6 +8279,38 @@ MonoBehaviour:
   P2: {fileID: 0}
   P3: {fileID: 0}
   P4: {fileID: 0}
+--- !u!114 &114395333884603190
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1661519802291668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 153
+    i1: 80
+    i2: 136
+    i3: 75
+    i4: 16
+    i5: 179
+    i6: 161
+    i7: 180
+    i8: 107
+    i9: 221
+    i10: 251
+    i11: 195
+    i12: 216
+    i13: 117
+    i14: 201
+    i15: 135
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114397044859034596
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8806,7 +8851,7 @@ MonoBehaviour:
   Sensitivity: 4
   RunSpeed: 10
   WalkSpeed: 6
-  cameraPivot: {fileID: 4180425046959296}
+  cameraPivot: {fileID: 0}
   BreakObject: {fileID: 11400000, guid: 8d616ec8803206749b56379eefea810f, type: 2}
   anim: {fileID: 95432343654545580}
 --- !u!114 &114770006543873924

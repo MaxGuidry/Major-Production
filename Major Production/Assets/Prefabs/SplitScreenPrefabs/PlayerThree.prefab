@@ -2072,6 +2072,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4352350287945506}
+  - component: {fileID: 114063554526325236}
   m_Layer: 0
   m_Name: PlayerThree
   m_TagString: Untagged
@@ -2234,6 +2235,7 @@ GameObject:
   - component: {fileID: 114046279341212174}
   - component: {fileID: 114074228776528426}
   - component: {fileID: 114434430501806744}
+  - component: {fileID: 114859327503422068}
   m_Layer: 0
   m_Name: TvPlayerP3
   m_TagString: P3
@@ -7789,6 +7791,17 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: GameEventArgsResponseObject, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!114 &114063554526325236
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1465462816100638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5935b300dca47a4689909c3caa4043c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114067660151322462
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9093,6 +9106,38 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: GameEventArgsResponse, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!114 &114859327503422068
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1501412966829104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 61
+    i1: 107
+    i2: 173
+    i3: 111
+    i4: 149
+    i5: 204
+    i6: 45
+    i7: 52
+    i8: 137
+    i9: 7
+    i10: 119
+    i11: 155
+    i12: 193
+    i13: 173
+    i14: 6
+    i15: 155
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114860130757867730
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9213,7 +9258,7 @@ MonoBehaviour:
   Sensitivity: 4
   RunSpeed: 10
   WalkSpeed: 6
-  cameraPivot: {fileID: 4789902510657088}
+  cameraPivot: {fileID: 0}
   BreakObject: {fileID: 11400000, guid: 8d616ec8803206749b56379eefea810f, type: 2}
   anim: {fileID: 95209291418661174}
 --- !u!114 &114970746231974476

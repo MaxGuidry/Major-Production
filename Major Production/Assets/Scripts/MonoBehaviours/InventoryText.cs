@@ -50,6 +50,8 @@ public class InventoryText : MonoBehaviour
         characterMovement = gameObject.transform.parent.parent.GetComponentInChildren<CharacterMovement>();
         eventSystem = gameObject.transform.parent.parent.GetComponentInChildren<EventSystem>();
         string Input = "";
+        if (characterMovement == null)
+            return;
         switch (gameObject.transform.parent.parent.GetComponentInChildren<CharacterMovement>().gameObject.transform.tag)
         {
             case "P1":

@@ -1797,6 +1797,7 @@ GameObject:
   - component: {fileID: 114003599878305850}
   - component: {fileID: 114982619141215058}
   - component: {fileID: 114071571947406894}
+  - component: {fileID: 114900029669607046}
   m_Layer: 0
   m_Name: TvPlayerP4
   m_TagString: P4
@@ -2562,6 +2563,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4745926842586386}
+  - component: {fileID: 114032601507419210}
   m_Layer: 0
   m_Name: PlayerFour
   m_TagString: Untagged
@@ -7679,6 +7681,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 114494910549373678}
   item: {fileID: 11400000, guid: a56e6035ae842e34d876ec8aaa27c90f, type: 2}
+--- !u!114 &114032601507419210
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1661344723520592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5935b300dca47a4689909c3caa4043c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114056698087290872
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8961,7 +8974,7 @@ MonoBehaviour:
   Sensitivity: 4
   RunSpeed: 10
   WalkSpeed: 6
-  cameraPivot: {fileID: 4339393747260748}
+  cameraPivot: {fileID: 0}
   BreakObject: {fileID: 11400000, guid: 8d616ec8803206749b56379eefea810f, type: 2}
   anim: {fileID: 95633841130373952}
 --- !u!114 &114788178255091426
@@ -9144,6 +9157,38 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: GameEventArgsResponse, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!114 &114900029669607046
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1454962628183746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 132
+    i1: 226
+    i2: 28
+    i3: 40
+    i4: 56
+    i5: 133
+    i6: 127
+    i7: 68
+    i8: 216
+    i9: 0
+    i10: 165
+    i11: 25
+    i12: 251
+    i13: 163
+    i14: 9
+    i15: 50
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114902660521513394
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -27,10 +27,15 @@ public class DisplayPlayerStats : MonoBehaviour
     public void CreateText()
     {
         var textPos = gameObject.transform.position;
+        if (PlayerStats == null)
+            return;
+        if (PlayerStats.stats == null)
+            return;
         if (!created)
             for (var i = 0; i < PlayerStats.stats._stats.Count; i++)
             {
                 var temp = Instantiate(TextPrefab, textPos, transform.rotation);
+                temp.transform.LookAt(gameObject.transform.parent.parent.GetComponentInChildren<Camera>().transform);
                 TempText.Add(temp);
 
                 temp.transform.SetParent(gameObject.transform);

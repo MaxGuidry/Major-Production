@@ -78,6 +78,8 @@ public class CharacterMovement : NetworkBehaviour
     {
         if (!isLocalPlayer && nm)
             return;
+        if (!cameraPivot)
+            return;
         object[] test = { this, "A" };
         if (Input.GetKeyDown(KeyCode.Space))
             Jump(test);

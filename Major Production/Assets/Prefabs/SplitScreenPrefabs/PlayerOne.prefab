@@ -759,6 +759,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4888686848343078}
+  - component: {fileID: 114002596150990430}
   m_Layer: 0
   m_Name: PlayerOne
   m_TagString: Untagged
@@ -2169,6 +2170,7 @@ GameObject:
   - component: {fileID: 114103189793090168}
   - component: {fileID: 114099241373768874}
   - component: {fileID: 114979459814607756}
+  - component: {fileID: 114881914015561196}
   m_Layer: 0
   m_Name: TvPlayerP1
   m_TagString: P1
@@ -7638,6 +7640,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114002596150990430
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1196326631148512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5935b300dca47a4689909c3caa4043c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114033062425417480
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9100,6 +9113,38 @@ MonoBehaviour:
   AllQuestComplete: {fileID: 11400000, guid: b9af6b6344580df4db6899a4185a854f, type: 2}
   CurrentObjectiveText: {fileID: 114674902121546464}
   typer: {fileID: 114983907589657682}
+--- !u!114 &114881914015561196
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1533950598595852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 241
+    i1: 128
+    i2: 7
+    i3: 197
+    i4: 196
+    i5: 172
+    i6: 24
+    i7: 196
+    i8: 235
+    i9: 4
+    i10: 49
+    i11: 136
+    i12: 193
+    i13: 228
+    i14: 78
+    i15: 204
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114883649570006180
 MonoBehaviour:
   m_ObjectHideFlags: 1

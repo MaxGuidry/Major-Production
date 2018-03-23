@@ -76,18 +76,26 @@ public class FixCamera : MonoBehaviour
     public IEnumerator GetCharacter()
     {
         bool done = false;
+        string playernumber = "";
         while (!done)
         {
+            playernumber = this.gameObject.transform.parent.GetChild(0).name;
             cms = GameObject.FindObjectsOfType<CharacterMovement>().ToList();
+
             foreach (var c in cms)
             {
-                if (c.isLocalPlayer)
+                if(c.cameraPivot!=null)
+                    continue;
+                if(playernumber!= c.gameObject.name)
+                    continue;
+                if (c.isLocalPlayer||c.cameraPivot!=pivotY)
                 {
                     follow = c.transform;
+                    c.cameraPivot = pivotY;
                     character = c;
                     done = true;
 
-                    switch (gameObject.tag)
+                    switch (c.gameObject.tag)
                     {
                         case "P1":
                             PlayerNumber = "";
@@ -105,6 +113,7 @@ public class FixCamera : MonoBehaviour
 
                     }
 
+                    break;
                 }
 
             }

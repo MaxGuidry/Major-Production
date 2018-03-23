@@ -200,6 +200,7 @@ public class CharacterMovement : NetworkBehaviour
         if (args[1] as string == "X" + PlayerNumber)
         {
             anim.SetTrigger("AttackBasic");
+            
             //BreakObject.ObjRaise(this);
         }
     }

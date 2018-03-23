@@ -1973,6 +1973,7 @@ GameObject:
   - component: {fileID: 1373141499}
   - component: {fileID: 1373141496}
   - component: {fileID: 1373141495}
+  - component: {fileID: 1373141497}
   m_Layer: 0
   m_Name: Network Manager
   m_TagString: Untagged
@@ -2077,6 +2078,17 @@ MonoBehaviour:
   showGUI: 1
   offsetX: 0
   offsetY: 0
+--- !u!114 &1373141497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1373141494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5b51d4e882b0df42aef9ea44aa145c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1373141499
 Transform:
   m_ObjectHideFlags: 0
@@ -2623,12 +2635,12 @@ Prefab:
     - target: {fileID: 224084979615100764, guid: 3e236b5d89777a045bddc11f8345d659,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 120.32028
+      value: 123.945404
       objectReference: {fileID: 0}
     - target: {fileID: 224084979615100764, guid: 3e236b5d89777a045bddc11f8345d659,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -57.631577
       objectReference: {fileID: 0}
     - target: {fileID: 1261864423046138, guid: 3e236b5d89777a045bddc11f8345d659, type: 2}
       propertyPath: m_IsActive

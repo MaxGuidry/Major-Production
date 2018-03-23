@@ -29,15 +29,16 @@ public class CharacterMovement : NetworkBehaviour
 
     public Animator anim;
 
-
+    private NetworkManager nm;
     //private Dictionary<string, float> axisValues = new Dictionary<string, float>();
 
     private void Start()
     {
+        nm = FindObjectOfType<NetworkManager>();
         if (!anim)
             anim = GetComponent<Animator>();
-        if (!cameraPivot)
-            cameraPivot = Camera.main.transform.parent.parent;
+        //if (!cameraPivot)
+         //   cameraPivot = Camera.main.transform.parent.parent;
 
         switch (gameObject.tag)
         {
@@ -75,7 +76,7 @@ public class CharacterMovement : NetworkBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (!isLocalPlayer)
+        if (!isLocalPlayer && !nm)
             return;
         object[] test = { this, "A" };
         if (Input.GetKeyDown(KeyCode.Space))

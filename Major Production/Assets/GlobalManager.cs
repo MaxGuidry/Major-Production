@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class GlobalManager : MonoBehaviour {
+public class GlobalManager : MonoBehaviour
+{
 
     void Awake()
     {
@@ -12,12 +13,15 @@ public class GlobalManager : MonoBehaviour {
         GLOBALS.SplitscreenLocal = false;
         GLOBALS.SoloOnline = true;
     }
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+   
 }

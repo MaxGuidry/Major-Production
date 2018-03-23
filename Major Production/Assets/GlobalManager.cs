@@ -9,7 +9,8 @@ public class GlobalManager : MonoBehaviour {
     {
         if (FindObjectOfType<NetworkManager>() == null)
             GLOBALS.SplitscreenOnline = false;
-        GLOBALS.SplitscreenLocal = true;
+        GLOBALS.SplitscreenLocal = false;
+        GLOBALS.SoloOnline = true;
     }
     void Start () {
 		

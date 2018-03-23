@@ -76,7 +76,7 @@ public class CharacterMovement : NetworkBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (!GLOBALS.SplitscreenOnline)
+        if (GLOBALS.SoloOnline || GLOBALS.SplitscreenOnline)
             if (!isLocalPlayer)
                 return;
         if (!cameraPivot)

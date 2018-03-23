@@ -76,7 +76,7 @@ public class CharacterMovement : NetworkBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (!isLocalPlayer && !nm)
+        if (!isLocalPlayer && nm)
             return;
         object[] test = { this, "A" };
         if (Input.GetKeyDown(KeyCode.Space))

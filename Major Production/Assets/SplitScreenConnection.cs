@@ -6,20 +6,15 @@ using UnityEngine.UI;
 
 public class SplitScreenConnection : MonoBehaviour
 {
-    public GameObject Prefab;
-    public GameObject Panel;
+    public List<GameObject> Panels;
     public SplitScreenPlayers Players;
     public GameEventArgs PlayerJoined;
     //Get Joystick Names
     public List<string> connectedControllers;
     private List<string> oldStrings;
-    private GameObject temp;
-    private int X;
     // Use this for initialization
     void Start()
     {
-
-        X = 0;
         connectedControllers = Input.GetJoystickNames().ToList();
         oldStrings = connectedControllers;
         Players.PlayersJoined = connectedControllers.Count;
@@ -39,26 +34,28 @@ public class SplitScreenConnection : MonoBehaviour
         {
             if (connectedControllers[i] == "")
             {
-                connectedControllers.Remove(connectedControllers[i]);
+                Panels[i].gameObject.GetComponentInChildren<Text>().text = "Press A to Join Game";
                 i = -1;
-                Destroy(temp);
+            }
+            if (connectedControllers[i].Contains(i.ToString()))
+            {
+                Panels[i].gameObject.GetComponentInChildren<Text>().text = "Player " + i + " joined game";
             }
         }
+
+        if (connectedControllers.Count <= 0)
+        {
+            foreach(var i in Panels)
+                i.gameObject.GetComponentInChildren<Text>().text = "Press A to Join Game";
+        }
+
         Players.PlayersJoined = connectedControllers.Count;
     }
 
     public void PlayerJoinedRaise()
     {
-        X += 10;
         if (connectedControllers.Count > 0)
         {
-            for (int i = 0; i < Players.PlayersJoined; i++)
-            {
-                temp = Instantiate(Prefab, new Vector3(Panel.transform.position.x + X,
-                        Panel.transform.position.y, Panel.transform.position.z),
-                    Quaternion.identity);
-                temp.transform.parent = Panel.transform;
-            }
             //Iterate over every element
             for (var i = 0; i < connectedControllers.Count; ++i)
             {

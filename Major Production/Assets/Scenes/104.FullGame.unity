@@ -113,6 +113,52 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &23503857
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 23503859}
+  - component: {fileID: 23503858}
+  m_Layer: 0
+  m_Name: PlayerSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &23503858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 23503857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9421f17a50b0794cb7237a734b6fcf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerAmount: {fileID: 11400000, guid: 86ecf7c6b55aeef4d8eef6987746e868, type: 2}
+  Players:
+  - {fileID: 1196326631148512, guid: f18007c5c4ac18c4eb043188c1e44ecc, type: 2}
+  - {fileID: 1014083832382958, guid: 9950884b10b3a1b46bddfbc3d875c987, type: 2}
+  - {fileID: 1465462816100638, guid: 3d6bad6f95cc2d348907779bc1ad069b, type: 2}
+  - {fileID: 1661344723520592, guid: 84e21c2838857f44d800a519fba30932, type: 2}
+--- !u!4 &23503859
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 23503857}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -12.616948, y: 23.869034, z: 19.187561}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &65150342 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1455469281419454, guid: 449e04cdb3d91274581143d8b5c240e2,

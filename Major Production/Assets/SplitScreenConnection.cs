@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,19 +34,18 @@ public class SplitScreenConnection : MonoBehaviour
         oldStrings = connectedControllers;
         for (var i = 0; i < connectedControllers.Count; i++)
         {
-            if (connectedControllers[i].Contains("Controller"))
-            {
-                connectedControllers[i] += i.ToString();
-            }
-            else
-            {
-                connectedControllers[i] = "";
-            }
             if (connectedControllers[i] == "")
             {
                 Panels[i].gameObject.GetComponentInChildren<Text>().text = "Connect Controller";
                 connectedControllers.Remove(connectedControllers[i]);
+                i -=1;
             }
+
+            if (connectedControllers[i].Contains("Controller"))
+            {
+                connectedControllers[i] += i.ToString();
+            }
+
             if (connectedControllers[i].Contains(i.ToString()))
             {
                 Panels[i].gameObject.GetComponentInChildren<Text>().text = "Player " + (i + 1) + " joined game";

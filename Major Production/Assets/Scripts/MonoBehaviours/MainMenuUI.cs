@@ -27,7 +27,6 @@ public class MainMenuUI : MonoBehaviour
         _backSound.volume = 1;
 
         sensitivity.value = InputMap.Sensititivity;
-        Debug.Log(InputMap.Sensititivity);
         if (InputMap.Sensititivity < 0)
             invertMouse.isOn = true;
         if (MusicClip == null) return;

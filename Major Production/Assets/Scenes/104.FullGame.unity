@@ -142,7 +142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerAmount: {fileID: 11400000, guid: 86ecf7c6b55aeef4d8eef6987746e868, type: 2}
   Players:
-  - {fileID: 2093559966}
+  - {fileID: 1755278981}
   - {fileID: 1668917480}
   - {fileID: 1293786014}
   - {fileID: 204416720}
@@ -574,7 +574,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1001 &2093559965
+--- !u!1001 &1755278980
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -616,8 +616,8 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f18007c5c4ac18c4eb043188c1e44ecc, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &2093559966 stripped
+--- !u!1 &1755278981 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1196326631148512, guid: f18007c5c4ac18c4eb043188c1e44ecc,
     type: 2}
-  m_PrefabInternal: {fileID: 2093559965}
+  m_PrefabInternal: {fileID: 1755278980}

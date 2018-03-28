@@ -18,6 +18,8 @@ public class SplitScreenConnection : MonoBehaviour
         connectedControllers = Input.GetJoystickNames().ToList();
         oldStrings = connectedControllers;
         Players.PlayersJoined = connectedControllers.Count;
+        foreach (var i in Panels)
+            i.gameObject.GetComponentInChildren<Text>().text = "Press A to Join Game";
     }
 
     // Update is called once per frame
@@ -29,27 +31,21 @@ public class SplitScreenConnection : MonoBehaviour
             PlayerJoined.Raise(this);
         }
         oldStrings = connectedControllers;
+        Players.PlayersJoined = connectedControllers.Count;
 
         for (var i = 0; i < connectedControllers.Count; i++)
         {
-            if (connectedControllers[i] == "")
+            if (connectedControllers[i] != "")
+                connectedControllers[i] += i.ToString();
+            else
             {
                 Panels[i].gameObject.GetComponentInChildren<Text>().text = "Press A to Join Game";
-                i = -1;
+                connectedControllers.Remove(connectedControllers[i]);
             }
+
             if (connectedControllers[i].Contains(i.ToString()))
-            {
-                Panels[i].gameObject.GetComponentInChildren<Text>().text = "Player " + i + " joined game";
-            }
+                Panels[i].gameObject.GetComponentInChildren<Text>().text = "Player " + (i + 1) + " joined game";
         }
-
-        if (connectedControllers.Count <= 0)
-        {
-            foreach(var i in Panels)
-                i.gameObject.GetComponentInChildren<Text>().text = "Press A to Join Game";
-        }
-
-        Players.PlayersJoined = connectedControllers.Count;
     }
 
     public void PlayerJoinedRaise()

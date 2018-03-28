@@ -6,7 +6,7 @@ public class PlayerSpawner : MonoBehaviour {
     public SplitScreenPlayers PlayerAmount;
     public List<GameObject> Players;
     // Use this for initialization
-    void Start () {
+    void Awake () {
 		foreach (var player in Players)
         {
             player.SetActive(false);

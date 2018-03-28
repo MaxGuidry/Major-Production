@@ -7,11 +7,6 @@ public class PlayerSpawner : MonoBehaviour {
     public List<GameObject> Players;
     // Use this for initialization
     void Awake () {
-		foreach (var player in Players)
-        {
-            player.SetActive(false);
-        }
-
         switch (PlayerAmount.PlayersJoined)
         {
             case 0:
@@ -32,11 +27,17 @@ public class PlayerSpawner : MonoBehaviour {
                 Players[1].SetActive(true);
                 Players[2].SetActive(true);
 
+                Players[0].gameObject.GetComponentInChildren<Camera>().rect = new Rect(0, .5f, .5f, 1);
+                Players[1].gameObject.GetComponentInChildren<Camera>().rect = new Rect(.5f, .5f, 1, 1);
                 Players[2].gameObject.GetComponentInChildren<Camera>().rect = new Rect(0, -.5f, 1, 1);
                 break;
             case 4:
                 foreach (var player in Players)
                     player.SetActive(true);
+                Players[0].gameObject.GetComponentInChildren<Camera>().rect = new Rect(0, .5f, .5f, 1);
+                Players[1].gameObject.GetComponentInChildren<Camera>().rect = new Rect(.5f, .5f, 1, 1);
+                Players[2].gameObject.GetComponentInChildren<Camera>().rect = new Rect(0, 0, .5f, .5f);
+                Players[3].gameObject.GetComponentInChildren<Camera>().rect = new Rect(.5f, 0, .5f, .5f);
                 break;
         }
 	}

@@ -1,17 +1,23 @@
 ﻿using System.Collections.Generic;
 using ScriptableObjects;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ObjectiveBehaviour : MonoBehaviour
 {
     public Objective CurrentObjective;
     public List<Objective> PlayerObjectives;
+    public GameEvent AllQuestComplete;
 
     private void Start()
     {
         //null should be used to check validity of the token
         if (PlayerObjectives == null) return;
+
+        PlayerObjectives.ForEach(objective => objective.CurrentAmount = 0);
+
         PlayerObjectives.ForEach(objective => objective.ProgressQuest("initialize"));
+        PlayerObjectives.ForEach(objective => objective.Status = ObjectiveStatus.Inactive);
         //set the current objective
         CurrentObjective = PlayerObjectives[0];
         //activate the currentobjective
@@ -36,8 +42,6 @@ public class ObjectiveBehaviour : MonoBehaviour
     {
         if (CurrentObjective == null)
             return;
-        if (PlayerObjectives.Count <= 0)
-            Destroy(gameObject);
 
         //Set Next Objective
         PlayerObjectives.Remove(CurrentObjective);
@@ -55,6 +59,6 @@ public class ObjectiveBehaviour : MonoBehaviour
     public void ProgressObjective(Object[] args)
     {
         var sender = args[0];
-        CurrentObjective.ProgressQuest(sender as Item);
+        CurrentObjective.ProgressQuest(sender as Item, args[1]);
     }
 }

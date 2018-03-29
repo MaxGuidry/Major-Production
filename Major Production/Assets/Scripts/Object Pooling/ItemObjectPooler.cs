@@ -7,21 +7,22 @@ public class ItemObjectPooler : MonoBehaviour
 
     private int activeCount;
     public int PooledAmount;
-    public GameObject PooledObject;
+    public List<GameObject> PooledObject;
     public List<GameObject> PooledObjects;
-    public List<GameObject> RandomGameObjects;
 
     private void Awake()
     {
         s_instance = this;
         PooledObjects = new List<GameObject>();
-        for (var i = 0; i <= PooledAmount; i++)
+        foreach (var po in PooledObject)
         {
-            PooledObject = RandomGameObjects[Random.Range(0, RandomGameObjects.Count)];
-            var obj = Instantiate(PooledObject);
-            obj.SetActive(false);
-            obj.transform.SetParent(gameObject.transform);
-            PooledObjects.Add(obj);
+            for (var i = 0; i <= PooledAmount; i++)
+            {
+                var obj = Instantiate(po) as GameObject;
+                obj.SetActive(false);
+                obj.transform.SetParent(gameObject.transform);
+                PooledObjects.Add(obj);
+            }
         }
     }
 
@@ -44,7 +45,7 @@ public class ItemObjectPooler : MonoBehaviour
     /// <param name="prefab"></param>
     /// <param name="objPos"></param>
     /// <param name="rot"></param>
-    public void Create(GameObject prefab, Vector3 objPos, Quaternion rot)
+    public GameObject Create(GameObject prefab, Vector3 objPos, Quaternion rot)
     {
         var newActiveCount = activeCount + 1;
         if (newActiveCount < PooledAmount)
@@ -58,10 +59,21 @@ public class ItemObjectPooler : MonoBehaviour
             AddToPool(newObj);
             newObj.transform.SetParent(gameObject.transform);
             activeCount++;
+            return newObj;
         }
 
         prefab.transform.position = objPos;
         prefab.transform.rotation = rot;
+        return prefab;
+    }
+
+    public GameObject CreateSingle(GameObject prefab, Vector3 objPos, Quaternion rot)
+    {
+        RemoveFromPool(prefab);
+        prefab.transform.position = objPos;
+        prefab.transform.rotation = rot;
+        activeCount--;
+        return prefab;
     }
 
     /// <summary>
@@ -95,4 +107,5 @@ public class ItemObjectPooler : MonoBehaviour
         prefab.SetActive(false);
         PooledObjects.Add(prefab);
     }
+    
 }

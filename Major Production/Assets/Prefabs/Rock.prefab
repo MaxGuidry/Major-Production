@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 23937443635008016}
   - component: {fileID: 114742531089728968}
   - component: {fileID: 54625384125803456}
+  - component: {fileID: 114627134618364800}
   m_Layer: 0
   m_Name: Rock
   m_TagString: Untagged
@@ -112,6 +113,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114627134618364800
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1973308700312860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3564fec715b5a8044b5f00c9d1c52725, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114742531089728968
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -126,3 +138,6 @@ MonoBehaviour:
   SpoilerTime: 0
   Item: {fileID: 11400000, guid: a56e6035ae842e34d876ec8aaa27c90f, type: 2}
   ItemPickedUp: {fileID: 11400000, guid: c913b0e6817fa654d9da16c8ca35575b, type: 2}
+  ItemPickedUp1: {fileID: 11400000, guid: ce05ae57839993e499d397d853a1b174, type: 2}
+  ItemPickedUp2: {fileID: 11400000, guid: d511a4fc6cf3df54597d760be2e7a07b, type: 2}
+  ItemPickedUp3: {fileID: 11400000, guid: acc6d17ce0ad0c346864f02d0a9f85d9, type: 2}

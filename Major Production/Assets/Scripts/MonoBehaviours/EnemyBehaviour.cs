@@ -23,4 +23,5 @@ public class EnemyBehaviour : MonoBehaviour
         if (Vector3.Distance(transform.position, _target.transform.position)<= MaxDistance)
             Debug.Log("Shoot");
     }
+
 }

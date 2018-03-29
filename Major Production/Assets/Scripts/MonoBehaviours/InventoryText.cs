@@ -2,135 +2,197 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class InventoryText : MonoBehaviour
 {
-    private int GoopAmount;
+    public GameObject SelectionObject;
     public Text GoopAmounttext;
-    private InventoryBehaviour Inventory;
-
-    private int MetalAmount;
     public Text MetalAmounttext;
-    private int StoneAmount;
     public Text StoneAmounttext;
-    private int WoodAmount;
     public Text WoodAmounttext;
-    private List<ScriptableObjects.Item> WoodList = new List<ScriptableObjects.Item>();
-    private List<ScriptableObjects.Item> StoneList = new List<ScriptableObjects.Item>();
-    private List<ScriptableObjects.Item> MetalList = new List<ScriptableObjects.Item>();
-    private List<ScriptableObjects.Item> GoopList = new List<ScriptableObjects.Item>();
 
-    private int prevWood;
-    private int prevStone;
-    private int prevMetal;
-    private int prevGoop;
+    public uint woodAmount, stoneAmount, metalAmount, goopAmount;
+    public bool inInventory;
+    private CharacterMovement characterMovement;
+    private EventSystem eventSystem;
+    private GameObject inputEvents;
 
+    private string Input;
     // Use this for initialization
     private void Start()
     {
-        Inventory = FindObjectOfType<InventoryBehaviour>();
-    }
+        //WoodAmounttext = GameObject.FindGameObjectWithTag("Wood").GetComponentInChildren<Text>();
+        //StoneAmounttext = GameObject.FindGameObjectWithTag("Stone").GetComponentInChildren<Text>();
+        //MetalAmounttext = GameObject.FindGameObjectWithTag("Metal").GetComponentInChildren<Text>();
+        //GoopAmounttext = GameObject.FindGameObjectWithTag("Goop").GetComponentInChildren<Text>();
 
-    /// <summary>
-    ///     Checks each item in inventory then makes a number
-    ///     that is equal to the amount in inventory
-    /// </summary>
-    public void CheckInv()
-    {
-        WoodAmount = 0;
-        StoneAmount = 0;
-        MetalAmount = 0;
-        GoopAmount = 0;
-
-        WoodList.Clear();
-        StoneList.Clear();
-        MetalList.Clear();
-        GoopList.Clear();
-
-        prevWood = 0;
-        prevStone = 0;
-        prevMetal = 0;
-        prevGoop = 0;
-      
-        foreach (var item in Inventory.ActiveInventory)
+        foreach (var slot in GetComponentsInChildren<Transform>())
         {
-            switch (item.ItemType)
+            switch (slot.tag)
             {
-                case ItemType.None:
+                case "Wood":
+                    WoodAmounttext = slot.GetComponentInChildren<Text>();
                     break;
-                case ItemType.Wood:
-                    ItemAdded(WoodAmount, WoodAmounttext, WoodList, item);
+                case "Stone":
+                    StoneAmounttext = slot.GetComponentInChildren<Text>();
                     break;
-                case ItemType.Stone:
-                    ItemAdded(StoneAmount, StoneAmounttext, StoneList, item);
+                case "Metal":
+                    MetalAmounttext = slot.GetComponentInChildren<Text>();
                     break;
-                case ItemType.Metal:
-                    ItemAdded(MetalAmount, MetalAmounttext, MetalList, item);
-                    break;
-                case ItemType.Goop:
-                    ItemAdded(GoopAmount, GoopAmounttext, GoopList, item);
+                case "Goop":
+                    GoopAmounttext = slot.GetComponentInChildren<Text>();
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    break;
             }
         }
 
-        if (WoodList.Count > prevWood)
+        characterMovement = gameObject.transform.parent.parent.GetComponentInChildren<CharacterMovement>();
+        eventSystem = gameObject.transform.parent.parent.GetComponentInChildren<EventSystem>();
+        Input = "";
+        if (characterMovement == null)
+            return;
+        SelectionObject.SetActive(false);
+    }
+
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Escape))
+    //    {
+    //        if (characterMovement.enabled)
+    //        {
+    //            if (Input.GetKeyDown(KeyCode.Escape)) return;
+    //            SelectionObject.SetActive(true);
+    //            characterMovement.enabled = false;
+    //            inputEvents.gameObject.SetActive(false);
+    //            eventSystem.SetSelectedGameObject(gameObject.transform.GetChild(0).gameObject);
+    //            inInventory = true;
+    //        }
+    //        else
+    //        {
+    //            inInventory = false;
+    //            SelectionObject.SetActive(false);
+    //            characterMovement.enabled = true;
+    //            inputEvents.gameObject.SetActive(true);
+    //            eventSystem.SetSelectedGameObject(null);
+    //        }
+    //    }
+
+    //    if (inInventory)
+    //        SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
+    //}
+
+    public void CycleThroughUI(object[] args)
+    {
+        switch (gameObject.transform.parent.parent.GetComponentInChildren<CharacterMovement>().gameObject.transform.tag)
         {
-            prevWood = WoodList.Count;
-            StartCoroutine(TextPop(WoodAmounttext));
+            case "P1":
+                Input = "Input";
+                break;
+            case "P2":
+                Input = "Input 1";
+                break;
+            case "P3":
+                Input = "Input 2";
+                break;
+            case "P4":
+                Input = "Input 3";
+                break;
         }
 
-        if (StoneList.Count > prevStone)
+        if (inputEvents == null)
+            inputEvents = GameObject.FindGameObjectWithTag(Input);
+        if (characterMovement == null)
+            characterMovement = gameObject.transform.parent.parent.GetComponentInChildren<CharacterMovement>();
+        if (args.Length < 2)
+            return;
+        string Bbutton = "", SubmitButton = "";
+        switch (args[1] as string)
         {
-            prevStone = StoneList.Count;
-            StartCoroutine(TextPop(StoneAmounttext));
+            case "Submit":
+                SubmitButton = "Submit";
+                if (characterMovement.gameObject.tag != "P1") return;
+                break;
+            case "Submit1":
+                SubmitButton = "Submit1";
+                if (characterMovement.gameObject.tag != "P2") return;
+                break;
+            case "Submit2":
+                SubmitButton = "Submit2";
+                if (characterMovement.gameObject.tag != "P3") return;
+                break;
+            case "Submit3":
+                SubmitButton = "Submit3";
+                if (characterMovement.gameObject.tag != "P4") return;
+                break;
+            default:
+                break;
         }
 
-        if (MetalList.Count > prevMetal)
+        switch (args[1] as string)
         {
-            prevMetal = MetalList.Count;
-            StartCoroutine(TextPop(MetalAmounttext));
+            case "B":
+                Bbutton = "B";
+                if (characterMovement.gameObject.tag != "P1") return;
+                break;
+            case "B1":
+                Bbutton = "B1";
+                if (characterMovement.gameObject.tag != "P2") return;
+                break;
+            case "B2":
+                Bbutton = "B2";
+                if (characterMovement.gameObject.tag != "P3") return;
+                break;
+            case "B3":
+                Bbutton = "B3";
+                if (characterMovement.gameObject.tag != "P4") return;
+                break;
+            default:
+                break;
         }
 
-        if (GoopList.Count > prevGoop)
+
+        if (args[1] as string == SubmitButton || args[1] as string == Bbutton)
         {
-            prevGoop = GoopList.Count;
-            StartCoroutine(TextPop(GoopAmounttext));
+            if (characterMovement.enabled)
+            {
+                if (args[1] as string == Bbutton) return;
+                SelectionObject.SetActive(true);
+                characterMovement.enabled = false;
+                inputEvents.gameObject.SetActive(false);
+                eventSystem.SetSelectedGameObject(gameObject.transform.GetChild(0).gameObject);
+                inInventory = true;
+            }
+            else
+            {
+                inInventory = false;
+                SelectionObject.SetActive(false);
+                characterMovement.enabled = true;
+                inputEvents.gameObject.SetActive(true);
+                eventSystem.SetSelectedGameObject(null);
+            }
         }
     }
 
-    /// <summary>
-    ///     Removing redundancy in code above
-    /// </summary>
-    /// <param name="itemAmount"></param>
-    /// <param name="itemText"></param>
-    /// <param name="list"></param>
-    /// <param name="item"></param>
-    private void ItemAdded(int itemAmount, Text itemText, List<ScriptableObjects.Item> list, ScriptableObjects.Item item)
+    public uint GetNumberItems(ItemType type)
     {
-        itemAmount++;
-        itemText.text = itemAmount.ToString();
-        list.Add(item);
-    }
-
-    /// <summary>
-    ///     Creates sort of a pop animation for text
-    /// </summary>
-    /// <param name="text"></param>
-    /// <returns></returns>
-    private IEnumerator TextPop(Text text)
-    {
-        var test = true;
-        while (test)
+        switch (type)
         {
-            text.fontSize = 50;
-            yield return new WaitForSeconds(1);
-            text.fontSize = 40;
-            test = false;
+            case ItemType.None:
+                break;
+            case ItemType.Wood:
+                return woodAmount;
+            case ItemType.Stone:
+                return stoneAmount;
+            case ItemType.Metal:
+                return metalAmount;
+            case ItemType.Goop:
+                return goopAmount;
+            default:
+                throw new ArgumentOutOfRangeException("type", type, null);
         }
-
-        yield return null;
+        return 0;
     }
 }

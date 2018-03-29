@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8286086bc686bc6439e296d867609903, type: 3}
+  m_Name: GatherStone2
+  m_EditorClassIdentifier: 
+  _title: Gather 1 Stone
+  _description: Gather Stone
+  _requiredAmount: 1
+  _requiredItem: {fileID: 11400000, guid: a56e6035ae842e34d876ec8aaa27c90f, type: 2}
+  QuestStart: {fileID: 11400000, guid: 60e7ca7159b1edb42b00150baf93e9a4, type: 2}
+  QuestChange: {fileID: 11400000, guid: 3c60fde1f19a79f44a086688fd554faa, type: 2}
+  QuestComplete: {fileID: 11400000, guid: 49d42ba0c5202734c9b2d4a5ce8919a4, type: 2}
+  _reward:
+    stat: {fileID: 11400000, guid: 3ab79e8d285a00c4b9b018107e695a49, type: 2}
+    RewardValue: 100

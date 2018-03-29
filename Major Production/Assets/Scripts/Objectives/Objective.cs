@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ScriptableObjects;
 using UnityEngine;
@@ -14,6 +15,7 @@ public enum ObjectiveStatus
     Active = 2,
     Complete = 3
 }
+
 [Serializable]
 public class QuestReward
 {
@@ -24,12 +26,15 @@ public class QuestReward
         return string.Format("Quest Reward {0} with {1}", stat, RewardValue);
     }
 }
+
 [CreateAssetMenu]
 public class Objective : ScriptableObject
 {
+    private List<int> pickedUp = new List<int>();
+
     [SerializeField] private string _title;
 
-    [Multiline] [SerializeField] private  string _description;
+    [Multiline] [SerializeField] private string _description;
 
     private int _currentAmount;
 
@@ -53,6 +58,7 @@ public class Objective : ScriptableObject
     public int CurrentAmount
     {
         get { return _currentAmount; }
+        set { _currentAmount = value; }
     }
 
     public int RequiredAmount
@@ -74,7 +80,7 @@ public class Objective : ScriptableObject
 
         Debug.Log("Quest Progress: " + _title + " " + args[0]);
 
-        var valids = new object[] {_requiredItem, "initialize", "start"};
+        var valids = new object[] { _requiredItem, "initialize", "start" };
 
         if (!valids.Contains(args[0]))
             return;
@@ -88,7 +94,11 @@ public class Objective : ScriptableObject
                 ChangeState(ObjectiveStatus.Active);
                 break;
             case ObjectiveStatus.Active:
+                var go = args[1] as GameObject;
+                if (pickedUp.Contains(go.GetInstanceID()))
+                    break;
                 _currentAmount++;
+                pickedUp.Add(go.GetInstanceID());
                 ChangeState(AmountCheck() ? ObjectiveStatus.Complete : ObjectiveStatus.Active);
                 break;
             case ObjectiveStatus.Complete:

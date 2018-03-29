@@ -27,9 +27,10 @@ public class PlayerSpawner : MonoBehaviour {
                 Players[1].SetActive(true);
                 Players[2].SetActive(true);
                 Players[2].gameObject.transform.GetComponentInChildren<PlayerStatBehaviour>().gameObject.SetActive(true);
+
                 Players[0].gameObject.GetComponentInChildren<Camera>().rect = new Rect(0, .5f, .5f, 1);
                 Players[1].gameObject.GetComponentInChildren<Camera>().rect = new Rect(.5f, .5f, 1, 1);
-                Players[2].gameObject.GetComponentInChildren<Camera>().rect = new Rect(0, -.5f, 1, 1);
+                Players[2].gameObject.GetComponentInChildren<Camera>().rect = new Rect(0.25f, 0, .5f, .5f);
                 break;
             case 4:
                 foreach (var player in Players)

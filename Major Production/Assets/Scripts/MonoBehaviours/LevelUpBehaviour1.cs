@@ -6,36 +6,16 @@ public class LevelUpBehaviour1 : MonoBehaviour
 {
     public GameObject panel;
     private PlayerStatBehaviour playerStat;
-    private int UpgradePoint;
     void Start()
     {
         playerStat = gameObject.GetComponent<PlayerStatBehaviour>();
+       
     }
-
-    void Update()
-    {
-        if (UpgradePoint > 0)
-            panel.SetActive(true);
-        else
-        {
-            panel.SetActive(false);
-        }
-    }
-
-    /// <summary>
-    ///     Checks if the panel is active and sets it accordlying
-    /// </summary>
-    public void ShowUI()
-    {
-        panel.SetActive(!panel.activeInHierarchy);
-    }
-
     /// <summary>
     ///     Used to start the coroutine
     /// </summary>
     public void StartUpgrade()
     {
-        UpgradePoint++;
         StartCoroutine(UpgradeStat());
     }
 
@@ -48,25 +28,25 @@ public class LevelUpBehaviour1 : MonoBehaviour
         var statUpGraded = false;
         while (!statUpGraded)
         {
-            if (Input.GetAxis("DPad Horizontal1") == -1 || Input.GetKeyDown(KeyCode.LeftArrow))
+            if (Input.GetAxis("DPad Horizontal 1") == -1 || Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 statUpGraded = true;
                 StartCoroutine(DoubleClicked("PHealth 1"));
             }
 
-            if (Input.GetAxis("DPad Horizontal1") == 1 || Input.GetKeyDown(KeyCode.RightArrow))
+            if (Input.GetAxis("DPad Horizontal 1") == 1 || Input.GetKeyDown(KeyCode.RightArrow))
             {
                 statUpGraded = true;
                 StartCoroutine(DoubleClicked("PDamage 1"));
             }
 
-            if (Input.GetAxis("DPad Vertical1") == 1 || Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetAxis("DPad Vertical 1") == 1 || Input.GetKeyDown(KeyCode.UpArrow))
             {
                 statUpGraded = true;
                 StartCoroutine(DoubleClicked("PArmor 1"));
             }
 
-            if (Input.GetAxis("DPad Vertical1") == -1 || Input.GetKeyDown(KeyCode.DownArrow))
+            if (Input.GetAxis("DPad Vertical 1") == -1 || Input.GetKeyDown(KeyCode.DownArrow))
             {
                 statUpGraded = true;
                 StartCoroutine(DoubleClicked("PSpeed 1"));
@@ -81,17 +61,16 @@ public class LevelUpBehaviour1 : MonoBehaviour
         yield return new WaitForSeconds(.2f);
         while (!doubleClicked)
         {
-            var haxis = Input.GetAxis("DPad Horizontal1");
-            var vaxis = Input.GetAxis("DPad Vertical1");
+            var haxis = Input.GetAxis("DPad Horizontal 1");
+            var vaxis = Input.GetAxis("DPad Vertical 1");
 
             switch (statName)
             {
                 case "PHealth 1":
-                    if (Input.GetAxis("DPad Horizontal1") == -1 || Input.GetKeyDown(KeyCode.LeftArrow))
+                    if (Input.GetAxis("DPad Horizontal 1") == -1 || Input.GetKeyDown(KeyCode.LeftArrow))
                     {
                         doubleClicked = true;
                         UpgradeStatsProcess("PHealth 1");
-                        UpgradePoint--;
                     }
                     else if (haxis != 0 || vaxis != 0)
                     {
@@ -101,11 +80,10 @@ public class LevelUpBehaviour1 : MonoBehaviour
                     break;
 
                 case "PDamage 1":
-                    if (Input.GetAxis("DPad Horizontal1") == 1 || Input.GetKeyDown(KeyCode.RightArrow))
+                    if (Input.GetAxis("DPad Horizontal 1") == 1 || Input.GetKeyDown(KeyCode.RightArrow))
                     {
                         doubleClicked = true;
                         UpgradeStatsProcess("PDamage 1");
-                        UpgradePoint--;
                     }
                     else if (haxis != 0 || vaxis != 0)
                     {
@@ -115,11 +93,10 @@ public class LevelUpBehaviour1 : MonoBehaviour
                     break;
 
                 case "PArmor 1":
-                    if (Input.GetAxis("DPad Vertical1") == 1 || Input.GetKeyDown(KeyCode.UpArrow))
+                    if (Input.GetAxis("DPad Vertical 1") == 1 || Input.GetKeyDown(KeyCode.UpArrow))
                     {
                         doubleClicked = true;
                         UpgradeStatsProcess("PArmor 1");
-                        UpgradePoint--;
                     }
                     else if (haxis != 0 || vaxis != 0)
                     {
@@ -129,11 +106,10 @@ public class LevelUpBehaviour1 : MonoBehaviour
                     break;
 
                 case "PSpeed 1":
-                    if (Input.GetAxis("DPad Vertical1") == -1 || Input.GetKeyDown(KeyCode.DownArrow))
+                    if (Input.GetAxis("DPad Vertical 1") == -1 || Input.GetKeyDown(KeyCode.DownArrow))
                     {
                         doubleClicked = true;
                         UpgradeStatsProcess("PSpeed 1");
-                        UpgradePoint--;
                     }
                     else if (haxis != 0 || vaxis != 0)
                     {

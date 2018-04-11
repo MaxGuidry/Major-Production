@@ -1,33 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelUpBehaviour : MonoBehaviour
 {
     public GameObject panel;
+    public Sprite Default ,Left, Right, Up, Down;
     private PlayerStatBehaviour playerStat;
-    private int UpgradePoint;
+    private string playerNumber;
     void Start()
     {
         playerStat = gameObject.GetComponent<PlayerStatBehaviour>();
-    }
-
-    void Update()
-    {
-        if (UpgradePoint > 0)
-            panel.SetActive(true);
-        else
+        switch (gameObject.transform.tag)
         {
-            panel.SetActive(false);
+            case "P1":
+                playerNumber = "";
+                break;
+            case "P2":
+                playerNumber = " 1";
+                break;
+            case "P3":
+                playerNumber = " 2";
+                break;
+            case "P4":
+                playerNumber = " 3";
+                break;
+            default:
+                break;
         }
-    }
-
-    /// <summary>
-    ///     Checks if the panel is active and sets it accordlying
-    /// </summary>
-    public void ShowUI()
-    {
-        panel.SetActive(!panel.activeInHierarchy);
     }
 
     /// <summary>
@@ -35,7 +36,6 @@ public class LevelUpBehaviour : MonoBehaviour
     /// </summary>
     public void StartUpgrade()
     {
-        UpgradePoint++;
         StartCoroutine(UpgradeStat());
     }
 
@@ -48,28 +48,32 @@ public class LevelUpBehaviour : MonoBehaviour
         var statUpGraded = false;
         while (!statUpGraded)
         {
-            if (Input.GetAxis("DPad Horizontal") == -1 || Input.GetKeyDown(KeyCode.LeftArrow))
+            if (Input.GetAxis("DPad Horizontal" + playerNumber) == -1 || Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 statUpGraded = true;
-                StartCoroutine(DoubleClicked("PHealth"));
+                StartCoroutine(DoubleClicked("PHealth" + playerNumber));
+                panel.GetComponent<Image>().sprite = Left;
             }
 
-            if (Input.GetAxis("DPad Horizontal") == 1 || Input.GetKeyDown(KeyCode.RightArrow))
+            if (Input.GetAxis("DPad Horizontal" + playerNumber) == 1 || Input.GetKeyDown(KeyCode.RightArrow))
             {
                 statUpGraded = true;
-                StartCoroutine(DoubleClicked("PDamage"));
+                StartCoroutine(DoubleClicked("PDamage" + playerNumber));
+                panel.GetComponent<Image>().sprite = Right;
             }
 
-            if (Input.GetAxis("DPad Vertical") == 1 || Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetAxis("DPad Vertical" + playerNumber) == 1 || Input.GetKeyDown(KeyCode.UpArrow))
             {
                 statUpGraded = true;
-                StartCoroutine(DoubleClicked("PArmor"));
+                StartCoroutine(DoubleClicked("PArmor" + playerNumber));
+                panel.GetComponent<Image>().sprite = Up;
             }
 
-            if (Input.GetAxis("DPad Vertical") == -1 || Input.GetKeyDown(KeyCode.DownArrow))
+            if (Input.GetAxis("DPad Vertical" + playerNumber) == -1 || Input.GetKeyDown(KeyCode.DownArrow))
             {
                 statUpGraded = true;
-                StartCoroutine(DoubleClicked("PSpeed"));
+                StartCoroutine(DoubleClicked("PSpeed" + playerNumber));
+                panel.GetComponent<Image>().sprite = Down;
             }
             yield return null;
         }
@@ -81,67 +85,62 @@ public class LevelUpBehaviour : MonoBehaviour
         yield return new WaitForSeconds(.2f);
         while (!doubleClicked)
         {
-            var haxis = Input.GetAxis("DPad Horizontal");
-            var vaxis = Input.GetAxis("DPad Vertical");
+            var haxis = Input.GetAxis("DPad Horizontal" + playerNumber);
+            var vaxis = Input.GetAxis("DPad Vertical" + playerNumber);
 
-            switch (statName)
+            if (statName == "PHealth" + playerNumber)
             {
-                case "PHealth":
-                    if (Input.GetAxis("DPad Horizontal") == -1 || Input.GetKeyDown(KeyCode.LeftArrow))
-                    {
-                        doubleClicked = true;
-                        UpgradeStatsProcess("PHealth");
-                        UpgradePoint--;
-                    }
-                    else if (haxis != 0 || vaxis != 0)
-                    {
-                        doubleClicked = true;
-                        StartUpgrade();
-                    }
-                    break;
-
-                case "PDamage":
-                    if (Input.GetAxis("DPad Horizontal") == 1 || Input.GetKeyDown(KeyCode.RightArrow))
-                    {
-                        doubleClicked = true;
-                        UpgradeStatsProcess("PDamage");
-                        UpgradePoint--;
-                    }
-                    else if (haxis != 0 || vaxis != 0)
-                    {
-                        doubleClicked = true;
-                        StartUpgrade();
-                    }
-                    break;
-
-                case "PArmor":
-                    if (Input.GetAxis("DPad Vertical") == 1 || Input.GetKeyDown(KeyCode.UpArrow))
-                    {
-                        doubleClicked = true;
-                        UpgradeStatsProcess("PArmor");
-                        UpgradePoint--;
-                    }
-                    else if (haxis != 0 || vaxis != 0)
-                    {
-                        doubleClicked = true;
-                        StartUpgrade();
-                    }
-                    break;
-
-                case "PSpeed":
-                    if (Input.GetAxis("DPad Vertical") == -1 || Input.GetKeyDown(KeyCode.DownArrow))
-                    {
-                        doubleClicked = true;
-                        UpgradeStatsProcess("PSpeed");
-                        UpgradePoint--;
-                    }
-                    else if (haxis != 0 || vaxis != 0)
-                    {
-                        doubleClicked = true;
-                        StartUpgrade();
-                    }
-                    break;
+                if (Input.GetAxis("DPad Horizontal" + playerNumber) == -1 || Input.GetKeyDown(KeyCode.LeftArrow))
+                {
+                    doubleClicked = true;
+                    UpgradeStatsProcess("PHealth" + playerNumber);
+                }
+                else if (haxis != 0 || vaxis != 0)
+                {
+                    doubleClicked = true;
+                    StartUpgrade();
+                }
             }
+            else if (statName == "PDamage" + playerNumber)
+            {
+                if (Input.GetAxis("DPad Horizontal" + playerNumber) == 1 || Input.GetKeyDown(KeyCode.RightArrow))
+                {
+                    doubleClicked = true;
+                    UpgradeStatsProcess("PDamage" + playerNumber);
+                }
+                else if (haxis != 0 || vaxis != 0)
+                {
+                    doubleClicked = true;
+                    StartUpgrade();
+                }
+            }
+            else if (statName == "PArmor" + playerNumber)
+            {
+                if (Input.GetAxis("DPad Vertical" + playerNumber) == 1 || Input.GetKeyDown(KeyCode.UpArrow))
+                {
+                    doubleClicked = true;
+                    UpgradeStatsProcess("PArmor" + playerNumber);
+                }
+                else if (haxis != 0 || vaxis != 0)
+                {
+                    doubleClicked = true;
+                    StartUpgrade();
+                }
+            }
+            else if (statName == "PSpeed" + playerNumber)
+            {
+                if (Input.GetAxis("DPad Vertical" + playerNumber) == -1 || Input.GetKeyDown(KeyCode.DownArrow))
+                {
+                    doubleClicked = true;
+                    UpgradeStatsProcess("PSpeed" + playerNumber);
+                }
+                else if (haxis != 0 || vaxis != 0)
+                {
+                    doubleClicked = true;
+                    StartUpgrade();
+                }
+            }
+
             yield return null;
         }
     }
@@ -153,5 +152,6 @@ public class LevelUpBehaviour : MonoBehaviour
     private void UpgradeStatsProcess(string statName)
     {
         playerStat.stats.GetStat(statName).Value += 10;
+        panel.GetComponent<Image>().sprite = Default;
     }
 }

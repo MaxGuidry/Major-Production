@@ -19,8 +19,8 @@ public class PlayerSpawner : MonoBehaviour {
                 Players[0].SetActive(true);
                 Players[1].SetActive(true);
 
-                Players[0].gameObject.GetComponentInChildren<Camera>().rect = new Rect(0,.5f, 1, 1);
-                Players[1].gameObject.GetComponentInChildren<Camera>().rect = new Rect(0, -.5f, 1, 1);
+                Players[0].gameObject.GetComponentInChildren<Camera>().rect = new Rect(.25f,.5f, .5f, 1);
+                Players[1].gameObject.GetComponentInChildren<Camera>().rect = new Rect(.25f, -.5f, .5f, 1);
                 break;
             case 3:
                 Players[0].SetActive(true);

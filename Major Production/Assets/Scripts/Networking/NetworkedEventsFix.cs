@@ -16,7 +16,7 @@ public class NetworkedEventsFix : MonoBehaviour
     public void AssignPlayerEvents()
     {
         var testevent = new GameEventArgsListenerObject();
-        testevent.ObjResponse = ScriptableObject.CreateInstance<GameEventArgsResponseObject>();
+        testevent.ObjResponse = new GameEventArgsResponseObject();
         testevent.ObjResponse.AddListener(player.Jump);
         testevent.ObjResponse.AddListener(player.HitObject);
         

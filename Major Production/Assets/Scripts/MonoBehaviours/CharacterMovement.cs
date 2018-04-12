@@ -34,7 +34,8 @@ public class CharacterMovement : NetworkBehaviour
 
     private void Start()
     {
-
+        anim.GetBehaviour<BasicAttackSM>().Punch = this.GetComponent<AudioSource>().clip;
+        anim.GetBehaviour<BasicAttackSM>().source = this.GetComponent<AudioSource>();
         if (!anim)
             anim = GetComponent<Animator>();
         //if (!cameraPivot)
@@ -195,12 +196,14 @@ public class CharacterMovement : NetworkBehaviour
     }
     public void HitObject(object[] args)
     {
+        if (!anim)
+            return;
         if (args.Length < 2)
             return;
         if (args[1] as string == "X" + PlayerNumber)
         {
             anim.SetTrigger("AttackBasic");
-            
+
             //BreakObject.ObjRaise(this);
         }
     }

@@ -8,13 +8,15 @@ public class GlobalManager : MonoBehaviour
 
     void Awake()
     {
-        //if (FindObjectOfType<NetworkManager>() == null)
-        //    GLOBALS.SplitscreenOnline = false;
-        //GLOBALS.SplitscreenLocal = false;
-        //GLOBALS.SoloOnline = true;
-        GLOBALS.SplitscreenLocal = true;
-        GLOBALS.SoloOnline = false;
+        if (FindObjectOfType<NetworkManager>() == null)
+            GLOBALS.SplitscreenLocal = false;
+        else
+            GLOBALS.SoloOnline = true;
         GLOBALS.SplitscreenOnline = false;
+
+        //GLOBALS.SplitscreenLocal = true;
+        //GLOBALS.SoloOnline = false;
+        //GLOBALS.SplitscreenOnline = false;
     }
     void Start()
     {
@@ -26,5 +28,5 @@ public class GlobalManager : MonoBehaviour
     {
 
     }
-   
+
 }

@@ -1197,7 +1197,7 @@ Prefab:
     - target: {fileID: 114617715121535764, guid: 20ddf612192a5384e8df30e97f303183,
         type: 2}
       propertyPath: ObjResponse.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4954737942335694, guid: 20ddf612192a5384e8df30e97f303183, type: 2}
       propertyPath: m_LocalPosition.x
@@ -1235,12 +1235,14 @@ Prefab:
         type: 2}
       propertyPath: ObjResponse.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 114724766372456566, guid: 19e958d984c938645a9ef0aa636b09cb,
+        type: 2}
     - target: {fileID: 114617715121535764, guid: 20ddf612192a5384e8df30e97f303183,
         type: 2}
       propertyPath: ObjResponse.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 114724766372456566, guid: 19e958d984c938645a9ef0aa636b09cb,
+        type: 2}
     - target: {fileID: 114617715121535764, guid: 20ddf612192a5384e8df30e97f303183,
         type: 2}
       propertyPath: ObjResponse.m_PersistentCalls.m_Calls.Array.data[3].m_Target
@@ -1250,11 +1252,12 @@ Prefab:
         type: 2}
       propertyPath: ObjResponse.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 114724766372456566, guid: 19e958d984c938645a9ef0aa636b09cb,
+        type: 2}
     - target: {fileID: 114617715121535764, guid: 20ddf612192a5384e8df30e97f303183,
         type: 2}
       propertyPath: ObjResponse.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Jump
+      value: ClearInventory
       objectReference: {fileID: 0}
     - target: {fileID: 114261646139834150, guid: 20ddf612192a5384e8df30e97f303183,
         type: 2}
@@ -1264,7 +1267,7 @@ Prefab:
     - target: {fileID: 114617715121535764, guid: 20ddf612192a5384e8df30e97f303183,
         type: 2}
       propertyPath: ObjResponse.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: HitObject
+      value: ClearInventory
       objectReference: {fileID: 0}
     - target: {fileID: 114617715121535764, guid: 20ddf612192a5384e8df30e97f303183,
         type: 2}
@@ -1305,6 +1308,26 @@ Prefab:
         type: 2}
       propertyPath: ObjResponse.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114617715121535764, guid: 20ddf612192a5384e8df30e97f303183,
+        type: 2}
+      propertyPath: ObjResponse.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114617715121535764, guid: 20ddf612192a5384e8df30e97f303183,
+        type: 2}
+      propertyPath: ObjResponse.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114617715121535764, guid: 20ddf612192a5384e8df30e97f303183,
+        type: 2}
+      propertyPath: ObjResponse.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114617715121535764, guid: 20ddf612192a5384e8df30e97f303183,
+        type: 2}
+      propertyPath: ObjResponse.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 20ddf612192a5384e8df30e97f303183, type: 2}
@@ -2060,7 +2083,7 @@ MonoBehaviour:
   m_MatchHost: mm.unet.unity3d.com
   m_MatchPort: 443
   matchName: default
-  matchSize: 4
+  matchSize: 8
   isNetworkActive: 0
   matchMaker: {fileID: 0}
 --- !u!114 &1373141496
@@ -2635,12 +2658,12 @@ Prefab:
     - target: {fileID: 224084979615100764, guid: 3e236b5d89777a045bddc11f8345d659,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 123.945404
+      value: 125.326416
       objectReference: {fileID: 0}
     - target: {fileID: 224084979615100764, guid: 3e236b5d89777a045bddc11f8345d659,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -57.631577
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1261864423046138, guid: 3e236b5d89777a045bddc11f8345d659, type: 2}
       propertyPath: m_IsActive

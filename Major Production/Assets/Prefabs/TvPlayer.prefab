@@ -1355,6 +1355,7 @@ GameObject:
   - component: {fileID: 114997161021350154}
   - component: {fileID: 114327222407528642}
   - component: {fileID: 82404945407645040}
+  - component: {fileID: 114546468351356142}
   m_Layer: 0
   m_Name: TvPlayer
   m_TagString: Player
@@ -6925,7 +6926,8 @@ AudioSource:
   m_GameObject: {fileID: 1398798868300312}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 7ce38cea2ca816c4995b831eed6c1c60,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: f7e6d4b76efab17448e275fecd0660c8, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -7079,6 +7081,19 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114546468351356142
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1398798868300312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d00c175e0bbc29447b5c530179e9557d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  test: {fileID: 0}
+  player: {fileID: 0}
 --- !u!114 &114588626339394494
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7253,6 +7268,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 0}
+  Default: {fileID: 0}
+  Left: {fileID: 0}
+  Right: {fileID: 0}
+  Up: {fileID: 0}
+  Down: {fileID: 0}
 --- !u!114 &114997161021350154
 MonoBehaviour:
   m_ObjectHideFlags: 1

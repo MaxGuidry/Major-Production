@@ -41,11 +41,11 @@ public class InputEvents : MonoBehaviour
         foreach (var button in Buttons)
         {
             float value = Input.GetAxis(button);
-            if (value > .1f && buttonValues[button] < .1f)
+            if (value > .01f && buttonValues[button] < .01f)
                 OnButtonPressed.ObjRaise("Pressed", button);
-            else if (value > .1f)
+            else if (value > .01f)
                 OnButtonHeld.ObjRaise("Held", button);
-            else if (value < .1f && buttonValues[button] > .1f)
+            else if (value < .01f && buttonValues[button] > .01f)
                 OnButtonReleased.ObjRaise("Released", button);
             buttonValues[button] = value;
         }

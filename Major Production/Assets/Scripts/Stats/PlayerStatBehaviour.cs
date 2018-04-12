@@ -7,12 +7,56 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
     public GameEventArgs LevelUpEvent;
     public Stats stats;
 
-    private void Start()
+    public int Health, Armor, Level;
+
+    private void Awake()
     {
         stats._stats.ForEach(stat => stat.Value = 0);
-        stats.GetStat("PHealth").Value = 100;
+        switch (GetComponent<Transform>().tag)
+        {
+            case "P1":
+                Health = stats.GetStat("PHealth").Value = 100;
+                break;
+            case "P2":
+                Health = stats.GetStat("PHealth 1").Value = 100;
+                break;
+            case "P3":
+                Health = stats.GetStat("PHealth 2").Value = 100;
+                break;
+            case "P4":
+                Health = stats.GetStat("PHealth 3").Value = 100;
+                break;
+            default:
+                break;
+        }
     }
 
+    private void Update()
+    {
+        switch (GetComponent<Transform>().tag)
+        {
+            case "P1":
+                Health = stats.GetStat("PHealth").Value;
+                Armor = stats.GetStat("PArmor").Value;
+                Level = stats.GetStat("PLevel").Value;
+                break;
+            case "P2":
+                Health = stats.GetStat("PHealth 1").Value;
+                Armor = stats.GetStat("PArmor 1").Value;
+                Level = stats.GetStat("PLevel 1").Value;
+                break;
+            case "P3":
+                Health = stats.GetStat("PHealth 2").Value;
+                Armor = stats.GetStat("PArmor 2").Value;
+                Level = stats.GetStat("PLevel 2").Value;
+                break;
+            case "P4":
+                Health = stats.GetStat("PHealth 3").Value;
+                Armor = stats.GetStat("PArmor 3").Value;
+                Level = stats.GetStat("PLevel 3").Value;
+                break;
+        }
+    }
     /// <summary>
     ///     Entity Takes Damage
     ///     TODO: calculate armor rating using standard rolling system
@@ -21,21 +65,18 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
     /// <param name="damage">how much damage to take</param>
     public void TakeDamage(int damage)
     {
-        var healthStat = stats.GetStat("PHealth");
-        var armorStat = stats.GetStat("PArmor");
+        var calculatedDamage = damage - Armor;
 
-        var calculatedDamage = damage - armorStat.Value;
-
-        var nexthealth = healthStat.Value - calculatedDamage;
+        var nexthealth = Health - calculatedDamage;
 
         if (nexthealth <= 0)
         {
-            healthStat.Value = nexthealth;
+            Health = nexthealth;
             Die();
         }
         else
         {
-            healthStat.Value = nexthealth;
+            Health = nexthealth;
         }
     }
 
@@ -54,7 +95,6 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
     /// <param name="args"></param>
     public void OnQuestComplete(Object[] args)
     {
-        var levelStat = stats.GetStat("PLevel");
         var quest = args[0] as Objective;
         if (quest == null)
             return;
@@ -79,11 +119,25 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
         if (affectedstat.Value >= 100)
         {
             affectedstat.Value -= 100;
-            levelStat.Value++;
+            switch (GetComponent<Transform>().tag)
+            {
+                case "P1":
+                    stats.GetStat("PLevel").Value++;
+                    break;
+                case "P2":
+                    stats.GetStat("PLevel 1").Value++;
+                    break;
+                case "P3":
+                    stats.GetStat("PLevel 2").Value++;
+                    break;
+                case "P4":
+                    stats.GetStat("PLevel 3").Value++;
+                    break;
+            }
             LevelUpEvent.Raise(this);
         }
     }
-    
+
     /// <summary>
     ///     Start Coroutine 
     /// </summary>

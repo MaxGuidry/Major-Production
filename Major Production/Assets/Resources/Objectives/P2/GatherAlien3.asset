@@ -13,9 +13,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _title: Gather 3 Aliens
   _description: Gather Aliens
-  _currentAmount: 0
   _requiredAmount: 3
   _requiredItem: {fileID: 11400000, guid: 192499123d279744887a0100c3c60466, type: 2}
-  QuestStart: {fileID: 11400000, guid: b66499015cebc5940b09958a4c05f3f7, type: 2}
-  QuestChange: {fileID: 11400000, guid: 6be7e7f74f09fb34d9cddb58bda687b9, type: 2}
-  QuestComplete: {fileID: 11400000, guid: 9d44f410c46f20047893219d71f48af9, type: 2}
+  QuestStart: {fileID: 11400000, guid: df4e9a9645a2227468396421fcf3477f, type: 2}
+  QuestChange: {fileID: 11400000, guid: 284a39cf0c8e6fe409e331ec0df6e4f2, type: 2}
+  QuestComplete: {fileID: 11400000, guid: 3b625269135b69845beadb23b5dc3cc8, type: 2}
+  _reward:
+    stat: {fileID: 0}
+    RewardValue: 0

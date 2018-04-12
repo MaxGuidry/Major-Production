@@ -15,32 +15,46 @@ public class DisplayPlayerStats : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        PlayerStats = FindObjectOfType<PlayerStatBehaviour>();
+        PlayerStats = gameObject.transform.parent.parent.GetComponentInChildren<PlayerStatBehaviour>();
         TempText = new List<Text>();
+        foreach (var child in gameObject.transform.GetComponentsInChildren<Text>())
+        {
+            TempText.Add(child);
+        }
     }
 
     private void Update()
     {
-        CreateText();
+        if (PlayerStats == null)
+            PlayerStats = gameObject.transform.parent.parent.GetComponentInChildren<PlayerStatBehaviour>();
+
+        for (var i = 0; i < PlayerStats.stats._stats.Count; i++)
+            TempText[i].text = PlayerStats.stats._stats[i].Name + ": " + PlayerStats.stats._stats[i].Value;
     }
 
-    public void CreateText()
-    {
-        var textPos = Vector3.zero;
-        if (!created)
-            for (var i = 0; i < PlayerStats.stats._stats.Count; i++)
-            {
-                var temp = Instantiate(TextPrefab, textPos, transform.rotation);
-                TempText.Add(temp);
+    //public void CreateText()
+    //{
+    //    PlayerStats = gameObject.transform.parent.parent.GetComponentInChildren<PlayerStatBehaviour>();
+    //    var textPos = gameObject.transform.position;
+    //    if (PlayerStats == null)
+    //        return;
+    //    if (PlayerStats.stats == null)
+    //        return;
+    //    if (!created)
+    //        for (var i = 0; i < PlayerStats.stats._stats.Count; i++)
+    //        {
+    //            var temp = Instantiate(TextPrefab, textPos, transform.rotation);
+    //            temp.transform.LookAt(gameObject.transform.parent.parent.GetComponentInChildren<Camera>().transform);
+    //            TempText.Add(temp);
 
-                temp.transform.SetParent(gameObject.transform);
-                temp.text = PlayerStats.stats._stats[i].Name + ": " + PlayerStats.stats._stats[i].Value;
-                created = true;
-            }
-        else
-        {
-            for (var i = 0; i < PlayerStats.stats._stats.Count; i++)
-                TempText[i].text = PlayerStats.stats._stats[i].Name + ": " + PlayerStats.stats._stats[i].Value;
-        }
-    }
+    //            temp.transform.SetParent(gameObject.transform);
+    //            temp.text = PlayerStats.stats._stats[i].Name + ": " + PlayerStats.stats._stats[i].Value;
+    //            created = true;
+    //        }
+    //    else
+    //    {
+    //        for (var i = 0; i < PlayerStats.stats._stats.Count; i++)
+    //            TempText[i].text = PlayerStats.stats._stats[i].Name + ": " + PlayerStats.stats._stats[i].Value;
+    //    }
+    //}
 }

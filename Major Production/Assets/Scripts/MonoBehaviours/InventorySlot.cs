@@ -15,23 +15,65 @@ public class InventorySlot : MonoBehaviour
         if (item == null) return;
         icon.sprite = item.icon;
         icon.enabled = true;
-        inventoryBehaviour = FindObjectOfType<InventoryBehaviour>();
+        inventoryBehaviour = gameObject.transform.parent.GetComponent<InventoryText>().gameObject.transform.parent.gameObject.transform.parent.GetComponentInChildren<InventoryBehaviour>();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if(InventoryText.inInventory)
-                DropItem();
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    switch (inventoryBehaviour.GetComponent<Transform>().tag)
+        //    {
+        //        case "P1":
+        //            if(inventoryBehaviour.P1.inInventory)
+        //                DropItem(); 
+        //            break;
+
+        //        case "P2":
+        //            if (inventoryBehaviour.P2.inInventory)
+        //                DropItem();
+        //            break;
+
+        //        case "P3":
+        //            if (inventoryBehaviour.P3.inInventory)
+        //                DropItem();
+        //            break;
+
+        //        case "P4":
+        //            if (inventoryBehaviour.P4.inInventory)
+        //                DropItem();
+        //            break;
+        //    }
+        //}
     }
 
     public void DropItem()
     {
+        if (inventoryBehaviour == null)
+            inventoryBehaviour = gameObject.transform.parent.GetComponent<InventoryText>().gameObject.transform.parent.gameObject.transform.parent.GetComponentInChildren<InventoryBehaviour>();
         if (item == null) return;
         Debug.Log("Droping: " + item.name);
-        if (inventoryBehaviour.inventory.CurrentInventory.Contains(item))
-            inventoryBehaviour.RemoveFromInventory(item, inventoryBehaviour.objectList[item.ItemType.ToString() + InventoryText.GetNumberItems(item.ItemType)]);
+        switch (inventoryBehaviour.gameObject.tag)
+        {
+            case "P1":
+                if (inventoryBehaviour.inventory.CurrentInventory.Contains(item))
+                    inventoryBehaviour.RemoveFromInventory(item, inventoryBehaviour.objectList[item.ItemType.ToString() + inventoryBehaviour.P1.GetNumberItems(item.ItemType)]);
+                break;
+
+            case "P2":
+                if (inventoryBehaviour.inventory.CurrentInventory.Contains(item))
+                    inventoryBehaviour.RemoveFromInventory(item, inventoryBehaviour.objectList[item.ItemType.ToString() + inventoryBehaviour.P2.GetNumberItems(item.ItemType)]);
+                break;
+
+            case "P3":
+                if (inventoryBehaviour.inventory.CurrentInventory.Contains(item))
+                    inventoryBehaviour.RemoveFromInventory(item, inventoryBehaviour.objectList[item.ItemType.ToString() + inventoryBehaviour.P3.GetNumberItems(item.ItemType)]);
+                break;
+
+            case "P4":
+                if (inventoryBehaviour.inventory.CurrentInventory.Contains(item))
+                    inventoryBehaviour.RemoveFromInventory(item, inventoryBehaviour.objectList[item.ItemType.ToString() + inventoryBehaviour.P4.GetNumberItems(item.ItemType)]);
+                break;
+        }
     }
 }

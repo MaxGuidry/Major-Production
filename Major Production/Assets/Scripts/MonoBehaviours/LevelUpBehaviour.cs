@@ -6,9 +6,10 @@ using UnityEngine.UI;
 public class LevelUpBehaviour : MonoBehaviour
 {
     public GameObject panel;
-    public Sprite Default ,Left, Right, Up, Down;
+    public Sprite Default, Left, Right, Up, Down;
     private PlayerStatBehaviour playerStat;
     private string playerNumber;
+    private List<TweenScaleBehaviour> tweens = new List<TweenScaleBehaviour>();
     void Start()
     {
         playerStat = gameObject.GetComponent<PlayerStatBehaviour>();
@@ -29,6 +30,7 @@ public class LevelUpBehaviour : MonoBehaviour
             default:
                 break;
         }
+
     }
 
     /// <summary>
@@ -36,6 +38,19 @@ public class LevelUpBehaviour : MonoBehaviour
     /// </summary>
     public void StartUpgrade()
     {
+        var children = gameObject.transform.parent.GetComponentInChildren<Canvas>().gameObject.GetComponentsInChildren<Text>();
+        foreach (var stat in children)
+        {
+            if(stat.GetComponent<TweenScaleBehaviour>())
+                tweens.Add(stat.GetComponent<TweenScaleBehaviour>());            
+        }
+        foreach (var tween in tweens)
+        {
+            tween.tweened = tween.gameObject;
+        }
+
+        panel.GetComponent<TweenScaleBehaviour>().tweened = panel.gameObject;
+        panel.GetComponent<TweenScaleBehaviour>().TweenScale();
         StartCoroutine(UpgradeStat());
     }
 
@@ -152,6 +167,11 @@ public class LevelUpBehaviour : MonoBehaviour
     private void UpgradeStatsProcess(string statName)
     {
         playerStat.stats.GetStat(statName).Value += 10;
+        foreach (var stat in tweens)
+        {
+            if (stat.gameObject.GetComponent<Text>().text.Contains(statName))
+                stat.TweenScale();
+        }
         panel.GetComponent<Image>().sprite = Default;
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+// ReSharper disable CompareOfFloatsByEqualityOperator
 
 public class LevelUpBehaviour : MonoBehaviour
 {
@@ -63,34 +64,46 @@ public class LevelUpBehaviour : MonoBehaviour
         var statUpGraded = false;
         while (!statUpGraded)
         {
-            if (Input.GetAxis("DPad Horizontal" + playerNumber) == -1 || Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                statUpGraded = true;
-                StartCoroutine(DoubleClicked("PHealth" + playerNumber));
-                panel.GetComponent<Image>().sprite = Left;
-            }
+        //    if (Input.GetAxis("DPad Horizontal" + playerNumber) == -1 || Input.GetKeyDown(KeyCode.LeftArrow))
+        //    {
+        //        statUpGraded = true;
+        //        StartCoroutine(DoubleClicked("PHealth" + playerNumber));
+        //        panel.GetComponent<Image>().sprite = Left;
+        //    }
 
-            if (Input.GetAxis("DPad Horizontal" + playerNumber) == 1 || Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                statUpGraded = true;
-                StartCoroutine(DoubleClicked("PDamage" + playerNumber));
-                panel.GetComponent<Image>().sprite = Right;
-            }
+        //    if (Input.GetAxis("DPad Horizontal" + playerNumber) == 1 || Input.GetKeyDown(KeyCode.RightArrow))
+        //    {
+        //        statUpGraded = true;
+        //        StartCoroutine(DoubleClicked("PDamage" + playerNumber));
+        //        panel.GetComponent<Image>().sprite = Right;
+        //    }
 
-            if (Input.GetAxis("DPad Vertical" + playerNumber) == 1 || Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                statUpGraded = true;
-                StartCoroutine(DoubleClicked("PArmor" + playerNumber));
-                panel.GetComponent<Image>().sprite = Up;
-            }
+        //    if (Input.GetAxis("DPad Vertical" + playerNumber) == 1 || Input.GetKeyDown(KeyCode.UpArrow))
+        //    {
+        //        statUpGraded = true;
+        //        StartCoroutine(DoubleClicked("PArmor" + playerNumber));
+        //        panel.GetComponent<Image>().sprite = Up;
+        //    }
 
-            if (Input.GetAxis("DPad Vertical" + playerNumber) == -1 || Input.GetKeyDown(KeyCode.DownArrow))
+        //    if (Input.GetAxis("DPad Vertical" + playerNumber) == -1 || Input.GetKeyDown(KeyCode.DownArrow))
+        //    {
+        //        statUpGraded = true;
+        //        StartCoroutine(DoubleClicked("PSpeed" + playerNumber));
+        //        panel.GetComponent<Image>().sprite = Down;
+        //    }
+
+            if (Input.GetAxis("DPad Horizontal" + playerNumber) == -1 ||
+                Input.GetAxis("DPad Horizontal" + playerNumber) == 1 ||
+                Input.GetAxis("DPad Vertical" + playerNumber) == 1 ||
+                Input.GetAxis("DPad Vertical" + playerNumber) == -1)
             {
                 statUpGraded = true;
-                StartCoroutine(DoubleClicked("PSpeed" + playerNumber));
-                panel.GetComponent<Image>().sprite = Down;
+                UpgradeStatsProcess("PHealth" + playerNumber);
+                UpgradeStatsProcess("PDamage" + playerNumber);
+                UpgradeStatsProcess("PArmor" + playerNumber);
+                UpgradeStatsProcess("PSpeed" + playerNumber);
             }
-            yield return null;
+                yield return null;
         }
     }
 
@@ -166,7 +179,7 @@ public class LevelUpBehaviour : MonoBehaviour
     /// <param name="statName"></param>
     private void UpgradeStatsProcess(string statName)
     {
-        playerStat.stats.GetStat(statName).Value += 10;
+        playerStat.stats.GetStat(statName).Value += 100;
         foreach (var stat in tweens)
         {
             if (stat.gameObject.GetComponent<Text>().text.Contains(statName))

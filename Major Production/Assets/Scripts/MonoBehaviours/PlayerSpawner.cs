@@ -19,7 +19,7 @@ public class PlayerSpawner : MonoBehaviour {
                 Players[0].SetActive(true);
                 Players[1].SetActive(true);
 
-                Players[0].gameObject.GetComponentInChildren<Camera>().rect = new Rect(.25f,.5f, .5f, 1);
+                Players[0].gameObject.GetComponentInChildren<Camera>().rect = new Rect(.25f, .5f, .5f, 1);
                 Players[1].gameObject.GetComponentInChildren<Camera>().rect = new Rect(.25f, -.5f, .5f, 1);
                 break;
             case 3:
@@ -40,11 +40,9 @@ public class PlayerSpawner : MonoBehaviour {
                 Players[2].gameObject.GetComponentInChildren<Camera>().rect = new Rect(0, 0, .5f, .5f);
                 Players[3].gameObject.GetComponentInChildren<Camera>().rect = new Rect(.5f, 0, .5f, .5f);
                 break;
+            default:
+                SceneManager.LoadScene("103.MainMenu");
+                break;
         }
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    }
 }

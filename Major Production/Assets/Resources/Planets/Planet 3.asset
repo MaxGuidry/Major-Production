@@ -8,7 +8,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8333c9ccfd9618140a1f3486a84f06c5, type: 3}
-  m_Name: SplitScreenPlayers
+  m_Script: {fileID: 11500000, guid: 668938388d73b2a4d80ae9ede07aa8e0, type: 3}
+  m_Name: Planet 3
   m_EditorClassIdentifier: 
-  PlayersJoined: 4
+  gravity: 15
+  center: {x: 0, y: 0, z: 0}
+  mass: 0
+  radius: 0

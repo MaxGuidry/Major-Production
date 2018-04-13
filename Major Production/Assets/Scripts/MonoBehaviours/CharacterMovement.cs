@@ -10,7 +10,6 @@ public class CharacterMovement : NetworkBehaviour
 
     private string PlayerNumber;
     private Vector3 acceleration = Vector3.zero;
-    public Planet currentPlanet;
     [Range(1, 20)] public float Sensitivity = 1;
     private Rigidbody rb;
     public float RunSpeed = 2;

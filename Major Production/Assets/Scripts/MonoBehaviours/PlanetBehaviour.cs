@@ -19,18 +19,13 @@ public class PlanetBehaviour : MonoBehaviour
     }
     void Start()
     {
-        rbs = GameObject.FindObjectsOfType<Rigidbody>().ToList();
-        foreach (var rb in rbs)
-        {
-
-        }
+        
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
 
-        rbs = GameObject.FindObjectsOfType<Rigidbody>().ToList();
         foreach (var rb in rbs)
         {
             Attract(rb);
@@ -42,6 +37,24 @@ public class PlanetBehaviour : MonoBehaviour
         }
     }
 
+    public void OnTriggerEnter(Collider other)
+    {
+        var rb = other.GetComponent<Rigidbody>();
+        if (!rb)
+            return;
+        rbs.Add(rb);
+
+    }
+    public void OnTriggerStay(Collider other)
+    {
+        var rb = other.GetComponent<Rigidbody>();
+        if (!rb)
+            return;
+        if (rbs.Contains(rb))
+            return;
+        rbs.Add(rb);
+
+    }
     void Attract(Rigidbody rb)
     {
         if (!rb)
@@ -55,7 +68,7 @@ public class PlanetBehaviour : MonoBehaviour
             return;
 
         }
-
+       
 
 
 

@@ -100,6 +100,10 @@ public class ItemInteractionBehaviour : MonoBehaviour
                     break;
                 }
         }
+
+        if (!other.gameObject.GetComponent<MeshCollider>())
+            return;
+        this.GetComponent<Rigidbody>().drag = 50f;
     }
 }
 

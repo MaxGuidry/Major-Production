@@ -86,7 +86,8 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
     /// </summary>
     public void Die()
     {
-        Debug.Log(transform.name + " died.");
+       
+        this.gameObject.GetComponent<CharacterMovement>().Die();
     }
 
     /// <summary>

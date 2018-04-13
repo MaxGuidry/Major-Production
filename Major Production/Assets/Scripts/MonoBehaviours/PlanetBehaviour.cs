@@ -55,6 +55,15 @@ public class PlanetBehaviour : MonoBehaviour
         rbs.Add(rb);
 
     }
+
+    public void OnTriggerExit(Collider other)
+    {
+        var rb = other.GetComponent<Rigidbody>();
+        if (!rb)
+            return;
+        if (rbs.Contains(rb))
+            rbs.Remove(rb);
+    }
     void Attract(Rigidbody rb)
     {
         if (!rb)

@@ -76,6 +76,8 @@ public class CharacterMovement : NetworkBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.N) && PlayerNumber == "")
+            SpawnOnOtherPlanet(FindObjectsOfType<PlanetBehaviour>()[Random.Range(0, 4)]);
         if (GLOBALS.SoloOnline || GLOBALS.SplitscreenOnline)
             if (!isLocalPlayer)
                 return;
@@ -212,27 +214,60 @@ public class CharacterMovement : NetworkBehaviour
         RaycastHit[] hits;
 
         hits = Physics.RaycastAll(this.transform.position, this.transform.forward, 6, ~LayerMask.GetMask("Player"));
-        GameObject breakableObj = null;
         foreach (var rayhit in hits)
         {
+            if(rayhit.transform.gameObject == this.gameObject)
+                continue;
+            
             var toplevel = rayhit.transform;
             while (toplevel.parent != null)
             {
                 toplevel = toplevel.parent;
             }
-            if (toplevel.transform.GetComponent<BreakableResourceBehaviour>() == null)
-                continue;
-            breakableObj = toplevel.gameObject;
+
+            if (toplevel.transform.GetComponent<BreakableResourceBehaviour>() != null)
+            {
+                var HitObject = toplevel.gameObject.GetComponent<BreakableResourceBehaviour>();
+                HitObject.SpawnResources();
+                return;
+            }
+
+            if (toplevel.transform.GetComponentInChildren<PlayerStatBehaviour>() != null)
+            {
+                var HitObject = toplevel.gameObject.GetComponentInChildren<PlayerStatBehaviour>();
+                HitObject.TakeDamage(90000);
+                return;
+                
+            }
+
         }
 
 
-        if (!breakableObj)
-            return;
-        var breakable = breakableObj.transform.GetComponent<BreakableResourceBehaviour>();
-        if (breakable)
-        {
-            breakable.SpawnResources();
-        }
+       
     }
 
+    public void SpawnOnOtherPlanet(PlanetBehaviour p)
+    {
+        var children = p.gameObject.transform.GetComponentsInChildren<Transform>();
+        List<GameObject> spawnPoints = new List<GameObject>();
+        foreach (var child in children)
+        {
+            if (child.gameObject.tag != "SpawnPoint")
+                continue;
+            spawnPoints.Add(child.gameObject);
+        }
+
+        var tpLocation = spawnPoints[Random.Range(0, spawnPoints.Count)].transform.position;
+        this.transform.position = tpLocation;
+    }
+
+
+    
+
+    public void Die()
+    {
+        anim.SetTrigger("Death");
+        cameraPivot = null;
+        Destroy(this.gameObject.GetComponent<CharacterMovement>());
+    }
 }

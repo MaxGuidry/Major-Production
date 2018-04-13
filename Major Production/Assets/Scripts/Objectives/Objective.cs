@@ -94,7 +94,11 @@ public class Objective : ScriptableObject
                 ChangeState(ObjectiveStatus.Active);
                 break;
             case ObjectiveStatus.Active:
-                var go = args[1] as GameObject;
+                GameObject go;
+                if (args.Length > 1)
+                    go = args[1] as GameObject;
+                else
+                    return;
                 if (pickedUp.Contains(go.GetInstanceID()))
                     break;
                 _currentAmount++;

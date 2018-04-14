@@ -13,15 +13,19 @@ public class InputEvents : MonoBehaviour
 
 
 
-   // public Text text;
+    // public Text text;
 
     public GameEventArgsObject OnButtonPressed;
     public GameEventArgsObject OnButtonHeld;
     public GameEventArgsObject OnButtonReleased;
     public List<string> Buttons = new List<string>();
-
+    public List<string> Axis = new List<string>();
     public Dictionary<string, float> buttonValues;
-    public Dictionary<string, float> prevButtonValues;
+    [HideInInspector] public Dictionary<string, float> prevButtonValues;
+
+    public Dictionary<string, float> axisValues;
+    [HideInInspector] public Dictionary<string, float> prevAxisValues;
+
 
     // Use this for initialization
     void Start()
@@ -30,12 +34,19 @@ public class InputEvents : MonoBehaviour
         //    text.text += '\n';
         buttonValues = new Dictionary<string, float>();
         prevButtonValues = new Dictionary<string, float>();
+        axisValues = new Dictionary<string, float>();
+        prevAxisValues = new Dictionary<string, float>();
         foreach (var button in Buttons)
         {
-            prevButtonValues.Add(button,0);
+            prevButtonValues.Add(button, 0);
             buttonValues.Add(button, 0);
         }
 
+        foreach (var axis in Axis)
+        {
+            axisValues.Add(axis, 0);
+            prevAxisValues.Add(axis, 0);
+        }
     }
 
     void Update()
@@ -51,6 +62,22 @@ public class InputEvents : MonoBehaviour
             else if (value < .01f && buttonValues[button] > .01f)
                 OnButtonReleased.ObjRaise("Released", button);
             buttonValues[button] = value;
+        }
+
+        foreach (var axis in Axis)
+        {
+
+            prevAxisValues[axis] = axisValues[axis];
+            float value = Input.GetAxis(axis);
+            if (axis == "DPad Horizontal")
+                Debug.Log(prevAxisValues[axis]);
+            if (value > .01f && axisValues[axis] < .01f)
+                OnButtonPressed.ObjRaise("Pressed", axis);
+            else if (value > .01f)
+                OnButtonHeld.ObjRaise("Held", axis);
+            else if (value < .01f && axisValues[axis] > .01f)
+                OnButtonReleased.ObjRaise("Released", axis);
+            axisValues[axis] = value;
         }
     }
 

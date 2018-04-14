@@ -2547,6 +2547,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114676625522103852, guid: 9950884b10b3a1b46bddfbc3d875c987,
+        type: 2}
+      propertyPath: Axis.Array.size
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4559129935888672, guid: 9950884b10b3a1b46bddfbc3d875c987, type: 2}
       propertyPath: m_LocalPosition.x
       value: 108
@@ -2619,6 +2624,31 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 1906032513}
+    - target: {fileID: 114676625522103852, guid: 9950884b10b3a1b46bddfbc3d875c987,
+        type: 2}
+      propertyPath: Axis.Array.data[0]
+      value: Trigger1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114676625522103852, guid: 9950884b10b3a1b46bddfbc3d875c987,
+        type: 2}
+      propertyPath: Axis.Array.data[1]
+      value: Horizontal1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114676625522103852, guid: 9950884b10b3a1b46bddfbc3d875c987,
+        type: 2}
+      propertyPath: Axis.Array.data[2]
+      value: Vertical1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114676625522103852, guid: 9950884b10b3a1b46bddfbc3d875c987,
+        type: 2}
+      propertyPath: Axis.Array.data[3]
+      value: DPad Horizontal 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114676625522103852, guid: 9950884b10b3a1b46bddfbc3d875c987,
+        type: 2}
+      propertyPath: Axis.Array.data[4]
+      value: DPad Vertical 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9950884b10b3a1b46bddfbc3d875c987, type: 2}
   m_IsPrefabParent: 0
@@ -11047,6 +11077,12 @@ MonoBehaviour:
   - Right Stick Button3
   - Submit3
   - Start3
+  Axis:
+  - Trigger3
+  - Horizontal3
+  - Vertical3
+  - DPad Horizontal 3
+  - DPad Vertical 3
 --- !u!1 &791938908
 GameObject:
   m_ObjectHideFlags: 0
@@ -22828,6 +22864,7 @@ MonoBehaviour:
   - Right Stick Button2
   - Submit2
   - Start2
+  Axis: []
 --- !u!114 &1575634081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23469,6 +23506,12 @@ MonoBehaviour:
   - Right Stick Button2
   - Submit2
   - Start2
+  Axis:
+  - Trigger2
+  - Horizontal2
+  - Vertical2
+  - DPad Horizontal 2
+  - DPad Vertical 2
 --- !u!1 &1611946796
 GameObject:
   m_ObjectHideFlags: 0
@@ -23527,6 +23570,7 @@ MonoBehaviour:
   - Right Stick Button3
   - Submit3
   - Start3
+  Axis: []
 --- !u!114 &1611946799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25937,6 +25981,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114985268061076834, guid: f18007c5c4ac18c4eb043188c1e44ecc,
+        type: 2}
+      propertyPath: Axis.Array.size
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4888686848343078, guid: f18007c5c4ac18c4eb043188c1e44ecc, type: 2}
       propertyPath: m_LocalPosition.x
       value: 26
@@ -25989,6 +26038,31 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 1000933610}
+    - target: {fileID: 114985268061076834, guid: f18007c5c4ac18c4eb043188c1e44ecc,
+        type: 2}
+      propertyPath: Axis.Array.data[0]
+      value: Trigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 114985268061076834, guid: f18007c5c4ac18c4eb043188c1e44ecc,
+        type: 2}
+      propertyPath: Axis.Array.data[1]
+      value: Horizontal
+      objectReference: {fileID: 0}
+    - target: {fileID: 114985268061076834, guid: f18007c5c4ac18c4eb043188c1e44ecc,
+        type: 2}
+      propertyPath: Axis.Array.data[2]
+      value: Vertical
+      objectReference: {fileID: 0}
+    - target: {fileID: 114985268061076834, guid: f18007c5c4ac18c4eb043188c1e44ecc,
+        type: 2}
+      propertyPath: Axis.Array.data[3]
+      value: DPad Horizontal
+      objectReference: {fileID: 0}
+    - target: {fileID: 114985268061076834, guid: f18007c5c4ac18c4eb043188c1e44ecc,
+        type: 2}
+      propertyPath: Axis.Array.data[4]
+      value: DPad Vertical
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f18007c5c4ac18c4eb043188c1e44ecc, type: 2}
   m_IsPrefabParent: 0

@@ -30,7 +30,7 @@ public class InventoryText : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        switch (gameObject.transform.tag)
+        switch (gameObject.transform.parent.parent.GetChild(0).tag)
         {
             case "P1":
                 playerNumber = "";
@@ -217,12 +217,12 @@ public class InventoryText : MonoBehaviour
         while (inInventory)
         {
             var inputs = FindObjectsOfType<InputEvents>();
-            InputEvents ie = null;
+            InputEvents ie = inputEvents.GetComponent<InputEvents>();
             foreach (var i in inputs)
             {
-                if (i.Buttons.Contains("A" + playerNumber))
+                if (i.Axis.Contains("DPad Horizontal" + playerNumber))
                 {
-                    ie = i;
+                   // ie = i;
                     break;
                 }
             }
@@ -230,8 +230,8 @@ public class InventoryText : MonoBehaviour
             timer += Time.deltaTime;
 
 
-
-            if (ie.prevButtonValues["Dpad Horizontal" + playerNumber] < -.9f|| ie.prevButtonValues["Dpad Horizontal" + playerNumber] > .9f)
+            //Debug.Log(ie.prevAxisValues["DPad Horizontal" +playerNumber]);
+            if (ie.prevAxisValues["DPad Horizontal" + playerNumber] < -.9f|| ie.prevAxisValues["DPad Horizontal" + playerNumber] > .9f)
             { if (timer < .2f)
                     yield return null;
                 else

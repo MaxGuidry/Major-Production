@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
@@ -17,10 +18,10 @@ public class InputEvents : MonoBehaviour
     public GameEventArgsObject OnButtonPressed;
     public GameEventArgsObject OnButtonHeld;
     public GameEventArgsObject OnButtonReleased;
-
     public List<string> Buttons = new List<string>();
 
     public Dictionary<string, float> buttonValues;
+    public Dictionary<string, float> prevButtonValues;
 
     // Use this for initialization
     void Start()
@@ -28,9 +29,10 @@ public class InputEvents : MonoBehaviour
         //for (int i = 0; i < 100; i++)
         //    text.text += '\n';
         buttonValues = new Dictionary<string, float>();
-
+        prevButtonValues = new Dictionary<string, float>();
         foreach (var button in Buttons)
         {
+            prevButtonValues.Add(button,0);
             buttonValues.Add(button, 0);
         }
 
@@ -40,6 +42,7 @@ public class InputEvents : MonoBehaviour
     {
         foreach (var button in Buttons)
         {
+            prevButtonValues[button] = buttonValues[button];
             float value = Input.GetAxis(button);
             if (value > .01f && buttonValues[button] < .01f)
                 OnButtonPressed.ObjRaise("Pressed", button);

@@ -204,12 +204,41 @@ public class InventoryText : MonoBehaviour
     {
         gameObject.transform.parent.parent.GetComponentInChildren<CharacterMovement>().SpawnOnOtherPlanet(planet.GetComponent<PlanetBehaviour>());
     }
-
+    
     IEnumerator NextWarp()
     {
+        float timer = 0f;
+
+
+        
+            
+
+
         while (inInventory)
         {
-            Debug.Log(i);
+            var inputs = FindObjectsOfType<InputEvents>();
+            InputEvents ie = null;
+            foreach (var i in inputs)
+            {
+                if (i.Buttons.Contains("A" + playerNumber))
+                {
+                    ie = i;
+                    break;
+                }
+            }
+
+            timer += Time.deltaTime;
+
+
+
+            if (ie.prevButtonValues["Dpad Horizontal" + playerNumber] < -.9f|| ie.prevButtonValues["Dpad Horizontal" + playerNumber] > .9f)
+            { if (timer < .2f)
+                    yield return null;
+                else
+                {
+                    timer = 0;
+                }
+            }
             if (UnityEngine.Input.GetAxis("DPad Horizontal" + playerNumber) == -1)
             {
                 i--;
@@ -230,7 +259,7 @@ public class InventoryText : MonoBehaviour
                 eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(i).gameObject);
                 SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
             }
-            yield return new WaitForSeconds(.2f);
+            yield return null;
         }
     }
    

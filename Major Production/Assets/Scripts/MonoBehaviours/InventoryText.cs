@@ -23,11 +23,31 @@ public class InventoryText : MonoBehaviour
     private CharacterMovement characterMovement;
     private EventSystem eventSystem;
     private GameObject inputEvents;
-
+    private string playerNumber;
     private string Input;
+
+    private int i = 0;
     // Use this for initialization
     private void Start()
     {
+        switch (gameObject.transform.tag)
+        {
+            case "P1":
+                playerNumber = "";
+                break;
+            case "P2":
+                playerNumber = " 1";
+                break;
+            case "P3":
+                playerNumber = " 2";
+                break;
+            case "P4":
+                playerNumber = " 3";
+                break;
+            default:
+                break;
+        }
+
         //WoodAmounttext = GameObject.FindGameObjectWithTag("Wood").GetComponentInChildren<Text>();
         //StoneAmounttext = GameObject.FindGameObjectWithTag("Stone").GetComponentInChildren<Text>();
         //MetalAmounttext = GameObject.FindGameObjectWithTag("Metal").GetComponentInChildren<Text>();
@@ -64,11 +84,36 @@ public class InventoryText : MonoBehaviour
 
     private void Update()
     {
-
         if (inInventory)
         {
-            eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(0).gameObject);
-            SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
+            if (UnityEngine.Input.GetAxis("DPad Horizontal" + playerNumber) == -1)
+            {
+                if (i == 0)
+                    eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(3).gameObject);
+                else
+                {
+                    i--;
+                    eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(i).gameObject);
+                }
+
+                SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
+            }
+            if (UnityEngine.Input.GetAxis("DPad Horizontal" + playerNumber) == 1)
+            {
+                i++;
+                eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(i).gameObject);
+                SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
+            }
+            if (UnityEngine.Input.GetAxis("DPad Vertical" + playerNumber) == 1)
+            {
+                eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(3).gameObject);
+                SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
+            }
+            if (UnityEngine.Input.GetAxis("DPad Vertical" + playerNumber) == -1)
+            {
+                eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(3).gameObject);
+                SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
+            }
         }
     }
 
@@ -96,7 +141,7 @@ public class InventoryText : MonoBehaviour
             characterMovement = gameObject.transform.parent.parent.GetComponentInChildren<CharacterMovement>();
         if (args.Length < 2)
             return;
-        string Bbutton = "", SubmitButton = "";
+        string Bbutton = "", SubmitButton = "", Vertical = "", Horizontal = "";
         switch (args[1] as string)
         {
             case "Submit":
@@ -141,6 +186,26 @@ public class InventoryText : MonoBehaviour
                 break;
         }
 
+        switch (args[1] as string)
+        {
+            case "DPad Horizontal":
+                Horizontal = "DPad Horizontal";
+                if (characterMovement.gameObject.tag != "P1") return;
+                break;
+            case "DPad Horizontal 1":
+                Horizontal = "DPad Horizontal 1";
+                if (characterMovement.gameObject.tag != "P2") return;
+                break;
+            case "DPad Horizontal 2":
+                Horizontal = "DPad Horizontal 2";
+                if (characterMovement.gameObject.tag != "P3") return;
+                break;
+            case "DPad Horizontal 3":
+                Horizontal = "DPad Horizontal 3";
+                if (characterMovement.gameObject.tag != "P4") return;
+                break;
+        }
+
 
         if (args[1] as string == SubmitButton || args[1] as string == Bbutton)
         {
@@ -151,7 +216,8 @@ public class InventoryText : MonoBehaviour
                 WarpUI.SetActive(true);
                 characterMovement.enabled = false;
                 inputEvents.gameObject.SetActive(false);
-                eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(0).gameObject);
+                eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(i).gameObject);
+                SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
                 inInventory = true;
             }
             else

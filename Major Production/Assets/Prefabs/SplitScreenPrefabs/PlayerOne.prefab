@@ -9333,6 +9333,7 @@ MonoBehaviour:
   - Right Stick Button
   - Submit
   - Start
+  Axis: []
 --- !u!114 &114529263442528774
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10600,11 +10601,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 1102828726129100}
-  Default: {fileID: 21300002, guid: 173a039209a16aa4ebbe32a0dea3b7e8, type: 3}
-  Left: {fileID: 21300010, guid: 173a039209a16aa4ebbe32a0dea3b7e8, type: 3}
-  Right: {fileID: 21300006, guid: 173a039209a16aa4ebbe32a0dea3b7e8, type: 3}
-  Up: {fileID: 21300004, guid: 173a039209a16aa4ebbe32a0dea3b7e8, type: 3}
-  Down: {fileID: 21300008, guid: 173a039209a16aa4ebbe32a0dea3b7e8, type: 3}
+  Default: {fileID: 0}
+  Left: {fileID: 0}
+  Right: {fileID: 0}
+  Up: {fileID: 0}
+  Down: {fileID: 0}
 --- !u!114 &114983907589657682
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10646,6 +10647,12 @@ MonoBehaviour:
   - Right Stick Button
   - Submit
   - Start
+  Axis:
+  - Trigger
+  - Horizontal
+  - Vertical
+  - DPad Horizontal
+  - DPad Vertical
 --- !u!124 &124738039866601366
 Behaviour:
   m_ObjectHideFlags: 1

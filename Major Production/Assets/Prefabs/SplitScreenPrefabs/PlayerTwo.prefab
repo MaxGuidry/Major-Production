@@ -9452,11 +9452,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 1861795744686232}
-  Default: {fileID: 21300002, guid: 173a039209a16aa4ebbe32a0dea3b7e8, type: 3}
-  Left: {fileID: 21300010, guid: 173a039209a16aa4ebbe32a0dea3b7e8, type: 3}
-  Right: {fileID: 21300006, guid: 173a039209a16aa4ebbe32a0dea3b7e8, type: 3}
-  Up: {fileID: 21300004, guid: 173a039209a16aa4ebbe32a0dea3b7e8, type: 3}
-  Down: {fileID: 21300008, guid: 173a039209a16aa4ebbe32a0dea3b7e8, type: 3}
+  Default: {fileID: 0}
+  Left: {fileID: 0}
+  Right: {fileID: 0}
+  Up: {fileID: 0}
+  Down: {fileID: 0}
 --- !u!114 &114566854372963124
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9584,6 +9584,7 @@ MonoBehaviour:
   - Right Stick Button1
   - Submit1
   - Start1
+  Axis: []
 --- !u!114 &114640107499876198
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9803,6 +9804,12 @@ MonoBehaviour:
   - Right Stick Button1
   - Submit1
   - Start1
+  Axis:
+  - Trigger1
+  - Horizontal1
+  - Vertical1
+  - DPad Horizontal 1
+  - DPad Vertical 1
 --- !u!114 &114676804273234588
 MonoBehaviour:
   m_ObjectHideFlags: 1

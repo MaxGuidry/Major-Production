@@ -82,6 +82,11 @@ public class InventoryText : MonoBehaviour
         SelectionObject.SetActive(false);
     }
 
+    private void Update()
+    {
+        if (inInventory)
+            SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
+    }
     public void CycleThroughUI(object[] args)
     {
         var playerTag = gameObject.transform.parent.parent.GetComponentInChildren<PlayerStatBehaviour>().tag;
@@ -168,8 +173,8 @@ public class InventoryText : MonoBehaviour
                 eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(i).gameObject);
                 SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
                 inInventory = true;
-                if (coroutine == null)
-                    coroutine = StartCoroutine(NextWarp());
+                //if (coroutine == null)
+                //    coroutine = StartCoroutine(NextWarp());
 
             }
             else
@@ -215,7 +220,8 @@ public class InventoryText : MonoBehaviour
         //float timer = 0f;
         while (inInventory)
         {
-            //#region Max
+
+            #region Max
             //var inputs = FindObjectsOfType<InputEvents>();
             //InputEvents ie = inputEvents.GetComponent<InputEvents>();
             //foreach (var i in inputs)
@@ -237,7 +243,7 @@ public class InventoryText : MonoBehaviour
             //        timer = 0;
             //    }
             //}
-            //#endregion
+            #endregion
 
             if (UnityEngine.Input.GetAxis("DPad Horizontal" + playerNumber) == -1)
             {
@@ -249,7 +255,7 @@ public class InventoryText : MonoBehaviour
                 i++;
                 CyclePlanet();
             }
-            yield return new WaitForSeconds(.2f);
+            yield return new WaitForSeconds(.15f);
         }
     }
 

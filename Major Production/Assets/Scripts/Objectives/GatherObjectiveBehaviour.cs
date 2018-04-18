@@ -17,11 +17,15 @@ public class GatherObjectiveBehaviour : ObjectiveBehaviour
         if (PlayerObjectives.Count <= 0)
         {
             AllQuestComplete.Raise();
-            Destroy(CurrentObjectiveText);
+            //Destroy(CurrentObjectiveText);
         }
-        CurrentObjectiveText.text = CurrentObjective.Description + " " +
-                                    CurrentObjective.CurrentAmount + " / " +
-                                    CurrentObjective.RequiredAmount;
+        else
+        {
+            CurrentObjectiveText.text = CurrentObjective.Description + " " +
+                                        CurrentObjective.CurrentAmount + " / " +
+                                        CurrentObjective.RequiredAmount;
+        }
+
     }
 
     /// <summary>
@@ -33,7 +37,8 @@ public class GatherObjectiveBehaviour : ObjectiveBehaviour
         typer.ChooseFile = "AllQuestComplete";
         typer.TypeSpeed = 0.1f;
         typer.path = "Assets/Resources/Dialogue/" + typer.ChooseFile + ".txt";
-        StartCoroutine(typer.AutoType());
+        CurrentObjectiveText.text = "Kill All Players!";
+        //StartCoroutine(typer.AutoType());
         //StartCoroutine(Restart());
     }
 

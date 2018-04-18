@@ -22,6 +22,10 @@ public class CountDown : MonoBehaviour
             if (playerStatBehaviour.Health != 0)
                 players.Add(playerStatBehaviour.gameObject);
         }
+
+        var temp = players[2];
+        players[2] = players[3];
+        players[3] = temp;
         SpecateCamera.gameObject.SetActive(false);
         SpecateCamera.enabled = false;
     }

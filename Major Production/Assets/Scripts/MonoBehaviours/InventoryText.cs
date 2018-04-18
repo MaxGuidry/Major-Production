@@ -84,21 +84,22 @@ public class InventoryText : MonoBehaviour
 
     public void CycleThroughUI(object[] args)
     {
+        var playerTag = gameObject.transform.parent.parent.GetComponentInChildren<PlayerStatBehaviour>().tag;
         if (characterMovement == null)
             characterMovement = gameObject.transform.parent.parent.GetComponentInChildren<CharacterMovement>();
-        switch (characterMovement.gameObject.transform.tag)
+        switch (playerTag)
         {
             case "P1":
-                Input = "Input";
+                Input = characterMovement == null ? null : "Input";
                 break;
             case "P2":
-                Input = "Input 1";
+                Input = characterMovement == null ? null : "Input 1";
                 break;
             case "P3":
-                Input = "Input 2";
+                Input = characterMovement == null ? null : "Input 2";
                 break;
             case "P4":
-                Input = "Input 3";
+                Input = characterMovement == null ? null : "Input 3";
                 break;
             default:
                 break;
@@ -115,19 +116,19 @@ public class InventoryText : MonoBehaviour
         {
             case "Submit":
                 SubmitButton = "Submit";
-                if (characterMovement.gameObject.tag != "P1") return;
+                if (playerTag!= "P1") return;
                 break;
             case "Submit1":
                 SubmitButton = "Submit1";
-                if (characterMovement.gameObject.tag != "P2") return;
+                if (playerTag != "P2") return;
                 break;
             case "Submit2":
                 SubmitButton = "Submit2";
-                if (characterMovement.gameObject.tag != "P3") return;
+                if (playerTag != "P3") return;
                 break;
             case "Submit3":
                 SubmitButton = "Submit3";
-                if (characterMovement.gameObject.tag != "P4") return;
+                if (playerTag != "P4") return;
                 break;
             default:
                 break;
@@ -137,19 +138,19 @@ public class InventoryText : MonoBehaviour
         {
             case "B":
                 Bbutton = "B";
-                if (characterMovement.gameObject.tag != "P1") return;
+                if (playerTag != "P1") return;
                 break;
             case "B1":
                 Bbutton = "B1";
-                if (characterMovement.gameObject.tag != "P2") return;
+                if (playerTag != "P2") return;
                 break;
             case "B2":
                 Bbutton = "B2";
-                if (characterMovement.gameObject.tag != "P3") return;
+                if (playerTag != "P3") return;
                 break;
             case "B3":
                 Bbutton = "B3";
-                if (characterMovement.gameObject.tag != "P4") return;
+                if (playerTag != "P4") return;
                 break;
             default:
                 break;

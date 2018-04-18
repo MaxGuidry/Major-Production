@@ -10,11 +10,13 @@ public class CountDown : MonoBehaviour
     public GameObject GameOverUI;
     public Text TimerDisplay;
     public List<GameObject> players;
-
     public Camera SpecateCamera;
+
+    private bool GameActive;
     // Use this for initialization
     void Start()
     {
+        GameActive = true;
         foreach (var playerStatBehaviour in FindObjectsOfType<PlayerStatBehaviour>())
         {
             if (playerStatBehaviour.Health != 0)
@@ -67,6 +69,7 @@ public class CountDown : MonoBehaviour
 
     private IEnumerator GameOverLost()
     {
+        GameActive = false;
         foreach (var playerStatBehaviour in FindObjectsOfType<PlayerStatBehaviour>())
         {
             playerStatBehaviour.gameObject.transform.parent.GetComponentInChildren<Camera>().enabled = true;
@@ -93,6 +96,7 @@ public class CountDown : MonoBehaviour
 
     private IEnumerator GameOverWin(GameObject player)
     {
+        GameActive = false;
         foreach (var playerStatBehaviour in FindObjectsOfType<PlayerStatBehaviour>())
         {
             playerStatBehaviour.gameObject.transform.parent.GetComponentInChildren<Camera>().enabled = true;
@@ -119,7 +123,7 @@ public class CountDown : MonoBehaviour
     private IEnumerator CycleSpecate(GameObject camera)
     {
         var i = 0;
-        while (true)
+        while (GameActive)
         {
             camera.gameObject.transform.position = new Vector3(players[i].gameObject.transform.parent.transform.position.x + 10,
                 players[i].gameObject.transform.parent.transform.position.y + 10, players[i].gameObject.transform.parent.transform.position.z - 10);

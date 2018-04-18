@@ -10,24 +10,27 @@ public class CountDown : MonoBehaviour
     public GameObject GameOverUI;
     public Text TimerDisplay;
     public List<GameObject> players;
-    public Camera SpecateCamera;
+    public List<Camera> SpecateCameras;
 
     private bool GameActive;
     // Use this for initialization
     void Start()
     {
         GameActive = true;
-        foreach (var playerStatBehaviour in FindObjectsOfType<PlayerStatBehaviour>())
-        {
-            if (playerStatBehaviour.Health != 0)
-                players.Add(playerStatBehaviour.gameObject);
-        }
+        //foreach (var playerStatBehaviour in FindObjectsOfType<PlayerStatBehaviour>())
+        //{
+        //    if (playerStatBehaviour.Health != 0)
+        //        players.Add(playerStatBehaviour.gameObject);
+        //}
 
-        var temp = players[2];
-        players[2] = players[3];
-        players[3] = temp;
-        SpecateCamera.gameObject.SetActive(false);
-        SpecateCamera.enabled = false;
+        //var temp = players[2];
+        //players[2] = players[3];
+        //players[3] = temp;
+        foreach (var SpecateCamera in SpecateCameras)
+        {
+            SpecateCamera.gameObject.SetActive(false);
+            SpecateCamera.enabled = false;
+        }
     }
 
     // Update is called once per frame
@@ -36,23 +39,24 @@ public class CountDown : MonoBehaviour
         Timer -= Time.deltaTime;
         if (Timer >= 0f)
             TimerDisplay.text = Mathf.Round(Timer).ToString();
-        foreach (var playerStatBehaviour in FindObjectsOfType<PlayerStatBehaviour>())
+        foreach (var playerStatBehaviour in players)
         {
-            if (playerStatBehaviour.Health <= 0)
+            if (playerStatBehaviour.GetComponentInChildren<PlayerStatBehaviour>().Health <= 0)
             {
                 //playerStatBehaviour.gameObject.SetActive(false);
-                playerStatBehaviour.gameObject.transform.parent.GetComponentInChildren<Camera>().enabled = false;
-
-                var cam = Instantiate(SpecateCamera);
-                SpecateCamera.gameObject.transform.position = Vector3.zero;
-                cam.gameObject.SetActive(true);
-                cam.enabled = true;
-                cam.gameObject.GetComponentInChildren<Camera>().rect = playerStatBehaviour.gameObject.transform.parent
+                playerStatBehaviour.gameObject.transform.GetComponentInChildren<Camera>().enabled = false;
+                var cam = players.IndexOf(playerStatBehaviour);
+                if (SpecateCameras[cam].enabled)
+                    return;
+                SpecateCameras[cam].enabled = true;
+                SpecateCameras[cam].gameObject.transform.position = Vector3.zero;
+                SpecateCameras[cam].gameObject.SetActive(true);
+                SpecateCameras[cam].enabled = true;
+                SpecateCameras[cam].gameObject.GetComponentInChildren<Camera>().rect = playerStatBehaviour.gameObject.transform
                     .GetComponentInChildren<Camera>().rect;
-               //cam.gameObject.transform.RotateAround(playerStatBehaviour.gameObject.transform.localPosition, playerStatBehaviour.gameObject.transform.localPosition, 5f);
-                StartCoroutine(CycleSpecate(cam.gameObject));
+                //cam.gameObject.transform.RotateAround(playerStatBehaviour.gameObject.transform.localPosition, playerStatBehaviour.gameObject.transform.localPosition, 5f);
 
-                players.Remove(playerStatBehaviour.gameObject);
+                StartCoroutine(CycleSpecate(SpecateCameras[cam].gameObject));
             }
 
             if (Timer <= 0)
@@ -129,15 +133,28 @@ public class CountDown : MonoBehaviour
         var i = 0;
         while (GameActive)
         {
-            camera.gameObject.transform.position = new Vector3(players[i].gameObject.transform.parent.transform.position.x + 10,
-                players[i].gameObject.transform.parent.transform.position.y + 10, players[i].gameObject.transform.parent.transform.position.z - 10);
-            camera.gameObject.transform.LookAt(players[i].gameObject.transform);
-           
-            Debug.Log(i);
-            yield return new WaitForSeconds(3);
-            i++;
-            if (i == players.Count)
-                i = 0;
+            if (players[i].gameObject.transform.GetChild(0).GetComponentInChildren<PlayerStatBehaviour>().Health > 0)
+            {
+                camera.gameObject.transform.position = new Vector3(
+                    players[i].gameObject.transform.GetChild(0).GetComponentInChildren<PlayerStatBehaviour>().transform
+                        .position.x + 10,
+                    players[i].gameObject.transform.GetChild(0).GetComponentInChildren<PlayerStatBehaviour>().transform
+                        .position.y + 10,
+                    players[i].gameObject.transform.GetChild(0).GetComponentInChildren<PlayerStatBehaviour>().transform
+                        .position.z - 10);
+                camera.gameObject.transform.LookAt(players[i].gameObject.transform);
+                yield return new WaitForSeconds(3);
+                i++;
+                if (i == players.Count)
+                    i = 0;
+            }
+            else
+            {
+                yield return new WaitForSeconds(0);
+                i++;
+                if (i == players.Count)
+                    i = 0;
+            }
         }
     }
 }

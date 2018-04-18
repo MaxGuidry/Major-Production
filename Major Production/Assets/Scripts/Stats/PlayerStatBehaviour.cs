@@ -33,27 +33,51 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
 
     private void Update()
     {
+        //switch (GetComponent<Transform>().tag)
+        //{
+        //    case "P1":
+        //        Health = stats.GetStat("PHealth").Value;
+        //        Armor = stats.GetStat("PArmor").Value;
+        //        Level = stats.GetStat("PLevel").Value;
+        //        break;
+        //    case "P2":
+        //        Health = stats.GetStat("PHealth 1").Value;
+        //        Armor = stats.GetStat("PArmor 1").Value;
+        //        Level = stats.GetStat("PLevel 1").Value;
+        //        break;
+        //    case "P3":
+        //        Health = stats.GetStat("PHealth 2").Value;
+        //        Armor = stats.GetStat("PArmor 2").Value;
+        //        Level = stats.GetStat("PLevel 2").Value;
+        //        break;
+        //    case "P4":
+        //        Health = stats.GetStat("PHealth 3").Value;
+        //        Armor = stats.GetStat("PArmor 3").Value;
+        //        Level = stats.GetStat("PLevel 3").Value;
+        //        break;
+        //}
+
         switch (GetComponent<Transform>().tag)
         {
             case "P1":
-                Health = stats.GetStat("PHealth").Value;
-                Armor = stats.GetStat("PArmor").Value;
-                Level = stats.GetStat("PLevel").Value;
+                stats.GetStat("PHealth").Value = Health;
+                stats.GetStat("PArmor").Value = Armor;
+                stats.GetStat("PLevel").Value = Level;
                 break;
             case "P2":
-                Health = stats.GetStat("PHealth 1").Value;
-                Armor = stats.GetStat("PArmor 1").Value;
-                Level = stats.GetStat("PLevel 1").Value;
+                stats.GetStat("PHealth 1").Value = Health;
+                stats.GetStat("PArmor 1").Value = Armor;
+                stats.GetStat("PLevel 1").Value = Level;
                 break;
             case "P3":
-                Health = stats.GetStat("PHealth 2").Value;
-                Armor = stats.GetStat("PArmor 2").Value;
-                Level = stats.GetStat("PLevel 2").Value;
+                stats.GetStat("PHealth 2").Value = Health;
+                stats.GetStat("PArmor 2").Value = Armor;
+                stats.GetStat("PLevel 2").Value = Level;
                 break;
             case "P4":
-                Health = stats.GetStat("PHealth 3").Value;
-                Armor = stats.GetStat("PArmor 3").Value;
-                Level = stats.GetStat("PLevel 3").Value;
+                stats.GetStat("PHealth 3").Value = Health;
+                stats.GetStat("PArmor 3").Value = Armor;
+                stats.GetStat("PLevel 3").Value = Level;
                 break;
         }
     }
@@ -71,7 +95,7 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
 
         if (nexthealth <= 0)
         {
-            Health = nexthealth;
+            Health = 0;
             Die();
         }
         else

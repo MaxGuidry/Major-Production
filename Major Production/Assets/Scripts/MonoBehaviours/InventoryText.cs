@@ -84,7 +84,9 @@ public class InventoryText : MonoBehaviour
 
     public void CycleThroughUI(object[] args)
     {
-        switch (gameObject.transform.parent.parent.GetComponentInChildren<CharacterMovement>().gameObject.transform.tag)
+        if (characterMovement == null)
+            characterMovement = gameObject.transform.parent.parent.GetComponentInChildren<CharacterMovement>();
+        switch (characterMovement.gameObject.transform.tag)
         {
             case "P1":
                 Input = "Input";
@@ -98,12 +100,14 @@ public class InventoryText : MonoBehaviour
             case "P4":
                 Input = "Input 3";
                 break;
+            default:
+                break;
         }
 
         if (inputEvents == null)
             inputEvents = GameObject.FindGameObjectWithTag(Input);
-        if (characterMovement == null)
-            characterMovement = gameObject.transform.parent.parent.GetComponentInChildren<CharacterMovement>();
+        //if (characterMovement == null)
+        //    characterMovement = gameObject.transform.parent.parent.GetComponentInChildren<CharacterMovement>();
         if (args.Length < 2)
             return;
         string Bbutton = "", SubmitButton = "", Vertical = "", Horizontal = "";
@@ -204,63 +208,58 @@ public class InventoryText : MonoBehaviour
     {
         gameObject.transform.parent.parent.GetComponentInChildren<CharacterMovement>().SpawnOnOtherPlanet(planet.GetComponent<PlanetBehaviour>());
     }
-    
+
     IEnumerator NextWarp()
     {
-        float timer = 0f;
-
-
-        
-            
-
-
+        //float timer = 0f;
         while (inInventory)
         {
-            var inputs = FindObjectsOfType<InputEvents>();
-            InputEvents ie = inputEvents.GetComponent<InputEvents>();
-            foreach (var i in inputs)
-            {
-                if (i.Axis.Contains("DPad Horizontal" + playerNumber))
-                {
-                   // ie = i;
-                    break;
-                }
-            }
+            //#region Max
+            //var inputs = FindObjectsOfType<InputEvents>();
+            //InputEvents ie = inputEvents.GetComponent<InputEvents>();
+            //foreach (var i in inputs)
+            //{
+            //    if (i.Axis.Contains("DPad Horizontal" + playerNumber))
+            //    {
+            //        // ie = i;
+            //        break;
+            //    }
+            //}
+            //timer += Time.deltaTime;
+            ////Debug.Log(ie.prevAxisValues["DPad Horizontal" +playerNumber]);
+            //if (ie.prevAxisValues["DPad Horizontal" + playerNumber] < -.9f || ie.prevAxisValues["DPad Horizontal" + playerNumber] > .9f)
+            //{
+            //    if (timer < .2f)
+            //        yield return null;
+            //    else
+            //    {
+            //        timer = 0;
+            //    }
+            //}
+            //#endregion
 
-            timer += Time.deltaTime;
-
-
-            //Debug.Log(ie.prevAxisValues["DPad Horizontal" +playerNumber]);
-            if (ie.prevAxisValues["DPad Horizontal" + playerNumber] < -.9f|| ie.prevAxisValues["DPad Horizontal" + playerNumber] > .9f)
-            { if (timer < .2f)
-                    yield return null;
-                else
-                {
-                    timer = 0;
-                }
-            }
             if (UnityEngine.Input.GetAxis("DPad Horizontal" + playerNumber) == -1)
             {
                 i--;
-                if (i > 3)
-                    i = 0;
-                if (i < 0)
-                    i = 3;
-                eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(i).gameObject);
-                SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
+                CyclePlanet();
             }
             if (UnityEngine.Input.GetAxis("DPad Horizontal" + playerNumber) == 1)
             {
                 i++;
-                if (i > 3)
-                    i = 0;
-                if (i < 0)
-                    i = 3;
-                eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(i).gameObject);
-                SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
+                CyclePlanet();
             }
-            yield return null;
+            yield return new WaitForSeconds(.2f);
         }
     }
-   
+
+    private void CyclePlanet()
+    {
+        if (i > WarpUI.transform.childCount - 1)
+            i = 0;
+        if (i < 0)
+            i = WarpUI.transform.childCount - 1;
+
+        eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(i).gameObject);
+        SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
+    }
 }

@@ -28,7 +28,8 @@ public class CountDown : MonoBehaviour
     void Update()
     {
         Timer -= Time.deltaTime;
-        TimerDisplay.text = Mathf.Round(Timer).ToString();
+        if (Timer >= 0f)
+            TimerDisplay.text = Mathf.Round(Timer).ToString();
         foreach (var playerStatBehaviour in FindObjectsOfType<PlayerStatBehaviour>())
         {
             if (playerStatBehaviour.Health <= 0)
@@ -71,6 +72,14 @@ public class CountDown : MonoBehaviour
             playerStatBehaviour.gameObject.transform.parent.GetComponentInChildren<Camera>().enabled = true;
         }
 
+        foreach (var WarpUI in GameObject.FindGameObjectsWithTag("WarpUI"))
+        {
+            WarpUI.gameObject.SetActive(false);
+        }
+        foreach (var select in GameObject.FindGameObjectsWithTag("Select"))
+        {
+            select.gameObject.SetActive(false);
+        }
         foreach (var Over in GameObject.FindGameObjectsWithTag("GameOver"))
         {
             Over.GetComponent<Image>().enabled = true;
@@ -88,7 +97,14 @@ public class CountDown : MonoBehaviour
         {
             playerStatBehaviour.gameObject.transform.parent.GetComponentInChildren<Camera>().enabled = true;
         }
-
+        foreach (var WarpUI in GameObject.FindGameObjectsWithTag("WarpUI"))
+        {
+            WarpUI.gameObject.SetActive(false);
+        }
+        foreach (var select in GameObject.FindGameObjectsWithTag("Select"))
+        {
+            select.gameObject.SetActive(false);
+        }
         foreach (var Over in GameObject.FindGameObjectsWithTag("GameOver"))
         {
             Over.GetComponent<Image>().enabled = true;

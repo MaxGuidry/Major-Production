@@ -7902,7 +7902,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f7e6d4b76efab17448e275fecd0660c8, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -8171,6 +8171,7 @@ MonoBehaviour:
   goopAmount: 0
   inInventory: 0
   characterMovement: {fileID: 0}
+  inputEvents: {fileID: 0}
   warping: 0
 --- !u!114 &114078602716030366
 MonoBehaviour:
@@ -10709,6 +10710,7 @@ MonoBehaviour:
   WalkSpeed: 6
   cameraPivot: {fileID: 4127989674469884}
   BreakObject: {fileID: 11400000, guid: 8d616ec8803206749b56379eefea810f, type: 2}
+  state: 0
   anim: {fileID: 95451221985943686}
 --- !u!124 &124012916432948572
 Behaviour:

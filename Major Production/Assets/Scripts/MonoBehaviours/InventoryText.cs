@@ -22,7 +22,7 @@ public class InventoryText : MonoBehaviour
     public bool inInventory;
     public CharacterMovement characterMovement;
     private EventSystem eventSystem;
-    private GameObject inputEvents;
+    public GameObject inputEvents;
     private string playerNumber;
     private string Input;
     public Coroutine coroutine;

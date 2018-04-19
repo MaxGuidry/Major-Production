@@ -69,8 +69,6 @@ public class InputEvents : MonoBehaviour
 
             prevAxisValues[axis] = axisValues[axis];
             float value = Input.GetAxis(axis);
-            if (axis == "DPad Horizontal")
-                Debug.Log(prevAxisValues[axis]);
             if (value > .01f && axisValues[axis] < .01f)
                 OnButtonPressed.ObjRaise("Pressed", axis);
             else if (value > .01f)

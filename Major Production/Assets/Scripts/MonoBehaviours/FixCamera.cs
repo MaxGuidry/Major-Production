@@ -87,19 +87,21 @@ public class FixCamera : MonoBehaviour
 
             foreach (var c in cms)
             {
-                if (c.cameraPivot != null)
-                    continue;
+               
                 if (GLOBALS.SplitscreenLocal || GLOBALS.SplitscreenOnline)
                 {
                     if (playernumber != c.gameObject.name)
                         continue;
                 }
 
-                if (c.isLocalPlayer || c.cameraPivot != pivotY)
+                if (c.cameraPivot == pivotY)
                 {
-                    follow = c.transform;
-                    c.cameraPivot = pivotY;
-                    character = c;
+                    if (!follow)
+                        follow = c.transform;
+                    if (!c.cameraPivot)
+                        c.cameraPivot = pivotY;
+                    if (!character)
+                        character = c;
                     done = true;
 
                     switch (c.gameObject.tag)

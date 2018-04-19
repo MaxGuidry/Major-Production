@@ -39,6 +39,8 @@ public class CountDown : MonoBehaviour
         Timer -= Time.deltaTime;
         if (Timer >= 0f)
             TimerDisplay.text = Mathf.Round(Timer).ToString();
+        if (players.Count == 0)
+            return;
         foreach (var playerStatBehaviour in players)
         {
             if (playerStatBehaviour.GetComponentInChildren<PlayerStatBehaviour>().Health <= 0)
@@ -63,9 +65,9 @@ public class CountDown : MonoBehaviour
             {
                 foreach (var player in players)
                 {
-                    player.gameObject.SetActive(false);
+                    player.GetComponentInChildren<CharacterMovement>().enabled = false;
                 }
-                players.Remove(playerStatBehaviour.gameObject);
+                //players.Remove(playerStatBehaviour.gameObject);
                 StartCoroutine(GameOverLost());
             }
             else if (players.Count == 1)

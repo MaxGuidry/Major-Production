@@ -21,8 +21,9 @@ public class InventoryText : MonoBehaviour
     public uint woodAmount, stoneAmount, metalAmount, goopAmount;
     public bool inInventory;
     public CharacterMovement characterMovement;
+    [SerializeField]
     private EventSystem eventSystem;
-    private GameObject inputEvents;
+    public GameObject inputEvents;
     private string playerNumber;
     private string Input;
     public Coroutine coroutine;
@@ -75,9 +76,7 @@ public class InventoryText : MonoBehaviour
                     break;
             }
         }
-
         characterMovement = gameObject.transform.parent.parent.GetComponentInChildren<CharacterMovement>();
-        eventSystem = gameObject.transform.parent.parent.GetComponentInChildren<EventSystem>();
         Input = "";
         if (characterMovement == null)
             return;
@@ -91,23 +90,28 @@ public class InventoryText : MonoBehaviour
     }
     public void CycleThroughUI(object[] args)
     {
-
+        var EventSystem = "";
         var playerTag = gameObject.transform.parent.parent.GetComponentInChildren<PlayerStatBehaviour>().tag;
         if (characterMovement == null)
             characterMovement = gameObject.transform.parent.parent.GetComponentInChildren<CharacterMovement>();
+
         switch (playerTag)
         {
             case "P1":
                 Input = characterMovement == null ? null : "Input";
+                EventSystem = "Event";
                 break;
             case "P2":
                 Input = characterMovement == null ? null : "Input 1";
+                EventSystem = "Event 1";
                 break;
             case "P3":
                 Input = characterMovement == null ? null : "Input 2";
+                EventSystem = "Event 2";
                 break;
             case "P4":
                 Input = characterMovement == null ? null : "Input 3";
+                EventSystem = "Event 3";
                 break;
             default:
                 break;
@@ -115,6 +119,7 @@ public class InventoryText : MonoBehaviour
 
         if (inputEvents == null)
             inputEvents = GameObject.FindGameObjectWithTag(Input);
+        eventSystem = GameObject.FindGameObjectWithTag(EventSystem).GetComponent<EventSystem>();
         //if (characterMovement == null)
         //    characterMovement = gameObject.transform.parent.parent.GetComponentInChildren<CharacterMovement>();
         if (args.Length < 2)

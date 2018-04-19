@@ -32,10 +32,17 @@ public class SplitScreenConnection : MonoBehaviour
         {
             var val = "";
             if (connectedControllers[i] != "")
+            {
                 val = "Player " + (i + 1) + " joined game";
+                m_Controllers[Panels[i]] = val;
+            }
             else
-                connectedControllers.RemoveAt(i); 
-            m_Controllers[Panels[i]] = val;
+            {
+                connectedControllers.RemoveAt(i);
+                i--;
+            }
+
+
         }
 
         foreach (KeyValuePair<GameObject, string> item in m_Controllers)

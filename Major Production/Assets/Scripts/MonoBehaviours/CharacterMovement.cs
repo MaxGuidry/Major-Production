@@ -300,6 +300,7 @@ public class CharacterMovement : NetworkBehaviour
         yield return new WaitForSeconds(timer);
         SpawnOnOtherPlanet(p);
         yield return new WaitForSeconds(timer);
+        crt.inputEvents.SetActive(true);
         crt.warping = false;
         enabled = true;
         crt.coroutine = null;

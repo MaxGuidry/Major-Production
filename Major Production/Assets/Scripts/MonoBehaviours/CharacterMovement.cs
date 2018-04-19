@@ -41,8 +41,11 @@ public class CharacterMovement : NetworkBehaviour
 
     private void Start()
     {
-        anim.GetBehaviour<BasicAttackSM>().Punch = this.GetComponent<AudioSource>().clip;
-        anim.GetBehaviour<BasicAttackSM>().source = this.GetComponent<AudioSource>();
+        state = PlayerState.None;
+        var basm = anim.GetBehaviour<BasicAttackSM>();
+        basm.Punch = this.GetComponent<AudioSource>().clip;
+        basm.source = this.GetComponent<AudioSource>();
+        basm.player = this;
         if (!anim)
             anim = GetComponent<Animator>();
         //if (!cameraPivot)

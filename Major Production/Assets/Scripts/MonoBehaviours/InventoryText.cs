@@ -20,13 +20,15 @@ public class InventoryText : MonoBehaviour
     [HideInInspector]
     public uint woodAmount, stoneAmount, metalAmount, goopAmount;
     public bool inInventory;
-    private CharacterMovement characterMovement;
+    public CharacterMovement characterMovement;
     private EventSystem eventSystem;
     private GameObject inputEvents;
     private string playerNumber;
     private string Input;
-    public static Coroutine coroutine;
+    public Coroutine coroutine;
     private int i = 0;
+
+    public bool warping = false;
     // Use this for initialization
     private void Start()
     {
@@ -89,6 +91,7 @@ public class InventoryText : MonoBehaviour
     }
     public void CycleThroughUI(object[] args)
     {
+
         var playerTag = gameObject.transform.parent.parent.GetComponentInChildren<PlayerStatBehaviour>().tag;
         if (characterMovement == null)
             characterMovement = gameObject.transform.parent.parent.GetComponentInChildren<CharacterMovement>();
@@ -121,7 +124,7 @@ public class InventoryText : MonoBehaviour
         {
             case "Submit":
                 SubmitButton = "Submit";
-                if (playerTag!= "P1") return;
+                if (playerTag != "P1") return;
                 break;
             case "Submit1":
                 SubmitButton = "Submit1";
@@ -160,7 +163,8 @@ public class InventoryText : MonoBehaviour
             default:
                 break;
         }
-
+        if (warping)
+            return;
         if (args[1] as string == SubmitButton || args[1] as string == Bbutton)
         {
             if (characterMovement.enabled)
@@ -180,7 +184,7 @@ public class InventoryText : MonoBehaviour
             else
             {
                 inInventory = false;
-                coroutine = null;
+                //coroutine = null;
                 SelectionObject.SetActive(false);
                 characterMovement.enabled = true;
                 WarpUI.SetActive(false);
@@ -212,7 +216,17 @@ public class InventoryText : MonoBehaviour
 
     public void WarpPlanet(GameObject planet)
     {
-        gameObject.transform.parent.parent.GetComponentInChildren<CharacterMovement>().SpawnOnOtherPlanet(planet.GetComponent<PlanetBehaviour>());
+        var delay = 2f;
+
+        var charMov = gameObject.transform.parent.parent.GetComponentInChildren<CharacterMovement>();
+        if (coroutine == null)
+        {
+            WarpUI.SetActive(false);
+            SelectionObject.SetActive(false);
+            warping = true;
+            coroutine = charMov.StartCoroutine(charMov.SpawnDelay(planet.GetComponent<PlanetBehaviour>(), delay, this));
+        }
+        //gameObject.transform.parent.parent.GetComponentInChildren<CharacterMovement>().SpawnOnOtherPlanet(planet.GetComponent<PlanetBehaviour>());
     }
 
     IEnumerator NextWarp()

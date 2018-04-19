@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Advertisements;
@@ -261,8 +262,15 @@ public class CharacterMovement : NetworkBehaviour
         this.transform.position = tpLocation;
     }
 
-
-    
+    public IEnumerator SpawnDelay(PlanetBehaviour p, float timer, InventoryText crt)
+    {
+        yield return new WaitForSeconds(timer);
+        SpawnOnOtherPlanet(p);
+        yield return new WaitForSeconds(timer);
+        crt.warping = false;
+        enabled = true;
+        crt.coroutine = null;
+    }
 
     public void Die()
     {

@@ -58,8 +58,6 @@ public class FixCamera : MonoBehaviour
             pivotX.transform.rotation = origin;
             //Debug.Log("FUCK");
             // }
-
-
         }
         // lastDot = dp;
 

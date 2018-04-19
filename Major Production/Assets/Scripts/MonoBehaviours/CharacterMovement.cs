@@ -201,7 +201,7 @@ public class CharacterMovement : NetworkBehaviour
             return;
         if (args.Length < 2)
             return;
-        if (args[1] as string == "X" + PlayerNumber)
+        if (args[1] as string == "X" + PlayerNumber )//&& anim.GetCurrentAnimatorStateInfo(). )
         {
             anim.SetTrigger("AttackBasic");
 

@@ -36,6 +36,8 @@ public class CharacterMovement : NetworkBehaviour
     public PlayerState state;
     public Animator anim;
 
+    public Transform HandToShoot;
+    public GameObject RocketPrefab;
     private NetworkManager nm;
     //private Dictionary<string, float> axisValues = new Dictionary<string, float>();
 
@@ -43,9 +45,12 @@ public class CharacterMovement : NetworkBehaviour
     {
         state = PlayerState.None;
         var basm = anim.GetBehaviour<BasicAttackSM>();
+        
         basm.Punch = this.GetComponent<AudioSource>().clip;
         basm.source = this.GetComponent<AudioSource>();
         basm.player = this;
+        var mssm = anim.GetBehaviour<MissileStrikeSM>();
+        mssm.player = this;
         if (!anim)
             anim = GetComponent<Animator>();
         //if (!cameraPivot)
@@ -87,6 +92,8 @@ public class CharacterMovement : NetworkBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (Input.GetAxis("Right Bumper" + PlayerNumber) > 0 && state != PlayerState.Attacking)
+            anim.SetTrigger("Rocket");
         if (Input.GetKeyDown(KeyCode.N) && PlayerNumber == "")
             SpawnOnOtherPlanet(FindObjectsOfType<PlanetBehaviour>()[Random.Range(0, 4)]);
         if (GLOBALS.SoloOnline || GLOBALS.SplitscreenOnline)
@@ -179,7 +186,7 @@ public class CharacterMovement : NetworkBehaviour
 
         // }
     }
-    
+
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.GetComponent<MeshCollider>())
@@ -266,6 +273,11 @@ public class CharacterMovement : NetworkBehaviour
 
 
 
+    }
+
+    public void FireRocket()
+    {
+        Instantiate(RocketPrefab, HandToShoot.position + transform.forward *1.5f + transform.right *.4f, HandToShoot.transform.rotation);
     }
 
     public void SpawnOnOtherPlanet(PlanetBehaviour p)

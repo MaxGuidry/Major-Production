@@ -116,7 +116,10 @@ public class ItemInteractionBehaviour : MonoBehaviour
     private float TimeOffSurface = 0;
     private void OnCollisionExit(Collision other)
     {
-        string name = other.gameObject.GetComponent<MeshRenderer>().material.name;
+        var mr = other.gameObject.GetComponent<MeshRenderer>();
+        if (!mr)
+            return;
+        string name = mr.material.name;
         var mc = other.gameObject.GetComponent<MeshCollider>();
         if (!mc)
             return;

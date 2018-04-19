@@ -179,12 +179,10 @@ public class CharacterMovement : NetworkBehaviour
 
         // }
     }
-    //todo MAKE SURE THE DELTA TIME IS CORRECT
-    //
-    //
+    
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.GetComponent<Collider>())
+        if (other.gameObject.GetComponent<MeshCollider>())
         {
             //needs check for if the object is below the player relative to the players up axis.
             grounded = true;
@@ -194,16 +192,27 @@ public class CharacterMovement : NetworkBehaviour
 
     void OnCollisionStay(Collision other)
     {
+        if (other.gameObject.GetComponent<Collider>())
+        {
+            var mc = other.gameObject.GetComponent<MeshCollider>();
+            if (!mc)
+                return;
+            grounded = true;
+            jumping = false;
+        }
+    }
+    void OnCollisionExit(Collision other)
+    {
 
         if (other.gameObject.GetComponent<Collider>())
         {
-            //needs check for if the object is below the player relative to the players up axis.
-            if (!jumping)
-            {
-                grounded = true;
-                //jumping = false;
+            var mc = other.gameObject.GetComponent<MeshCollider>();
+            if (!mc)
+                return;
+            grounded = false;
+            jumping = true;
 
-            }
+
         }
     }
     public void HitObject(object[] args)
@@ -214,7 +223,7 @@ public class CharacterMovement : NetworkBehaviour
             return;
         if (args.Length < 2)
             return;
-        if (args[1] as string == "X" + PlayerNumber )//&& anim.GetCurrentAnimatorStateInfo(). )
+        if (args[1] as string == "X" + PlayerNumber)//&& anim.GetCurrentAnimatorStateInfo(). )
         {
             anim.SetTrigger("AttackBasic");
 
@@ -229,9 +238,9 @@ public class CharacterMovement : NetworkBehaviour
         hits = Physics.RaycastAll(this.transform.position, this.transform.forward, 6, ~LayerMask.GetMask("Player"));
         foreach (var rayhit in hits)
         {
-            if(rayhit.transform.gameObject == this.gameObject)
+            if (rayhit.transform.gameObject == this.gameObject)
                 continue;
-            
+
             var toplevel = rayhit.transform;
             while (toplevel.parent != null)
             {
@@ -250,13 +259,13 @@ public class CharacterMovement : NetworkBehaviour
                 var HitObject = toplevel.gameObject.GetComponentInChildren<PlayerStatBehaviour>();
                 HitObject.TakeDamage(90000);
                 return;
-                
+
             }
 
         }
 
 
-       
+
     }
 
     public void SpawnOnOtherPlanet(PlanetBehaviour p)

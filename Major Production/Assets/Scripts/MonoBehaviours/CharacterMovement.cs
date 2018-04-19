@@ -26,7 +26,14 @@ public class CharacterMovement : NetworkBehaviour
 
     }
 
-
+    public enum PlayerState
+    {
+        Attacking,
+        Running,
+        None,
+    }
+    [HideInInspector]
+    public PlayerState state;
     public Animator anim;
 
     private NetworkManager nm;
@@ -199,6 +206,8 @@ public class CharacterMovement : NetworkBehaviour
     public void HitObject(object[] args)
     {
         if (!anim)
+            return;
+        if (state == PlayerState.Attacking)
             return;
         if (args.Length < 2)
             return;

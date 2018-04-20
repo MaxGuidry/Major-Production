@@ -103,16 +103,22 @@ public class WarpBehviour : MonoBehaviour
             {
                 if (inInventory)
                 {
-                    inInventory = false;
                     SelectionObject.SetActive(false);
                     characterMovement.enabled = true;
                     WarpUI.SetActive(false);
                     inputEvents.gameObject.SetActive(true);
                     eventSystem.SetSelectedGameObject(null);
+                    if (Input.GetAxis("Submit" + playerNumber) > .9f)
+                    {
+                        inInventory = false;
+                    }
                 }
                 else
                 {
-                    inInventory = true;
+                    if (Input.GetAxis("Submit" + playerNumber) > .9f)
+                    {
+                        inInventory = true;
+                    }
                     SelectionObject.SetActive(true);
                     WarpUI.SetActive(true);
                     characterMovement.enabled = false;
@@ -125,34 +131,68 @@ public class WarpBehviour : MonoBehaviour
 
         if (inInventory)
         {
-            if (Input.GetAxis("Horizontal" + playerNumber) >= 1)
+            if (Input.GetAxis("Horizontal" + playerNumber) >= .5f)
             {
-                i++;
-                CyclePlanet();
+                if (i == 0)
+                    i = 1;
+                if (i == 2)
+                    i = 3;
+                eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(i).gameObject);
+                SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
             }
 
-            if (Input.GetAxis("Horizontal" + playerNumber) <= -1)
+            if (Input.GetAxis("Horizontal" + playerNumber) <= -.5f)
             {
-                i--;
-                CyclePlanet();
+                if (i == 1)
+                    i = 0;
+                if (i == 3)
+                    i = 2;
+                eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(i).gameObject);
+                SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
             }
-            if (Input.GetAxis("Vertical" + playerNumber) >= 1)
-            {
 
+            if (Input.GetAxis("Vertical" + playerNumber) >= .5f)
+            {
+                switch (i)
+                {
+                    case 0:
+                        return;
+                    case 1:
+                        return;
+                    case 2:
+                        i = 0;
+                        break;
+                    case 3:
+                        i = 1;
+                        break;
+                    default:
+                        break;
+                }
+                eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(i).gameObject);
+                SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
+            }
+
+            if (Input.GetAxis("Vertical" + playerNumber) <= -.5f)
+            {
+                switch (i)
+                {
+                    case 0:
+                        i = 2;
+                        break;
+                    case 1:
+                        i = 3;
+                        break;
+                    case 2:
+                        return;
+                    case 3:
+                        return;
+                    default:
+                        break;
+                }
+                eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(i).gameObject);
+                SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
             }
         }
-    }
-   
-
-    private void CyclePlanet()
-    {
-        if (i > WarpUI.transform.childCount - 1)
-            i = 0;
-        if (i < 0)
-            i = WarpUI.transform.childCount - 1;
-
-        eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(i).gameObject);
-        SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
     }
 
     public void WarpPlanet(GameObject planet)

@@ -13,6 +13,7 @@ public class RocketProjectile : MonoBehaviour
 	{
 	    rb = GetComponent<Rigidbody>();
 	    StartCoroutine(DestroyTime());
+        
 	}
 	
 	// Update is called once per frame
@@ -34,7 +35,7 @@ public class RocketProjectile : MonoBehaviour
     void OnCollisionEnter(Collision other)
     {
         //explosion
-        Collider[] knockbacks = Physics.OverlapSphere(this.transform.position, 8);
+        Collider[] knockbacks = Physics.OverlapSphere(this.transform.position, 15);
         for (int i = 0; i < knockbacks.Length; i++)
         {
             var rb = knockbacks[i].gameObject.GetComponent<Rigidbody>();
@@ -42,12 +43,37 @@ public class RocketProjectile : MonoBehaviour
                 continue;
             if(rb == this.rb)
                 continue;
-            rb.AddExplosionForce(1005,this.transform.position,8);
+            rb.AddExplosionForce(15,this.transform.position - this.transform.up, 15,0,ForceMode.Impulse);
+            
             var id = rb.gameObject.GetComponent<IDamageable>();
-
+            if (id == null)
+                continue;
+            //id.TakeDamage((int)(200 / (15- (this.transform.position-rb.transform.position).magnitude)));
+            id.TakeDamage(5);
         }
         Destroy(this.gameObject);
     }
+    //void OnCollisionStay(Collision other)
+    //{
+    //    //explosion
+    //    Collider[] knockbacks = Physics.OverlapSphere(this.transform.position, 15);
+    //    for (int i = 0; i < knockbacks.Length; i++)
+    //    {
+    //        var rb = knockbacks[i].gameObject.GetComponent<Rigidbody>();
+    //        if (!rb)
+    //            continue;
+    //        if (rb == this.rb)
+    //            continue;
+    //        rb.AddExplosionForce(15, this.transform.position-this.transform.up, 15, 0, ForceMode.Impulse);
+    //
+    //        var id = rb.gameObject.GetComponent<IDamageable>();
+    //        if (id == null)
+    //            continue;
+    //        id.TakeDamage((int)(50 / (15 - (this.transform.position - rb.transform.position).magnitude)));
+    //
+    //    }
+    //    Destroy(this.gameObject);
+    //}
     private IEnumerator DestroyTime()
     {
         yield return new WaitForSeconds(4);

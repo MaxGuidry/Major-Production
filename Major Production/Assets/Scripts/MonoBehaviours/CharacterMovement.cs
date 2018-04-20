@@ -287,7 +287,9 @@ public class CharacterMovement : NetworkBehaviour
 
     public void FireRocket()
     {
-        Instantiate(RocketPrefab, HandToShoot.position + transform.forward *1.5f + transform.right *.4f, HandToShoot.transform.rotation);
+        var go = Instantiate(RocketPrefab, HandToShoot.position + transform.forward + transform.right *.4f, HandToShoot.transform.rotation);
+        go.transform.rotation *= new Quaternion(Mathf.Sin(-0.2f) * go.transform.up.x, Mathf.Sin(-0.2f) * go.transform.up.y, Mathf.Sin(-0.2f) * go.transform.up.z,
+            Mathf.Cos(-0.2f));
     }
 
     public void SpawnOnOtherPlanet(PlanetBehaviour p)

@@ -5178,7 +5178,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.83982754, y: -0.00000963553}
   m_AnchorMax: {x: 0.9999994, y: 0.25118557}
-  m_AnchoredPosition: {x: 0, y: 0.0000076293945}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0.0000076293945}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &432948050
@@ -5901,26 +5901,26 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 114135535052514484, guid: 9950884b10b3a1b46bddfbc3d875c987,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 1000933610}
-    - target: {fileID: 114173405418844732, guid: 9950884b10b3a1b46bddfbc3d875c987,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 1906032513}
-    - target: {fileID: 114307350119592448, guid: 9950884b10b3a1b46bddfbc3d875c987,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 1637615448}
     - target: {fileID: 114899495499484978, guid: 9950884b10b3a1b46bddfbc3d875c987,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 1551333972}
+    - target: {fileID: 114307350119592448, guid: 9950884b10b3a1b46bddfbc3d875c987,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1637615448}
+    - target: {fileID: 114173405418844732, guid: 9950884b10b3a1b46bddfbc3d875c987,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1906032513}
+    - target: {fileID: 114135535052514484, guid: 9950884b10b3a1b46bddfbc3d875c987,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1000933610}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9950884b10b3a1b46bddfbc3d875c987, type: 2}
   m_IsPrefabParent: 0
@@ -8915,50 +8915,26 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114007431915276492, guid: f18007c5c4ac18c4eb043188c1e44ecc,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 1906032513}
-    - target: {fileID: 114275927986489804, guid: f18007c5c4ac18c4eb043188c1e44ecc,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 1551333972}
-    - target: {fileID: 114287595604171238, guid: f18007c5c4ac18c4eb043188c1e44ecc,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 1637615448}
     - target: {fileID: 114753414678765570, guid: f18007c5c4ac18c4eb043188c1e44ecc,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 1000933610}
-    - target: {fileID: 1196326631148512, guid: f18007c5c4ac18c4eb043188c1e44ecc, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224480246490641924, guid: f18007c5c4ac18c4eb043188c1e44ecc,
+    - target: {fileID: 114287595604171238, guid: f18007c5c4ac18c4eb043188c1e44ecc,
         type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: -35.805763
-      objectReference: {fileID: 0}
-    - target: {fileID: 224480246490641924, guid: f18007c5c4ac18c4eb043188c1e44ecc,
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1637615448}
+    - target: {fileID: 114275927986489804, guid: f18007c5c4ac18c4eb043188c1e44ecc,
         type: 2}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224480246490641924, guid: f18007c5c4ac18c4eb043188c1e44ecc,
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1551333972}
+    - target: {fileID: 114007431915276492, guid: f18007c5c4ac18c4eb043188c1e44ecc,
         type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224480246490641924, guid: f18007c5c4ac18c4eb043188c1e44ecc,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: 77.029526
-      objectReference: {fileID: 0}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1906032513}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f18007c5c4ac18c4eb043188c1e44ecc, type: 2}
   m_IsPrefabParent: 0
@@ -10938,6 +10914,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 776943735}
+  - component: {fileID: 776943737}
+  - component: {fileID: 776943736}
   m_Layer: 0
   m_Name: JevSuit_R_Wrist
   m_TagString: Untagged
@@ -10963,6 +10941,33 @@ Transform:
   m_Father: {fileID: 337683186}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &776943736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114563088917364648, guid: 84e21c2838857f44d800a519fba30932,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 776943734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98af7c5cd949d3c4bab4f510691f2995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1412776305}
+--- !u!136 &776943737
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 136890990052536454, guid: 84e21c2838857f44d800a519fba30932,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 776943734}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.03
+  m_Height: 0.15
+  m_Direction: 0
+  m_Center: {x: -0.02, y: 0, z: 0}
 --- !u!1 &779458841
 GameObject:
   m_ObjectHideFlags: 0
@@ -14671,6 +14676,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1049182112}
+  - component: {fileID: 1049182114}
+  - component: {fileID: 1049182113}
   m_Layer: 0
   m_Name: JevSuit_L_Wrist
   m_TagString: Untagged
@@ -14696,6 +14703,33 @@ Transform:
   m_Father: {fileID: 1795578740}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1049182113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114404046499901046, guid: 84e21c2838857f44d800a519fba30932,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1049182111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98af7c5cd949d3c4bab4f510691f2995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1412776305}
+--- !u!136 &1049182114
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 136371204701555626, guid: 84e21c2838857f44d800a519fba30932,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1049182111}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.03
+  m_Height: 0.15
+  m_Direction: 0
+  m_Center: {x: -0.02, y: 0, z: 0}
 --- !u!1 &1050081088
 GameObject:
   m_ObjectHideFlags: 0
@@ -15623,6 +15657,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1105682206}
+  - component: {fileID: 1105682208}
+  - component: {fileID: 1105682207}
   m_Layer: 0
   m_Name: JevSuit_L_Wrist
   m_TagString: Untagged
@@ -15648,6 +15684,33 @@ Transform:
   m_Father: {fileID: 583526966}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1105682207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114973295618496022, guid: 3d6bad6f95cc2d348907779bc1ad069b,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1105682205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98af7c5cd949d3c4bab4f510691f2995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1469269352}
+--- !u!136 &1105682208
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 136562394370262464, guid: 3d6bad6f95cc2d348907779bc1ad069b,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1105682205}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.03
+  m_Height: 0.15
+  m_Direction: 0
+  m_Center: {x: -0.02, y: 0, z: 0}
 --- !u!1 &1106666708
 GameObject:
   m_ObjectHideFlags: 0
@@ -15657,6 +15720,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1106666709}
+  - component: {fileID: 1106666711}
+  - component: {fileID: 1106666710}
   m_Layer: 0
   m_Name: JevSuit_R_Wrist
   m_TagString: Untagged
@@ -15682,6 +15747,33 @@ Transform:
   m_Father: {fileID: 1314489570}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1106666710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114011925097707528, guid: 3d6bad6f95cc2d348907779bc1ad069b,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1106666708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98af7c5cd949d3c4bab4f510691f2995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1469269352}
+--- !u!136 &1106666711
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 136329177491857636, guid: 3d6bad6f95cc2d348907779bc1ad069b,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1106666708}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.03
+  m_Height: 0.15
+  m_Direction: 0
+  m_Center: {x: -0.02, y: 0, z: 0}
 --- !u!1 &1113119087
 GameObject:
   m_ObjectHideFlags: 0
@@ -20297,7 +20389,6 @@ GameObject:
   - component: {fileID: 1412776306}
   - component: {fileID: 1412776304}
   - component: {fileID: 1412776303}
-  - component: {fileID: 1412776302}
   - component: {fileID: 1412776301}
   - component: {fileID: 1412776294}
   - component: {fileID: 1412776305}
@@ -20308,7 +20399,8 @@ GameObject:
   - component: {fileID: 1412776296}
   - component: {fileID: 1412776295}
   - component: {fileID: 1412776307}
-  m_Layer: 0
+  - component: {fileID: 1412776302}
+  m_Layer: 8
   m_Name: TvPlayerP4
   m_TagString: P4
   m_Icon: {fileID: 0}
@@ -20516,19 +20608,20 @@ MonoBehaviour:
   Health: 0
   Armor: 0
   Level: 0
---- !u!65 &1412776302
-BoxCollider:
+--- !u!136 &1412776302
+CapsuleCollider:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 65895999596635536, guid: 84e21c2838857f44d800a519fba30932,
+  m_PrefabParentObject: {fileID: 136804531714180692, guid: 84e21c2838857f44d800a519fba30932,
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1412776293}
   m_Material: {fileID: 13400000, guid: e52fb17f9b1e7fd48b8955f1391d3688, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.15, y: 0.25, z: 0.1}
-  m_Center: {x: 0, y: 0.125, z: 0}
+  m_Radius: 0.1
+  m_Height: 0.37
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.175, z: 0}
 --- !u!54 &1412776303
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -21342,7 +21435,6 @@ GameObject:
   - component: {fileID: 1469269353}
   - component: {fileID: 1469269351}
   - component: {fileID: 1469269350}
-  - component: {fileID: 1469269349}
   - component: {fileID: 1469269348}
   - component: {fileID: 1469269341}
   - component: {fileID: 1469269352}
@@ -21353,7 +21445,8 @@ GameObject:
   - component: {fileID: 1469269343}
   - component: {fileID: 1469269342}
   - component: {fileID: 1469269354}
-  m_Layer: 0
+  - component: {fileID: 1469269349}
+  m_Layer: 8
   m_Name: TvPlayerP3
   m_TagString: P3
   m_Icon: {fileID: 0}
@@ -21561,19 +21654,20 @@ MonoBehaviour:
   Health: 0
   Armor: 0
   Level: 0
---- !u!65 &1469269349
-BoxCollider:
+--- !u!136 &1469269349
+CapsuleCollider:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 65699382994033416, guid: 3d6bad6f95cc2d348907779bc1ad069b,
+  m_PrefabParentObject: {fileID: 136229405351081128, guid: 3d6bad6f95cc2d348907779bc1ad069b,
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1469269340}
   m_Material: {fileID: 13400000, guid: e52fb17f9b1e7fd48b8955f1391d3688, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.15, y: 0.25, z: 0.1}
-  m_Center: {x: 0, y: 0.125, z: 0}
+  m_Radius: 0.1
+  m_Height: 0.37
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.175, z: 0}
 --- !u!54 &1469269350
 Rigidbody:
   m_ObjectHideFlags: 0

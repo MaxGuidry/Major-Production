@@ -1333,7 +1333,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1337350777285142
 GameObject:
   m_ObjectHideFlags: 1
@@ -9721,7 +9721,9 @@ MonoBehaviour:
   SelectionObject: {fileID: 0}
   WarpUI: {fileID: 0}
   warping: 0
+  eventSystem: {fileID: 0}
   inputEvents: {fileID: 0}
+  UIInputevents: {fileID: 1335770155662154}
 --- !u!114 &114626678487990826
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9745,7 +9747,7 @@ MonoBehaviour:
   - Left Bumper1
   - Left Stick Button1
   - Right Stick Button1
-  - Submit 1
+  - Submit1
   - Start1
   Axis: []
 --- !u!114 &114640107499876198
@@ -9794,6 +9796,17 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 114405652266283298}
         m_MethodName: ClearInventory
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 114624443104831616}
+        m_MethodName: CycleUI
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10098,8 +10111,8 @@ MonoBehaviour:
   ObjResponse:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114064892067881248}
-        m_MethodName: CycleThroughUI
+      - m_Target: {fileID: 114624443104831616}
+        m_MethodName: CycleUI
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

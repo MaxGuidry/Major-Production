@@ -41,6 +41,20 @@ public class CountDown : MonoBehaviour
             TimerDisplay.text = Mathf.Round(Timer).ToString();
         if (players.Count == 0)
             return;
+        if (Timer <= 0)
+        {
+            foreach (var player in players)
+            {
+                player.GetComponentInChildren<CharacterMovement>().enabled = false;
+            }
+            //players.Remove(playerStatBehaviour.gameObject);
+            StartCoroutine(GameOverLost());
+        }
+        else if (players.Count == 1)
+        {
+            StartCoroutine(GameOverWin(players[0]));
+        }
+
         foreach (var playerStatBehaviour in players)
         {
             if (playerStatBehaviour.GetComponentInChildren<PlayerStatBehaviour>().Health <= 0)
@@ -54,32 +68,24 @@ public class CountDown : MonoBehaviour
                 SpecateCameras[cam].gameObject.transform.position = Vector3.zero;
                 SpecateCameras[cam].gameObject.SetActive(true);
                 SpecateCameras[cam].enabled = true;
-                SpecateCameras[cam].gameObject.GetComponentInChildren<Camera>().rect = playerStatBehaviour.gameObject.transform
+                SpecateCameras[cam].gameObject.GetComponentInChildren<Camera>().rect = playerStatBehaviour.gameObject
+                    .transform
                     .GetComponentInChildren<Camera>().rect;
                 //cam.gameObject.transform.RotateAround(playerStatBehaviour.gameObject.transform.localPosition, playerStatBehaviour.gameObject.transform.localPosition, 5f);
 
                 StartCoroutine(CycleSpecate(SpecateCameras[cam].gameObject));
             }
-
-            if (Timer <= 0)
-            {
-                foreach (var player in players)
-                {
-                    player.GetComponentInChildren<CharacterMovement>().enabled = false;
-                }
-                //players.Remove(playerStatBehaviour.gameObject);
-                StartCoroutine(GameOverLost());
-            }
-            else if (players.Count == 1)
-            {
-                StartCoroutine(GameOverWin(players[0]));
-            }
         }
+
     }
 
     private IEnumerator GameOverLost()
     {
         GameActive = false;
+        foreach (var specateCamera in SpecateCameras)
+        {
+            specateCamera.enabled = false;
+        }
         foreach (var playerStatBehaviour in FindObjectsOfType<PlayerStatBehaviour>())
         {
             playerStatBehaviour.gameObject.transform.parent.GetComponentInChildren<Camera>().enabled = true;

@@ -27,7 +27,7 @@ public class RocketProjectile : MonoBehaviour
             rb.velocity = rb.velocity.normalized * 17f;
         }
         rb.AddForce(transform.up *( upSpeed/100f),ForceMode.Impulse);
-	    
+
 
     }
 

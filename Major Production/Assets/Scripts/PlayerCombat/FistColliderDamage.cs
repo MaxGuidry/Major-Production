@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FistColliderDamage : MonoBehaviour
 {
-    public Animator anim;
+    
 
     public CharacterMovement player;
     //public PlayerStatBehaviour stats;

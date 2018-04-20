@@ -51,6 +51,8 @@ public class CharacterMovement : NetworkBehaviour
         basm.player = this;
         var mssm = anim.GetBehaviour<MissileStrikeSM>();
         mssm.player = this;
+        var wwsm = anim.GetBehaviour<WhirlwindSM>();
+        wwsm.player = this;
         if (!anim)
             anim = GetComponent<Animator>();
         //if (!cameraPivot)
@@ -94,6 +96,8 @@ public class CharacterMovement : NetworkBehaviour
     {
         if (Input.GetAxis("Right Bumper" + PlayerNumber) > 0 && state != PlayerState.Attacking)
             anim.SetTrigger("Rocket");
+        if(Input.GetAxis("Left Bumper"+PlayerNumber)>0&& state != PlayerState.Attacking)
+            anim.SetBool("Whirlwind",true);
         if (Input.GetKeyDown(KeyCode.N) && PlayerNumber == "")
             SpawnOnOtherPlanet(FindObjectsOfType<PlanetBehaviour>()[Random.Range(0, 4)]);
         if (GLOBALS.SoloOnline || GLOBALS.SplitscreenOnline)
@@ -171,16 +175,22 @@ public class CharacterMovement : NetworkBehaviour
         // var names = Input.GetJoystickNames();
         // if (names.Contains("Controller (XBOX One For Windows)"))
         // {
-        if (!grounded)
-            return;
+        
         if (args[1] as string == "A" + PlayerNumber)
         {
-            if (!grounded)
+            //if (!grounded)
+            //    return;
+            RaycastHit rh;
+            Physics.Raycast(transform.position + (transform.up * .2f), -transform.up,out rh, 1, ~LayerMask.GetMask("Player"));
+            if (!rh.transform)
+            {
                 return;
-            grounded = false;
 
-            rb.AddForce(this.transform.up * 25, ForceMode.Impulse);
-            jumping = true;
+            }
+            
+            
+            rb.AddForce(this.transform.up * 11, ForceMode.Impulse);
+            
         }
 
 
@@ -293,6 +303,20 @@ public class CharacterMovement : NetworkBehaviour
 
         var tpLocation = spawnPoints[Random.Range(0, spawnPoints.Count)].transform.position;
         this.transform.position = tpLocation;
+    }
+
+    public IEnumerator Whirlwind()
+    {
+        float time = 0;
+        while (time < 2)
+        {
+            time += Time.deltaTime;
+            
+            
+            yield return null;
+        }
+        anim.SetBool("Whirlwind",false);
+
     }
 
     public IEnumerator SpawnDelay(PlanetBehaviour p, float timer, InventoryText crt)

@@ -274,7 +274,7 @@ public class CharacterMovement : NetworkBehaviour
             if (toplevel.transform.GetComponentInChildren<PlayerStatBehaviour>() != null)
             {
                 var HitObject = toplevel.gameObject.GetComponentInChildren<PlayerStatBehaviour>();
-                HitObject.TakeDamage(90000);
+                //HitObject.TakeDamage(90000);
                 return;
 
             }

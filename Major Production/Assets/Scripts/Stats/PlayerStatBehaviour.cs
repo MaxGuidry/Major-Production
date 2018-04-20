@@ -78,7 +78,7 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
         else
         {
             Health = nexthealth;
-            UpdateStat();
+            
         }
 
     }

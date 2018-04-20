@@ -1333,7 +1333,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1337350777285142
 GameObject:
   m_ObjectHideFlags: 1
@@ -2840,7 +2840,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1669827339206674
 GameObject:
   m_ObjectHideFlags: 0
@@ -3588,6 +3588,7 @@ GameObject:
   - component: {fileID: 223697182538935466}
   - component: {fileID: 114078602716030366}
   - component: {fileID: 114580108890186040}
+  - component: {fileID: 114624443104831616}
   m_Layer: 5
   m_Name: CanvasP2
   m_TagString: Untagged
@@ -8228,8 +8229,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2452eb028c8f2b64fa853138de8f5001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectionObject: {fileID: 1669094765586566}
-  WarpUI: {fileID: 1504471353489474}
   GoopAmounttext: {fileID: 0}
   MetalAmounttext: {fileID: 0}
   StoneAmounttext: {fileID: 0}
@@ -8238,11 +8237,6 @@ MonoBehaviour:
   stoneAmount: 0
   metalAmount: 0
   goopAmount: 0
-  inInventory: 0
-  characterMovement: {fileID: 0}
-  eventSystem: {fileID: 0}
-  inputEvents: {fileID: 0}
-  warping: 0
 --- !u!114 &114078602716030366
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8344,7 +8338,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 114624443104831616}
         m_MethodName: WarpPlanet
         m_Mode: 2
         m_Arguments:
@@ -8666,7 +8660,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 114624443104831616}
         m_MethodName: WarpPlanet
         m_Mode: 2
         m_Arguments:
@@ -9036,7 +9030,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 114624443104831616}
         m_MethodName: WarpPlanet
         m_Mode: 2
         m_Arguments:
@@ -9709,6 +9703,21 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: GameEventArgsResponse, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!114 &114624443104831616
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1846265939747448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 810bcfdeb994de946b62edab71126804, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectionObject: {fileID: 0}
+  WarpUI: {fileID: 0}
+  warping: 0
+  inputEvents: {fileID: 0}
 --- !u!114 &114626678487990826
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9732,7 +9741,7 @@ MonoBehaviour:
   - Left Bumper1
   - Left Stick Button1
   - Right Stick Button1
-  - Submit1
+  - Submit 1
   - Start1
   Axis: []
 --- !u!114 &114640107499876198
@@ -10693,7 +10702,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 114624443104831616}
         m_MethodName: WarpPlanet
         m_Mode: 2
         m_Arguments:
@@ -10886,6 +10895,8 @@ MonoBehaviour:
   BreakObject: {fileID: 11400000, guid: 8d616ec8803206749b56379eefea810f, type: 2}
   state: 0
   anim: {fileID: 95451221985943686}
+  HandToShoot: {fileID: 0}
+  RocketPrefab: {fileID: 0}
 --- !u!114 &114974667371463688
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13657,7 +13668,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224887366106260176}
-  m_RootOrder: 8
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.83982754, y: -0.00000963553}
   m_AnchorMax: {x: 0.9999994, y: 0.25118557}
@@ -13788,7 +13799,7 @@ RectTransform:
   - {fileID: 224597499753421766}
   - {fileID: 224710400635939650}
   m_Father: {fileID: 224887366106260176}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.6450975, y: -0.056843106}
   m_AnchorMax: {x: 1.0766402, y: 0.25863707}
@@ -13845,7 +13856,7 @@ RectTransform:
   m_Children:
   - {fileID: 224913040625039260}
   m_Father: {fileID: 224887366106260176}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: -0.18200807, y: 0.7851195}
   m_AnchorMax: {x: 1.1736294, y: 1.0345143}
@@ -13899,7 +13910,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224887366106260176}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.7228027, y: -0.01240041}
   m_AnchorMax: {x: 0.8063453, y: 0.12335658}
@@ -14083,7 +14094,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224887366106260176}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.73006743, y: 0.10924132}
   m_AnchorMax: {x: 1.0028764, y: 0.24658866}
@@ -14128,7 +14139,7 @@ RectTransform:
   - {fileID: 224800333800427108}
   - {fileID: 224111769638660012}
   m_Father: {fileID: 224887366106260176}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: -0.0000599215, y: -0.00008825713}
   m_AnchorMax: {x: 0.40125906, y: 0.9999934}
@@ -14147,7 +14158,7 @@ RectTransform:
   m_Children:
   - {fileID: 224612886811802182}
   m_Father: {fileID: 224887366106260176}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.6879594, y: 0.7492066}
   m_AnchorMax: {x: 1.0332112, y: 1.0345114}
@@ -14169,7 +14180,7 @@ RectTransform:
   - {fileID: 224462553776527442}
   - {fileID: 224525711939830298}
   m_Father: {fileID: 224887366106260176}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -14191,7 +14202,7 @@ RectTransform:
   - {fileID: 224662399843443712}
   - {fileID: 224985532202798058}
   m_Father: {fileID: 224887366106260176}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.37803358, y: 0}
   m_AnchorMax: {x: 0.6219664, y: 0.21321961}
@@ -14280,6 +14291,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 224784678734641922}
+  - {fileID: 224091516885160710}
   - {fileID: 224789705603274422}
   - {fileID: 224742032650573926}
   - {fileID: 224391495754206102}
@@ -14287,8 +14300,6 @@ RectTransform:
   - {fileID: 224323018412292044}
   - {fileID: 224680462426161426}
   - {fileID: 224499337874248360}
-  - {fileID: 224784678734641922}
-  - {fileID: 224091516885160710}
   - {fileID: 224237856186262908}
   m_Father: {fileID: 4559129935888672}
   m_RootOrder: 2

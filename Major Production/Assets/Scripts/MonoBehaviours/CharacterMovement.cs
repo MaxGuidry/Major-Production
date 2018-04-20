@@ -319,7 +319,8 @@ public class CharacterMovement : NetworkBehaviour
 
     }
 
-    public IEnumerator SpawnDelay(PlanetBehaviour p, float timer, InventoryText crt)
+    
+    public IEnumerator SpawnDelay(PlanetBehaviour p, float timer, WarpBehviour crt)
     {
         yield return new WaitForSeconds(timer);
         SpawnOnOtherPlanet(p);

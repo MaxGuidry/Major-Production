@@ -189,7 +189,7 @@ public class CharacterMovement : NetworkBehaviour
             }
             
             
-            rb.AddForce(this.transform.up * 11, ForceMode.Impulse);
+            rb.AddForce(this.transform.up * 21, ForceMode.Impulse);
             
         }
 

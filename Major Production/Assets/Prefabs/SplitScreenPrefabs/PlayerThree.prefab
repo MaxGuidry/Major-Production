@@ -259,7 +259,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1053314528457838
 GameObject:
   m_ObjectHideFlags: 1
@@ -9971,8 +9971,8 @@ MonoBehaviour:
   ObjResponse:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114884857983594090}
-        m_MethodName: CycleThroughUI
+      - m_Target: {fileID: 114879126222377176}
+        m_MethodName: CycleUI
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10106,7 +10106,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 24cab10082d8fbd44b0e4bf89c5b8867, type: 2}
   AllQuestComplete: {fileID: 11400000, guid: 57cba31621ea3f943b3db3fbac6158b8, type: 2}
   CurrentObjectiveText: {fileID: 114261171124366126}
-  typer: {fileID: 0}
+  typer: {fileID: 114293850713723046}
 --- !u!114 &114708894707374992
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10222,6 +10222,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 114879126222377176}
+        m_MethodName: CycleUI
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: GameEventArgsResponseObject, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
 --- !u!114 &114720907401169682
@@ -10247,7 +10258,7 @@ MonoBehaviour:
   - Left Bumper2
   - Left Stick Button2
   - Right Stick Button2
-  - Submit 2
+  - Submit2
   - Start2
   Axis: []
 --- !u!114 &114751609380563724
@@ -10548,7 +10559,9 @@ MonoBehaviour:
   SelectionObject: {fileID: 0}
   WarpUI: {fileID: 0}
   warping: 0
+  eventSystem: {fileID: 0}
   inputEvents: {fileID: 0}
+  UIInputevents: {fileID: 1047745312062418}
 --- !u!114 &114884857983594090
 MonoBehaviour:
   m_ObjectHideFlags: 1

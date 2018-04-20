@@ -12,10 +12,9 @@ public class WarpBehviour : MonoBehaviour
     public Coroutine coroutine;
     public bool warping;
     private CharacterMovement characterMovement;
-    private EventSystem eventSystem;
-    [HideInInspector]
+    [SerializeField] private EventSystem eventSystem;
     public GameObject inputEvents;
-    private bool inInventory;
+    public GameObject UIInputevents;
     private string playerNumber;
     private string playerTag;
     private string InputString;
@@ -97,28 +96,147 @@ public class WarpBehviour : MonoBehaviour
             inputEvents = GameObject.FindGameObjectWithTag(InputString);
         eventSystem = GameObject.FindGameObjectWithTag(EventString).GetComponent<EventSystem>();
 
-        if (!warping)
+        foreach (var child in WarpUI.GetComponentsInChildren<Button>())
         {
-            if (Input.GetAxis("Submit" + playerNumber) > .9f)
+            if (WarpUI.gameObject.activeInHierarchy)
             {
-                if (inInventory)
+                child.enabled = true;
+                child.interactable = true;
+            }
+            else
+            {
+                child.enabled = false;
+                child.interactable = false;
+            }
+        }
+
+
+        if (!warping)
+        { 
+            if (WarpUI.gameObject.activeInHierarchy)
+            {
+                UIInputevents.GetComponent<GameEventArgsListenerObject>().enabled = true;
+                UIInputevents.gameObject.SetActive(true);
+                UIInputevents.GetComponent<InputEvents>().enabled = true;
+                characterMovement.enabled = false;
+                inputEvents.gameObject.SetActive(false);
+                if (Input.GetAxis("A" + playerNumber) >= .9f)
                 {
+                    Debug.Log("Player: " + playerNumber + " pressed A");
+                    if (eventSystem.currentSelectedGameObject.GetComponent<Button>() != null)
+                        eventSystem.currentSelectedGameObject.GetComponent<Button>().onClick.Invoke();
+                }
+
+                if (Input.GetAxis("Horizontal" + playerNumber) >= .5f)
+                {
+                    if (i == 0)
+                        i = 1;
+                    if (i == 2)
+                        i = 3;
+                    eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(i).gameObject);
+                    SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
+                }
+
+                if (Input.GetAxis("Horizontal" + playerNumber) <= -.5f)
+                {
+                    if (i == 1)
+                        i = 0;
+                    if (i == 3)
+                        i = 2;
+                    eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(i).gameObject);
+                    SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
+                }
+
+                if (Input.GetAxis("Vertical" + playerNumber) >= .5f)
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            return;
+                        case 1:
+                            return;
+                        case 2:
+                            i = 0;
+                            break;
+                        case 3:
+                            i = 1;
+                            break;
+                        default:
+                            break;
+                    }
+                    eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(i).gameObject);
+                    SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
+                }
+
+                if (Input.GetAxis("Vertical" + playerNumber) <= -.5f)
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            i = 2;
+                            break;
+                        case 1:
+                            i = 3;
+                            break;
+                        case 2:
+                            return;
+                        case 3:
+                            return;
+                        default:
+                            break;
+                    }
+                    eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(i).gameObject);
+                    SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
+                }
+            }
+            else
+            {
+                UIInputevents.GetComponent<GameEventArgsListenerObject>().enabled = false;
+                UIInputevents.gameObject.SetActive(false);
+                inputEvents.gameObject.SetActive(true);
+                UIInputevents.GetComponent<InputEvents>().enabled = false;
+                characterMovement.enabled = true;
+            }
+        }
+      
+    }
+    public void WarpPlanet(GameObject planet)
+    {
+        if (WarpUI.activeInHierarchy)
+        {
+            var delay = 2f;
+            if (coroutine == null)
+            {
+                WarpUI.SetActive(false);
+                SelectionObject.SetActive(false);
+                warping = true;
+                coroutine = characterMovement.StartCoroutine(
+                    characterMovement.SpawnDelay(planet.GetComponent<PlanetBehaviour>(), delay, this));
+            }
+        }
+    }
+
+    public void CycleUI(object[] args)
+    {
+        if (args.Length > 1)
+        {
+            if (args[1] as string == ("Submit" + playerNumber))
+            {
+                if (WarpUI.gameObject.activeInHierarchy)
+                {
+                    UIInputevents.GetComponent<InputEvents>().enabled = false;
+                    UIInputevents.gameObject.SetActive(false);
                     SelectionObject.SetActive(false);
                     characterMovement.enabled = true;
                     WarpUI.SetActive(false);
                     inputEvents.gameObject.SetActive(true);
                     eventSystem.SetSelectedGameObject(null);
-                    if (Input.GetAxis("Submit" + playerNumber) > .9f)
-                    {
-                        inInventory = false;
-                    }
                 }
                 else
                 {
-                    if (Input.GetAxis("Submit" + playerNumber) > .9f)
-                    {
-                        inInventory = true;
-                    }
+
+                    UIInputevents.GetComponent<InputEvents>().enabled = true;
+                    UIInputevents.gameObject.SetActive(true);
                     SelectionObject.SetActive(true);
                     WarpUI.SetActive(true);
                     characterMovement.enabled = false;
@@ -127,83 +245,6 @@ public class WarpBehviour : MonoBehaviour
                     SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
                 }
             }
-        }
-
-        if (inInventory)
-        {
-            if (Input.GetAxis("Horizontal" + playerNumber) >= .5f)
-            {
-                if (i == 0)
-                    i = 1;
-                if (i == 2)
-                    i = 3;
-                eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(i).gameObject);
-                SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
-            }
-
-            if (Input.GetAxis("Horizontal" + playerNumber) <= -.5f)
-            {
-                if (i == 1)
-                    i = 0;
-                if (i == 3)
-                    i = 2;
-                eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(i).gameObject);
-                SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
-            }
-
-            if (Input.GetAxis("Vertical" + playerNumber) >= .5f)
-            {
-                switch (i)
-                {
-                    case 0:
-                        return;
-                    case 1:
-                        return;
-                    case 2:
-                        i = 0;
-                        break;
-                    case 3:
-                        i = 1;
-                        break;
-                    default:
-                        break;
-                }
-                eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(i).gameObject);
-                SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
-            }
-
-            if (Input.GetAxis("Vertical" + playerNumber) <= -.5f)
-            {
-                switch (i)
-                {
-                    case 0:
-                        i = 2;
-                        break;
-                    case 1:
-                        i = 3;
-                        break;
-                    case 2:
-                        return;
-                    case 3:
-                        return;
-                    default:
-                        break;
-                }
-                eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(i).gameObject);
-                SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
-            }
-        }
-    }
-
-    public void WarpPlanet(GameObject planet)
-    {
-        var delay = 2f;
-        if (coroutine == null)
-        {
-            WarpUI.SetActive(false);
-            SelectionObject.SetActive(false);
-            warping = true;
-            coroutine = characterMovement.StartCoroutine(characterMovement.SpawnDelay(planet.GetComponent<PlanetBehaviour>(), delay, this));
         }
     }
 }

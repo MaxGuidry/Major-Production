@@ -43,6 +43,8 @@ public class RocketProjectile : MonoBehaviour
             if(rb == this.rb)
                 continue;
             rb.AddExplosionForce(1005,this.transform.position,8);
+            var id = rb.gameObject.GetComponent<IDamageable>();
+
         }
         Destroy(this.gameObject);
     }

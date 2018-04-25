@@ -106,6 +106,7 @@ public class WarpBehviour : MonoBehaviour
 
 
         if (!warping)
+        {
             if (WarpUI.gameObject.activeInHierarchy)
             {
                 UIInputevents.GetComponent<GameEventArgsListenerObject>().enabled = true;
@@ -192,6 +193,7 @@ public class WarpBehviour : MonoBehaviour
                 UIInputevents.GetComponent<InputEvents>().enabled = false;
                 characterMovement.enabled = true;
             }
+        }
     }
 
     public void WarpPlanet(GameObject planet)
@@ -215,17 +217,18 @@ public class WarpBehviour : MonoBehaviour
     {
         if (args.Length > 1)
             if (args[1] as string == "Submit" + playerNumber)
-                if (WarpUI.gameObject.activeInHierarchy)
-                {
-                    if (test)
-                        ToggleUI(false);
-                    else if (!test)
-                        test = true;
-                }
-                else
-                {
-                    ToggleUI(true);
-                }
+                if (!warping)
+                    if (WarpUI.gameObject.activeInHierarchy)
+                    {
+                        if (test)
+                            ToggleUI(false);
+                        else if (!test)
+                            test = true;
+                    }
+                    else
+                    {
+                        ToggleUI(true);
+                    }
     }
 
     private void ToggleUI(bool toogle)

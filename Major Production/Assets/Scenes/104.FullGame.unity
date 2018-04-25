@@ -3962,6 +3962,16 @@ Prefab:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 224293974024903916, guid: 168f79b43db584442aa2dff0a11f03aa,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224483340642692310, guid: 168f79b43db584442aa2dff0a11f03aa,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 168f79b43db584442aa2dff0a11f03aa, type: 2}
   m_IsPrefabParent: 0
@@ -9043,12 +9053,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 810bcfdeb994de946b62edab71126804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectionObject: {fileID: 0}
-  WarpUI: {fileID: 0}
-  warping: 0
   eventSystem: {fileID: 0}
   inputEvents: {fileID: 0}
+  SelectionObject: {fileID: 0}
   UIInputevents: {fileID: 1611946796}
+  warping: 0
+  WarpUI: {fileID: 0}
 --- !u!1 &683119652
 GameObject:
   m_ObjectHideFlags: 0
@@ -16543,12 +16553,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 810bcfdeb994de946b62edab71126804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectionObject: {fileID: 0}
-  WarpUI: {fileID: 0}
-  warping: 0
   eventSystem: {fileID: 0}
   inputEvents: {fileID: 0}
+  SelectionObject: {fileID: 0}
   UIInputevents: {fileID: 1575634078}
+  warping: 0
+  WarpUI: {fileID: 0}
 --- !u!1 &1147856275
 GameObject:
   m_ObjectHideFlags: 0
@@ -25720,6 +25730,26 @@ Prefab:
       propertyPath: m_RootOrder
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 1331235011062872, guid: 454c9743a05bc15499cf1208e95bb94d, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1026580348762406, guid: 454c9743a05bc15499cf1208e95bb94d, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1306739247812780, guid: 454c9743a05bc15499cf1208e95bb94d, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1021776967350950, guid: 454c9743a05bc15499cf1208e95bb94d, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1543265377460902, guid: 454c9743a05bc15499cf1208e95bb94d, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 454c9743a05bc15499cf1208e95bb94d, type: 2}
   m_IsPrefabParent: 0
@@ -31134,6 +31164,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114861752886770556, guid: 032729772d22e9b47aa3a0c8013442d8,
+        type: 2}
+      propertyPath: renderTextures.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4558192787351562, guid: 032729772d22e9b47aa3a0c8013442d8, type: 2}
       propertyPath: m_LocalPosition.x
       value: -12.616948
@@ -31231,6 +31266,26 @@ Prefab:
       propertyPath: SpecateCameras.Array.data[3]
       value: 
       objectReference: {fileID: 578983719}
+    - target: {fileID: 114861752886770556, guid: 032729772d22e9b47aa3a0c8013442d8,
+        type: 2}
+      propertyPath: renderTextures.Array.data[0]
+      value: 
+      objectReference: {fileID: 8400000, guid: ae508bf8b90061b4282f139db781ff8c, type: 2}
+    - target: {fileID: 114861752886770556, guid: 032729772d22e9b47aa3a0c8013442d8,
+        type: 2}
+      propertyPath: renderTextures.Array.data[1]
+      value: 
+      objectReference: {fileID: 8400000, guid: 977fb8df2e8815a40ad830fb45dfa852, type: 2}
+    - target: {fileID: 114861752886770556, guid: 032729772d22e9b47aa3a0c8013442d8,
+        type: 2}
+      propertyPath: renderTextures.Array.data[2]
+      value: 
+      objectReference: {fileID: 8400000, guid: fe91f043980931f46b1882cb54c9c112, type: 2}
+    - target: {fileID: 114861752886770556, guid: 032729772d22e9b47aa3a0c8013442d8,
+        type: 2}
+      propertyPath: renderTextures.Array.data[3]
+      value: 
+      objectReference: {fileID: 8400000, guid: 1ee2be77e05e6ed4a86aa99f22f4601a, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 032729772d22e9b47aa3a0c8013442d8, type: 2}
   m_IsPrefabParent: 0

@@ -1,32 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class WarpBehviour : MonoBehaviour
 {
-
-    public GameObject SelectionObject;
-    public GameObject WarpUI;
-    public Coroutine coroutine;
-    public bool warping;
     private CharacterMovement characterMovement;
+    public Coroutine coroutine;
+    private string EventString;
     [SerializeField] private EventSystem eventSystem;
+    private int i;
     public GameObject inputEvents;
-    public GameObject UIInputevents;
+    private string InputString;
     private string playerNumber;
     private string playerTag;
-    private string InputString;
-    private string EventString;
 
-    private int i;
+    public GameObject SelectionObject;
+    private bool test;
+    public GameObject UIInputevents;
+    public bool warping;
+    public GameObject WarpUI;
 
     // Use this for initialization
-    void Start()
+    private void Start()
     {
         foreach (var child in gameObject.GetComponentsInChildren<Image>())
-        {
             switch (child.tag)
             {
                 case "WarpUI":
@@ -40,7 +37,6 @@ public class WarpBehviour : MonoBehaviour
                 default:
                     break;
             }
-        }
         InputString = "";
         EventString = "";
         characterMovement = gameObject.transform.parent.GetComponentInChildren<CharacterMovement>();
@@ -65,7 +61,7 @@ public class WarpBehviour : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         playerTag = gameObject.transform.parent.GetComponentInChildren<PlayerStatBehaviour>().tag;
         if (characterMovement == null)
@@ -97,7 +93,6 @@ public class WarpBehviour : MonoBehaviour
         eventSystem = GameObject.FindGameObjectWithTag(EventString).GetComponent<EventSystem>();
 
         foreach (var child in WarpUI.GetComponentsInChildren<Button>())
-        {
             if (WarpUI.gameObject.activeInHierarchy)
             {
                 child.enabled = true;
@@ -108,11 +103,9 @@ public class WarpBehviour : MonoBehaviour
                 child.enabled = false;
                 child.interactable = false;
             }
-        }
 
 
         if (!warping)
-        { 
             if (WarpUI.gameObject.activeInHierarchy)
             {
                 UIInputevents.GetComponent<GameEventArgsListenerObject>().enabled = true;
@@ -164,6 +157,7 @@ public class WarpBehviour : MonoBehaviour
                         default:
                             break;
                     }
+
                     eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(i).gameObject);
                     SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
                 }
@@ -185,6 +179,7 @@ public class WarpBehviour : MonoBehaviour
                         default:
                             break;
                     }
+
                     eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(i).gameObject);
                     SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
                 }
@@ -197,9 +192,8 @@ public class WarpBehviour : MonoBehaviour
                 UIInputevents.GetComponent<InputEvents>().enabled = false;
                 characterMovement.enabled = true;
             }
-        }
-      
     }
+
     public void WarpPlanet(GameObject planet)
     {
         if (WarpUI.activeInHierarchy)
@@ -212,6 +206,7 @@ public class WarpBehviour : MonoBehaviour
                 warping = true;
                 coroutine = characterMovement.StartCoroutine(
                     characterMovement.SpawnDelay(planet.GetComponent<PlanetBehaviour>(), delay, this));
+                test = false;
             }
         }
     }
@@ -219,32 +214,42 @@ public class WarpBehviour : MonoBehaviour
     public void CycleUI(object[] args)
     {
         if (args.Length > 1)
-        {
-            if (args[1] as string == ("Submit" + playerNumber))
-            {
+            if (args[1] as string == "Submit" + playerNumber)
                 if (WarpUI.gameObject.activeInHierarchy)
                 {
-                    UIInputevents.GetComponent<InputEvents>().enabled = false;
-                    UIInputevents.gameObject.SetActive(false);
-                    SelectionObject.SetActive(false);
-                    characterMovement.enabled = true;
-                    WarpUI.SetActive(false);
-                    inputEvents.gameObject.SetActive(true);
-                    eventSystem.SetSelectedGameObject(null);
+                    if (test)
+                        ToggleUI(false);
+                    else if (!test)
+                        test = true;
                 }
                 else
                 {
-
-                    UIInputevents.GetComponent<InputEvents>().enabled = true;
-                    UIInputevents.gameObject.SetActive(true);
-                    SelectionObject.SetActive(true);
-                    WarpUI.SetActive(true);
-                    characterMovement.enabled = false;
-                    inputEvents.gameObject.SetActive(false);
-                    eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(i).gameObject);
-                    SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
+                    ToggleUI(true);
                 }
-            }
+    }
+
+    private void ToggleUI(bool toogle)
+    {
+        if (toogle)
+        {
+            UIInputevents.GetComponent<InputEvents>().enabled = true;
+            UIInputevents.gameObject.SetActive(true);
+            SelectionObject.SetActive(true);
+            WarpUI.SetActive(true);
+            characterMovement.enabled = false;
+            inputEvents.gameObject.SetActive(false);
+            eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(i).gameObject);
+            SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
+        }
+        else if (!toogle)
+        {
+            UIInputevents.GetComponent<InputEvents>().enabled = false;
+            UIInputevents.gameObject.SetActive(false);
+            SelectionObject.SetActive(false);
+            characterMovement.enabled = true;
+            WarpUI.SetActive(false);
+            inputEvents.gameObject.SetActive(true);
+            eventSystem.SetSelectedGameObject(null);
         }
     }
 }

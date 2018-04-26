@@ -148,9 +148,10 @@ public class CountDown : MonoBehaviour
         {
             var currentPlayerCam = activePlayers[i].gameObject.GetComponentInChildren<Camera>();
             camera.gameObject.transform.SetParent(currentPlayerCam.transform.parent);
-            camera.gameObject.transform.position= activePlayers[i].gameObject.transform.GetChild(0).position;
-            camera.gameObject.transform.position += new Vector3(0, 20, 0);
-            camera.gameObject.transform.LookAt(activePlayers[i].gameObject.transform.GetChild(0).transform);
+            camera.gameObject.transform.position = currentPlayerCam.transform.position;
+            camera.gameObject.transform.rotation = currentPlayerCam.transform.rotation;
+            //camera.gameObject.transform.position += new Vector3(0, 20, 0);
+            //camera.gameObject.transform.LookAt(activePlayers[i].gameObject.transform.GetChild(0).transform);
             //camera.gameObject.transform.localRotation = currentPlayerCam.gameObject.transform.localRotation;
 
 

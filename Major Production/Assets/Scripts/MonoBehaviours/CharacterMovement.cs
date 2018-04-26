@@ -1,29 +1,42 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Advertisements;
 using UnityEngine.Events;
 using UnityEngine.Networking;
+using Random = UnityEngine.Random;
 
 public class CharacterMovement : NetworkBehaviour
 {
+    [SectionHeader("Camera")]
+    [Range(1, 20)] public float Sensitivity = 1;
+    public Transform cameraPivot;
+
+    [SectionHeader("Speeds")]
+    public float RunSpeed = 2;
+    public float WalkSpeed = 1;
+
+    [SectionHeader("Projectiles")]
+    public Transform HandToShoot;
+    public GameObject RocketPrefab;
+
+
+    public Animator anim;
 
     private string PlayerNumber;
-    private Vector3 acceleration = Vector3.zero;
-    [Range(1, 20)] public float Sensitivity = 1;
     private Rigidbody rb;
-    public float RunSpeed = 2;
     private Vector3 velocity = Vector3.zero;
     private bool grounded = false;
     private bool jumping = false;
-    public float WalkSpeed = 1;
-    public Transform cameraPivot;
-    [SerializeField] private GameEventArgsObject BreakObject;
+
+    private Vector3 acceleration = Vector3.zero;
+
     private void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody>();
-
+        
     }
 
     public enum PlayerState
@@ -34,10 +47,8 @@ public class CharacterMovement : NetworkBehaviour
     }
     [HideInInspector]
     public PlayerState state;
-    public Animator anim;
+    [SerializeField] private GameEventArgsObject BreakObject;
 
-    public Transform HandToShoot;
-    public GameObject RocketPrefab;
     private NetworkManager nm;
     //private Dictionary<string, float> axisValues = new Dictionary<string, float>();
 
@@ -96,8 +107,8 @@ public class CharacterMovement : NetworkBehaviour
     {
         if (Input.GetAxis("Right Bumper" + PlayerNumber) > 0 && state != PlayerState.Attacking)
             anim.SetTrigger("Rocket");
-        if(Input.GetAxis("Left Bumper"+PlayerNumber)>0&& state != PlayerState.Attacking)
-            anim.SetBool("Whirlwind",true);
+       // if(Input.GetAxis("Left Bumper"+PlayerNumber)>0&& state != PlayerState.Attacking)
+        //    anim.SetBool("Whirlwind",true);
         if (Input.GetKeyDown(KeyCode.N) && PlayerNumber == "")
             SpawnOnOtherPlanet(FindObjectsOfType<PlanetBehaviour>()[Random.Range(0, 4)]);
         if (GLOBALS.SoloOnline || GLOBALS.SplitscreenOnline)
@@ -287,9 +298,10 @@ public class CharacterMovement : NetworkBehaviour
 
     public void FireRocket()
     {
-        var go = Instantiate(RocketPrefab, HandToShoot.position + transform.forward + transform.right *.4f, HandToShoot.transform.rotation);
+        var go = Instantiate(RocketPrefab, HandToShoot.position +( transform.forward + transform.right *.4f)*1.2f,HandToShoot.transform.rotation);
         go.transform.rotation *= new Quaternion(Mathf.Sin(-0.2f) * go.transform.up.x, Mathf.Sin(-0.2f) * go.transform.up.y, Mathf.Sin(-0.2f) * go.transform.up.z,
             Mathf.Cos(-0.2f));
+        //go.GetComponent<RocketProjectile>().PlayerWhoShotMe = this;
     }
 
     public void SpawnOnOtherPlanet(PlanetBehaviour p)
@@ -338,6 +350,7 @@ public class CharacterMovement : NetworkBehaviour
         anim.SetTrigger("Death");
         cameraPivot = null;
         //Destroy(this.gameObject.GetComponent<CharacterMovement>());
-        gameObject.GetComponent<CharacterMovement>().enabled = false;
+        this.enabled = false;
+        this.transform.GetComponentInChildren<GameEventArgsListenerObject>().enabled = false;
     }
 }

@@ -241,7 +241,35 @@ public class WarpBehviour : MonoBehaviour
             WarpUI.SetActive(true);
             characterMovement.enabled = false;
             inputEvents.gameObject.SetActive(false);
-            eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(i).gameObject);
+
+            foreach (var planetBehaviour in FindObjectsOfType<PlanetBehaviour>())
+            {
+                foreach (var rb in planetBehaviour.rbs)
+                {
+                    var tag = rb.gameObject.transform.tag;
+                    if (tag == playerTag)
+                    {
+                        switch (planetBehaviour.gameObject.name)
+                        {
+                            case "Planet1":
+                                eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(0).gameObject);
+                                break;
+                            case "Planet2":
+                                eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(1).gameObject);
+                                break;
+                            case "Planet3":
+                                eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(2).gameObject);
+                                break;
+                            case "Planet4":
+                                eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(3).gameObject);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }
+
             SelectionObject.transform.position = eventSystem.currentSelectedGameObject.transform.position;
         }
         else if (!toogle)

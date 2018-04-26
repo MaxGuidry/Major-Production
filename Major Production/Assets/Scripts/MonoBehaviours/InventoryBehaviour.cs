@@ -65,6 +65,9 @@ public class InventoryBehaviour : MonoBehaviour, IStorageable
 
     public void AddToInventory(Item newItem, GameObject obj)
     {
+        if (inventory.CurrentInventory.Contains(newItem))
+            return;
+
         if (inventory.CurrentInventory.Count >= inventory.InventoryCap) return;
         inventory.CurrentInventory.Add(newItem);
 

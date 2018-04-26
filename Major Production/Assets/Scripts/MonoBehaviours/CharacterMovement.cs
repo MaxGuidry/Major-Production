@@ -351,6 +351,6 @@ public class CharacterMovement : NetworkBehaviour
         cameraPivot = null;
         //Destroy(this.gameObject.GetComponent<CharacterMovement>());
         this.enabled = false;
-        this.transform.GetComponentInChildren<GameEventArgsListenerObject>().enabled = false;
+        this.transform.parent.GetComponentInChildren<GameEventArgsListenerObject>().enabled = false;
     }
 }

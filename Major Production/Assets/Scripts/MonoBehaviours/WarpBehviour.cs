@@ -13,13 +13,13 @@ public class WarpBehviour : MonoBehaviour
     private string InputString;
     private string playerNumber;
     private string playerTag;
-
     public GameObject SelectionObject;
     private bool test;
     public GameObject UIInputevents;
     public bool warping;
     public GameObject WarpUI;
 
+    public Text InstrucText;
     // Use this for initialization
     private void Start()
     {
@@ -92,23 +92,13 @@ public class WarpBehviour : MonoBehaviour
             inputEvents = GameObject.FindGameObjectWithTag(InputString);
         eventSystem = GameObject.FindGameObjectWithTag(EventString).GetComponent<EventSystem>();
 
-        foreach (var child in WarpUI.GetComponentsInChildren<Button>())
-            if (WarpUI.gameObject.activeInHierarchy)
-            {
-                child.enabled = true;
-                child.interactable = true;
-            }
-            else
-            {
-                child.enabled = false;
-                child.interactable = false;
-            }
-
+      
 
         if (!warping)
         {
             if (WarpUI.gameObject.activeInHierarchy)
             {
+                InstrucText.text = "Close Warp Menu";
                 UIInputevents.GetComponent<GameEventArgsListenerObject>().enabled = true;
                 UIInputevents.gameObject.SetActive(true);
                 UIInputevents.GetComponent<InputEvents>().enabled = true;
@@ -117,7 +107,7 @@ public class WarpBehviour : MonoBehaviour
                 if (Input.GetAxis("A" + playerNumber) >= .9f)
                 {
                     Debug.Log("Player: " + playerNumber + " pressed A");
-                    if (eventSystem.currentSelectedGameObject.GetComponent<Button>() != null)
+                    if (eventSystem.currentSelectedGameObject.GetComponent<Button>().enabled)
                         eventSystem.currentSelectedGameObject.GetComponent<Button>().onClick.Invoke();
                 }
 
@@ -187,6 +177,7 @@ public class WarpBehviour : MonoBehaviour
             }
             else
             {
+                InstrucText.text = "Open Warp Menu";
                 UIInputevents.GetComponent<GameEventArgsListenerObject>().enabled = false;
                 UIInputevents.gameObject.SetActive(false);
                 inputEvents.gameObject.SetActive(true);
@@ -205,6 +196,11 @@ public class WarpBehviour : MonoBehaviour
             {
                 WarpUI.SetActive(false);
                 SelectionObject.SetActive(false);
+                foreach (var child in WarpUI.GetComponentsInChildren<Button>())
+                {
+                    child.enabled = false;
+                    child.interactable = false;
+                }
                 warping = true;
                 coroutine = characterMovement.StartCoroutine(
                     characterMovement.SpawnDelay(planet.GetComponent<PlanetBehaviour>(), delay, this));
@@ -235,6 +231,12 @@ public class WarpBehviour : MonoBehaviour
     {
         if (toogle)
         {
+            foreach (var child in WarpUI.GetComponentsInChildren<Button>())
+            {
+                child.enabled = true;
+                child.interactable = true;
+            }
+
             UIInputevents.GetComponent<InputEvents>().enabled = true;
             UIInputevents.gameObject.SetActive(true);
             SelectionObject.SetActive(true);
@@ -253,15 +255,19 @@ public class WarpBehviour : MonoBehaviour
                         {
                             case "Planet1":
                                 eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(0).gameObject);
+                                WarpUI.transform.GetChild(0).GetComponent<Button>().enabled = false;
                                 break;
                             case "Planet2":
                                 eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(1).gameObject);
+                                WarpUI.transform.GetChild(1).GetComponent<Button>().enabled = false;
                                 break;
                             case "Planet3":
                                 eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(2).gameObject);
+                                WarpUI.transform.GetChild(2).GetComponent<Button>().enabled = false;
                                 break;
                             case "Planet4":
                                 eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(3).gameObject);
+                                WarpUI.transform.GetChild(3).GetComponent<Button>().enabled = false;
                                 break;
                             default:
                                 break;
@@ -274,6 +280,12 @@ public class WarpBehviour : MonoBehaviour
         }
         else if (!toogle)
         {
+            foreach (var child in WarpUI.GetComponentsInChildren<Button>())
+            {
+                child.enabled = false;
+                child.interactable = false;
+            }
+
             UIInputevents.GetComponent<InputEvents>().enabled = false;
             UIInputevents.gameObject.SetActive(false);
             SelectionObject.SetActive(false);

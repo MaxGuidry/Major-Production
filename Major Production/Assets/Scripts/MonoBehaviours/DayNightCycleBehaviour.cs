@@ -10,7 +10,6 @@ public class DayNightCycleBehaviour : MonoBehaviour
     void Start()
     {
         Cycle.Time = 0;
-        Cycle.DayLength = 60;
         Cycle.DirectionalLight = GameObject.FindGameObjectWithTag("Sun").GetComponent<Light>();
         Cycle.MaxLightIntensity = 1;
     }

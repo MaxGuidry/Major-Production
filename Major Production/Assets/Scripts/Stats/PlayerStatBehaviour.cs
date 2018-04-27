@@ -158,19 +158,19 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
         var done = false;
         while (!done)
         {
-            var effect = Instantiate(LevelUpEffect, Vector3.zero, Quaternion.identity);
-            effect.gameObject.transform.SetParent(gameObject.transform);
-            effect.transform.localRotation = Quaternion.identity;
-            effect.transform.localPosition = Vector3.zero;
-            effect.transform.localPosition = new Vector3(
-                effect.gameObject.transform.localPosition.x,
-                -1f,
-                effect.gameObject.transform.localPosition.z);
-            foreach (var eff in effect.GetComponentsInChildren<Transform>())
-                eff.transform.localScale = new Vector3(.5f, .5f, .5f);
+        //    var effect = Instantiate(LevelUpEffect, Vector3.zero, Quaternion.identity);
+        //    effect.gameObject.transform.SetParent(gameObject.transform);
+        //    effect.transform.localRotation = Quaternion.identity;
+        //    effect.transform.localPosition = Vector3.zero;
+        //    effect.transform.localPosition = new Vector3(
+        //        effect.gameObject.transform.localPosition.x,
+        //        -1f,
+        //        effect.gameObject.transform.localPosition.z);
+        //    foreach (var eff in effect.GetComponentsInChildren<Transform>())
+        //        eff.transform.localScale = new Vector3(.5f, .5f, .5f);
             yield return new WaitForSeconds(3);
-            done = true;
-            Destroy(effect);
+        //    done = true;
+        //    Destroy(effect);
         }
     }
 }

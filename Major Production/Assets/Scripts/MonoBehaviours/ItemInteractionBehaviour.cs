@@ -23,6 +23,8 @@ public class ItemInteractionBehaviour : MonoBehaviour
 
     void SwitchCheck(InventoryText player)
     {
+        if (player == null)
+            return;
         switch (Item.ItemType)
         {
             case ItemType.None:

@@ -4996,6 +4996,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 311159022}
+  - component: {fileID: 311159024}
+  - component: {fileID: 311159023}
   m_Layer: 0
   m_Name: JevSuit_R_Wrist
   m_TagString: Untagged
@@ -5021,6 +5023,33 @@ Transform:
   m_Father: {fileID: 978953676}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &311159023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114817420220024746, guid: 3d6bad6f95cc2d348907779bc1ad069b,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 311159021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98af7c5cd949d3c4bab4f510691f2995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 2040195203}
+--- !u!136 &311159024
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 136620684576982936, guid: 3d6bad6f95cc2d348907779bc1ad069b,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 311159021}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.03
+  m_Height: 0.15
+  m_Direction: 0
+  m_Center: {x: -0.02, y: 0, z: 0}
 --- !u!1 &320965892
 GameObject:
   m_ObjectHideFlags: 0
@@ -5192,9 +5221,9 @@ RectTransform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 325309296}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.0023738982}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1036932503}
   - {fileID: 1091527052}
@@ -5205,7 +5234,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.000044880624, y: 0.0000009536743}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &325309298
@@ -6893,6 +6922,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 449898374}
+  - component: {fileID: 449898376}
+  - component: {fileID: 449898375}
   m_Layer: 0
   m_Name: JevSuit_R_Wrist
   m_TagString: Untagged
@@ -6918,6 +6949,33 @@ Transform:
   m_Father: {fileID: 1578953600}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &449898375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114914272201151592, guid: 84e21c2838857f44d800a519fba30932,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 449898373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98af7c5cd949d3c4bab4f510691f2995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 862950275}
+--- !u!136 &449898376
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 136205981549238292, guid: 84e21c2838857f44d800a519fba30932,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 449898373}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.03
+  m_Height: 0.15
+  m_Direction: 0
+  m_Center: {x: -0.02, y: 0, z: 0}
 --- !u!1 &453501449
 GameObject:
   m_ObjectHideFlags: 0
@@ -8583,6 +8641,17 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 2040195192}
         m_MethodName: ClearInventory
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1031768645}
+        m_MethodName: CycleUI
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11945,7 +12014,6 @@ GameObject:
   - component: {fileID: 862950276}
   - component: {fileID: 862950274}
   - component: {fileID: 862950273}
-  - component: {fileID: 862950272}
   - component: {fileID: 862950271}
   - component: {fileID: 862950264}
   - component: {fileID: 862950275}
@@ -11956,7 +12024,8 @@ GameObject:
   - component: {fileID: 862950266}
   - component: {fileID: 862950265}
   - component: {fileID: 862950277}
-  m_Layer: 0
+  - component: {fileID: 862950272}
+  m_Layer: 8
   m_Name: TvPlayerP4
   m_TagString: P4
   m_Icon: {fileID: 0}
@@ -12164,19 +12233,20 @@ MonoBehaviour:
   Health: 0
   Armor: 0
   Level: 0
---- !u!65 &862950272
-BoxCollider:
+--- !u!136 &862950272
+CapsuleCollider:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 65746325303251512, guid: 84e21c2838857f44d800a519fba30932,
+  m_PrefabParentObject: {fileID: 136022071126455780, guid: 84e21c2838857f44d800a519fba30932,
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 862950263}
   m_Material: {fileID: 13400000, guid: e52fb17f9b1e7fd48b8955f1391d3688, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.15, y: 0.25, z: 0.1}
-  m_Center: {x: 0, y: 0.125, z: 0}
+  m_Radius: 0.1
+  m_Height: 0.37
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.175, z: 0}
 --- !u!54 &862950273
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12242,7 +12312,7 @@ Transform:
   m_GameObject: {fileID: 862950263}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 278672867}
   - {fileID: 276267903}
@@ -14239,7 +14309,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1006219044
 Transform:
   m_ObjectHideFlags: 0
@@ -14278,7 +14348,7 @@ MonoBehaviour:
   - Left Bumper2
   - Left Stick Button2
   - Right Stick Button2
-  - Submit 2
+  - Submit2
   - Start2
   Axis: []
 --- !u!114 &1006219046
@@ -14304,8 +14374,8 @@ MonoBehaviour:
   ObjResponse:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2110423866}
-        m_MethodName: CycleThroughUI
+      - m_Target: {fileID: 1031768645}
+        m_MethodName: CycleUI
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14879,7 +14949,7 @@ MonoBehaviour:
   eventSystem: {fileID: 0}
   inputEvents: {fileID: 0}
   SelectionObject: {fileID: 0}
-  UIInputevents: {fileID: 0}
+  UIInputevents: {fileID: 1006219043}
   warping: 0
   WarpUI: {fileID: 0}
 --- !u!1001 &1033773710
@@ -18082,7 +18152,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.83982754, y: -0.00000963553}
   m_AnchorMax: {x: 0.9999994, y: 0.25118557}
-  m_AnchoredPosition: {x: 0, y: 0.0000076293945}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0.0000076293945}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1253414435
@@ -18403,6 +18473,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1263513082}
+  - component: {fileID: 1263513084}
+  - component: {fileID: 1263513083}
   m_Layer: 0
   m_Name: JevSuit_L_Wrist
   m_TagString: Untagged
@@ -18428,6 +18500,33 @@ Transform:
   m_Father: {fileID: 1002857490}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1263513083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114035314330562944, guid: 84e21c2838857f44d800a519fba30932,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1263513081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98af7c5cd949d3c4bab4f510691f2995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 862950275}
+--- !u!136 &1263513084
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 136566851578199598, guid: 84e21c2838857f44d800a519fba30932,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1263513081}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.03
+  m_Height: 0.15
+  m_Direction: 0
+  m_Center: {x: -0.02, y: 0, z: 0}
 --- !u!1 &1267486183
 GameObject:
   m_ObjectHideFlags: 0
@@ -21655,7 +21754,7 @@ MonoBehaviour:
   eventSystem: {fileID: 0}
   inputEvents: {fileID: 0}
   SelectionObject: {fileID: 0}
-  UIInputevents: {fileID: 0}
+  UIInputevents: {fileID: 1646570566}
   warping: 0
   WarpUI: {fileID: 0}
 --- !u!1 &1496994531
@@ -22182,9 +22281,9 @@ RectTransform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1534388541}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.0020293}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1494619314}
   m_RootOrder: 1
@@ -23169,6 +23268,17 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 862950264}
         m_MethodName: ClearInventory
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1494619318}
+        m_MethodName: CycleUI
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -24710,7 +24820,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1646570567
 Transform:
   m_ObjectHideFlags: 0
@@ -24775,8 +24885,8 @@ MonoBehaviour:
   ObjResponse:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1767369788}
-        m_MethodName: CycleThroughUI
+      - m_Target: {fileID: 1494619318}
+        m_MethodName: CycleUI
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -25740,7 +25850,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 24cab10082d8fbd44b0e4bf89c5b8867, type: 2}
   AllQuestComplete: {fileID: 11400000, guid: 57cba31621ea3f943b3db3fbac6158b8, type: 2}
   CurrentObjectiveText: {fileID: 1021593228}
-  typer: {fileID: 0}
+  typer: {fileID: 1838698346}
 --- !u!1 &1707863449
 GameObject:
   m_ObjectHideFlags: 0
@@ -30411,7 +30521,6 @@ GameObject:
   - component: {fileID: 2040195204}
   - component: {fileID: 2040195202}
   - component: {fileID: 2040195201}
-  - component: {fileID: 2040195200}
   - component: {fileID: 2040195199}
   - component: {fileID: 2040195192}
   - component: {fileID: 2040195203}
@@ -30422,7 +30531,8 @@ GameObject:
   - component: {fileID: 2040195194}
   - component: {fileID: 2040195193}
   - component: {fileID: 2040195205}
-  m_Layer: 0
+  - component: {fileID: 2040195200}
+  m_Layer: 8
   m_Name: TvPlayerP3
   m_TagString: P3
   m_Icon: {fileID: 0}
@@ -30630,19 +30740,20 @@ MonoBehaviour:
   Health: 0
   Armor: 0
   Level: 0
---- !u!65 &2040195200
-BoxCollider:
+--- !u!136 &2040195200
+CapsuleCollider:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 65847030935642072, guid: 3d6bad6f95cc2d348907779bc1ad069b,
+  m_PrefabParentObject: {fileID: 136784348112138514, guid: 3d6bad6f95cc2d348907779bc1ad069b,
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2040195191}
   m_Material: {fileID: 13400000, guid: e52fb17f9b1e7fd48b8955f1391d3688, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.15, y: 0.25, z: 0.1}
-  m_Center: {x: 0, y: 0.125, z: 0}
+  m_Radius: 0.1
+  m_Height: 0.37
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.175, z: 0}
 --- !u!54 &2040195201
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -30708,7 +30819,7 @@ Transform:
   m_GameObject: {fileID: 2040195191}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 2143784654}
   - {fileID: 1946748259}
@@ -30974,6 +31085,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 2065244531}
+  - component: {fileID: 2065244533}
+  - component: {fileID: 2065244532}
   m_Layer: 0
   m_Name: JevSuit_L_Wrist
   m_TagString: Untagged
@@ -30999,6 +31112,33 @@ Transform:
   m_Father: {fileID: 1634569817}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2065244532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114405241653090352, guid: 3d6bad6f95cc2d348907779bc1ad069b,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2065244530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98af7c5cd949d3c4bab4f510691f2995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 2040195203}
+--- !u!136 &2065244533
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 136526316016146634, guid: 3d6bad6f95cc2d348907779bc1ad069b,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2065244530}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.03
+  m_Height: 0.15
+  m_Direction: 0
+  m_Center: {x: -0.02, y: 0, z: 0}
 --- !u!1 &2066466904
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ public class BasicAttackSM : StateMachineBehaviour
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 	    source.clip = Punch;
-        source.Play();
+        //source.Play();
 	    player.state = CharacterMovement.PlayerState.Attacking;
 	}
 

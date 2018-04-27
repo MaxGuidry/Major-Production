@@ -7086,7 +7086,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1661344723520592}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 109, y: 33, z: -302}
+  m_LocalPosition: {x: 109.70999, y: 33.83, z: -302.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4625702427250368}
@@ -10435,8 +10435,9 @@ MonoBehaviour:
   cameraPivot: {fileID: 4339393747260748}
   RunSpeed: 10
   WalkSpeed: 6
-  HandToShoot: {fileID: 0}
-  RocketPrefab: {fileID: 0}
+  HandToShoot: {fileID: 4816351177286728}
+  RocketPrefab: {fileID: 1250494697334330, guid: d5478b540000f8d4da303a2e62c66fb5,
+    type: 2}
   anim: {fileID: 95633841130373952}
   state: 0
   BreakObject: {fileID: 11400000, guid: 8d616ec8803206749b56379eefea810f, type: 2}
@@ -10966,10 +10967,10 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: e52fb17f9b1e7fd48b8955f1391d3688, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.1
-  m_Height: 0.37
+  m_Radius: 0.2
+  m_Height: 0.74
   m_Direction: 1
-  m_Center: {x: 0, y: 0.175, z: 0}
+  m_Center: {x: 0, y: 0.35, z: 0}
 --- !u!136 &136205981549238292
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -14059,7 +14060,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 77.029526, y: -35.805763}
+  m_AnchoredPosition: {x: 56.467865, y: -26.248047}
   m_SizeDelta: {x: 153.99, y: 27.04}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224409393894988224

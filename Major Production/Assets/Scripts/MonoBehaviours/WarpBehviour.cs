@@ -18,11 +18,14 @@ public class WarpBehviour : MonoBehaviour
     public GameObject UIInputevents;
     public bool warping;
     public GameObject WarpUI;
+    private float Timer = 3f;
+    public Text InstrucText, WarpText;
 
-    public Text InstrucText;
+    private bool TakingOff, Landing;
     // Use this for initialization
     private void Start()
     {
+        WarpText.gameObject.SetActive(false);
         foreach (var child in gameObject.GetComponentsInChildren<Image>())
             switch (child.tag)
             {
@@ -96,6 +99,8 @@ public class WarpBehviour : MonoBehaviour
 
         if (!warping)
         {
+            WarpText.text = "";
+            WarpText.gameObject.SetActive(false);
             if (WarpUI.gameObject.activeInHierarchy)
             {
                 InstrucText.text = "Close Warp Menu";
@@ -185,6 +190,16 @@ public class WarpBehviour : MonoBehaviour
                 characterMovement.enabled = true;
             }
         }
+        else
+        {
+            WarpText.gameObject.SetActive(true);
+            WarpText.GetComponent<TweenScaleBehaviour>().TweenScale();
+            Timer -= Time.deltaTime;
+            if (Timer <= 1f)
+            {
+                Timer = 3;
+            }
+        }
     }
 
     public void WarpPlanet(GameObject planet)
@@ -202,8 +217,9 @@ public class WarpBehviour : MonoBehaviour
                     child.interactable = false;
                 }
                 warping = true;
+
                 coroutine = characterMovement.StartCoroutine(
-                    characterMovement.SpawnDelay(planet.GetComponent<PlanetBehaviour>(), delay, this));
+                    characterMovement.SpawnDelay(planet.GetComponent<PlanetBehaviour>(), delay, this, WarpText, Timer));
                 test = false;
             }
         }

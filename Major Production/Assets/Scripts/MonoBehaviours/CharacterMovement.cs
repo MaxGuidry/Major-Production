@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Advertisements;
 using UnityEngine.Events;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class CharacterMovement : NetworkBehaviour
@@ -334,10 +335,12 @@ public class CharacterMovement : NetworkBehaviour
     }
 
     
-    public IEnumerator SpawnDelay(PlanetBehaviour p, float timer, WarpBehviour crt)
+    public IEnumerator SpawnDelay(PlanetBehaviour p, float timer, WarpBehviour crt, Text warpText, float warpTimer)
     {
+        warpText.text =  "Takeoff: " + Mathf.Round(warpTimer).ToString() + "...";
         yield return new WaitForSeconds(timer);
         SpawnOnOtherPlanet(p);
+        warpText.text = "Landing: " + Mathf.Round(warpTimer).ToString() + "...";
         yield return new WaitForSeconds(timer);
         crt.inputEvents.SetActive(true);
         crt.warping = false;

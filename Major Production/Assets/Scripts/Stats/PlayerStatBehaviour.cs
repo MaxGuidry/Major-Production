@@ -70,6 +70,9 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
 
         var nexthealth = Health - calculatedDamage;
 
+        var anim = GetComponent<Animator>();
+        if (anim)
+            anim.SetTrigger("Hurt");
         if (nexthealth <= 0)
         {
             Health = 0;

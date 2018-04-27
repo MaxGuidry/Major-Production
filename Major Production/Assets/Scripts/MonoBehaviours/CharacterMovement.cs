@@ -347,7 +347,7 @@ public class CharacterMovement : NetworkBehaviour
 
     public void Die()
     {
-        anim.SetTrigger("Death");
+        anim.SetBool("Death",true);
         cameraPivot = null;
         //Destroy(this.gameObject.GetComponent<CharacterMovement>());
         this.enabled = false;

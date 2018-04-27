@@ -259,7 +259,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1053314528457838
 GameObject:
   m_ObjectHideFlags: 1
@@ -445,8 +445,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4398901378029814}
-  - component: {fileID: 136329177491857636}
-  - component: {fileID: 114011925097707528}
   m_Layer: 0
   m_Name: JevSuit_R_Wrist
   m_TagString: Untagged
@@ -1429,8 +1427,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4461945739836056}
-  - component: {fileID: 136562394370262464}
-  - component: {fileID: 114973295618496022}
   m_Layer: 0
   m_Name: JevSuit_L_Wrist
   m_TagString: Untagged
@@ -2356,6 +2352,7 @@ GameObject:
   - component: {fileID: 4668213946990076}
   - component: {fileID: 95209291418661174}
   - component: {fileID: 54198018322955528}
+  - component: {fileID: 65847030935642072}
   - component: {fileID: 114359703987340394}
   - component: {fileID: 114277597131525570}
   - component: {fileID: 114892976087724624}
@@ -2366,8 +2363,7 @@ GameObject:
   - component: {fileID: 114596400862529298}
   - component: {fileID: 114859327503422068}
   - component: {fileID: 82391342857587970}
-  - component: {fileID: 136229405351081128}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: TvPlayerP3
   m_TagString: P3
   m_Icon: {fileID: 0}
@@ -7947,6 +7943,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 1
+--- !u!65 &65847030935642072
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1501412966829104}
+  m_Material: {fileID: 13400000, guid: e52fb17f9b1e7fd48b8955f1391d3688, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.15, y: 0.25, z: 0.1}
+  m_Center: {x: 0, y: 0.125, z: 0}
 --- !u!81 &81878871506090548
 AudioListener:
   m_ObjectHideFlags: 1
@@ -8084,18 +8092,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'PHealth: 100'
---- !u!114 &114011925097707528
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1093433105720880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98af7c5cd949d3c4bab4f510691f2995, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 114892976087724624}
 --- !u!114 &114013423779366748
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9291,10 +9287,10 @@ MonoBehaviour:
   m_Script: {fileID: 1077351063, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal2
-  m_VerticalAxis: Vertical2
-  m_SubmitButton: A2
-  m_CancelButton: Cancel2
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: A
+  m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
   m_ForceModuleActive: 0
@@ -9971,8 +9967,8 @@ MonoBehaviour:
   ObjResponse:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114879126222377176}
-        m_MethodName: CycleUI
+      - m_Target: {fileID: 114884857983594090}
+        m_MethodName: CycleThroughUI
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10106,7 +10102,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 24cab10082d8fbd44b0e4bf89c5b8867, type: 2}
   AllQuestComplete: {fileID: 11400000, guid: 57cba31621ea3f943b3db3fbac6158b8, type: 2}
   CurrentObjectiveText: {fileID: 114261171124366126}
-  typer: {fileID: 114293850713723046}
+  typer: {fileID: 0}
 --- !u!114 &114708894707374992
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10222,17 +10218,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 114879126222377176}
-        m_MethodName: CycleUI
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
     m_TypeName: GameEventArgsResponseObject, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
 --- !u!114 &114720907401169682
@@ -10258,7 +10243,7 @@ MonoBehaviour:
   - Left Bumper2
   - Left Stick Button2
   - Right Stick Button2
-  - Submit2
+  - Submit 2
   - Start2
   Axis: []
 --- !u!114 &114751609380563724
@@ -10556,12 +10541,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 810bcfdeb994de946b62edab71126804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectionObject: {fileID: 0}
-  WarpUI: {fileID: 0}
-  warping: 0
   eventSystem: {fileID: 0}
   inputEvents: {fileID: 0}
-  UIInputevents: {fileID: 1047745312062418}
+  SelectionObject: {fileID: 0}
+  UIInputevents: {fileID: 0}
+  warping: 0
+  WarpUI: {fileID: 0}
 --- !u!114 &114884857983594090
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10626,14 +10611,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Sensitivity: 4
+  cameraPivot: {fileID: 4789902510657088}
   RunSpeed: 10
   WalkSpeed: 6
-  cameraPivot: {fileID: 4789902510657088}
-  BreakObject: {fileID: 11400000, guid: 8d616ec8803206749b56379eefea810f, type: 2}
-  state: 0
+  HandToShoot: {fileID: 4398901378029814}
+  RocketPrefab: {fileID: 1250494697334330, guid: d5478b540000f8d4da303a2e62c66fb5,
+    type: 2}
   anim: {fileID: 95209291418661174}
-  HandToShoot: {fileID: 0}
-  RocketPrefab: {fileID: 0}
+  state: 0
+  BreakObject: {fileID: 11400000, guid: 8d616ec8803206749b56379eefea810f, type: 2}
 --- !u!114 &114902229997587290
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10862,18 +10848,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: GameEventArgsResponse, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
---- !u!114 &114973295618496022
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1312801314531288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98af7c5cd949d3c4bab4f510691f2995, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 114892976087724624}
 --- !u!114 &114987289726141664
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10957,45 +10931,6 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1717341116804066}
   m_Enabled: 1
---- !u!136 &136229405351081128
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1501412966829104}
-  m_Material: {fileID: 13400000, guid: e52fb17f9b1e7fd48b8955f1391d3688, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.1
-  m_Height: 0.37
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.175, z: 0}
---- !u!136 &136329177491857636
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1093433105720880}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.03
-  m_Height: 0.15
-  m_Direction: 0
-  m_Center: {x: -0.02, y: 0, z: 0}
---- !u!136 &136562394370262464
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1312801314531288}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.03
-  m_Height: 0.15
-  m_Direction: 0
-  m_Center: {x: -0.02, y: 0, z: 0}
 --- !u!137 &137035810878042250
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -14118,7 +14053,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 71.965836, y: -33.451996}
+  m_AnchoredPosition: {x: 77.029526, y: -35.805763}
   m_SizeDelta: {x: 153.99, y: 27.04}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224547483777271194
@@ -14275,7 +14210,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.83982754, y: -0.00000963553}
   m_AnchorMax: {x: 0.9999994, y: 0.25118557}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.0000076293945}
   m_SizeDelta: {x: 0, y: 0.0000076293945}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224837177517549082

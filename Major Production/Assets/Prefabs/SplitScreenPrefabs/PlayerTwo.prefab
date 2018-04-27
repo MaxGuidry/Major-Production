@@ -2528,6 +2528,8 @@ GameObject:
   - component: {fileID: 4380240650051606}
   - component: {fileID: 136967868469656386}
   - component: {fileID: 114967127205751752}
+  - component: {fileID: 136576944437220260}
+  - component: {fileID: 114132399909514220}
   m_Layer: 0
   m_Name: JevSuit_L_Wrist
   m_TagString: Untagged
@@ -3258,6 +3260,7 @@ GameObject:
   - component: {fileID: 4343784604575912}
   - component: {fileID: 136759270471883140}
   - component: {fileID: 114340250354458316}
+  - component: {fileID: 136101226592764604}
   m_Layer: 0
   m_Name: JevSuit_R_Wrist
   m_TagString: Untagged
@@ -3849,7 +3852,6 @@ GameObject:
   - component: {fileID: 114059002936186656}
   - component: {fileID: 114642340429674936}
   - component: {fileID: 114779453682414494}
-  - component: {fileID: 114005170154283588}
   - component: {fileID: 114550166485007406}
   - component: {fileID: 114144628184233580}
   - component: {fileID: 82945257114228432}
@@ -8051,17 +8053,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114005170154283588
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1905082728106880}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114018233842405676
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8291,6 +8282,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114132399909514220
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1589293043710194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98af7c5cd949d3c4bab4f510691f2995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 114949114615598650}
 --- !u!114 &114135535052514484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9718,12 +9721,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 810bcfdeb994de946b62edab71126804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectionObject: {fileID: 0}
-  WarpUI: {fileID: 0}
-  warping: 0
   eventSystem: {fileID: 0}
   inputEvents: {fileID: 0}
+  SelectionObject: {fileID: 0}
   UIInputevents: {fileID: 1335770155662154}
+  warping: 0
+  WarpUI: {fileID: 0}
 --- !u!114 &114626678487990826
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10906,15 +10909,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Sensitivity: 4
+  cameraPivot: {fileID: 4127989674469884}
   RunSpeed: 10
   WalkSpeed: 6
-  cameraPivot: {fileID: 4127989674469884}
-  BreakObject: {fileID: 11400000, guid: 8d616ec8803206749b56379eefea810f, type: 2}
-  state: 0
-  anim: {fileID: 95451221985943686}
   HandToShoot: {fileID: 4343784604575912}
   RocketPrefab: {fileID: 1250494697334330, guid: d5478b540000f8d4da303a2e62c66fb5,
     type: 2}
+  anim: {fileID: 95451221985943686}
+  state: 0
+  BreakObject: {fileID: 11400000, guid: 8d616ec8803206749b56379eefea810f, type: 2}
 --- !u!114 &114967127205751752
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10961,6 +10964,32 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1948153424113332}
   m_Enabled: 1
+--- !u!136 &136101226592764604
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1778599287668398}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.03
+  m_Height: 0.15
+  m_Direction: 0
+  m_Center: {x: 0.02, y: 0, z: 0}
+--- !u!136 &136576944437220260
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1589293043710194}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.03
+  m_Height: 0.15
+  m_Direction: 0
+  m_Center: {x: -0.02, y: 0, z: 0}
 --- !u!136 &136709458952079674
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -14113,7 +14142,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 77.029526, y: -35.805763}
+  m_AnchoredPosition: {x: 79.02432, y: -36.732994}
   m_SizeDelta: {x: 153.99, y: 27.04}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224657944530739628

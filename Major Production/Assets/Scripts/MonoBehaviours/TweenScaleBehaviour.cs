@@ -42,4 +42,23 @@ public class TweenScaleBehaviour : MonoBehaviour
         isRunning = false;
         yield return null;
     }
+
+    public IEnumerator TweenItForwardOnly()
+    {
+        isRunning = true;
+        var timer = 0.0f;
+        var startScale = tweened.transform.localScale;
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            tweened.transform.localScale = startScale + Vector3.one * ac.Evaluate(timer / duration);
+            yield return null;
+            tweened.transform.localScale = new Vector3(10, 10, 10);
+        }
+
+       // StartCoroutine(TweenItBackward());
+
+        yield return null;
+    }
+
 }

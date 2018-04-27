@@ -2367,6 +2367,7 @@ GameObject:
   - component: {fileID: 114859327503422068}
   - component: {fileID: 82391342857587970}
   - component: {fileID: 136784348112138514}
+  - component: {fileID: 114022907601569994}
   m_Layer: 8
   m_Name: TvPlayerP3
   m_TagString: P3
@@ -5716,7 +5717,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1465462816100638}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18, y: 26.77, z: -289.8}
+  m_LocalPosition: {x: 18, y: 26, z: -289}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4668213946990076}
@@ -8158,6 +8159,61 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 0
+--- !u!114 &114022907601569994
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1501412966829104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1fa0fe34fd41f0449079ae6a25502ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ac:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: -0.56443024
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.28685567
+      value: 2.1467285
+      inSlope: 3.7038326
+      outSlope: 3.7038326
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.7868461
+      value: 1.109605
+      inSlope: -0.8094311
+      outSlope: -0.8094311
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.98198795
+      value: 3.5652728
+      inSlope: 7.7462196
+      outSlope: 7.7462196
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1.4269359
+      value: 2.8701577
+      inSlope: 2.193451
+      outSlope: 2.193451
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1.6778775
+      value: 8
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  duration: 1
+  tweened: {fileID: 1501412966829104}
 --- !u!114 &114033952814300556
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10641,9 +10697,8 @@ MonoBehaviour:
   cameraPivot: {fileID: 4789902510657088}
   RunSpeed: 10
   WalkSpeed: 6
-  HandToShoot: {fileID: 4398901378029814}
-  RocketPrefab: {fileID: 1250494697334330, guid: d5478b540000f8d4da303a2e62c66fb5,
-    type: 2}
+  HandToShoot: {fileID: 0}
+  RocketPrefab: {fileID: 0}
   anim: {fileID: 95209291418661174}
   state: 0
   BreakObject: {fileID: 11400000, guid: 8d616ec8803206749b56379eefea810f, type: 2}
@@ -10993,10 +11048,10 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: e52fb17f9b1e7fd48b8955f1391d3688, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.2
-  m_Height: 0.74
+  m_Radius: 0.1
+  m_Height: 0.37
   m_Direction: 1
-  m_Center: {x: 0, y: 0.35, z: 0}
+  m_Center: {x: 0, y: 0.175, z: 0}
 --- !u!137 &137035810878042250
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -14119,7 +14174,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 56.467865, y: -26.248047}
+  m_AnchoredPosition: {x: 77.029526, y: -35.805763}
   m_SizeDelta: {x: 153.99, y: 27.04}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224547483777271194

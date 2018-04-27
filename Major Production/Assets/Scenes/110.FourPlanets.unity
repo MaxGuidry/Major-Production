@@ -5043,7 +5043,7 @@ CapsuleCollider:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 311159021}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e52fb17f9b1e7fd48b8955f1391d3688, type: 2}
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.03
@@ -6969,7 +6969,7 @@ CapsuleCollider:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 449898373}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e52fb17f9b1e7fd48b8955f1391d3688, type: 2}
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.03
@@ -10841,7 +10841,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 56.467865, y: -26.248047}
+  m_AnchoredPosition: {x: 77.029526, y: -35.805763}
   m_SizeDelta: {x: 153.99, y: 27.04}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &780780584
@@ -12025,6 +12025,7 @@ GameObject:
   - component: {fileID: 862950265}
   - component: {fileID: 862950277}
   - component: {fileID: 862950272}
+  - component: {fileID: 862950278}
   m_Layer: 8
   m_Name: TvPlayerP4
   m_TagString: P4
@@ -12243,10 +12244,10 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: e52fb17f9b1e7fd48b8955f1391d3688, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.2
-  m_Height: 0.74
+  m_Radius: 0.1
+  m_Height: 0.37
   m_Direction: 1
-  m_Center: {x: 0, y: 0.35, z: 0}
+  m_Center: {x: 0, y: 0.175, z: 0}
 --- !u!54 &862950273
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12297,9 +12298,8 @@ MonoBehaviour:
   cameraPivot: {fileID: 1369317395}
   RunSpeed: 10
   WalkSpeed: 6
-  HandToShoot: {fileID: 449898374}
-  RocketPrefab: {fileID: 1250494697334330, guid: d5478b540000f8d4da303a2e62c66fb5,
-    type: 2}
+  HandToShoot: {fileID: 0}
+  RocketPrefab: {fileID: 0}
   anim: {fileID: 862950274}
   state: 0
   BreakObject: {fileID: 11400000, guid: 8d616ec8803206749b56379eefea810f, type: 2}
@@ -12403,6 +12403,62 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &862950278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114704179060794332, guid: 84e21c2838857f44d800a519fba30932,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 862950263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1fa0fe34fd41f0449079ae6a25502ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ac:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: -0.56443024
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.28685567
+      value: 2.1467285
+      inSlope: 3.7038326
+      outSlope: 3.7038326
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.7868461
+      value: 1.109605
+      inSlope: -0.8094311
+      outSlope: -0.8094311
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.98198795
+      value: 3.5652728
+      inSlope: 7.7462196
+      outSlope: 7.7462196
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1.4269359
+      value: 2.8701577
+      inSlope: 2.193451
+      outSlope: 2.193451
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1.6778775
+      value: 8
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  duration: 1
+  tweened: {fileID: 862950263}
 --- !u!1 &864674261
 GameObject:
   m_ObjectHideFlags: 0
@@ -12617,6 +12673,23 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.0001320662, y: -0.023326885, z: -0.0000000027939677}
     m_Extent: {x: 0.005746606, y: 0.023717668, z: 0.005746604}
   m_DirtyAABB: 0
+--- !u!1 &875961946 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1446569161786706, guid: f18007c5c4ac18c4eb043188c1e44ecc,
+    type: 2}
+  m_PrefabInternal: {fileID: 1215129297}
+--- !u!114 &875961952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 875961946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: 8eb63a66ac6e8974b94dd92d5b684cfe, type: 2}
 --- !u!1 &876601315
 GameObject:
   m_ObjectHideFlags: 0
@@ -14822,7 +14895,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 56.467865, y: -26.248047}
+  m_AnchoredPosition: {x: 77.029526, y: -35.805763}
   m_SizeDelta: {x: 153.99, y: 27.04}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1031768640
@@ -17365,6 +17438,30 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1196326631148512, guid: f18007c5c4ac18c4eb043188c1e44ecc, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224480246490641924, guid: f18007c5c4ac18c4eb043188c1e44ecc,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -40.803047
+      objectReference: {fileID: 0}
+    - target: {fileID: 224480246490641924, guid: f18007c5c4ac18c4eb043188c1e44ecc,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 87.780304
+      objectReference: {fileID: 0}
+    - target: {fileID: 224480246490641924, guid: f18007c5c4ac18c4eb043188c1e44ecc,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224480246490641924, guid: f18007c5c4ac18c4eb043188c1e44ecc,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f18007c5c4ac18c4eb043188c1e44ecc, type: 2}
   m_IsPrefabParent: 0
@@ -18520,7 +18617,7 @@ CapsuleCollider:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1263513081}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e52fb17f9b1e7fd48b8955f1391d3688, type: 2}
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.03
@@ -30532,6 +30629,7 @@ GameObject:
   - component: {fileID: 2040195193}
   - component: {fileID: 2040195205}
   - component: {fileID: 2040195200}
+  - component: {fileID: 2040195206}
   m_Layer: 8
   m_Name: TvPlayerP3
   m_TagString: P3
@@ -30750,10 +30848,10 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: e52fb17f9b1e7fd48b8955f1391d3688, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.2
-  m_Height: 0.74
+  m_Radius: 0.1
+  m_Height: 0.37
   m_Direction: 1
-  m_Center: {x: 0, y: 0.35, z: 0}
+  m_Center: {x: 0, y: 0.175, z: 0}
 --- !u!54 &2040195201
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -30804,9 +30902,8 @@ MonoBehaviour:
   cameraPivot: {fileID: 771179525}
   RunSpeed: 10
   WalkSpeed: 6
-  HandToShoot: {fileID: 311159022}
-  RocketPrefab: {fileID: 1250494697334330, guid: d5478b540000f8d4da303a2e62c66fb5,
-    type: 2}
+  HandToShoot: {fileID: 0}
+  RocketPrefab: {fileID: 0}
   anim: {fileID: 2040195202}
   state: 0
   BreakObject: {fileID: 11400000, guid: 8d616ec8803206749b56379eefea810f, type: 2}
@@ -30910,6 +31007,62 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &2040195206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114022907601569994, guid: 3d6bad6f95cc2d348907779bc1ad069b,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2040195191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1fa0fe34fd41f0449079ae6a25502ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ac:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: -0.56443024
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.28685567
+      value: 2.1467285
+      inSlope: 3.7038326
+      outSlope: 3.7038326
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.7868461
+      value: 1.109605
+      inSlope: -0.8094311
+      outSlope: -0.8094311
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.98198795
+      value: 3.5652728
+      inSlope: 7.7462196
+      outSlope: 7.7462196
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1.4269359
+      value: 2.8701577
+      inSlope: 2.193451
+      outSlope: 2.193451
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1.6778775
+      value: 8
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  duration: 1
+  tweened: {fileID: 2040195191}
 --- !u!1 &2040376840
 GameObject:
   m_ObjectHideFlags: 0
@@ -31132,7 +31285,7 @@ CapsuleCollider:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2065244530}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e52fb17f9b1e7fd48b8955f1391d3688, type: 2}
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.03

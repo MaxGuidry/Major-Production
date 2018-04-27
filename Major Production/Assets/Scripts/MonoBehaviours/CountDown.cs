@@ -15,7 +15,7 @@ public class CountDown : MonoBehaviour
     public float Timer = 60f;
     private float deathTimer = 0f;
     public Text TimerDisplay;
-
+    public float GameOverScreenTimer = 4f;
     // Use this for initialization
     private void Start()
     {
@@ -110,7 +110,7 @@ public class CountDown : MonoBehaviour
         }
 
         TimerDisplay.text = 0.ToString();
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(GameOverScreenTimer);
         SceneManager.LoadScene("104.FullGame");
     }
 

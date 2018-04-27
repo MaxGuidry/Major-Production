@@ -25,6 +25,8 @@ GameObject:
   - component: {fileID: 54625384125803456}
   - component: {fileID: 114627134618364800}
   - component: {fileID: 64860657442987604}
+  - component: {fileID: 114992799609531042}
+  - component: {fileID: 114876975085642216}
   m_Layer: 0
   m_Name: Rock
   m_TagString: Untagged
@@ -59,7 +61,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: e5f1d4de86b70944ab88cbbc573f0197, type: 2}
+  - {fileID: 2100000, guid: cadfde2f3ef294043affa7194ae69b94, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -143,3 +145,31 @@ MonoBehaviour:
   ItemPickedUp1: {fileID: 11400000, guid: ce05ae57839993e499d397d853a1b174, type: 2}
   ItemPickedUp2: {fileID: 11400000, guid: d511a4fc6cf3df54597d760be2e7a07b, type: 2}
   ItemPickedUp3: {fileID: 11400000, guid: acc6d17ce0ad0c346864f02d0a9f85d9, type: 2}
+--- !u!114 &114876975085642216
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1973308700312860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.12975778, g: 0.7058823, b: 0.3482878, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
+--- !u!114 &114992799609531042
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1973308700312860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0.4852941, g: 1, b: 0.53144014, a: 1}
+  outlineWidth: 3.44

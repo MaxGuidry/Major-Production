@@ -126,7 +126,7 @@ public class CharacterMovement : NetworkBehaviour
         //rh.
 
 
-        var Speed = Input.GetKey(InputMap.KeyBinds["sprint"]) ? RunSpeed : WalkSpeed;
+        var Speed = Input.GetAxis("Left Stick Button"+PlayerNumber)>.1f ? RunSpeed : WalkSpeed;
 
         var vert = Input.GetAxis("Vertical" + PlayerNumber);
         var hor = Input.GetAxis("Horizontal" + PlayerNumber);

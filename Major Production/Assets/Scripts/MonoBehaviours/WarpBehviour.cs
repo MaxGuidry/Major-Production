@@ -194,6 +194,8 @@ public class WarpBehviour : MonoBehaviour
         {
             WarpText.gameObject.SetActive(true);
             WarpText.GetComponent<TweenScaleBehaviour>().TweenScale();
+            WarpText.GetComponent<TweenScaleBehaviour>().isRunning = false;
+
             Timer -= Time.deltaTime;
             if (Timer <= 1f)
             {

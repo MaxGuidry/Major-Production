@@ -337,10 +337,10 @@ public class CharacterMovement : NetworkBehaviour
     
     public IEnumerator SpawnDelay(PlanetBehaviour p, float timer, WarpBehviour crt, Text warpText, float warpTimer)
     {
-        warpText.text =  "Takeoff: " + Mathf.Round(warpTimer).ToString() + "...";
+        warpText.text =  "Taking Off";
         yield return new WaitForSeconds(timer);
         SpawnOnOtherPlanet(p);
-        warpText.text = "Landing: " + Mathf.Round(warpTimer).ToString() + "...";
+        warpText.text = "Landing";
         yield return new WaitForSeconds(timer);
         crt.inputEvents.SetActive(true);
         crt.warping = false;

@@ -67,6 +67,8 @@ public class CountDown : MonoBehaviour
 
                         if (deathTimer >= 3f)
                         {
+                            playerStatBehaviour.gameObject.transform.position = new Vector3(playerStatBehaviour.gameObject.transform.position.x, playerStatBehaviour.gameObject.transform.position.y - 10f,
+                                playerStatBehaviour.gameObject.transform.position.z);
                             activePlayers.Remove(playerStatBehaviour);
                             playerStatBehaviour.gameObject.transform.GetComponentInChildren<Camera>().enabled = false;
                             var cam = players.IndexOf(playerStatBehaviour);

@@ -7,7 +7,7 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
     public GameEventArgs LevelUpEvent;
     public Stats stats;
 
-    public int Health, Armor, Level;
+    public int Health, Armor, Level, Speed, Damage, EXP;
 
     private void Awake()
     {
@@ -32,6 +32,10 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
         UpdateStat();
     }
 
+    private void Update()
+    {
+        UpdateStat();
+    }
     private void UpdateStat()
     {
         switch (GetComponent<Transform>().tag)
@@ -40,21 +44,33 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
                 Health = stats.GetStat("PHealth").Value;
                 Armor = stats.GetStat("PArmor").Value;
                 Level = stats.GetStat("PLevel").Value;
+                Speed = stats.GetStat("PSpeed").Value;
+                Damage = stats.GetStat("PDamage").Value;
+                EXP = stats.GetStat("PExperience").Value;
                 break;
             case "P2":
                 Health = stats.GetStat("PHealth 1").Value;
                 Armor = stats.GetStat("PArmor 1").Value;
                 Level = stats.GetStat("PLevel 1").Value;
+                Speed = stats.GetStat("PSpeed 1").Value;
+                Damage = stats.GetStat("PDamage 1").Value;
+                EXP = stats.GetStat("PExperience 1").Value;
                 break;
             case "P3":
                 Health = stats.GetStat("PHealth 2").Value;
                 Armor = stats.GetStat("PArmor 2").Value;
                 Level = stats.GetStat("PLevel 2").Value;
+                Speed = stats.GetStat("PSpeed 2").Value;
+                Damage = stats.GetStat("PDamage 2").Value;
+                EXP = stats.GetStat("PExperience 2").Value;
                 break;
             case "P4":
                 Health = stats.GetStat("PHealth 3").Value;
                 Armor = stats.GetStat("PArmor 3").Value;
                 Level = stats.GetStat("PLevel 3").Value;
+                Speed = stats.GetStat("PSpeed 3").Value;
+                Damage = stats.GetStat("PDamage 3").Value;
+                EXP = stats.GetStat("PExperience 3").Value;
                 break;
         }
     }

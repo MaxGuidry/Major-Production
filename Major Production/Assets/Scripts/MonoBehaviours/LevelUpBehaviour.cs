@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class LevelUpBehaviour : MonoBehaviour
 {
     public GameObject panel;
-    public Sprite Default, Left, Right, Up, Down;
     private PlayerStatBehaviour playerStat;
     private string playerNumber;
     private List<TweenScaleBehaviour> tweens = new List<TweenScaleBehaviour>();
@@ -42,17 +41,19 @@ public class LevelUpBehaviour : MonoBehaviour
         var children = gameObject.transform.parent.GetComponentInChildren<Canvas>().gameObject.GetComponentsInChildren<Text>();
         foreach (var stat in children)
         {
-            if(stat.GetComponent<TweenScaleBehaviour>())
-                tweens.Add(stat.GetComponent<TweenScaleBehaviour>());            
+            if (stat.GetComponent<TweenScaleBehaviour>())
+                tweens.Add(stat.GetComponent<TweenScaleBehaviour>());
         }
         foreach (var tween in tweens)
         {
             tween.tweened = tween.gameObject;
         }
 
-        panel.GetComponent<TweenScaleBehaviour>().tweened = panel.gameObject;
-        panel.GetComponent<TweenScaleBehaviour>().TweenScale();
-        StartCoroutine(UpgradeStat());
+        if (panel != null)
+        {
+            panel.GetComponent<TweenScaleBehaviour>().TweenScale();
+            StartCoroutine(UpgradeStat());
+        }
     }
 
     /// <summary>
@@ -64,46 +65,41 @@ public class LevelUpBehaviour : MonoBehaviour
         var statUpGraded = false;
         while (!statUpGraded)
         {
-        //    if (Input.GetAxis("DPad Horizontal" + playerNumber) == -1 || Input.GetKeyDown(KeyCode.LeftArrow))
-        //    {
-        //        statUpGraded = true;
-        //        StartCoroutine(DoubleClicked("PHealth" + playerNumber));
-        //        panel.GetComponent<Image>().sprite = Left;
-        //    }
+            //    if (Input.GetAxis("DPad Horizontal" + playerNumber) == -1 || Input.GetKeyDown(KeyCode.LeftArrow))
+            //    {
+            //        statUpGraded = true;
+            //        StartCoroutine(DoubleClicked("PHealth" + playerNumber));
+            //        panel.GetComponent<Image>().sprite = Left;
+            //    }
 
-        //    if (Input.GetAxis("DPad Horizontal" + playerNumber) == 1 || Input.GetKeyDown(KeyCode.RightArrow))
-        //    {
-        //        statUpGraded = true;
-        //        StartCoroutine(DoubleClicked("PDamage" + playerNumber));
-        //        panel.GetComponent<Image>().sprite = Right;
-        //    }
+            //    if (Input.GetAxis("DPad Horizontal" + playerNumber) == 1 || Input.GetKeyDown(KeyCode.RightArrow))
+            //    {
+            //        statUpGraded = true;
+            //        StartCoroutine(DoubleClicked("PDamage" + playerNumber));
+            //        panel.GetComponent<Image>().sprite = Right;
+            //    }
 
-        //    if (Input.GetAxis("DPad Vertical" + playerNumber) == 1 || Input.GetKeyDown(KeyCode.UpArrow))
-        //    {
-        //        statUpGraded = true;
-        //        StartCoroutine(DoubleClicked("PArmor" + playerNumber));
-        //        panel.GetComponent<Image>().sprite = Up;
-        //    }
+            //    if (Input.GetAxis("DPad Vertical" + playerNumber) == 1 || Input.GetKeyDown(KeyCode.UpArrow))
+            //    {
+            //        statUpGraded = true;
+            //        StartCoroutine(DoubleClicked("PArmor" + playerNumber));
+            //        panel.GetComponent<Image>().sprite = Up;
+            //    }
 
-        //    if (Input.GetAxis("DPad Vertical" + playerNumber) == -1 || Input.GetKeyDown(KeyCode.DownArrow))
-        //    {
-        //        statUpGraded = true;
-        //        StartCoroutine(DoubleClicked("PSpeed" + playerNumber));
-        //        panel.GetComponent<Image>().sprite = Down;
-        //    }
+            //    if (Input.GetAxis("DPad Vertical" + playerNumber) == -1 || Input.GetKeyDown(KeyCode.DownArrow))
+            //    {
+            //        statUpGraded = true;
+            //        StartCoroutine(DoubleClicked("PSpeed" + playerNumber));
+            //        panel.GetComponent<Image>().sprite = Down;
+            //    }
 
-            if (Input.GetAxis("DPad Horizontal" + playerNumber) == -1 ||
-                Input.GetAxis("DPad Horizontal" + playerNumber) == 1 ||
-                Input.GetAxis("DPad Vertical" + playerNumber) == 1 ||
-                Input.GetAxis("DPad Vertical" + playerNumber) == -1)
-            {
-                statUpGraded = true;
-                UpgradeStatsProcess("PHealth" + playerNumber);
-                UpgradeStatsProcess("PDamage" + playerNumber);
-                UpgradeStatsProcess("PArmor" + playerNumber);
-                UpgradeStatsProcess("PSpeed" + playerNumber);
-            }
-                yield return null;
+
+            statUpGraded = true;
+            UpgradeStatsProcess("PHealth" + playerNumber);
+            UpgradeStatsProcess("PDamage" + playerNumber);
+            UpgradeStatsProcess("PArmor" + playerNumber);
+            UpgradeStatsProcess("PSpeed" + playerNumber);
+            yield return null;
         }
     }
 
@@ -185,6 +181,6 @@ public class LevelUpBehaviour : MonoBehaviour
             if (stat.gameObject.GetComponent<Text>().text.Contains(statName))
                 stat.TweenScale();
         }
-        panel.GetComponent<Image>().sprite = Default;
+       // panel.GetComponent<Image>().sprite = Default;
     }
 }

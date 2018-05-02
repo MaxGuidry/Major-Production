@@ -5,15 +5,17 @@ public class TweenScaleBehaviour : MonoBehaviour
     public AnimationCurve ac;
     public float duration = 1;
     public GameObject tweened;
-    private bool isRunning = false;
+    public bool isRunning = false;
     public void TweenScale()
     {
+        if (!gameObject.activeInHierarchy) return;
         if(!isRunning)
             StartCoroutine(TweenItForward());
     }
 
     public IEnumerator TweenItForward()
     {
+        if (!tweened.activeInHierarchy) yield return null;
         isRunning = true;
         var timer = 0.0f;
         var startScale = tweened.transform.localScale;
@@ -24,6 +26,7 @@ public class TweenScaleBehaviour : MonoBehaviour
             yield return null;
         }
 
+
         StartCoroutine(TweenItBackward());
 
         yield return null;
@@ -31,6 +34,7 @@ public class TweenScaleBehaviour : MonoBehaviour
 
     public IEnumerator TweenItBackward()
     {
+        if (!tweened.activeInHierarchy) yield return null;
         var timer = 0.0f;
         var startScale = tweened.transform.localScale;
         while (timer < duration)

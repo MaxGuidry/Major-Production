@@ -15,16 +15,16 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
         switch (GetComponent<Transform>().tag)
         {
             case "P1":
-                SetInitStats("", 100, 40, 50, 70);
+                SetInitStats("", 100, 10, 50, 30);
                 break;
             case "P2":
-                SetInitStats(" 1", 100, 40, 50, 70);
+                SetInitStats(" 1", 100, 10, 50, 30);
                 break;
             case "P3":
-                SetInitStats(" 2", 100, 40, 50, 70);
+                SetInitStats(" 2", 100, 10, 50, 30);
                 break;
             case "P4":
-                SetInitStats(" 3", 100, 40, 50, 70);
+                SetInitStats(" 3", 100, 10, 50, 30);
                 break;
             default:
                 break;

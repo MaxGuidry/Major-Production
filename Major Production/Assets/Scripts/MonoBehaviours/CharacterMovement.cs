@@ -325,7 +325,9 @@ public class CharacterMovement : NetworkBehaviour
         // go.transform.rotation *= new Quaternion(Mathf.Sin(-0.2f) * go.transform.up.x, Mathf.Sin(-0.2f) * go.transform.up.y, Mathf.Sin(-0.2f) * go.transform.up.z,
         //    Mathf.Cos(-0.2f));
         go.transform.localScale = Vector3.one * .3f;
-        go.GetComponent<RocketProjectile>().PlayerWhoShotMe = this.transform.parent.gameObject.name;
+        var rocketprojectile = go.GetComponent<RocketProjectile>();
+        rocketprojectile.PlayerWhoShotMe = this.transform.parent.gameObject.name;
+        rocketprojectile.damage = gameObject.GetComponent<PlayerStatBehaviour>().Damage;
     }
 
     public void SpawnOnOtherPlanet(PlanetBehaviour p)

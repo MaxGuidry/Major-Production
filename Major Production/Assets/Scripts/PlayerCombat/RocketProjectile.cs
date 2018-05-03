@@ -10,6 +10,8 @@ public class RocketProjectile : MonoBehaviour
     private Rigidbody rb;
     [HideInInspector] public string PlayerWhoShotMe="";
     public GameObject ExplosionPrefab;
+
+    public float damage;
     // Use this for initialization
     void Start()
     {
@@ -81,7 +83,7 @@ public class RocketProjectile : MonoBehaviour
             if (id == null)
                 continue;
             //id.TakeDamage((int)(200 / (15- (this.transform.position-rb.transform.position).magnitude)));
-            id.TakeDamage(5);
+            id.TakeDamage((int)damage);
         }
     }
     //void OnCollisionStay(Collision other)

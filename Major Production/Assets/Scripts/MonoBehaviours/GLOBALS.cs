@@ -37,4 +37,16 @@ public static class GLOBALS
             Current.UpdateState(this);
         }
     }
+
+    public static Transform GetTopLevelParentTransform(Transform child)
+    {
+        var parent = child.parent;
+        if (!parent)
+            return child;
+        while (parent.parent)
+        {
+            parent = parent.parent;
+        }
+        return parent;
+    }
 }

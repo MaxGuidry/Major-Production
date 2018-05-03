@@ -8,7 +8,7 @@ public class RocketProjectile : MonoBehaviour
     public float rocketSpeed;
     public float upSpeed;
     private Rigidbody rb;
-
+    [HideInInspector] public string PlayerWhoShotMe="";
     public GameObject ExplosionPrefab;
     // Use this for initialization
     void Start()
@@ -21,7 +21,7 @@ public class RocketProjectile : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
+        
         //this.transform.position += this.transform.up *(upSpeed /100f);
         //this.transform.position += this.transform.forward *(rocketSpeed/100f);
         if (rb.velocity.magnitude < 17)
@@ -35,17 +35,37 @@ public class RocketProjectile : MonoBehaviour
 
     }
 
+    void Update()
+    {
+        if (transform.localScale.x < 2)
+            transform.localScale *= 1.1f;
+    }
     void OnCollisionEnter(Collision other)
     {
         //explosion
-       
+
+        Destroy(this.gameObject);
+
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        //explosion
+        if (other.gameObject.GetComponent<PlanetBehaviour>() != null)
+            return;
+        var player = GLOBALS.GetTopLevelParentTransform(other.gameObject.transform);
+        if (player.gameObject.name.Contains("Player"))
+        {
+            
+            if (player.gameObject.name == PlayerWhoShotMe)
+                return;
+        }
         Destroy(this.gameObject);
     }
 
     void OnDestroy()
     {
 
-        var go = Instantiate(ExplosionPrefab,this.transform.position,Quaternion.identity);
+        var go = Instantiate(ExplosionPrefab, this.transform.position, Quaternion.identity);
         Collider[] knockbacks = Physics.OverlapSphere(this.transform.position, 10);
         for (int i = 0; i < knockbacks.Length; i++)
         {

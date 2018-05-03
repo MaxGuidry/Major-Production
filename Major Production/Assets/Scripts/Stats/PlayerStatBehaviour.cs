@@ -15,19 +15,16 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
         switch (GetComponent<Transform>().tag)
         {
             case "P1":
-                Health = stats.GetStat("PHealth").Value = 100;
-                Armor = stats.GetStat("PArmor").Value;
-                Speed = stats.GetStat("PSpeed").Value;
-                Damage = stats.GetStat("PDamage").Value;
+                SetInitStats("", 100, 40, 50, 70);
                 break;
             case "P2":
-                Health = stats.GetStat("PHealth 1").Value = 100;
+                SetInitStats(" 1", 100, 40, 50, 70);
                 break;
             case "P3":
-                Health = stats.GetStat("PHealth 2").Value = 100;
+                SetInitStats(" 2", 100, 40, 50, 70);
                 break;
             case "P4":
-                Health = stats.GetStat("PHealth 3").Value = 100;
+                SetInitStats(" 3", 100, 40, 50, 70);
                 break;
             default:
                 break;
@@ -35,11 +32,17 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
         UpdateStat();
     }
 
-
+    private void SetInitStats(string number, int HealthAmount, int ArmorAmount, int SpeedAmount, int DamageAmount)
+    {
+        Level = stats.GetStat("PLevel" + number).Value = 1;
+        Health = stats.GetStat("PHealth" + number).Value = HealthAmount;
+        Armor = stats.GetStat("PArmor" + number).Value = ArmorAmount;
+        Speed = stats.GetStat("PSpeed" + number).Value = SpeedAmount;
+        Damage = stats.GetStat("PDamage" + number).Value = DamageAmount;
+    }
 
     private void Update()
     {
-        UpdateStat();
         switch (GetComponent<Transform>().tag)
         {
             case "P1":
@@ -48,6 +51,7 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
                     LevelUpEvent.Raise(this);
                     stats.GetStat("PExperience").Value -= 100;
                     stats.GetStat("PLevel").Value++;
+                    UpdateStat();
                 }
                 break;
             case "P2":
@@ -56,6 +60,7 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
                     LevelUpEvent.Raise(this);
                     stats.GetStat("PExperience 1").Value -= 100;
                     stats.GetStat("PLevel 1").Value++;
+                    UpdateStat();
                 }
                 break;
             case "P3":
@@ -64,6 +69,7 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
                     LevelUpEvent.Raise(this);
                     stats.GetStat("PExperience 2").Value -= 100;
                     stats.GetStat("PLevel 2").Value++;
+                    UpdateStat();
                 }
                 break;
             case "P4":
@@ -72,6 +78,7 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
                     LevelUpEvent.Raise(this);
                     stats.GetStat("PExperience 3").Value -= 100;
                     stats.GetStat("PLevel 3").Value++;
+                    UpdateStat();
                 }
                 break;
         }
@@ -110,7 +117,6 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
 
     /// <summary>
     ///     Entity Takes Damage
-    ///     TODO: calculate armor rating using standard rolling system
     ///     Reduce this incoming damage by our armor value
     /// </summary>
     /// <param name="damage">how much damage to take</param>
@@ -132,6 +138,7 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
         {
             Health = nexthealth;
         }
+        UpdateStat();
     }
 
     /// <summary>

@@ -97,8 +97,8 @@ public class LevelUpBehaviour : MonoBehaviour
             statUpGraded = true;
             UpgradeStatsProcess("PHealth" + playerNumber);
             UpgradeStatsProcess("PDamage" + playerNumber);
-            UpgradeStatsProcess("PArmor" + playerNumber);
-            UpgradeStatsProcess("PSpeed" + playerNumber);
+            //UpgradeStatsProcess("PArmor" + playerNumber);
+            //UpgradeStatsProcess("PSpeed" + playerNumber);
             yield return null;
         }
     }

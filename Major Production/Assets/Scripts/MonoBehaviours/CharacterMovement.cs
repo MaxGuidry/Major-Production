@@ -110,6 +110,8 @@ public class CharacterMovement : NetworkBehaviour
             anim.SetTrigger("Rocket");
         if(Input.GetAxis("Left Bumper"+PlayerNumber)>0&& state != PlayerState.Attacking)
             anim.SetBool("Whirlwind",true);
+        if (Input.GetAxis("Trigger" + PlayerNumber) > 0.5f)
+            StartCoroutine(Dash());
         if (Input.GetKeyDown(KeyCode.N) && PlayerNumber == "")
             SpawnOnOtherPlanet(FindObjectsOfType<PlanetBehaviour>()[Random.Range(0, 4)]);
         if (GLOBALS.SoloOnline || GLOBALS.SplitscreenOnline)
@@ -297,12 +299,25 @@ public class CharacterMovement : NetworkBehaviour
 
     }
 
+    public IEnumerator Dash()
+    {
+        anim.SetTrigger("Dash");
+        float timer = 0;
+        while (timer< 1f)
+        {
+            timer += Time.deltaTime;
+            this.transform.position += this.transform.forward * .3f;
+            yield return null;
+        }
+    }
+
     public void FireRocket()
     {
-        var go = Instantiate(RocketPrefab, HandToShoot.position +( transform.forward + transform.right *.4f)*1.2f,HandToShoot.transform.rotation);
-        go.transform.rotation *= new Quaternion(Mathf.Sin(-0.2f) * go.transform.up.x, Mathf.Sin(-0.2f) * go.transform.up.y, Mathf.Sin(-0.2f) * go.transform.up.z,
-            Mathf.Cos(-0.2f));
-        //go.GetComponent<RocketProjectile>().PlayerWhoShotMe = this;
+        var go = Instantiate(RocketPrefab, HandToShoot.position  ,HandToShoot.transform.rotation);
+       // go.transform.rotation *= new Quaternion(Mathf.Sin(-0.2f) * go.transform.up.x, Mathf.Sin(-0.2f) * go.transform.up.y, Mathf.Sin(-0.2f) * go.transform.up.z,
+        //    Mathf.Cos(-0.2f));
+        go.transform.localScale = Vector3.one * .3f;
+        go.GetComponent<RocketProjectile>().PlayerWhoShotMe = this.transform.parent.gameObject.name;
     }
 
     public void SpawnOnOtherPlanet(PlanetBehaviour p)

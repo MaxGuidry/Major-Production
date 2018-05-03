@@ -23,6 +23,8 @@ public class ItemInteractionBehaviour : MonoBehaviour
 
     void SwitchCheck(InventoryText player)
     {
+        if (player == null)
+            return;
         switch (Item.ItemType)
         {
             case ItemType.None:
@@ -101,9 +103,60 @@ public class ItemInteractionBehaviour : MonoBehaviour
                 }
         }
 
-        if (!other.gameObject.GetComponent<MeshCollider>())
+        var mc = other.gameObject.GetComponent<MeshCollider>();
+        if (!mc)
             return;
-        this.GetComponent<Rigidbody>().drag = 50f;
+        if (mc.sharedMesh != this.GetComponent<MeshCollider>().sharedMesh)
+        {
+            this.GetComponent<Rigidbody>().drag = 50f;
+            TimeOffSurface = 0;
+            StopCoroutine("OffPlanet");
+        }
+
+    }
+
+    private float TimeOffSurface = 0;
+    private void OnCollisionExit(Collision other)
+    {
+        var mr = other.gameObject.GetComponent<MeshRenderer>();
+        if (!mr)
+            return;
+        string name = mr.material.name;
+        var mc = other.gameObject.GetComponent<MeshCollider>();
+        if (!mc)
+            return;
+        if (name == "Planetoid_Mat (Instance)" && mc.sharedMesh != this.GetComponent<MeshCollider>().sharedMesh)
+        {
+            if (TimeOffSurface == 0)
+                StartCoroutine(OffPlanet());
+        }
+
+    }
+
+    private void OnCollisionStay(Collision other)
+    {
+        var mc = other.gameObject.GetComponent<MeshCollider>();
+        if (!mc)
+            return;
+        if (mc.sharedMesh != this.GetComponent<MeshCollider>().sharedMesh)
+        {
+            this.GetComponent<Rigidbody>().drag = 50f;
+        }
+    }
+    private IEnumerator OffPlanet()
+    {
+        while (true)
+        {
+            TimeOffSurface += Time.deltaTime;
+            if (TimeOffSurface > .1f)
+            {
+                TimeOffSurface = 0;
+                this.GetComponent<Rigidbody>().drag = 1f;
+                break;
+            }
+
+            yield return null;
+        }
     }
 }
 

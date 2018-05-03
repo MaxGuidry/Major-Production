@@ -16,12 +16,25 @@ public class GatherObjectiveBehaviour : ObjectiveBehaviour
         if (CurrentObjective == null) return;
         if (PlayerObjectives.Count <= 0)
         {
+            var capCollider = this.gameObject.transform.parent.GetChild(0).GetComponent<CapsuleCollider>();
             AllQuestComplete.Raise();
-            Destroy(CurrentObjectiveText);
+            CurrentObjectiveText.text = "Kill All Players!";
+            //this.gameObject.transform.parent.GetChild(0).transform.localScale *= 2;
+            capCollider.radius /= 2;
+            capCollider.height /= 2;
+            capCollider.center = new Vector3(capCollider.center.x, capCollider.center.y / 2, capCollider.center.z);
+            gameObject.transform.parent.GetChild(0).GetComponent<TweenScaleBehaviour>().StartCoroutine(gameObject
+                .transform.parent.GetChild(0).GetComponent<TweenScaleBehaviour>().TweenItForwardOnly());
+            //this.gameObject.transform.parent.GetChild(0).transform.localScale = new Vector3(10, 10, 10);
+            //Destroy(CurrentObjectiveText);
         }
-        CurrentObjectiveText.text = CurrentObjective.Description + " " +
-                                    CurrentObjective.CurrentAmount + " / " +
-                                    CurrentObjective.RequiredAmount;
+        else
+        {
+            CurrentObjectiveText.text = CurrentObjective.Description + " " +
+                                        CurrentObjective.CurrentAmount + " / " +
+                                        CurrentObjective.RequiredAmount;
+        }
+
     }
 
     /// <summary>
@@ -33,7 +46,8 @@ public class GatherObjectiveBehaviour : ObjectiveBehaviour
         typer.ChooseFile = "AllQuestComplete";
         typer.TypeSpeed = 0.1f;
         typer.path = "Assets/Resources/Dialogue/" + typer.ChooseFile + ".txt";
-        StartCoroutine(typer.AutoType());
+        //CurrentObjectiveText.text = "Kill All Players!";
+        //StartCoroutine(typer.AutoType());
         //StartCoroutine(Restart());
     }
 

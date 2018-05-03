@@ -65,6 +65,9 @@ public class InventoryBehaviour : MonoBehaviour, IStorageable
 
     public void AddToInventory(Item newItem, GameObject obj)
     {
+        if (inventory.CurrentInventory.Contains(newItem))
+            return;
+
         if (inventory.CurrentInventory.Count >= inventory.InventoryCap) return;
         inventory.CurrentInventory.Add(newItem);
 
@@ -149,69 +152,69 @@ public class InventoryBehaviour : MonoBehaviour, IStorageable
     }
 
     public void ClearInventory(object[] args)
-    {
-        if (args.Length < 2)
-            return;
+   {
+    //    if (args.Length < 2)
+    //        return;
 
-        switch (args[1] as string)
-        {
-            case "Right Stick Button":
-                break;
-            case "Right Stick Button1":
-                break;
-            case "Right Stick Button2":
-                break;
-            case "Right Stick Button3":
-                break;
-            default:
-               return;
-        }
+    //    switch (args[1] as string)
+    //    {
+    //        case "Right Stick Button":
+    //            break;
+    //        case "Right Stick Button1":
+    //            break;
+    //        case "Right Stick Button2":
+    //            break;
+    //        case "Right Stick Button3":
+    //            break;
+    //        default:
+    //           return;
+    //    }
 
-        switch (GetComponent<Transform>().tag)
-        {
-            case "P1":
-                foreach (var obj in objectList.Values)
-                {
-                    RemoveAllFromInventory(obj, P1);
-                }
-                break;
-            case "P2":
-                foreach (var obj in objectList1.Values)
-                {
-                    RemoveAllFromInventory(obj, P2);
-                }
-                break;
-            case "P3":
-                foreach (var obj in objectList2.Values)
-                {
-                    RemoveAllFromInventory(obj, P3);
-                }
-                break;
-            case "P4":
-                foreach (var obj in objectList3.Values)
-                {
-                    RemoveAllFromInventory(obj, P4);
-                }
-                break;
-            default:
-                break;
-        }
-        objectList.Clear();
+    //    switch (GetComponent<Transform>().tag)
+    //    {
+    //        case "P1":
+    //            foreach (var obj in objectList.Values)
+    //            {
+    //                RemoveAllFromInventory(obj, P1);
+    //            }
+    //            break;
+    //        case "P2":
+    //            foreach (var obj in objectList1.Values)
+    //            {
+    //                RemoveAllFromInventory(obj, P2);
+    //            }
+    //            break;
+    //        case "P3":
+    //            foreach (var obj in objectList2.Values)
+    //            {
+    //                RemoveAllFromInventory(obj, P3);
+    //            }
+    //            break;
+    //        case "P4":
+    //            foreach (var obj in objectList3.Values)
+    //            {
+    //                RemoveAllFromInventory(obj, P4);
+    //            }
+    //            break;
+    //        default:
+    //            break;
+    //    }
+    //    objectList.Clear();
     }
 
     public void RemoveAllFromInventory(GameObject obj, InventoryText player)
     {
-        CheckForGameObject(obj);
-        inventory.CurrentInventory.Clear();
+    //    CheckForGameObject(obj);
+    //    inventory.CurrentInventory.Clear();
 
-        player.woodAmount = 0;
-        player.WoodAmounttext.text = player.woodAmount.ToString();
-        player.stoneAmount = 0;
-        player.StoneAmounttext.text = player.stoneAmount.ToString();
-        player.metalAmount = 0;
-        player.MetalAmounttext.text = player.metalAmount.ToString();
-        player.goopAmount = 0;
-        player.GoopAmounttext.text = player.goopAmount.ToString();
+    //    player.woodAmount = 0;
+    //    player.WoodAmounttext.text = player.woodAmount.ToString();
+    //    player.stoneAmount = 0;
+    //    player.StoneAmounttext.text = player.stoneAmount.ToString();
+    //    player.metalAmount = 0;
+    //    player.MetalAmounttext.text = player.metalAmount.ToString();
+    //    player.goopAmount = 0;
+    //    player.GoopAmounttext.text = player.goopAmount.ToString();
     }
 
     private void CheckForGameObject(GameObject obj)

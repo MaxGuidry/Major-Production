@@ -123,22 +123,66 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
     public void TakeDamage(int damage)
     {
         var calculatedDamage = damage - Armor;
+        var nexthealth = 0;
+        switch (GetComponent<Transform>().tag)
+        {
+            case "P1":
+                nexthealth = stats.GetStat("PHealth").Value - calculatedDamage;
+                break;
+            case "P2":
+                nexthealth = stats.GetStat("PHealth 1").Value - calculatedDamage;
+                break;
+            case "P3":
+                nexthealth = stats.GetStat("PHealth 2").Value - calculatedDamage;
+                break;
+            case "P4":
+                nexthealth = stats.GetStat("PHealth 3").Value - calculatedDamage;
+                break;
+        }
 
-        var nexthealth = Health - calculatedDamage;
 
         var anim = GetComponent<Animator>();
         if (anim)
             anim.SetTrigger("Hurt");
         if (nexthealth <= 0)
         {
-            Health = 0;
+            switch (GetComponent<Transform>().tag)
+            {
+                case "P1":
+                    stats.GetStat("PHealth").Value = 0;
+                    break;
+                case "P2":
+                    stats.GetStat("PHealth 1").Value = 0;
+                    break;
+                case "P3":
+                    stats.GetStat("PHealth 2").Value = 0;
+                    break;
+                case "P4":
+                    stats.GetStat("PHealth 3").Value = 0;
+                    break;
+            }
+            UpdateStat();
             Die();
         }
         else
         {
-            Health = nexthealth;
+            switch (GetComponent<Transform>().tag)
+            {
+                case "P1":
+                    stats.GetStat("PHealth").Value = nexthealth;
+                    break;
+                case "P2":
+                    stats.GetStat("PHealth 1").Value = nexthealth;
+                    break;
+                case "P3":
+                    stats.GetStat("PHealth 2").Value = nexthealth;
+                    break;
+                case "P4":
+                    stats.GetStat("PHealth 3").Value = nexthealth;
+                    break;
+            }
+            UpdateStat();
         }
-        UpdateStat();
     }
 
     /// <summary>

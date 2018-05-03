@@ -862,7 +862,7 @@ MonoBehaviour:
         m_MethodName: WarpPlanet
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1637615448}
+          m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -3891,7 +3891,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ExpSlider: {fileID: 631483117}
-  PlayerStats: {fileID: 151721523}
+  PlayerStats: {fileID: 0}
   TempText:
   - {fileID: 875479693}
   - {fileID: 1224559359}
@@ -5539,7 +5539,7 @@ MonoBehaviour:
         m_MethodName: WarpPlanet
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1906032513}
+          m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -10923,7 +10923,12 @@ MonoBehaviour:
   - Right Stick Button3
   - Submit3
   - Start3
-  Axis: []
+  Axis:
+  - Trigger3
+  - Horizontal3
+  - Vertical3
+  - DPad Horizontal 3
+  - DPad Vertical 3
 --- !u!1 &791938908
 GameObject:
   m_ObjectHideFlags: 0
@@ -12291,7 +12296,7 @@ MonoBehaviour:
         m_MethodName: WarpPlanet
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1637615448}
+          m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -24258,7 +24263,7 @@ MonoBehaviour:
         m_MethodName: WarpPlanet
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1906032513}
+          m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -26111,7 +26116,7 @@ MonoBehaviour:
         m_MethodName: WarpPlanet
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1551333972}
+          m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -26406,7 +26411,12 @@ MonoBehaviour:
   - Right Stick Button2
   - Submit2
   - Start2
-  Axis: []
+  Axis:
+  - Trigger2
+  - Horizontal2
+  - Vertical2
+  - DPad Horizontal 2
+  - DPad Vertical 2
 --- !u!1 &1611946796
 GameObject:
   m_ObjectHideFlags: 0
@@ -26664,7 +26674,7 @@ MonoBehaviour:
         m_MethodName: WarpPlanet
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1000933610}
+          m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -31037,7 +31047,7 @@ MonoBehaviour:
         m_MethodName: WarpPlanet
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1551333972}
+          m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -31916,7 +31926,7 @@ MonoBehaviour:
         m_MethodName: WarpPlanet
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1000933610}
+          m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -33350,7 +33360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ExpSlider: {fileID: 1946967887}
-  PlayerStats: {fileID: 151721523}
+  PlayerStats: {fileID: 0}
   TempText:
   - {fileID: 865870282}
   - {fileID: 1009225521}

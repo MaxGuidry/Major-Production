@@ -175,7 +175,7 @@ public class LevelUpBehaviour : MonoBehaviour
     /// <param name="statName"></param>
     private void UpgradeStatsProcess(string statName)
     {
-        playerStat.stats.GetStat(statName).Value += 100;
+        playerStat.stats.GetStat(statName).Value += 20;
         foreach (var stat in tweens)
         {
             if (stat.gameObject.GetComponent<Text>().text.Contains(statName))

@@ -69,7 +69,7 @@ public class InputEvents : MonoBehaviour
 
             prevButtonValues[button] = buttonValues[button];
             float value = Input.GetAxis(button);
-            Debug.Log(button + ": "+ value);
+            //Debug.Log(button + ": "+ value);
             if (value > .001f && buttonValues[button] < .001f)
                 OnButtonPressed.ObjRaise("Pressed", button);
             else if (value > .001f)
@@ -84,7 +84,7 @@ public class InputEvents : MonoBehaviour
 
             prevAxisValues[axis] = axisValues[axis];
             float value = Input.GetAxis(axis);
-            Debug.Log(axis + ": " + value);
+            //Debug.Log(axis + ": " + value);
 
             if (value > .001f && axisValues[axis] < .001f)
                 OnButtonPressed.ObjRaise("Pressed", axis);

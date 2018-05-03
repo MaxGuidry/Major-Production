@@ -7371,7 +7371,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1661344723520592}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 109, y: 33, z: -302}
+  m_LocalPosition: {x: 109.70999, y: 33.83, z: -302.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4625702427250368}
@@ -9133,7 +9133,12 @@ MonoBehaviour:
   - Right Stick Button3
   - Submit3
   - Start3
-  Axis: []
+  Axis:
+  - Trigger3
+  - Horizontal3
+  - Vertical3
+  - DPad Horizontal 3
+  - DPad Vertical 3
 --- !u!114 &114169122365609686
 MonoBehaviour:
   m_ObjectHideFlags: 1

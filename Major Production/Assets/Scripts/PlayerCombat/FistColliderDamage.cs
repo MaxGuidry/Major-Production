@@ -18,7 +18,7 @@ public class FistColliderDamage : MonoBehaviour
             var idamageable = other.gameObject.GetComponent<IDamageable>();
             if (idamageable != null)
             {
-                idamageable.TakeDamage(50);
+                idamageable.TakeDamage(player.gameObject.GetComponent<PlayerStatBehaviour>().Damage);
             }
         }
     }

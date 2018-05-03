@@ -12,7 +12,8 @@ using Random = UnityEngine.Random;
 public class CharacterMovement : NetworkBehaviour
 {
     [SectionHeader("Camera")]
-    [Range(1, 20)] public float Sensitivity = 1;
+    [Range(1, 20)]
+    public float Sensitivity = 1;
     public Transform cameraPivot;
 
     [SectionHeader("Speeds")]
@@ -33,11 +34,11 @@ public class CharacterMovement : NetworkBehaviour
     private bool jumping = false;
 
     private Vector3 acceleration = Vector3.zero;
-
+    private Coroutine dash;
     private void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody>();
-        
+
     }
 
     public enum PlayerState
@@ -57,7 +58,7 @@ public class CharacterMovement : NetworkBehaviour
     {
         state = PlayerState.None;
         var basm = anim.GetBehaviour<BasicAttackSM>();
-        
+
         basm.Punch = this.GetComponent<AudioSource>().clip;
         basm.source = this.GetComponent<AudioSource>();
         basm.player = this;
@@ -108,10 +109,14 @@ public class CharacterMovement : NetworkBehaviour
     {
         if (Input.GetAxis("Right Bumper" + PlayerNumber) > 0 && state != PlayerState.Attacking)
             anim.SetTrigger("Rocket");
-        if(Input.GetAxis("Left Bumper"+PlayerNumber)>0&& state != PlayerState.Attacking)
-            anim.SetBool("Whirlwind",true);
+        if (Input.GetAxis("Left Bumper" + PlayerNumber) > 0 && state != PlayerState.Attacking)
+            anim.SetBool("Whirlwind", true);
         if (Input.GetAxis("Trigger" + PlayerNumber) > 0.5f)
-            StartCoroutine(Dash());
+        {
+            if (dash == null)
+                dash = StartCoroutine(Dash());
+        }
+
         if (Input.GetKeyDown(KeyCode.N) && PlayerNumber == "")
             SpawnOnOtherPlanet(FindObjectsOfType<PlanetBehaviour>()[Random.Range(0, 4)]);
         if (GLOBALS.SoloOnline || GLOBALS.SplitscreenOnline)
@@ -128,7 +133,7 @@ public class CharacterMovement : NetworkBehaviour
         //rh.
 
 
-        var Speed = Input.GetAxis("Left Stick Button"+PlayerNumber)>.1f ? RunSpeed : WalkSpeed;
+        var Speed = Input.GetAxis("Left Stick Button" + PlayerNumber) > .1f ? RunSpeed : WalkSpeed;
 
         var vert = Input.GetAxis("Vertical" + PlayerNumber);
         var hor = Input.GetAxis("Horizontal" + PlayerNumber);
@@ -189,22 +194,22 @@ public class CharacterMovement : NetworkBehaviour
         // var names = Input.GetJoystickNames();
         // if (names.Contains("Controller (XBOX One For Windows)"))
         // {
-        
+
         if (args[1] as string == "A" + PlayerNumber)
         {
             //if (!grounded)
             //    return;
             RaycastHit rh;
-            Physics.Raycast(transform.position + (transform.up * .2f), -transform.up,out rh, 1, ~LayerMask.GetMask("Player"));
+            Physics.Raycast(transform.position + (transform.up * .2f), -transform.up, out rh, 1, ~LayerMask.GetMask("Player"));
             if (!rh.transform)
             {
                 return;
 
             }
-            
-            
+
+
             rb.AddForce(this.transform.up * 21, ForceMode.Impulse);
-            
+
         }
 
 
@@ -303,18 +308,21 @@ public class CharacterMovement : NetworkBehaviour
     {
         anim.SetTrigger("Dash");
         float timer = 0;
-        while (timer< 1f)
+        while (timer < .3f)
         {
             timer += Time.deltaTime;
-            this.transform.position += this.transform.forward * .3f;
+            this.transform.position += this.transform.forward * .65f;
             yield return null;
         }
+
+        yield return new WaitForSeconds(3f);
+        dash = null;
     }
 
     public void FireRocket()
     {
-        var go = Instantiate(RocketPrefab, HandToShoot.position  ,HandToShoot.transform.rotation);
-       // go.transform.rotation *= new Quaternion(Mathf.Sin(-0.2f) * go.transform.up.x, Mathf.Sin(-0.2f) * go.transform.up.y, Mathf.Sin(-0.2f) * go.transform.up.z,
+        var go = Instantiate(RocketPrefab, HandToShoot.position, HandToShoot.transform.rotation);
+        // go.transform.rotation *= new Quaternion(Mathf.Sin(-0.2f) * go.transform.up.x, Mathf.Sin(-0.2f) * go.transform.up.y, Mathf.Sin(-0.2f) * go.transform.up.z,
         //    Mathf.Cos(-0.2f));
         go.transform.localScale = Vector3.one * .3f;
         go.GetComponent<RocketProjectile>().PlayerWhoShotMe = this.transform.parent.gameObject.name;
@@ -341,18 +349,18 @@ public class CharacterMovement : NetworkBehaviour
         while (time < 2)
         {
             time += Time.deltaTime;
-            
-            
+
+
             yield return null;
         }
-        anim.SetBool("Whirlwind",false);
+        anim.SetBool("Whirlwind", false);
 
     }
 
-    
+
     public IEnumerator SpawnDelay(PlanetBehaviour p, float timer, WarpBehviour crt, Text warpText, float warpTimer)
     {
-        warpText.text =  "Taking Off";
+        warpText.text = "Taking Off";
         yield return new WaitForSeconds(timer);
         SpawnOnOtherPlanet(p);
         warpText.text = "Landing";
@@ -365,7 +373,7 @@ public class CharacterMovement : NetworkBehaviour
 
     public void Die()
     {
-        anim.SetBool("Death",true);
+        anim.SetBool("Death", true);
         cameraPivot = null;
         //Destroy(this.gameObject.GetComponent<CharacterMovement>());
         this.enabled = false;

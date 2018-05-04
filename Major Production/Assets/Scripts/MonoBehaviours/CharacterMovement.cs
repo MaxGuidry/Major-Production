@@ -397,7 +397,7 @@ public class CharacterMovement : NetworkBehaviour
     public IEnumerator Whirlwind()
     {
         whirlwindCooldown = MaxWhirlwindCooldown;
-        while (whirlwindCooldown > 2)
+        while (whirlwindCooldown > 0)
         {
             whirlwindCooldown-= Time.deltaTime;
 

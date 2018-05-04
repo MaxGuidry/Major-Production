@@ -33,8 +33,8 @@ public class FixCamera : MonoBehaviour
         if (!follow)
             return;
 
-        this.transform.position = follow.transform.position;
-        this.transform.rotation = Quaternion.FromToRotation(this.transform.up, follow.transform.up) * this.transform.rotation;// follow.transform.rotation;
+        this.transform.position =  Vector3.Lerp(this.transform.position,follow.transform.position,.15f);
+        this.transform.rotation =Quaternion.Slerp(this.transform.rotation, Quaternion.FromToRotation(this.transform.up, follow.transform.up) * this.transform.rotation,.1f);// follow.transform.rotation;
                                                                                                                               // this.transform.rotation = Quaternion.FromToRotation(this.transform.right, follow.transform.right) * this.transform.rotation;// follow.transform.rotation;
         Quaternion origin = pivotX.rotation;
         if (character == null)
@@ -53,9 +53,28 @@ public class FixCamera : MonoBehaviour
         // Debug.Log(dp + ", " + lastDot);
         if (dp < .875f)
         {
+           
             //if (lastDot >= dp)
             //{
             pivotX.transform.rotation = origin;
+            dp = Vector3.Dot(pivotX.up, follow.up);
+            if (dp < .875f)
+            {
+                   
+                pivotX.rotation = new Quaternion(Mathf.Sin(-.01f) * pivotX.right.x, Mathf.Sin(-.01f)
+                                                                                    * pivotX.right.y,
+                                      Mathf.Sin(-.01f) * pivotX.right.z, Mathf.Cos(-.01f)) * pivotX.rotation;
+                var newdp = Vector3.Dot(pivotX.up, follow.up);
+                if (newdp < dp)
+                {
+                    pivotX.transform.rotation = origin;
+                    pivotX.rotation = new Quaternion(Mathf.Sin(.01f) * pivotX.right.x, Mathf.Sin(.01f)
+                                                                                        * pivotX.right.y,
+                                          Mathf.Sin(.01f) * pivotX.right.z, Mathf.Cos(.01f)) * pivotX.rotation;
+                }
+
+            }
+
             //Debug.Log("FUCK");
             // }
         }
@@ -64,7 +83,7 @@ public class FixCamera : MonoBehaviour
         //pivotY.rotation = originROT;//.FromToRotation(originUP,pivotY.up) * originROT;
 
         var thetaX = Input.GetAxis("Mouse X" + PlayerNumber) * Mathf.Deg2Rad * Sensitivity;
-        // thetaX = ((thetaX > .35f) ? .35f : thetaX);
+        //thetaX = ((thetaX > .35f) ? .35f : thetaX);
         //thetaX = (thetaX < -.35f ? -.35f : thetaX);
         var rotx = Mathf.Sin(thetaX / 2f) * follow.up.x;
         var roty = Mathf.Sin(thetaX / 2f) * follow.up.y;

@@ -35,6 +35,9 @@ public class CharacterMovement : NetworkBehaviour
 
     private Vector3 acceleration = Vector3.zero;
     private Coroutine dash;
+
+    [HideInInspector]
+    public float rocketCooldown = 0;
     private void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody>();
@@ -107,11 +110,21 @@ public class CharacterMovement : NetworkBehaviour
     // Update is called once per frame
     private void Update()
     {
+
+        
+
+
         if (Input.GetAxis("Right Bumper" + PlayerNumber) > 0 && state != PlayerState.Attacking)
-            anim.SetTrigger("Rocket");
+        {
+            if (rocketCooldown < 0)
+            {
+                anim.SetTrigger("Rocket");
+                rocketCooldown = 10;
+            }
+        }
         if (Input.GetAxis("Left Bumper" + PlayerNumber) > 0 && state != PlayerState.Attacking)
             anim.SetBool("Whirlwind", true);
-        if (Input.GetAxis("Trigger" + PlayerNumber) > 0.5f)
+        if (Input.GetAxis("Trigger" + PlayerNumber) > .9f)
         {
             if (dash == null)
                 dash = StartCoroutine(Dash());
@@ -170,7 +183,7 @@ public class CharacterMovement : NetworkBehaviour
         transform.position += (velocity * Time.deltaTime);
         //rb.MovePosition(pos);
         Quaternion to = Quaternion.FromToRotation(this.transform.forward, velocity.normalized) * this.transform.rotation;
-        transform.rotation = Quaternion.Slerp(this.transform.rotation, to, .1f);
+        transform.rotation = Quaternion.Slerp(this.transform.rotation, to, .075f);
         // transform.Rotate(to.eulerAngles);
         anim.SetFloat("Velocity", velocity.magnitude * Mathf.Sign(Vector3.Dot(this.transform.forward, velocity.normalized)));
         //Debug.Log(InputManager.Controller());
@@ -185,6 +198,7 @@ public class CharacterMovement : NetworkBehaviour
         //var rotz = Mathf.Sin(thetaX / 2f) * transform.up.z;
         //var rotw = Mathf.Cos(thetaX / 2f);
         //transform.rotation = new Quaternion(rotx, roty, rotz, rotw) * transform.rotation;
+        rocketCooldown -= Time.deltaTime;
     }
 
 
@@ -207,13 +221,20 @@ public class CharacterMovement : NetworkBehaviour
 
             }
 
-
+            StartCoroutine(jumpForce());
             rb.AddForce(this.transform.up * 21, ForceMode.Impulse);
 
+            anim.SetTrigger("Jump");
         }
 
 
         // }
+    }
+
+    public IEnumerator jumpForce()
+    {
+        yield return new WaitForSeconds(.1f);
+
     }
 
     void OnCollisionEnter(Collision other)

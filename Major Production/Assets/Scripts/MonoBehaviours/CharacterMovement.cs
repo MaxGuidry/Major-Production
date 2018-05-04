@@ -23,7 +23,7 @@ public class CharacterMovement : NetworkBehaviour
     [SectionHeader("Projectiles")]
     public Transform HandToShoot;
     public GameObject RocketPrefab;
-
+    public GameObject shieldPrefab;
 
     public Animator anim;
 
@@ -130,6 +130,10 @@ public class CharacterMovement : NetworkBehaviour
                 dash = StartCoroutine(Dash());
         }
 
+        if (Input.GetAxis("Y" + PlayerNumber) > .1f && state != PlayerState.Attacking)
+        {
+
+        }
         if (Input.GetKeyDown(KeyCode.N) && PlayerNumber == "")
             SpawnOnOtherPlanet(FindObjectsOfType<PlanetBehaviour>()[Random.Range(0, 4)]);
         if (GLOBALS.SoloOnline || GLOBALS.SplitscreenOnline)
@@ -237,6 +241,16 @@ public class CharacterMovement : NetworkBehaviour
 
     }
 
+    public IEnumerator Shield()
+    {
+        var time = 0f;
+        //var go = Instantiate()
+        while (time < 3)
+        {
+            time += Time.deltaTime;
+            yield return null;
+        }
+    }
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.GetComponent<MeshCollider>())

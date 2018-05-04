@@ -103,6 +103,17 @@ public class WarpBehviour : MonoBehaviour
             WarpText.gameObject.SetActive(false);
             if (WarpUI.gameObject.activeInHierarchy)
             {
+                foreach (var child in gameObject.GetComponentsInChildren<Transform>())
+                {
+                    if (child.tag == "Actions")
+                    {
+                        child.GetComponent<Image>().enabled = false;
+                        foreach (var image in child.GetComponentsInChildren<Image>())
+                        {
+                            image.enabled = false;
+                        }
+                    }
+                }
                 InstrucText.text = "Close Warp Menu";
                 UIInputevents.GetComponent<GameEventArgsListenerObject>().enabled = true;
                 UIInputevents.gameObject.SetActive(true);
@@ -182,6 +193,17 @@ public class WarpBehviour : MonoBehaviour
             }
             else
             {
+                foreach (var child in gameObject.GetComponentsInChildren<Transform>())
+                {
+                    if (child.tag == "Actions")
+                    {
+                        child.GetComponent<Image>().enabled = true;
+                        foreach (var image in child.GetComponentsInChildren<Image>())
+                        {
+                            image.enabled = true;
+                        }
+                    }
+                }
                 InstrucText.text = "Open Warp Menu";
                 UIInputevents.GetComponent<GameEventArgsListenerObject>().enabled = false;
                 UIInputevents.gameObject.SetActive(false);

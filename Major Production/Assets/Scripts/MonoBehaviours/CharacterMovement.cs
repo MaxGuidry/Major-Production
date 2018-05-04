@@ -38,6 +38,16 @@ public class CharacterMovement : NetworkBehaviour
 
     [HideInInspector]
     public float rocketCooldown = 0;
+    public float MaxRocketCooldown = 8;
+
+    public float whirlwindCooldown = 0;
+    public float MaxWhirlwindCooldown = 2;
+
+    public float dashCooldown = 0;
+    public float MaxDashCooldown = 2f;
+
+    public float shieldCooldown = 0;
+    public float MaxShieldCooldown = 3;
     private void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody>();
@@ -119,7 +129,7 @@ public class CharacterMovement : NetworkBehaviour
             if (rocketCooldown < 0)
             {
                 anim.SetTrigger("Rocket");
-                rocketCooldown = 10;
+                rocketCooldown = MaxRocketCooldown;
             }
         }
         if (Input.GetAxis("Left Bumper" + PlayerNumber) > 0 && state != PlayerState.Attacking)
@@ -191,17 +201,7 @@ public class CharacterMovement : NetworkBehaviour
         // transform.Rotate(to.eulerAngles);
         anim.SetFloat("Velocity", velocity.magnitude * Mathf.Sign(Vector3.Dot(this.transform.forward, velocity.normalized)));
         //Debug.Log(InputManager.Controller());
-        //this.transform.rotation = Quaternion.Slerp(q, this.transform.rotation, .2f);
-        //this.transform.LookAt(this.transform.position + acceleration.normalized);
-        //float sens = (Input.GetJoystickNames()[0] == "")
-        //var thetaX = Input.GetAxis("Mouse X") * Mathf.Deg2Rad * Sensitivity * Time.deltaTime * 60;
-        // thetaX = ((thetaX > .35f) ? .35f : thetaX);
-        //thetaX = (thetaX < -.35f ? -.35f : thetaX);
-        //var rotx = Mathf.Sin(thetaX / 2f) * transform.up.x;
-        //var roty = Mathf.Sin(thetaX / 2f) * transform.up.y;
-        //var rotz = Mathf.Sin(thetaX / 2f) * transform.up.z;
-        //var rotw = Mathf.Cos(thetaX / 2f);
-        //transform.rotation = new Quaternion(rotx, roty, rotz, rotw) * transform.rotation;
+       
         rocketCooldown -= Time.deltaTime;
     }
 
@@ -243,15 +243,21 @@ public class CharacterMovement : NetworkBehaviour
 
     public IEnumerator Shield()
     {
-        var time = 0f;
-        var go = Instantiate(shieldPrefab, this.transform.position, Quaternion.identity, this.gameObject.transform);
-        while (time < 3)
+        shieldCooldown = MaxShieldCooldown;
+        state = PlayerState.Attacking;
+     
+        var go = Instantiate(shieldPrefab, this.transform.position, transform.rotation, this.gameObject.transform);
+        var stats = GetComponent<PlayerStatBehaviour>();
+        stats.Armor += 75;
+        while (shieldCooldown > 0)
         {
-            time += Time.deltaTime;
+            shieldCooldown -= Time.deltaTime;
             go.transform.rotation = new Quaternion(Mathf.Sin(0.01f) * this.transform.up.x, Mathf.Sin(0.01f) * this.transform.up.y, Mathf.Sin(0.01f) * this.transform.up.z, Mathf.Cos(0.01f)) * go.transform.rotation;
             yield return null;
         }
         Destroy(go);
+        state = PlayerState.Running;
+        stats.Armor -= 75;
     }
     void OnCollisionEnter(Collision other)
     {
@@ -343,6 +349,7 @@ public class CharacterMovement : NetworkBehaviour
 
     public IEnumerator Dash()
     {
+        
         anim.SetTrigger("Dash");
         float timer = 0;
         while (timer < .5f)
@@ -352,7 +359,12 @@ public class CharacterMovement : NetworkBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(3f);
+        dashCooldown = MaxDashCooldown;
+        while (dashCooldown > 0)
+        {
+            dashCooldown -= Time.deltaTime;
+            yield return null;
+        }
         dash = null;
     }
 
@@ -384,10 +396,10 @@ public class CharacterMovement : NetworkBehaviour
 
     public IEnumerator Whirlwind()
     {
-        float time = 0;
-        while (time < 2)
+        whirlwindCooldown = MaxWhirlwindCooldown;
+        while (whirlwindCooldown > 2)
         {
-            time += Time.deltaTime;
+            whirlwindCooldown-= Time.deltaTime;
 
 
             yield return null;

@@ -132,7 +132,7 @@ public class CharacterMovement : NetworkBehaviour
 
         if (Input.GetAxis("Y" + PlayerNumber) > .1f && state != PlayerState.Attacking)
         {
-
+            StartCoroutine(Shield());
         }
         if (Input.GetKeyDown(KeyCode.N) && PlayerNumber == "")
             SpawnOnOtherPlanet(FindObjectsOfType<PlanetBehaviour>()[Random.Range(0, 4)]);
@@ -244,12 +244,14 @@ public class CharacterMovement : NetworkBehaviour
     public IEnumerator Shield()
     {
         var time = 0f;
-        //var go = Instantiate()
+        var go = Instantiate(shieldPrefab, this.transform.position, Quaternion.identity, this.gameObject.transform);
         while (time < 3)
         {
             time += Time.deltaTime;
+            go.transform.rotation = new Quaternion(Mathf.Sin(0.01f) * this.transform.up.x, Mathf.Sin(0.01f) * this.transform.up.y, Mathf.Sin(0.01f) * this.transform.up.z, Mathf.Cos(0.01f)) * go.transform.rotation;
             yield return null;
         }
+        Destroy(go);
     }
     void OnCollisionEnter(Collision other)
     {
@@ -343,10 +345,10 @@ public class CharacterMovement : NetworkBehaviour
     {
         anim.SetTrigger("Dash");
         float timer = 0;
-        while (timer < .3f)
+        while (timer < .5f)
         {
             timer += Time.deltaTime;
-            this.transform.position += this.transform.forward * .65f;
+            this.transform.position += this.transform.forward * .4f;
             yield return null;
         }
 

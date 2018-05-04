@@ -6731,7 +6731,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1127939565663234}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 108, y: 32, z: -212}
+  m_LocalPosition: {x: 108.07999, y: 32.28, z: -212.51003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4629860342394438}
@@ -11934,7 +11934,10 @@ MonoBehaviour:
   HandToShoot: {fileID: 4343784604575912}
   RocketPrefab: {fileID: 1250494697334330, guid: d5478b540000f8d4da303a2e62c66fb5,
     type: 2}
+  shieldPrefab: {fileID: 1205859810948618, guid: c1df88176342a5a4c8a4ae37062b7e89,
+    type: 2}
   anim: {fileID: 95451221985943686}
+  rocketCooldown: 0
   state: 1
   BreakObject: {fileID: 11400000, guid: 8d616ec8803206749b56379eefea810f, type: 2}
 --- !u!114 &114974667371463688

@@ -129,7 +129,7 @@ public class CharacterMovement : NetworkBehaviour
             if (rocketCooldown < 0)
             {
                 anim.SetTrigger("Rocket");
-                rocketCooldown = 6;
+                rocketCooldown = MaxRocketCooldown;
             }
         }
         if (Input.GetAxis("Left Bumper" + PlayerNumber) > 0 && state != PlayerState.Attacking)
@@ -390,10 +390,10 @@ public class CharacterMovement : NetworkBehaviour
 
     public IEnumerator Whirlwind()
     {
-        float time = 0;
-        while (time < 2)
+       
+        while (whirlwindCooldown > 2)
         {
-            time += Time.deltaTime;
+            whirlwindCooldown-= Time.deltaTime;
 
 
             yield return null;

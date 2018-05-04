@@ -53,13 +53,19 @@ public class InputEvents : MonoBehaviour
     {
         foreach (var button in Buttons)
         {
+
+
+           
+
+
             prevButtonValues[button] = buttonValues[button];
             float value = Input.GetAxis(button);
-            if (value > .001f && buttonValues[button] < .001f)
+            //Debug.Log(button + ": "+ value);
+            if (value > .1f && buttonValues[button] < .1f)
                 OnButtonPressed.ObjRaise("Pressed", button);
-            else if (value > .001f)
+            else if (value > .1f)
                 OnButtonHeld.ObjRaise("Held", button);
-            else if (value < .001f && buttonValues[button] > .001f)
+            else if (value < .1f && buttonValues[button] > .1f)
                 OnButtonReleased.ObjRaise("Released", button);
             buttonValues[button] = value;
         }
@@ -69,11 +75,13 @@ public class InputEvents : MonoBehaviour
 
             prevAxisValues[axis] = axisValues[axis];
             float value = Input.GetAxis(axis);
-            if (value > .001f && axisValues[axis] < .001f)
+            //Debug.Log(axis + ": " + value);
+
+            if (value > .1f && axisValues[axis] < .1f)
                 OnButtonPressed.ObjRaise("Pressed", axis);
-            else if (value > .001f)
+            else if (value > .1f)
                 OnButtonHeld.ObjRaise("Held", axis);
-            else if (value < .001f && axisValues[axis] > .001f)
+            else if (value < .1f && axisValues[axis] > .1f)
                 OnButtonReleased.ObjRaise("Released", axis);
             axisValues[axis] = value;
         }

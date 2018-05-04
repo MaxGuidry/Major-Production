@@ -1,15 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DisplayPlayerStats : MonoBehaviour
 {
-    [SerializeField] private bool created;
-
+    public Slider ExpSlider;
     public PlayerStatBehaviour PlayerStats;
-
     [SerializeField] private List<Text> TempText;
-
     public Text TextPrefab;
 
     // Use this for initialization
@@ -21,6 +19,8 @@ public class DisplayPlayerStats : MonoBehaviour
         {
             TempText.Add(child);
         }
+
+        ExpSlider.value = 0;
     }
 
     private void Update()
@@ -48,60 +48,13 @@ public class DisplayPlayerStats : MonoBehaviour
             }
             else if (text.name.Contains("Level"))
             {
-                text.text = "Level: " +  PlayerStats.GetComponent<PlayerStatBehaviour>().Level.ToString();
+                text.text = "Level: " + PlayerStats.GetComponent<PlayerStatBehaviour>().Level.ToString();
             }
             else if (text.name.Contains("EXP"))
             {
+                ExpSlider.value = PlayerStats.GetComponent<PlayerStatBehaviour>().EXP;
                 text.text = "EXP: " + PlayerStats.GetComponent<PlayerStatBehaviour>().EXP.ToString();
             }
         }
-        //for (var i = 0; i < PlayerStats.stats._stats.Count; i++)
-        //{
-        //    TempText[i].text = PlayerStats.stats._stats[i].Name + ": " + PlayerStats.stats._stats[i].Value;
-        //    TempText[i].fontSize = 12;
-
-        //    if (PlayerStats.stats._stats[i].Name.Contains("Health"))
-        //    {
-        //        TempText[i].text = PlayerStats.GetComponent<PlayerStatBehaviour>().Health.ToString();
-        //    }
-        //    else if (PlayerStats.stats._stats[i].Name.Contains("Armor"))
-        //    {
-        //        TempText[i].text = PlayerStats.GetComponent<PlayerStatBehaviour>().Armor.ToString();
-        //    }
-        //    else if (PlayerStats.stats._stats[i].Name.Contains("Speed"))
-        //    {
-        //        TempText[i].text = PlayerStats.GetComponent<PlayerStatBehaviour>().Speed.ToString();
-        //    }
-        //    else if (PlayerStats.stats._stats[i].Name.Contains("Damage"))
-        //    {
-        //        TempText[i].text = PlayerStats.GetComponent<PlayerStatBehaviour>().Damage.ToString();
-        //    }
-        //}
     }
-
-    //public void CreateText()
-    //{
-    //    PlayerStats = gameObject.transform.parent.parent.GetComponentInChildren<PlayerStatBehaviour>();
-    //    var textPos = gameObject.transform.position;
-    //    if (PlayerStats == null)
-    //        return;
-    //    if (PlayerStats.stats == null)
-    //        return;
-    //    if (!created)
-    //        for (var i = 0; i < PlayerStats.stats._stats.Count; i++)
-    //        {
-    //            var temp = Instantiate(TextPrefab, textPos, transform.rotation);
-    //            temp.transform.LookAt(gameObject.transform.parent.parent.GetComponentInChildren<Camera>().transform);
-    //            TempText.Add(temp);
-
-    //            temp.transform.SetParent(gameObject.transform);
-    //            temp.text = PlayerStats.stats._stats[i].Name + ": " + PlayerStats.stats._stats[i].Value;
-    //            created = true;
-    //        }
-    //    else
-    //    {
-    //        for (var i = 0; i < PlayerStats.stats._stats.Count; i++)
-    //            TempText[i].text = PlayerStats.stats._stats[i].Name + ": " + PlayerStats.stats._stats[i].Value;
-    //    }
-    //}
 }

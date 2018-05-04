@@ -8,8 +8,10 @@ public class RocketProjectile : MonoBehaviour
     public float rocketSpeed;
     public float upSpeed;
     private Rigidbody rb;
-
+    [HideInInspector] public string PlayerWhoShotMe="";
     public GameObject ExplosionPrefab;
+
+    public float damage;
     // Use this for initialization
     void Start()
     {
@@ -21,7 +23,7 @@ public class RocketProjectile : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
+        
         //this.transform.position += this.transform.up *(upSpeed /100f);
         //this.transform.position += this.transform.forward *(rocketSpeed/100f);
         if (rb.velocity.magnitude < 17)
@@ -35,18 +37,38 @@ public class RocketProjectile : MonoBehaviour
 
     }
 
+    void Update()
+    {
+        if (transform.localScale.x < 2)
+            transform.localScale *= 1.1f;
+    }
     void OnCollisionEnter(Collision other)
     {
         //explosion
-       
+
+        Destroy(this.gameObject);
+
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        //explosion
+        if (other.gameObject.GetComponent<PlanetBehaviour>() != null)
+            return;
+        var player = GLOBALS.GetTopLevelParentTransform(other.gameObject.transform);
+        if (player.gameObject.name.Contains("Player"))
+        {
+            
+            if (player.gameObject.name == PlayerWhoShotMe)
+                return;
+        }
         Destroy(this.gameObject);
     }
 
     void OnDestroy()
     {
 
-        var go = Instantiate(ExplosionPrefab,this.transform.position,Quaternion.identity);
-        Collider[] knockbacks = Physics.OverlapSphere(this.transform.position, 10);
+        var go = Instantiate(ExplosionPrefab, this.transform.position, Quaternion.identity);
+        Collider[] knockbacks = Physics.OverlapSphere(this.transform.position, 8);
         for (int i = 0; i < knockbacks.Length; i++)
         {
             var rb = knockbacks[i].gameObject.GetComponent<Rigidbody>();
@@ -54,14 +76,16 @@ public class RocketProjectile : MonoBehaviour
                 continue;
             if (rb == this.rb)
                 continue;
-            rb.AddExplosionForce(12, this.transform.position - this.transform.up, 10, 0, ForceMode.Impulse);
+            rb.AddExplosionForce(13, this.transform.position - this.transform.up, 8, 0, ForceMode.Impulse);
             if (!rb.gameObject.name.Contains("Rock"))
                 Debug.Log(rb.gameObject.name);
             var id = rb.gameObject.GetComponent<IDamageable>();
             if (id == null)
                 continue;
-            //id.TakeDamage((int)(200 / (15- (this.transform.position-rb.transform.position).magnitude)));
-            id.TakeDamage(5);
+            int dmg = (int)(-(rb.transform.position - transform.position).magnitude + damage);
+            if(dmg>40)
+                Debug.LogError("Player position: " + rb.transform.position + "   Rocket position: " + transform.position);
+            id.TakeDamage(dmg);
         }
     }
     //void OnCollisionStay(Collision other)

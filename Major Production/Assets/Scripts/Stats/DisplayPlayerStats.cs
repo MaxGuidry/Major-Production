@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class DisplayPlayerStats : MonoBehaviour
 {
+    public Font DefaultFont;
     public Slider ExpSlider;
     public PlayerStatBehaviour PlayerStats;
     [SerializeField] private List<Text> TempText;
@@ -29,7 +30,8 @@ public class DisplayPlayerStats : MonoBehaviour
             PlayerStats = gameObject.transform.parent.parent.GetComponentInChildren<PlayerStatBehaviour>();
         foreach (var text in TempText)
         {
-            text.fontSize = 12;
+            text.font = DefaultFont;
+            text.fontSize = 10;
             if (text.name.Contains("Health"))
             {
                 text.text = PlayerStats.GetComponent<PlayerStatBehaviour>().Health.ToString();

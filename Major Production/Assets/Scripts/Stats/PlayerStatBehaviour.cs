@@ -123,6 +123,8 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
     public void TakeDamage(int damage)
     {
         var calculatedDamage = damage - Armor;
+        if (calculatedDamage < 0)
+            return;
         var nexthealth = 0;
         switch (GetComponent<Transform>().tag)
         {

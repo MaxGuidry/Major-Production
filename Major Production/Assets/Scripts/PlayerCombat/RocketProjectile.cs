@@ -54,7 +54,7 @@ public class RocketProjectile : MonoBehaviour
         //explosion
         if (other.gameObject.GetComponent<PlanetBehaviour>() != null)
             return;
-        var player = GLOBALS.GetTopLevelParentTransform(other.gameObject.transform);
+        var player = other.gameObject.transform.root; //GLOBALS.GetTopLevelParentTransform(other.gameObject.transform);
         if (player.gameObject.name.Contains("Player"))
         {
             

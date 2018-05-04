@@ -52,8 +52,13 @@ public class TweenScaleBehaviour : MonoBehaviour
         isRunning = true;
         var timer = 0.0f;
         var startScale = tweened.transform.localScale;
+        var camScale = tweened.GetComponentInChildren<CharacterMovement>().cameraPivot.parent;
         while (timer < duration)
         {
+            var scale = ac.Evaluate(timer / duration);
+            scale = (.5f / 3.5f) * scale + 1;
+
+            camScale.localScale = Vector3.Lerp(camScale.localScale, Vector3.one * scale, .02f);
             timer += Time.deltaTime;
             tweened.transform.localScale = startScale + Vector3.one * ac.Evaluate(timer / duration);
             yield return null;

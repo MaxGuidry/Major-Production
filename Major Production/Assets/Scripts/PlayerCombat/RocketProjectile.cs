@@ -83,9 +83,7 @@ public class RocketProjectile : MonoBehaviour
             if (id == null)
                 continue;
             int dmg = (int)(-(rb.transform.position - transform.position).magnitude + damage);
-            if(dmg>40)
-                Debug.LogError("Player position: " + rb.transform.position + "   Rocket position: " + transform.position);
-            Debug.Log(dmg);
+
             id.TakeDamage(dmg);
         }
     }

@@ -23,7 +23,7 @@ public class CharacterMovement : NetworkBehaviour
     [SectionHeader("Projectiles")]
     public Transform HandToShoot;
     public GameObject RocketPrefab;
-
+    public GameObject shieldPrefab;
 
     public Animator anim;
 
@@ -35,6 +35,9 @@ public class CharacterMovement : NetworkBehaviour
 
     private Vector3 acceleration = Vector3.zero;
     private Coroutine dash;
+
+    [HideInInspector]
+    public float rocketCooldown = 0;
     private void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody>();
@@ -107,16 +110,30 @@ public class CharacterMovement : NetworkBehaviour
     // Update is called once per frame
     private void Update()
     {
+
+        
+
+
         if (Input.GetAxis("Right Bumper" + PlayerNumber) > 0 && state != PlayerState.Attacking)
-            anim.SetTrigger("Rocket");
+        {
+            if (rocketCooldown < 0)
+            {
+                anim.SetTrigger("Rocket");
+                rocketCooldown = 10;
+            }
+        }
         if (Input.GetAxis("Left Bumper" + PlayerNumber) > 0 && state != PlayerState.Attacking)
             anim.SetBool("Whirlwind", true);
-        if (Input.GetAxis("Trigger" + PlayerNumber) > 0.5f)
+        if (Input.GetAxis("Trigger" + PlayerNumber) > .9f)
         {
             if (dash == null)
                 dash = StartCoroutine(Dash());
         }
 
+        if (Input.GetAxis("Y" + PlayerNumber) > .1f && state != PlayerState.Attacking)
+        {
+            StartCoroutine(Shield());
+        }
         if (Input.GetKeyDown(KeyCode.N) && PlayerNumber == "")
             SpawnOnOtherPlanet(FindObjectsOfType<PlanetBehaviour>()[Random.Range(0, 4)]);
         if (GLOBALS.SoloOnline || GLOBALS.SplitscreenOnline)
@@ -170,7 +187,7 @@ public class CharacterMovement : NetworkBehaviour
         transform.position += (velocity * Time.deltaTime);
         //rb.MovePosition(pos);
         Quaternion to = Quaternion.FromToRotation(this.transform.forward, velocity.normalized) * this.transform.rotation;
-        transform.rotation = Quaternion.Slerp(this.transform.rotation, to, .1f);
+        transform.rotation = Quaternion.Slerp(this.transform.rotation, to, .075f);
         // transform.Rotate(to.eulerAngles);
         anim.SetFloat("Velocity", velocity.magnitude * Mathf.Sign(Vector3.Dot(this.transform.forward, velocity.normalized)));
         //Debug.Log(InputManager.Controller());
@@ -185,6 +202,7 @@ public class CharacterMovement : NetworkBehaviour
         //var rotz = Mathf.Sin(thetaX / 2f) * transform.up.z;
         //var rotw = Mathf.Cos(thetaX / 2f);
         //transform.rotation = new Quaternion(rotx, roty, rotz, rotw) * transform.rotation;
+        rocketCooldown -= Time.deltaTime;
     }
 
 
@@ -207,15 +225,34 @@ public class CharacterMovement : NetworkBehaviour
 
             }
 
-
+            StartCoroutine(jumpForce());
             rb.AddForce(this.transform.up * 21, ForceMode.Impulse);
 
+            anim.SetTrigger("Jump");
         }
 
 
         // }
     }
 
+    public IEnumerator jumpForce()
+    {
+        yield return new WaitForSeconds(.1f);
+
+    }
+
+    public IEnumerator Shield()
+    {
+        var time = 0f;
+        var go = Instantiate(shieldPrefab, this.transform.position, Quaternion.identity, this.gameObject.transform);
+        while (time < 3)
+        {
+            time += Time.deltaTime;
+            go.transform.rotation = new Quaternion(Mathf.Sin(0.01f) * this.transform.up.x, Mathf.Sin(0.01f) * this.transform.up.y, Mathf.Sin(0.01f) * this.transform.up.z, Mathf.Cos(0.01f)) * go.transform.rotation;
+            yield return null;
+        }
+        Destroy(go);
+    }
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.GetComponent<MeshCollider>())
@@ -308,10 +345,10 @@ public class CharacterMovement : NetworkBehaviour
     {
         anim.SetTrigger("Dash");
         float timer = 0;
-        while (timer < .3f)
+        while (timer < .5f)
         {
             timer += Time.deltaTime;
-            this.transform.position += this.transform.forward * .65f;
+            this.transform.position += this.transform.forward * .4f;
             yield return null;
         }
 

@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityStandardAssets.Utility;
 
 public class CountDown : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> activePlayers;
-
+    private List<GameObject> activePlayers;
+    public GameObject BackGround;
+    public RawImage DisplayWinner;
+    public RenderTexture TargeTexture;
     private bool GameActive;
     public GameObject GameOverUI;
     public List<GameObject> players;
@@ -15,10 +18,12 @@ public class CountDown : MonoBehaviour
     public float Timer = 60f;
     private float deathTimer = 0f;
     public Text TimerDisplay;
-    public float GameOverScreenTimer = 4f;
+    public float GameOverScreenTimer = 5f;
     // Use this for initialization
     private void Start()
     {
+        BackGround.SetActive(false);
+        DisplayWinner.enabled = false;
         GameActive = true;
         activePlayers = new List<GameObject>();
         foreach (var SpecateCamera in SpecateCameras)
@@ -36,7 +41,7 @@ public class CountDown : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        Timer -= Time.deltaTime;
+
         if (Timer >= 0f)
             TimerDisplay.text = Mathf.Round(Timer).ToString();
         if (players.Count == 0)
@@ -55,6 +60,7 @@ public class CountDown : MonoBehaviour
 
         if (GameActive)
         {
+            Timer -= Time.deltaTime;
             foreach (var playerStatBehaviour in players)
             {
                 if (activePlayers.Contains(playerStatBehaviour))
@@ -63,7 +69,6 @@ public class CountDown : MonoBehaviour
                             .Health <= 0)
                     {
                         deathTimer += Time.deltaTime;
-                        Debug.Log(deathTimer);
 
                         if (deathTimer >= 3f)
                         {
@@ -95,6 +100,10 @@ public class CountDown : MonoBehaviour
     private IEnumerator GameOverLost()
     {
         GameActive = false;
+        foreach (var outline in FindObjectsOfType<Outline>())
+        {
+            outline.gameObject.SetActive(false);
+        }
         foreach (var specateCamera in SpecateCameras) specateCamera.gameObject.SetActive(false);
         foreach (var player in players)
         {
@@ -118,9 +127,36 @@ public class CountDown : MonoBehaviour
 
     private IEnumerator GameOverWin(GameObject player)
     {
+        Timer = 1;
         GameActive = false;
+        BackGround.SetActive(true);
+        foreach (var outline in FindObjectsOfType<Outline>())
+        {
+            outline.gameObject.SetActive(false);
+        }
         foreach (var playerStatBehaviour in FindObjectsOfType<PlayerStatBehaviour>())
-            playerStatBehaviour.gameObject.transform.parent.GetComponentInChildren<Camera>().enabled = true;
+        {
+            if (playerStatBehaviour.gameObject.transform.parent.GetComponentInChildren<Camera>().tag == "MainCamera")
+                playerStatBehaviour.gameObject.transform.parent.GetComponentInChildren<Camera>().enabled = true;
+        }
+
+        DisplayWinner.enabled = true;
+
+        foreach (var child in activePlayers[0].GetComponentsInChildren<Transform>())
+        {
+            if (child.tag == "SecondCamera")
+            {
+                child.GetComponent<Camera>().enabled = true;
+                DisplayWinner.texture = TargeTexture;
+                child.GetComponent<Camera>().targetTexture = TargeTexture;
+            }
+        }
+        //if (activePlayers[0].gameObject.GetComponentInChildren<Camera>().transform.tag == "SecondCamera")
+        //{
+        //    activePlayers[0].gameObject.GetComponentInChildren<Camera>().enabled = true;
+        //    activePlayers[0].gameObject.GetComponentInChildren<Camera>().targetTexture = TargeTexture;
+        //}
+
         foreach (var WarpUI in GameObject.FindGameObjectsWithTag("WarpUI")) WarpUI.gameObject.SetActive(false);
         foreach (var select in GameObject.FindGameObjectsWithTag("Select")) select.gameObject.SetActive(false);
         foreach (var Over in GameObject.FindGameObjectsWithTag("GameOver"))
@@ -131,7 +167,7 @@ public class CountDown : MonoBehaviour
         }
 
         TimerDisplay.text = 0.ToString();
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(GameOverScreenTimer);
         SceneManager.LoadScene("104.FullGame");
     }
 
@@ -150,4 +186,52 @@ public class CountDown : MonoBehaviour
                 i = 0;
         }
     }
+#if UNITY_EDITOR
+    [ContextMenu("KillAllButOneRandom")]
+    public void KillAllButOne()
+    {
+        var playersNumbers = new List<string>() {"P1", "P2", "P3", "P4"};
+        foreach (var activePlayer in players)
+        {
+            if (activePlayer.transform.GetChild(0).tag != playersNumbers[Random.Range(0, 3)])
+                activePlayer.GetComponentInChildren<PlayerStatBehaviour>().Health = 0;
+        }
+    }
+    [ContextMenu("KillP1")]
+    public void KillP1()
+    {
+        foreach (var activePlayer in activePlayers)
+        {
+           if (activePlayer.transform.GetChild(0).tag == "P1")
+               activePlayer.GetComponentInChildren<PlayerStatBehaviour>().Health = 0;
+        }
+    }
+    [ContextMenu("KillP2")]
+    public void KillP2()
+    {
+        foreach (var activePlayer in activePlayers)
+        {
+            if (activePlayer.transform.GetChild(0).tag == "P2")
+                activePlayer.GetComponentInChildren<PlayerStatBehaviour>().Health = 0;
+        }
+    }
+    [ContextMenu("KillP3")]
+    public void KillP3()
+    {
+        foreach (var activePlayer in activePlayers)
+        {
+            if (activePlayer.transform.GetChild(0).tag == "P3")
+                activePlayer.GetComponentInChildren<PlayerStatBehaviour>().Health = 0;
+        }
+    }
+    [ContextMenu("KillP4")]
+    public void KillP4()
+    {
+        foreach (var activePlayer in activePlayers)
+        {
+            if (activePlayer.transform.GetChild(0).tag == "P4")
+                activePlayer.GetComponentInChildren<PlayerStatBehaviour>().Health = 0;
+        }
+    }
+#endif
 }

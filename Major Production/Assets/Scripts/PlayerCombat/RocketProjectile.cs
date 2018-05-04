@@ -10,6 +10,8 @@ public class RocketProjectile : MonoBehaviour
     private Rigidbody rb;
     [HideInInspector] public string PlayerWhoShotMe="";
     public GameObject ExplosionPrefab;
+
+    public float damage;
     // Use this for initialization
     void Start()
     {
@@ -66,7 +68,7 @@ public class RocketProjectile : MonoBehaviour
     {
 
         var go = Instantiate(ExplosionPrefab, this.transform.position, Quaternion.identity);
-        Collider[] knockbacks = Physics.OverlapSphere(this.transform.position, 10);
+        Collider[] knockbacks = Physics.OverlapSphere(this.transform.position, 8);
         for (int i = 0; i < knockbacks.Length; i++)
         {
             var rb = knockbacks[i].gameObject.GetComponent<Rigidbody>();
@@ -74,14 +76,17 @@ public class RocketProjectile : MonoBehaviour
                 continue;
             if (rb == this.rb)
                 continue;
-            rb.AddExplosionForce(12, this.transform.position - this.transform.up, 10, 0, ForceMode.Impulse);
+            rb.AddExplosionForce(13, this.transform.position - this.transform.up, 8, 0, ForceMode.Impulse);
             if (!rb.gameObject.name.Contains("Rock"))
                 Debug.Log(rb.gameObject.name);
             var id = rb.gameObject.GetComponent<IDamageable>();
             if (id == null)
                 continue;
-            //id.TakeDamage((int)(200 / (15- (this.transform.position-rb.transform.position).magnitude)));
-            id.TakeDamage(5);
+            int dmg = (int)(-(rb.transform.position - transform.position).magnitude + damage);
+            if(dmg>40)
+                Debug.LogError("Player position: " + rb.transform.position + "   Rocket position: " + transform.position);
+            Debug.Log(dmg);
+            id.TakeDamage(dmg);
         }
     }
     //void OnCollisionStay(Collision other)

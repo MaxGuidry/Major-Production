@@ -7,7 +7,7 @@ using UnityStandardAssets.Utility;
 
 public class CountDown : MonoBehaviour
 {
-    private List<GameObject> activePlayers;
+    [HideInInspector]public List<GameObject> activePlayers;
     public GameObject BackGround;
     public RawImage DisplayWinner;
     public RenderTexture TargeTexture;
@@ -18,10 +18,14 @@ public class CountDown : MonoBehaviour
     public float Timer = 60f;
     private float deathTimer = 0f;
     public Text TimerDisplay;
-    public float GameOverScreenTimer = 5f;
+    [HideInInspector]public float GameOverScreenTimer = 5f;
+    [SerializeField]private float testTimer;
+    public Image HourGlass;
     // Use this for initialization
     private void Start()
     {
+        testTimer = 10;
+        HourGlass.enabled = false;
         BackGround.SetActive(false);
         DisplayWinner.enabled = false;
         GameActive = true;
@@ -54,9 +58,14 @@ public class CountDown : MonoBehaviour
                 player.GetComponentInChildren<CharacterMovement>().enabled = false;
             }
             StartCoroutine(GameOverLost());
+            StartHourGlass();
         }
 
-        if (activePlayers.Count == 1) StartCoroutine(GameOverWin(activePlayers[0]));
+        if (activePlayers.Count == 1)
+        {
+            StartCoroutine(GameOverWin(activePlayers[0]));
+            StartHourGlass();
+        }
 
         if (GameActive)
         {
@@ -97,6 +106,15 @@ public class CountDown : MonoBehaviour
         }
     }
 
+    private void StartHourGlass()
+    {
+        HourGlass.enabled = true;
+        testTimer -= Time.deltaTime;
+        var slope = 1f / 10f;
+        var sliderAmount = slope * testTimer;
+        HourGlass.fillAmount = sliderAmount;
+    }
+
     private IEnumerator GameOverLost()
     {
         GameActive = false;
@@ -127,7 +145,6 @@ public class CountDown : MonoBehaviour
 
     private IEnumerator GameOverWin(GameObject player)
     {
-        Timer = 1;
         GameActive = false;
         BackGround.SetActive(true);
         foreach (var outline in FindObjectsOfType<Outline>())

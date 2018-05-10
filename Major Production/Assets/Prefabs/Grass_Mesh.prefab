@@ -21,7 +21,9 @@ GameObject:
   - component: {fileID: 4453558240520612}
   - component: {fileID: 33015297778613720}
   - component: {fileID: 23872304949791950}
-  m_Layer: 0
+  - component: {fileID: 135625564614324240}
+  - component: {fileID: 114108951894835622}
+  m_Layer: 9
   m_Name: Grass_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -82,3 +84,26 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1170733572868870}
   m_Mesh: {fileID: 4300000, guid: 95193bf056217a947aa42afed77576b2, type: 3}
+--- !u!114 &114108951894835622
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1170733572868870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a530f54913d54f44aa1e9bd9ad511403, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!135 &135625564614324240
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1170733572868870}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.45258403
+  m_Center: {x: 0, y: 0.45258403, z: 0}

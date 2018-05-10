@@ -153,8 +153,8 @@ public class CharacterMovement : NetworkBehaviour
         {
             StartCoroutine(Shield());
         }
-        if (Input.GetKeyDown(KeyCode.N) && PlayerNumber == "")
-            SpawnOnOtherPlanet(FindObjectsOfType<PlanetBehaviour>()[Random.Range(0, 4)]);
+        //if (Input.GetKeyDown(KeyCode.N) && PlayerNumber == "")
+          //  SpawnOnOtherPlanet(FindObjectsOfType<PlanetBehaviour>()[Random.Range(0, 4)]);
         if (GLOBALS.SoloOnline || GLOBALS.SplitscreenOnline)
             if (!isLocalPlayer)
                 return;
@@ -257,6 +257,7 @@ public class CharacterMovement : NetworkBehaviour
         var go = Instantiate(shieldPrefab, this.transform.position, transform.rotation, this.gameObject.transform);
         var stats = GetComponent<PlayerStatBehaviour>();
         stats.Armor += 75;
+       
         while (shieldCooldown > 0)
         {
             shieldCooldown -= Time.deltaTime;
@@ -405,14 +406,19 @@ public class CharacterMovement : NetworkBehaviour
     public IEnumerator Whirlwind()
     {
         whirlwindCooldown = MaxWhirlwindCooldown;
+        var go = Instantiate(whirlwind);
         while (whirlwindCooldown > 0)
         {
             whirlwindCooldown -= Time.deltaTime;
-
-
+            go.transform.position = this.transform.position;
+            go.transform.rotation= this.transform.rotation;
+            go.transform.localScale = this.transform.localScale;
             yield return null;
         }
+
         anim.SetBool("Whirlwind", false);
+        yield return new WaitForSeconds(0.25f);
+        Destroy(go);
 
     }
 

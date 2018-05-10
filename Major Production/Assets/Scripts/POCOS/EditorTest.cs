@@ -15,7 +15,7 @@ public class EditorTest : DecoratorDrawer {
             {
                
                 headerStyle = new GUIStyle("TE NodeBox");
-                headerStyle.fontSize = EditorStyles.label.fontSize;
+                headerStyle.fontSize = EditorStyles.label.fontSize ;
                 headerStyle.fontStyle = FontStyle.Bold;
                 headerStyle.normal.textColor = EditorStyles.largeLabel.normal.textColor;
                 headerStyle.alignment = TextAnchor.MiddleCenter;
@@ -40,10 +40,8 @@ public class EditorTest : DecoratorDrawer {
     public override void OnGUI(Rect position)
     {
         var attribute = (SectionHeaderAttribute)base.attribute;
-
         position.yMin +=  EditorGUIUtility.singleLineHeight;
         position.yMax -= EditorGUIUtility.standardVerticalSpacing;
-
         position.height = EditorGUIUtility.singleLineHeight;
         EditorGUI.LabelField(position, attribute.text, HeaderStyle);
     }

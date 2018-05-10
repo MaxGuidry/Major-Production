@@ -67,6 +67,7 @@ public class CharacterMovement : NetworkBehaviour
     {
         Attacking,
         Running,
+        Defending,
         None,
     }
     [HideInInspector]
@@ -149,7 +150,7 @@ public class CharacterMovement : NetworkBehaviour
                 dash = StartCoroutine(Dash());
         }
 
-        if (Input.GetAxis("Trigger" + PlayerNumber) > .9f && state != PlayerState.Attacking)
+        if (Input.GetAxis("Trigger" + PlayerNumber) > .9f && state != PlayerState.Defending && shieldCooldown<=0)
         {
             StartCoroutine(Shield());
         }
@@ -252,21 +253,28 @@ public class CharacterMovement : NetworkBehaviour
     public IEnumerator Shield()
     {
         shieldCooldown = MaxShieldCooldown;
-        state = PlayerState.Attacking;
+        state = PlayerState.Defending;
 
         var go = Instantiate(shieldPrefab, this.transform.position, transform.rotation, this.gameObject.transform);
         var stats = GetComponent<PlayerStatBehaviour>();
         stats.Armor += 75;
-       
-        while (shieldCooldown > 0)
+        float f = 3f;
+        while (f > 0)
         {
-            shieldCooldown -= Time.deltaTime;
+            f -= Time.deltaTime;
             go.transform.rotation = new Quaternion(Mathf.Sin(0.01f) * this.transform.up.x, Mathf.Sin(0.01f) * this.transform.up.y, Mathf.Sin(0.01f) * this.transform.up.z, Mathf.Cos(0.01f)) * go.transform.rotation;
             yield return null;
         }
         Destroy(go);
         state = PlayerState.Running;
+
         stats.Armor -= 75;
+        while (shieldCooldown > 0)
+        {
+            shieldCooldown -= Time.deltaTime;
+            
+            yield return null;
+        }
     }
     void OnCollisionEnter(Collision other)
     {

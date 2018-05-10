@@ -406,18 +406,19 @@ public class CharacterMovement : NetworkBehaviour
     public IEnumerator Whirlwind()
     {
         whirlwindCooldown = MaxWhirlwindCooldown;
-        var go = Instantiate(whirlwind);
+        var go = Instantiate(whirlwind,Vector3.zero,Quaternion.identity);
+        go.transform.parent = this.transform;
+       
         while (whirlwindCooldown > 0)
         {
-            whirlwindCooldown -= Time.deltaTime;
+            go.transform.localEulerAngles = new Vector3(-90,0,0);
             go.transform.position = this.transform.position;
-            go.transform.rotation= this.transform.rotation;
-            go.transform.localScale = this.transform.localScale;
+            whirlwindCooldown -= Time.deltaTime;
             yield return null;
         }
 
         anim.SetBool("Whirlwind", false);
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.1f);
         Destroy(go);
 
     }
@@ -443,5 +444,12 @@ public class CharacterMovement : NetworkBehaviour
         //Destroy(this.gameObject.GetComponent<CharacterMovement>());
         this.enabled = false;
         this.transform.parent.GetComponentInChildren<GameEventArgsListenerObject>().enabled = false;
+        StartCoroutine(deathps());
+    }
+
+    IEnumerator deathps()
+    {
+        yield return new WaitForSeconds(1.5f);
+        Instantiate(deathPuff,this.transform.position,this.transform.rotation);
     }
 }

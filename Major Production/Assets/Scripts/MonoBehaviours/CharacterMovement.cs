@@ -143,13 +143,13 @@ public class CharacterMovement : NetworkBehaviour
         }
         if (Input.GetAxis("Left Bumper" + PlayerNumber) > 0 && state != PlayerState.Attacking)
             anim.SetBool("Whirlwind", true);
-        if (Input.GetAxis("Trigger" + PlayerNumber) > .9f)
+        if (Input.GetAxis("Trigger" + PlayerNumber) > -.9f)
         {
             if (dash == null)
                 dash = StartCoroutine(Dash());
         }
 
-        if (Input.GetAxis("Trigger" + PlayerNumber) < -.9f && state != PlayerState.Attacking)
+        if (Input.GetAxis("Trigger" + PlayerNumber) < .9f && state != PlayerState.Attacking)
         {
             StartCoroutine(Shield());
         }

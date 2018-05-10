@@ -149,7 +149,7 @@ public class CharacterMovement : NetworkBehaviour
                 dash = StartCoroutine(Dash());
         }
 
-        if (Input.GetAxis("Y" + PlayerNumber) > .1f && state != PlayerState.Attacking)
+        if (Input.GetAxis("Trigger" + PlayerNumber) < -.9f && state != PlayerState.Attacking)
         {
             StartCoroutine(Shield());
         }
@@ -236,7 +236,6 @@ public class CharacterMovement : NetworkBehaviour
 
             StartCoroutine(jumpForce());
             rb.AddForce(this.transform.up * 21, ForceMode.Impulse);
-
             anim.SetTrigger("Jump");
         }
 

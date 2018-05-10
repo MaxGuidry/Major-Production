@@ -32,12 +32,21 @@ public class GameAudioManager : MonoBehaviour
                     audioSource.Pause();
                 }
             }
-            PlayClip("Won", wonPlayed);
+
+            if (!wonPlayed)
+            {
+                PlayClip("Won");
+                wonPlayed = true;
+            }
         }
 
         if (countDown.Timer <= 0)
         {
-            PlayClip("Over", lostPlayed);
+            if (!lostPlayed)
+            {
+                PlayClip("Over");
+                lostPlayed = true;
+            }
         }
 
         switch (countDown.TimerDisplay.text)
@@ -97,7 +106,7 @@ public class GameAudioManager : MonoBehaviour
         }
     }
 
-    private void PlayClip(string clipName, bool played)
+    private void PlayClip(string clipName)
     {
         foreach (var audioSource in Sources)
         {
@@ -105,11 +114,7 @@ public class GameAudioManager : MonoBehaviour
             {
                 if (!audioSource.isPlaying)
                 {
-                    if (!played)
-                    {
-                        audioSource.Play();
-                        played = true;
-                    }
+                    audioSource.Play();
                 }
             }
         }

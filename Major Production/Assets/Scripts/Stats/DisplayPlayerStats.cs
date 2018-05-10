@@ -11,6 +11,7 @@ public class DisplayPlayerStats : MonoBehaviour
     [SerializeField] private List<Text> TempText;
     public Text TextPrefab;
 
+    public List<Sprite> Sprites;
     // Use this for initialization
     private void Start()
     {
@@ -50,12 +51,46 @@ public class DisplayPlayerStats : MonoBehaviour
             }
             else if (text.name.Contains("Level"))
             {
-                text.text = "Level: " + PlayerStats.GetComponent<PlayerStatBehaviour>().Level.ToString();
+                text.text = "";
+                foreach (var child in text.GetComponentsInChildren<Image>())
+                {
+                    switch (child.name)
+                    {
+                        case "NUM":
+                            switch (PlayerStats.GetComponent<PlayerStatBehaviour>().Level)
+                            {
+                                case 1:
+                                    child.GetComponent<Image>().sprite = Sprites[1];
+                                    break;
+                                case 2:
+                                    child.GetComponent<Image>().sprite = Sprites[2];
+                                    break;
+                                case 3:
+                                    child.GetComponent<Image>().sprite = Sprites[3];
+                                    break;
+                                case 4:
+                                    child.GetComponent<Image>().sprite = Sprites[4];
+                                    break;
+                                case 5:
+                                    child.GetComponent<Image>().sprite = Sprites[5];
+                                    break;
+                                case 6:
+                                    child.GetComponent<Image>().sprite = Sprites[6];
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
+                        case "LVL":
+                            child.GetComponent<Image>().sprite = Sprites[0];
+                            break;
+                    }
+                }
             }
             else if (text.name.Contains("EXP"))
             {
                 ExpSlider.value = PlayerStats.GetComponent<PlayerStatBehaviour>().EXP;
-                text.text = "EXP: " + PlayerStats.GetComponent<PlayerStatBehaviour>().EXP.ToString();
+                text.text = "";
             }
         }
     }

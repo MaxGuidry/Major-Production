@@ -71,6 +71,11 @@ public class CountDown : MonoBehaviour
         if (GameActive)
         {
             Timer -= Time.deltaTime;
+            if (Timer <= 10)
+            {
+                TimerDisplay.GetComponent<TweenScaleBehaviour>().TweenScale();
+            }
+
             var slope = 1f / 60f;
             var sliderAmount = slope * Timer;
             CountdownImage.fillAmount = sliderAmount;

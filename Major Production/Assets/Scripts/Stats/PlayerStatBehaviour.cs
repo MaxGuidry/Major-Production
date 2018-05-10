@@ -239,20 +239,21 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
     private IEnumerator SpawnEffect()
     {
         var done = false;
+        foreach (var child in GetComponentsInChildren<Transform>())
+        {
+            if (child.name.Contains("Level"))
+            {
+                done = true;
+            }
+        }
         while (!done)
         {
             var effect = Instantiate(LevelUpEffect, Vector3.zero, Quaternion.identity);
             effect.gameObject.transform.SetParent(gameObject.transform);
-            effect.transform.localRotation = Quaternion.identity;
+            effect.transform.localEulerAngles = new Vector3(-90, 0, 0); 
             effect.transform.localPosition = Vector3.zero;
-            effect.transform.localPosition = new Vector3(
-                effect.gameObject.transform.localPosition.x,
-                -1f,
-                effect.gameObject.transform.localPosition.z);
-            foreach (var eff in effect.GetComponentsInChildren<Transform>())
-                eff.transform.localScale = new Vector3(.5f, .5f, .5f);
-            yield return new WaitForSeconds(3);
             done = true;
+            yield return new WaitForSeconds(3);
             Destroy(effect);
         }
     }

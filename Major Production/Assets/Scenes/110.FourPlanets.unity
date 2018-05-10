@@ -11459,6 +11459,48 @@ Transform:
   m_Father: {fileID: 1802880567}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &775658189
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4577803872618778, guid: 3045003d2d07d0d4dac444461eab23dc, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4577803872618778, guid: 3045003d2d07d0d4dac444461eab23dc, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4577803872618778, guid: 3045003d2d07d0d4dac444461eab23dc, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4577803872618778, guid: 3045003d2d07d0d4dac444461eab23dc, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4577803872618778, guid: 3045003d2d07d0d4dac444461eab23dc, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4577803872618778, guid: 3045003d2d07d0d4dac444461eab23dc, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4577803872618778, guid: 3045003d2d07d0d4dac444461eab23dc, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4577803872618778, guid: 3045003d2d07d0d4dac444461eab23dc, type: 2}
+      propertyPath: m_RootOrder
+      value: 31
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 3045003d2d07d0d4dac444461eab23dc, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &779562152
 GameObject:
   m_ObjectHideFlags: 0
@@ -11761,6 +11803,7 @@ MonoBehaviour:
   - {fileID: 564810338}
   TextPrefab: {fileID: 114772172128098200, guid: f9a2d8cb677e55446a139ec0db04f0c2,
     type: 2}
+  Sprites: []
 --- !u!114 &797751408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31366,6 +31409,7 @@ MonoBehaviour:
   - {fileID: 1019980700}
   TextPrefab: {fileID: 114772172128098200, guid: f9a2d8cb677e55446a139ec0db04f0c2,
     type: 2}
+  Sprites: []
 --- !u!114 &1898819899
 MonoBehaviour:
   m_ObjectHideFlags: 0

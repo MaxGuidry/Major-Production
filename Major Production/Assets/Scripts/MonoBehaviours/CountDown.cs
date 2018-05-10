@@ -21,6 +21,8 @@ public class CountDown : MonoBehaviour
     [HideInInspector]public float GameOverScreenTimer = 5f;
     [SerializeField]private float testTimer;
     public Image HourGlass;
+
+    public Image CountdownImage;
     // Use this for initialization
     private void Start()
     {
@@ -45,7 +47,6 @@ public class CountDown : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-
         if (Timer >= 0f)
             TimerDisplay.text = Mathf.Round(Timer).ToString();
         if (players.Count == 0)
@@ -70,6 +71,9 @@ public class CountDown : MonoBehaviour
         if (GameActive)
         {
             Timer -= Time.deltaTime;
+            var slope = 1f / 60f;
+            var sliderAmount = slope * Timer;
+            CountdownImage.fillAmount = sliderAmount;
             foreach (var playerStatBehaviour in players)
             {
                 if (activePlayers.Contains(playerStatBehaviour))
@@ -106,6 +110,13 @@ public class CountDown : MonoBehaviour
                         }
                     }
                 }
+            }
+        }
+        else
+        {
+            foreach (var player in players)
+            {
+                player.GetComponent<AudioSource>().Pause();
             }
         }
     }

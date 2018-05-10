@@ -11,7 +11,7 @@ public class BasicAttackSM : StateMachineBehaviour
 	 // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-	    source.clip = Punch;
+	   // source.clip = Punch;
         //source.Play();
 	    player.state = CharacterMovement.PlayerState.Attacking;
 	}

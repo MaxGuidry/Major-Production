@@ -29,7 +29,8 @@ public class GameAudioManager : MonoBehaviour
             {
                 if (audioSource.clip.name.Contains("Active"))
                 {
-                    audioSource.Pause();
+                    var fadeOut = AudioFadeOut(audioSource, 900);
+                    StartCoroutine(fadeOut);
                 }
             }
 
@@ -117,6 +118,17 @@ public class GameAudioManager : MonoBehaviour
                     audioSource.Play();
                 }
             }
+        }
+    }
+
+    private IEnumerator AudioFadeOut(AudioSource audioSource, float fadeTime)
+    {
+        var startVolume = audioSource.volume;
+
+        while (audioSource.volume > 0)
+        {
+            audioSource.volume -= startVolume * Time.deltaTime / fadeTime;
+            yield return null;
         }
     }
 }

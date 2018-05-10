@@ -25,6 +25,15 @@ public class CharacterMovement : NetworkBehaviour
     public GameObject RocketPrefab;
     public GameObject shieldPrefab;
 
+    [SectionHeader("Particles")]
+    public GameObject deathParticle;
+    public GameObject deathPuff;
+    public GameObject takeOff;
+    public GameObject landing;
+    public GameObject dustKickup;
+    public GameObject whirlwind;
+
+
     public Animator anim;
 
     private string PlayerNumber;
@@ -121,7 +130,7 @@ public class CharacterMovement : NetworkBehaviour
     private void Update()
     {
 
-        
+
 
 
         if (Input.GetAxis("Right Bumper" + PlayerNumber) > 0 && state != PlayerState.Attacking)
@@ -140,12 +149,12 @@ public class CharacterMovement : NetworkBehaviour
                 dash = StartCoroutine(Dash());
         }
 
-        if (Input.GetAxis("Y" + PlayerNumber) > .1f && state != PlayerState.Attacking)
+        if (Input.GetAxis("Trigger" + PlayerNumber) < -.9f && state != PlayerState.Attacking)
         {
             StartCoroutine(Shield());
         }
-        if (Input.GetKeyDown(KeyCode.N) && PlayerNumber == "")
-            SpawnOnOtherPlanet(FindObjectsOfType<PlanetBehaviour>()[Random.Range(0, 4)]);
+        //if (Input.GetKeyDown(KeyCode.N) && PlayerNumber == "")
+          //  SpawnOnOtherPlanet(FindObjectsOfType<PlanetBehaviour>()[Random.Range(0, 4)]);
         if (GLOBALS.SoloOnline || GLOBALS.SplitscreenOnline)
             if (!isLocalPlayer)
                 return;
@@ -201,7 +210,7 @@ public class CharacterMovement : NetworkBehaviour
         // transform.Rotate(to.eulerAngles);
         anim.SetFloat("Velocity", velocity.magnitude * Mathf.Sign(Vector3.Dot(this.transform.forward, velocity.normalized)));
         //Debug.Log(InputManager.Controller());
-       
+
         rocketCooldown -= Time.deltaTime;
     }
 
@@ -227,7 +236,6 @@ public class CharacterMovement : NetworkBehaviour
 
             StartCoroutine(jumpForce());
             rb.AddForce(this.transform.up * 21, ForceMode.Impulse);
-
             anim.SetTrigger("Jump");
         }
 
@@ -245,10 +253,11 @@ public class CharacterMovement : NetworkBehaviour
     {
         shieldCooldown = MaxShieldCooldown;
         state = PlayerState.Attacking;
-     
+
         var go = Instantiate(shieldPrefab, this.transform.position, transform.rotation, this.gameObject.transform);
         var stats = GetComponent<PlayerStatBehaviour>();
         stats.Armor += 75;
+       
         while (shieldCooldown > 0)
         {
             shieldCooldown -= Time.deltaTime;
@@ -349,7 +358,7 @@ public class CharacterMovement : NetworkBehaviour
 
     public IEnumerator Dash()
     {
-        
+
         anim.SetTrigger("Dash");
         float timer = 0;
         while (timer < .5f)
@@ -397,14 +406,19 @@ public class CharacterMovement : NetworkBehaviour
     public IEnumerator Whirlwind()
     {
         whirlwindCooldown = MaxWhirlwindCooldown;
+        var go = Instantiate(whirlwind);
         while (whirlwindCooldown > 0)
         {
-            whirlwindCooldown-= Time.deltaTime;
-
-
+            whirlwindCooldown -= Time.deltaTime;
+            go.transform.position = this.transform.position;
+            go.transform.rotation= this.transform.rotation;
+            go.transform.localScale = this.transform.localScale;
             yield return null;
         }
+
         anim.SetBool("Whirlwind", false);
+        yield return new WaitForSeconds(0.25f);
+        Destroy(go);
 
     }
 

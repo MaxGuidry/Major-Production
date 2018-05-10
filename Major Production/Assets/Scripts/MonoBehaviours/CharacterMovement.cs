@@ -25,6 +25,15 @@ public class CharacterMovement : NetworkBehaviour
     public GameObject RocketPrefab;
     public GameObject shieldPrefab;
 
+    [SectionHeader("Particles")]
+    public GameObject deathParticle;
+    public GameObject deathPuff;
+    public GameObject takeOff;
+    public GameObject landing;
+    public GameObject dustKickup;
+    public GameObject whirlwind;
+
+
     public Animator anim;
 
     private string PlayerNumber;
@@ -121,7 +130,7 @@ public class CharacterMovement : NetworkBehaviour
     private void Update()
     {
 
-        
+
 
 
         if (Input.GetAxis("Right Bumper" + PlayerNumber) > 0 && state != PlayerState.Attacking)
@@ -201,7 +210,7 @@ public class CharacterMovement : NetworkBehaviour
         // transform.Rotate(to.eulerAngles);
         anim.SetFloat("Velocity", velocity.magnitude * Mathf.Sign(Vector3.Dot(this.transform.forward, velocity.normalized)));
         //Debug.Log(InputManager.Controller());
-       
+
         rocketCooldown -= Time.deltaTime;
     }
 
@@ -245,7 +254,7 @@ public class CharacterMovement : NetworkBehaviour
     {
         shieldCooldown = MaxShieldCooldown;
         state = PlayerState.Attacking;
-     
+
         var go = Instantiate(shieldPrefab, this.transform.position, transform.rotation, this.gameObject.transform);
         var stats = GetComponent<PlayerStatBehaviour>();
         stats.Armor += 75;
@@ -349,7 +358,7 @@ public class CharacterMovement : NetworkBehaviour
 
     public IEnumerator Dash()
     {
-        
+
         anim.SetTrigger("Dash");
         float timer = 0;
         while (timer < .5f)
@@ -399,7 +408,7 @@ public class CharacterMovement : NetworkBehaviour
         whirlwindCooldown = MaxWhirlwindCooldown;
         while (whirlwindCooldown > 0)
         {
-            whirlwindCooldown-= Time.deltaTime;
+            whirlwindCooldown -= Time.deltaTime;
 
 
             yield return null;

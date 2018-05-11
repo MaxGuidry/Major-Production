@@ -213,7 +213,7 @@ public class CountDown : MonoBehaviour
         var i = 0;
         while (GameActive)
         {
-            if (i == activePlayers.Count)
+            if (i >= activePlayers.Count)
                 i = 0;
             var currentPlayerCam = activePlayers[i].gameObject.GetComponentInChildren<Camera>();
             camera.gameObject.transform.SetParent(currentPlayerCam.transform.parent);
@@ -221,7 +221,7 @@ public class CountDown : MonoBehaviour
             camera.gameObject.transform.rotation = currentPlayerCam.transform.rotation;
             yield return new WaitForSeconds(3);
             i++;
-            if (i == activePlayers.Count)
+            if (i >= activePlayers.Count)
                 i = 0;
         }
     }

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -20,7 +22,7 @@ public class WarpBehviour : MonoBehaviour
     public GameObject WarpUI;
     private float Timer = 3f;
     public Text InstrucText, WarpText;
-
+    public GameObject WarpEffect;
     private bool TakingOff, Landing;
     // Use this for initialization
     private void Start()
@@ -66,6 +68,7 @@ public class WarpBehviour : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+       
         playerTag = gameObject.transform.parent.GetComponentInChildren<PlayerStatBehaviour>().tag;
         if (characterMovement == null)
             characterMovement = gameObject.transform.parent.GetComponentInChildren<CharacterMovement>();
@@ -99,6 +102,21 @@ public class WarpBehviour : MonoBehaviour
 
         if (!warping)
         {
+            if(eventSystem != null)
+            {
+                if (eventSystem.currentSelectedGameObject != null)
+                {
+                    if (eventSystem.currentSelectedGameObject.transform.parent != null)
+                    {
+                        if (eventSystem.currentSelectedGameObject.transform.parent.parent != null)
+                        {
+                            if (eventSystem.currentSelectedGameObject.transform.parent.parent.name == "ActionBar")
+                                eventSystem.SetSelectedGameObject(WarpUI.transform.GetChild(2).gameObject);
+                        }
+                    }
+                }
+
+            }
             WarpText.text = "";
             WarpText.gameObject.SetActive(false);
             if (WarpUI.gameObject.activeInHierarchy)
@@ -122,7 +140,29 @@ public class WarpBehviour : MonoBehaviour
                 inputEvents.gameObject.SetActive(false);
                 if (Input.GetAxis("A" + playerNumber) >= .9f)
                 {
-                    Debug.Log("Player: " + playerNumber + " pressed A");
+
+                    if (eventSystem == null)
+                    {
+                        Debug.LogError("Event System is null");
+                        return;
+                    }
+
+                    if (eventSystem.currentSelectedGameObject == null)
+                    {
+                        Debug.LogError("Current Selected Game Object is null");
+                        return;
+                    }
+                    if (eventSystem.currentSelectedGameObject.GetComponent<Button>() == null)
+                    {
+                        Debug.LogError("Button is null");
+                        Debug.LogError(eventSystem.currentSelectedGameObject.name + " ,"+ eventSystem.currentSelectedGameObject.transform.parent.name);
+                        return;
+                    }
+                    if (eventSystem.currentSelectedGameObject.GetComponent<Button>().onClick == null)
+                    {
+                        Debug.LogError("Button On Click is null");
+                        return;
+                    }
                     if (eventSystem.currentSelectedGameObject.GetComponent<Button>().enabled)
                         eventSystem.currentSelectedGameObject.GetComponent<Button>().onClick.Invoke();
                 }
@@ -241,7 +281,7 @@ public class WarpBehviour : MonoBehaviour
                     child.interactable = false;
                 }
                 warping = true;
-
+                StartCoroutine(SpawnEffect());
                 coroutine = characterMovement.StartCoroutine(
                     characterMovement.SpawnDelay(planet.GetComponent<PlanetBehaviour>(), delay, this, WarpText, Timer));
                 test = false;
@@ -333,6 +373,21 @@ public class WarpBehviour : MonoBehaviour
             WarpUI.SetActive(false);
             inputEvents.gameObject.SetActive(true);
             eventSystem.SetSelectedGameObject(null);
+        }
+    }
+
+    private IEnumerator SpawnEffect()
+    {
+        var done = false;
+        while (!done)
+        {
+            var effect = Instantiate(WarpEffect, Vector3.zero, Quaternion.identity);
+            effect.gameObject.transform.SetParent(characterMovement.gameObject.transform);
+            effect.transform.localEulerAngles = new Vector3(-90, 0, 0);
+            effect.transform.localPosition = Vector3.zero;
+            done = true;
+            yield return new WaitForSeconds(4);
+            Destroy(effect);
         }
     }
 }

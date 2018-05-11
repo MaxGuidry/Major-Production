@@ -9,6 +9,7 @@ public class GameAudioManager : MonoBehaviour
 
     private CountDown countDown;
 
+    private AudioSource music;
     // Use this for initialization
     void Start()
     {
@@ -16,9 +17,36 @@ public class GameAudioManager : MonoBehaviour
         foreach (var audioSource in GetComponents<AudioSource>())
         {
             Sources.Add(audioSource);
+            if (audioSource.clip.name == "GameActiveShorter")
+            {
+                music = audioSource;
+                StartCoroutine(FadeMusicIn());
+            }
         }
     }
 
+    IEnumerator FadeMusicIn()
+    {
+        music.volume = 0;
+
+        while (music.volume < 1)
+        {
+            music.volume += .005f;
+            yield return null;
+        }
+
+    }
+
+    IEnumerator FadeOUt()
+    {
+        music.volume = 1;
+
+        while (music.volume > 0)
+        {
+            music.volume -= .005f;
+            yield return null;
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -46,6 +74,7 @@ public class GameAudioManager : MonoBehaviour
             if (!lostPlayed)
             {
                 PlayClip("Over");
+                StartCoroutine(FadeOUt());
                 lostPlayed = true;
             }
         }

@@ -1,7 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
+
+#if UNITY_EDITOR
 using UnityEngine;
+using UnityEditor;
+
 [CustomPropertyDrawer(typeof(SectionHeaderAttribute))]
 public class EditorTest : DecoratorDrawer {
 
@@ -47,3 +50,4 @@ public class EditorTest : DecoratorDrawer {
     }
 }
 
+#endif

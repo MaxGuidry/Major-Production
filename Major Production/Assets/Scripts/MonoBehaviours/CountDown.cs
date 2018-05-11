@@ -213,6 +213,8 @@ public class CountDown : MonoBehaviour
         var i = 0;
         while (GameActive)
         {
+            if (i == activePlayers.Count)
+                i = 0;
             var currentPlayerCam = activePlayers[i].gameObject.GetComponentInChildren<Camera>();
             camera.gameObject.transform.SetParent(currentPlayerCam.transform.parent);
             camera.gameObject.transform.position = currentPlayerCam.transform.position;

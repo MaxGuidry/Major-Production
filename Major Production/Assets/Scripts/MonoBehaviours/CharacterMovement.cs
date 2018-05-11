@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using NUnit.Framework.Constraints;
 using UnityEngine;
 using UnityEngine.Advertisements;
 using UnityEngine.Events;
@@ -468,10 +469,12 @@ public class CharacterMovement : NetworkBehaviour
     public IEnumerator SpawnDelay(PlanetBehaviour p, float timer, WarpBehviour crt, Text warpText, float warpTimer)
     {
         warpText.text = "Taking Off";
+        anim.SetBool("Victory", true);
         yield return new WaitForSeconds(timer);
         SpawnOnOtherPlanet(p);
         warpText.text = "Landing";
         yield return new WaitForSeconds(timer);
+        anim.SetBool("Victory", false);
         crt.inputEvents.SetActive(true);
         crt.warping = false;
         enabled = true;

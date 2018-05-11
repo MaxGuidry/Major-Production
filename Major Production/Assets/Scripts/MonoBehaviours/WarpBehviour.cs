@@ -102,7 +102,7 @@ public class WarpBehviour : MonoBehaviour
 
         if (!warping)
         {
-            if(eventSystem != null)
+            if (eventSystem != null)
             {
                 if (eventSystem.currentSelectedGameObject != null)
                 {
@@ -384,6 +384,7 @@ public class WarpBehviour : MonoBehaviour
             var effect = Instantiate(WarpEffect, Vector3.zero, Quaternion.identity);
             effect.gameObject.transform.SetParent(characterMovement.gameObject.transform);
             effect.transform.localEulerAngles = new Vector3(-90, 0, 0);
+            effect.transform.localScale *= 3;
             effect.transform.localPosition = Vector3.zero;
             done = true;
             yield return new WaitForSeconds(4);

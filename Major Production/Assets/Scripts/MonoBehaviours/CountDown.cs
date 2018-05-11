@@ -21,11 +21,13 @@ public class CountDown : MonoBehaviour
     [HideInInspector]public float GameOverScreenTimer = 5f;
     [SerializeField]private float testTimer;
     public Image HourGlass;
-
+    private float MaxTimer, MaxDeathTimer;
     public Image CountdownImage;
     // Use this for initialization
     private void Start()
     {
+        MaxTimer = Timer;
+        MaxDeathTimer = deathTimer;
         testTimer = 10;
         HourGlass.enabled = false;
         BackGround.SetActive(false);
@@ -76,7 +78,7 @@ public class CountDown : MonoBehaviour
                 TimerDisplay.GetComponent<TweenScaleBehaviour>().TweenScale();
             }
 
-            var slope = 1f / 60f;
+            var slope = 1f / MaxTimer;
             var sliderAmount = slope * Timer;
             CountdownImage.fillAmount = sliderAmount;
             foreach (var playerStatBehaviour in players)
@@ -130,7 +132,7 @@ public class CountDown : MonoBehaviour
     {
         HourGlass.enabled = true;
         testTimer -= Time.deltaTime;
-        var slope = 1f / 10f;
+        var slope = 1f / MaxDeathTimer;
         var sliderAmount = slope * testTimer;
         HourGlass.fillAmount = sliderAmount;
     }

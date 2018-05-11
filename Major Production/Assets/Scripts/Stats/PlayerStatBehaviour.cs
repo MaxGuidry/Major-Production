@@ -106,6 +106,7 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
 
     private void SetStats(string number)
     {
+
         Health = stats.GetStat("PHealth" + number).Value;
         Armor = stats.GetStat("PArmor" + number).Value;
         Level = stats.GetStat("PLevel" + number).Value;

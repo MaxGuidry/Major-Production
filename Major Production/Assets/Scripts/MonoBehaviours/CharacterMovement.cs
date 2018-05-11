@@ -68,6 +68,7 @@ public class CharacterMovement : NetworkBehaviour
         Attacking,
         Running,
         Defending,
+        Dead,
         None,
     }
     [HideInInspector]
@@ -133,7 +134,8 @@ public class CharacterMovement : NetworkBehaviour
 
 
 
-
+        if (state == PlayerState.Dead)
+            return;
         if (Input.GetAxis("Right Bumper" + PlayerNumber) > 0 && state != PlayerState.Attacking)
         {
             if (rocketCooldown < 0)
@@ -258,6 +260,22 @@ public class CharacterMovement : NetworkBehaviour
         var go = Instantiate(shieldPrefab, this.transform.position, transform.rotation, this.gameObject.transform);
         var stats = GetComponent<PlayerStatBehaviour>();
         stats.Armor += 75;
+        switch (GetComponent<Transform>().tag)
+        {
+            case "P1":
+                stats.stats.GetStat("PArmor").Value += 75;
+                
+                break;
+            case "P2":
+                stats.stats.GetStat("PArmor 1").Value += 75;
+                break;
+            case "P3":
+                stats.stats.GetStat("PArmor 2").Value += 75;
+                break;
+            case "P4":
+                stats.stats.GetStat("PArmor 3").Value += 75;
+                break;
+        }
         float f = 3f;
         while (f > 0)
         {
@@ -268,6 +286,21 @@ public class CharacterMovement : NetworkBehaviour
         Destroy(go);
         state = PlayerState.Running;
 
+        switch (GetComponent<Transform>().tag)
+        {
+            case "P1":
+                stats.stats.GetStat("PArmor").Value -= 75;
+                break;
+            case "P2":
+                stats.stats.GetStat("PArmor 1").Value -= 75;
+                break;
+            case "P3":
+                stats.stats.GetStat("PArmor 2").Value -= 75;
+                break;
+            case "P4":
+                stats.stats.GetStat("PArmor 3").Value -= 75;
+                break;
+        }
         stats.Armor -= 75;
         while (shieldCooldown > 0)
         {
@@ -447,10 +480,13 @@ public class CharacterMovement : NetworkBehaviour
 
     public void Die()
     {
+        if (state == PlayerState.Dead)
+            return;
         anim.SetBool("Death", true);
         cameraPivot = null;
         //Destroy(this.gameObject.GetComponent<CharacterMovement>());
-        this.enabled = false;
+        //gameObject.GetComponent<CharacterMovement>().enabled = false;
+        this.state = PlayerState.Dead;
         this.transform.parent.GetComponentInChildren<GameEventArgsListenerObject>().enabled = false;
         StartCoroutine(deathps());
     }

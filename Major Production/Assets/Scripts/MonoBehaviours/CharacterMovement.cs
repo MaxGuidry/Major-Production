@@ -23,6 +23,15 @@ public class CharacterMovement : NetworkBehaviour
     [SectionHeader("Projectiles")]
     public Transform HandToShoot;
     public GameObject RocketPrefab;
+    public GameObject shieldPrefab;
+
+    [SectionHeader("Particles")]
+    public GameObject deathParticle;
+    public GameObject deathPuff;
+    public GameObject takeOff;
+    public GameObject landing;
+    public GameObject dustKickup;
+    public GameObject whirlwind;
 
 
     public Animator anim;
@@ -38,6 +47,16 @@ public class CharacterMovement : NetworkBehaviour
 
     [HideInInspector]
     public float rocketCooldown = 0;
+    public float MaxRocketCooldown = 8;
+
+    public float whirlwindCooldown = 0;
+    public float MaxWhirlwindCooldown = 2;
+
+    public float dashCooldown = 0;
+    public float MaxDashCooldown = 2f;
+
+    public float shieldCooldown = 0;
+    public float MaxShieldCooldown = 3;
     private void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody>();
@@ -48,6 +67,8 @@ public class CharacterMovement : NetworkBehaviour
     {
         Attacking,
         Running,
+        Defending,
+        Dead,
         None,
     }
     [HideInInspector]
@@ -111,27 +132,32 @@ public class CharacterMovement : NetworkBehaviour
     private void Update()
     {
 
-        
 
 
+        if (state == PlayerState.Dead)
+            return;
         if (Input.GetAxis("Right Bumper" + PlayerNumber) > 0 && state != PlayerState.Attacking)
         {
             if (rocketCooldown < 0)
             {
                 anim.SetTrigger("Rocket");
-                rocketCooldown = 10;
+                rocketCooldown = MaxRocketCooldown;
             }
         }
         if (Input.GetAxis("Left Bumper" + PlayerNumber) > 0 && state != PlayerState.Attacking)
             anim.SetBool("Whirlwind", true);
-        if (Input.GetAxis("Trigger" + PlayerNumber) > .9f)
+        if (Input.GetAxis("Trigger" + PlayerNumber) < -.9f)
         {
             if (dash == null)
                 dash = StartCoroutine(Dash());
         }
 
-        if (Input.GetKeyDown(KeyCode.N) && PlayerNumber == "")
-            SpawnOnOtherPlanet(FindObjectsOfType<PlanetBehaviour>()[Random.Range(0, 4)]);
+        if (Input.GetAxis("Trigger" + PlayerNumber) > .9f && state != PlayerState.Defending && shieldCooldown<=0)
+        {
+            StartCoroutine(Shield());
+        }
+        //if (Input.GetKeyDown(KeyCode.N) && PlayerNumber == "")
+          //  SpawnOnOtherPlanet(FindObjectsOfType<PlanetBehaviour>()[Random.Range(0, 4)]);
         if (GLOBALS.SoloOnline || GLOBALS.SplitscreenOnline)
             if (!isLocalPlayer)
                 return;
@@ -187,17 +213,7 @@ public class CharacterMovement : NetworkBehaviour
         // transform.Rotate(to.eulerAngles);
         anim.SetFloat("Velocity", velocity.magnitude * Mathf.Sign(Vector3.Dot(this.transform.forward, velocity.normalized)));
         //Debug.Log(InputManager.Controller());
-        //this.transform.rotation = Quaternion.Slerp(q, this.transform.rotation, .2f);
-        //this.transform.LookAt(this.transform.position + acceleration.normalized);
-        //float sens = (Input.GetJoystickNames()[0] == "")
-        //var thetaX = Input.GetAxis("Mouse X") * Mathf.Deg2Rad * Sensitivity * Time.deltaTime * 60;
-        // thetaX = ((thetaX > .35f) ? .35f : thetaX);
-        //thetaX = (thetaX < -.35f ? -.35f : thetaX);
-        //var rotx = Mathf.Sin(thetaX / 2f) * transform.up.x;
-        //var roty = Mathf.Sin(thetaX / 2f) * transform.up.y;
-        //var rotz = Mathf.Sin(thetaX / 2f) * transform.up.z;
-        //var rotw = Mathf.Cos(thetaX / 2f);
-        //transform.rotation = new Quaternion(rotx, roty, rotz, rotw) * transform.rotation;
+
         rocketCooldown -= Time.deltaTime;
     }
 
@@ -223,7 +239,6 @@ public class CharacterMovement : NetworkBehaviour
 
             StartCoroutine(jumpForce());
             rb.AddForce(this.transform.up * 21, ForceMode.Impulse);
-
             anim.SetTrigger("Jump");
         }
 
@@ -237,6 +252,63 @@ public class CharacterMovement : NetworkBehaviour
 
     }
 
+    public IEnumerator Shield()
+    {
+        shieldCooldown = MaxShieldCooldown;
+        state = PlayerState.Defending;
+
+        var go = Instantiate(shieldPrefab, this.transform.position, transform.rotation, this.gameObject.transform);
+        var stats = GetComponent<PlayerStatBehaviour>();
+        stats.Armor += 75;
+        switch (GetComponent<Transform>().tag)
+        {
+            case "P1":
+                stats.stats.GetStat("PArmor").Value += 75;
+                
+                break;
+            case "P2":
+                stats.stats.GetStat("PArmor 1").Value += 75;
+                break;
+            case "P3":
+                stats.stats.GetStat("PArmor 2").Value += 75;
+                break;
+            case "P4":
+                stats.stats.GetStat("PArmor 3").Value += 75;
+                break;
+        }
+        float f = 3f;
+        while (f > 0)
+        {
+            f -= Time.deltaTime;
+            go.transform.rotation = new Quaternion(Mathf.Sin(0.01f) * this.transform.up.x, Mathf.Sin(0.01f) * this.transform.up.y, Mathf.Sin(0.01f) * this.transform.up.z, Mathf.Cos(0.01f)) * go.transform.rotation;
+            yield return null;
+        }
+        Destroy(go);
+        state = PlayerState.Running;
+
+        switch (GetComponent<Transform>().tag)
+        {
+            case "P1":
+                stats.stats.GetStat("PArmor").Value -= 75;
+                break;
+            case "P2":
+                stats.stats.GetStat("PArmor 1").Value -= 75;
+                break;
+            case "P3":
+                stats.stats.GetStat("PArmor 2").Value -= 75;
+                break;
+            case "P4":
+                stats.stats.GetStat("PArmor 3").Value -= 75;
+                break;
+        }
+        stats.Armor -= 75;
+        while (shieldCooldown > 0)
+        {
+            shieldCooldown -= Time.deltaTime;
+            
+            yield return null;
+        }
+    }
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.GetComponent<MeshCollider>())
@@ -327,16 +399,22 @@ public class CharacterMovement : NetworkBehaviour
 
     public IEnumerator Dash()
     {
+
         anim.SetTrigger("Dash");
         float timer = 0;
-        while (timer < .3f)
+        while (timer < .5f)
         {
             timer += Time.deltaTime;
-            this.transform.position += this.transform.forward * .65f;
+            this.transform.position += this.transform.forward * .4f;
             yield return null;
         }
 
-        yield return new WaitForSeconds(3f);
+        dashCooldown = MaxDashCooldown;
+        while (dashCooldown > 0)
+        {
+            dashCooldown -= Time.deltaTime;
+            yield return null;
+        }
         dash = null;
     }
 
@@ -368,15 +446,21 @@ public class CharacterMovement : NetworkBehaviour
 
     public IEnumerator Whirlwind()
     {
-        float time = 0;
-        while (time < 2)
+        whirlwindCooldown = MaxWhirlwindCooldown;
+        var go = Instantiate(whirlwind,Vector3.zero,Quaternion.identity);
+        go.transform.parent = this.transform;
+       
+        while (whirlwindCooldown > 0)
         {
-            time += Time.deltaTime;
-
-
+            go.transform.localEulerAngles = new Vector3(-90,0,0);
+            go.transform.position = this.transform.position;
+            whirlwindCooldown -= Time.deltaTime;
             yield return null;
         }
+
         anim.SetBool("Whirlwind", false);
+        yield return new WaitForSeconds(0.1f);
+        Destroy(go);
 
     }
 
@@ -384,10 +468,12 @@ public class CharacterMovement : NetworkBehaviour
     public IEnumerator SpawnDelay(PlanetBehaviour p, float timer, WarpBehviour crt, Text warpText, float warpTimer)
     {
         warpText.text = "Taking Off";
+        anim.SetBool("Victory", true);
         yield return new WaitForSeconds(timer);
         SpawnOnOtherPlanet(p);
         warpText.text = "Landing";
         yield return new WaitForSeconds(timer);
+        anim.SetBool("Victory", false);
         crt.inputEvents.SetActive(true);
         crt.warping = false;
         enabled = true;
@@ -396,10 +482,20 @@ public class CharacterMovement : NetworkBehaviour
 
     public void Die()
     {
+        if (state == PlayerState.Dead)
+            return;
         anim.SetBool("Death", true);
         cameraPivot = null;
         //Destroy(this.gameObject.GetComponent<CharacterMovement>());
-        this.enabled = false;
+        //gameObject.GetComponent<CharacterMovement>().enabled = false;
+        this.state = PlayerState.Dead;
         this.transform.parent.GetComponentInChildren<GameEventArgsListenerObject>().enabled = false;
+        StartCoroutine(deathps());
+    }
+
+    IEnumerator deathps()
+    {
+        yield return new WaitForSeconds(1.5f);
+        Instantiate(deathPuff,this.transform.position,this.transform.rotation);
     }
 }

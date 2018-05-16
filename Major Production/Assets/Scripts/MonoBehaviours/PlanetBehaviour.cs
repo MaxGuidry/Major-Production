@@ -8,7 +8,6 @@ public class PlanetBehaviour : MonoBehaviour
     public List<Rigidbody> rbs = new List<Rigidbody>();
     public Planet planet;
     public List<Rigidbody> rbrs = new List<Rigidbody>();
-
     // Use this for initialization
     void Awake()
     {
@@ -175,4 +174,4 @@ public class PlanetBehaviour : MonoBehaviour
 
     }
 
-}
+    }

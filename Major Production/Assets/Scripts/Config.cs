@@ -13,7 +13,7 @@ public class Config : MonoBehaviour
 
     #endregion
 
-    void Start()
+    void Awake()
     {
         if (!Countdown)
             return;

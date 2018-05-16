@@ -34,7 +34,7 @@ public class FixCamera : MonoBehaviour
             return;
 
         this.transform.position =  Vector3.Lerp(this.transform.position,follow.transform.position,.15f);
-        this.transform.rotation =Quaternion.Slerp(this.transform.rotation, Quaternion.FromToRotation(this.transform.up, follow.transform.up) * this.transform.rotation,.1f);// follow.transform.rotation;
+        this.transform.rotation =Quaternion.Slerp(this.transform.rotation, Quaternion.FromToRotation(this.transform.up, follow.transform.up) * this.transform.rotation,.5f);// follow.transform.rotation;
                                                                                                                               // this.transform.rotation = Quaternion.FromToRotation(this.transform.right, follow.transform.right) * this.transform.rotation;// follow.transform.rotation;
         Quaternion origin = pivotX.rotation;
         if (character == null)

@@ -16,16 +16,19 @@ public class CountDown : MonoBehaviour
     public List<GameObject> players;
     public List<Camera> SpecateCameras;
     public float Timer = 60f;
-    private float deathTimer = 0f;
+    private float deathTimer = 10f;
     public Text TimerDisplay;
     [HideInInspector]public float GameOverScreenTimer = 5f;
     [SerializeField]private float testTimer;
     public Image HourGlass;
     private float MaxTimer, MaxDeathTimer;
     public Image CountdownImage;
+
+    public Text CreditText;
     // Use this for initialization
     private void Start()
     {
+        CreditText.enabled = false;
         MaxTimer = Timer;
         MaxDeathTimer = deathTimer;
         testTimer = 10;
@@ -121,6 +124,7 @@ public class CountDown : MonoBehaviour
         }
         else
         {
+            CreditText.enabled = true;
             foreach (var player in players)
             {
                 player.GetComponent<AudioSource>().Pause();

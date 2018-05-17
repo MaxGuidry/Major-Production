@@ -34,24 +34,28 @@ public class ItemInteractionBehaviour : MonoBehaviour
                 player.WoodAmounttext.text = player.woodAmount.ToString();
                 var tweenItWood = player.WoodAmounttext.GetComponent<TweenScaleBehaviour>();
                 tweenItWood.TweenScale();
+                StartCoroutine(tweenItWood.TweenItBackward());
                 break;
             case ItemType.Stone:
                 player.stoneAmount++;
                 player.StoneAmounttext.text = player.stoneAmount.ToString();
                 var tweenItStone = player.StoneAmounttext.GetComponent<TweenScaleBehaviour>();
                 tweenItStone.TweenScale();
+                StartCoroutine(tweenItStone.TweenItBackward());
                 break;
             case ItemType.Metal:
                 player.metalAmount++;
                 player.MetalAmounttext.text = player.metalAmount.ToString();
                 var tweenItMetal = player.MetalAmounttext.GetComponent<TweenScaleBehaviour>();
                 tweenItMetal.TweenScale();
+                StartCoroutine(tweenItMetal.TweenItBackward());
                 break;
             case ItemType.Goop:
                 player.goopAmount++;
                 player.GoopAmounttext.text = player.goopAmount.ToString();
                 var tweenItGoop = player.GoopAmounttext.GetComponent<TweenScaleBehaviour>();
                 tweenItGoop.TweenScale();
+                StartCoroutine(tweenItGoop.TweenItBackward());
                 break;
             default:
                 throw new ArgumentOutOfRangeException();

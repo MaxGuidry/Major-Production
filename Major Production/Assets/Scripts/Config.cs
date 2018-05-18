@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Config : MonoBehaviour
 {
-    public static ConfigSettings EditSettings;
+    public static ConfigSettings EditSettings = new ConfigSettings();
     #region References
 
     public CountDown Countdown;

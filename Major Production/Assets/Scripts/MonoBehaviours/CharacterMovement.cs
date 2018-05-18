@@ -9,7 +9,7 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class CharacterMovement : NetworkBehaviour
+public class CharacterMovement : MonoBehaviour
 {
     [SectionHeader("Camera")]
     
@@ -158,9 +158,6 @@ public class CharacterMovement : NetworkBehaviour
         }
         //if (Input.GetKeyDown(KeyCode.N) && PlayerNumber == "")
           //  SpawnOnOtherPlanet(FindObjectsOfType<PlanetBehaviour>()[Random.Range(0, 4)]);
-        if (GLOBALS.SoloOnline || GLOBALS.SplitscreenOnline)
-            if (!isLocalPlayer)
-                return;
         if (!cameraPivot)
             return;
         object[] test = { this, "A" };

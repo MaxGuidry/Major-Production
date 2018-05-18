@@ -8,16 +8,29 @@ using UnityEngine.SceneManagement;
 public class MainMenuUI : MonoBehaviour
 {
     public AudioClip MusicClip;
-    private Canvas MainCanvas;
     public Canvas OptionsCanvas, StartLocalGameCanvas;
-    public Slider sensitivity;
-    public Toggle invertMouse;
+    public Slider GameTimerSlider;
+    public Slider EndScreenTimer;
+    public Text GameTime;
+    public Text EndTimer;
+    public GameObject BackButton, StartButton, FourPlayerStart;
+    public Canvas MainCanvas;
     private AudioSource _backSound;
     private EventSystem eventSystem;
 
     private void Start()
     {
-        MainCanvas = GetComponent<Canvas>();
+        GameTimerSlider.maxValue = 999;
+        GameTimerSlider.minValue = 30;
+        GameTimerSlider.value = 90;
+        EndScreenTimer.maxValue = 10;
+        EndScreenTimer.minValue = 1;
+        EndScreenTimer.value = 10;
+        Config.EditSettings.RoundTime = GameTimerSlider.value;
+        Config.EditSettings.EndScreenTimer = EndScreenTimer.value;
+        Config.SaveSettings();
+        GameTime.text = "Game Time: " + Mathf.Round(Config.EditSettings.RoundTime);
+        EndTimer.text = "End Screen Time: " + Mathf.Round(Config.EditSettings.EndScreenTimer);
         eventSystem = FindObjectOfType<EventSystem>();
         MainCanvas.gameObject.SetActive(true);
         OptionsCanvas.gameObject.SetActive(false);
@@ -26,12 +39,19 @@ public class MainMenuUI : MonoBehaviour
         _backSound = FindObjectOfType<AudioSource>();
         _backSound.volume = 1;
 
-        sensitivity.value = InputMap.Sensititivity;
-        if (InputMap.Sensititivity < 0)
-            invertMouse.isOn = true;
         if (MusicClip == null) return;
         _backSound.clip = MusicClip;
         _backSound.Play();
+        SetSelected();
+    }
+
+    public void Update()
+    {
+        Config.EditSettings.RoundTime = GameTimerSlider.value;
+        Config.EditSettings.EndScreenTimer = EndScreenTimer.value;
+        GameTime.text = "Game Time: " + Mathf.Round(Config.EditSettings.RoundTime);
+        EndTimer.text = "End Screen Time: " + Mathf.Round(Config.EditSettings.EndScreenTimer);
+        Config.SaveSettings();
     }
 
     public void LoadScene(string scene)
@@ -42,6 +62,7 @@ public class MainMenuUI : MonoBehaviour
     public void StartLocalGame()
     {
         SwitchCanvas(StartLocalGameCanvas);
+        SetSelected();
     }
 
     public void ExitGame()
@@ -51,7 +72,8 @@ public class MainMenuUI : MonoBehaviour
 
     public void Options()
     {
-       SwitchCanvas(OptionsCanvas);
+        SwitchCanvas(OptionsCanvas);
+        SetSelected();
     }
 
     private void SwitchCanvas(Canvas otherCanvas)
@@ -64,7 +86,6 @@ public class MainMenuUI : MonoBehaviour
                     child.gameObject.SetActive(false);
                 }
                 otherCanvas.gameObject.SetActive(true);
-                eventSystem.SetSelectedGameObject(GameObject.FindGameObjectWithTag("BackButton"));
                 break;
             case false:
                 MainCanvas.gameObject.SetActive(true);
@@ -74,23 +95,23 @@ public class MainMenuUI : MonoBehaviour
                     MainCanvas.transform.GetChild(i).GetChild(0).gameObject.SetActive(true);
                 }
                 otherCanvas.gameObject.SetActive(false);
-                eventSystem.SetSelectedGameObject(GameObject.FindGameObjectWithTag("StartButton"));
                 break;
         }
     }
 
-    public void InvertMouse()
+    private void SetSelected()
     {
-        //InputMap.Sensititivity *= -1;
-    }
-
-    public void MouseSensitivitySlider(float value)
-    {
-        //InputMap.Sensititivity = value;
-    }
-
-    public void AudioSlider(float value)
-    {
-        //_backSound.volume = value;
+        if (BackButton.activeInHierarchy)
+        {
+            eventSystem.SetSelectedGameObject(BackButton);
+        }
+        else if (StartButton.activeInHierarchy)
+        {
+            eventSystem.SetSelectedGameObject(StartButton);
+        }
+        else if (FourPlayerStart.activeInHierarchy)
+        {
+            eventSystem.SetSelectedGameObject(FourPlayerStart);
+        }
     }
 }

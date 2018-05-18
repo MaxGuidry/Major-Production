@@ -9,7 +9,7 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
 
     public int Health, Armor, Level, Speed, Damage, EXP;
 
-    private void Awake()
+    private void OnEnable()
     {
         stats._stats.ForEach(stat => stat.Value = 0);
         switch (GetComponent<Transform>().tag)

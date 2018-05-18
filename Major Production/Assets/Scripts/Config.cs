@@ -15,7 +15,7 @@ public class Config : MonoBehaviour
 
     void Awake()
     {
-        
+
         if (!Countdown)
             return;
         string path = Application.dataPath + "/bin/config.json";
@@ -47,7 +47,7 @@ public class Config : MonoBehaviour
 
     public void LoadSettings()
     {
-        
+
         string path = Application.dataPath + "/bin/config.json";
 
         if (!File.Exists(path))
@@ -64,11 +64,10 @@ public class Config : MonoBehaviour
         string configJSON = File.ReadAllText(path);
         ConfigSettings config = JsonUtility.FromJson<ConfigSettings>(configJSON);
         EditSettings = config;
-        if (config.DontYouDareTouchThisVariable__Thanks == "__Dev_Mode__5172018__@")
-        {
-            Countdown.Timer = config.RoundTime;
-            Countdown.GameOverScreenTimer = config.EndScreenTimer;
-        }
+
+        Countdown.Timer = config.RoundTime;
+        Countdown.GameOverScreenTimer = config.EndScreenTimer;
+
     }
 
     public static void SaveSettings()
@@ -88,6 +87,7 @@ public class Config : MonoBehaviour
         }
 
         string json = JsonUtility.ToJson(EditSettings);
-        File.WriteAllText(path,json);
+        File.WriteAllText(path, json);
+
     }
 }

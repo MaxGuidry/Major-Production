@@ -206,7 +206,7 @@ public class CharacterMovement : MonoBehaviour
         transform.position += (velocity * Time.deltaTime);
         //rb.MovePosition(pos);
         Quaternion to = Quaternion.FromToRotation(this.transform.forward, velocity.normalized) * this.transform.rotation;
-        transform.rotation = Quaternion.Slerp(this.transform.rotation, to, .075f);
+        transform.rotation = Quaternion.Slerp(this.transform.rotation, to, .085f);
         // transform.Rotate(to.eulerAngles);
         anim.SetFloat("Velocity", velocity.magnitude * Mathf.Sign(Vector3.Dot(this.transform.forward, velocity.normalized)));
         //Debug.Log(InputManager.Controller());

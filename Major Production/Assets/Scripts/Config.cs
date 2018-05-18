@@ -6,6 +6,7 @@ using UnityEngine;
 public class Config : MonoBehaviour
 {
     public static ConfigSettings EditSettings = new ConfigSettings();
+    public static FileStream fileStream;
     #region References
 
     public CountDown Countdown;
@@ -13,7 +14,8 @@ public class Config : MonoBehaviour
 
     #endregion
 
-    void Awake()
+    private bool open = false;
+    void OnEnable()
     {
 
         if (!Countdown)
@@ -24,8 +26,8 @@ public class Config : MonoBehaviour
             if (!Directory.Exists(Application.dataPath + "/bin"))
                 Directory.CreateDirectory(Application.dataPath + "/bin");
 
-            var filestream = File.Create(path);
-            filestream.Close();
+            fileStream = File.Create(path);
+            fileStream.Close();
 
 
             ConfigSettings config = new ConfigSettings();
@@ -40,6 +42,12 @@ public class Config : MonoBehaviour
     [System.Serializable]
     public class ConfigSettings
     {
+        public ConfigSettings()
+        {
+            DontYouDareTouchThisVariable__Thanks = "";
+            RoundTime = 60f;
+            EndScreenTimer = 10f;
+        }
         public string DontYouDareTouchThisVariable__Thanks;
         public float RoundTime;
         public float EndScreenTimer;
@@ -54,19 +62,23 @@ public class Config : MonoBehaviour
         {
             if (!Directory.Exists(Application.dataPath + "/bin"))
                 Directory.CreateDirectory(Application.dataPath + "/bin");
-            File.Create(path);
+            fileStream = File.Create(path);
+            fileStream.Close();
+            
         }
 
         if (!File.Exists(path))
         {
             return;
         }
+
+        fileStream= File.OpenRead(path);
         string configJSON = File.ReadAllText(path);
         ConfigSettings config = JsonUtility.FromJson<ConfigSettings>(configJSON);
-        EditSettings = config;
 
         Countdown.Timer = config.RoundTime;
         Countdown.GameOverScreenTimer = config.EndScreenTimer;
+        fileStream.Close();
 
     }
 
@@ -78,16 +90,23 @@ public class Config : MonoBehaviour
         {
             if (!Directory.Exists(Application.dataPath + "/bin"))
                 Directory.CreateDirectory(Application.dataPath + "/bin");
-            File.Create(path);
+           fileStream= File.Create(path);
+           fileStream.Close();
+            if (!File.Exists(path))
+            {
+                return;
+            }
         }
 
-        if (!File.Exists(path))
-        {
+        if (fileStream == null)
             return;
-        }
-
-        string json = JsonUtility.ToJson(EditSettings);
+        if (!fileStream.CanRead)
+            return;
+        fileStream = File.Open(path,FileMode.Open);
+        if (!fileStream.CanWrite)
+            return;
+        string json = JsonUtility.ToJson(EditSettings);        
         File.WriteAllText(path, json);
-
+        fileStream.Close();
     }
 }

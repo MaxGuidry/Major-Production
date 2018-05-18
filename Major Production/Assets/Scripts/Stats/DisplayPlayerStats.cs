@@ -6,11 +6,11 @@ using UnityEngine.UI;
 public class DisplayPlayerStats : MonoBehaviour
 {
     public Font DefaultFont;
-    public Slider ExpSlider;
+    public Slider ExpSlider, HealthSlider;
     public PlayerStatBehaviour PlayerStats;
     [SerializeField] private List<Text> TempText;
     public Text TextPrefab;
-
+    private bool maxChanged;
     public List<Sprite> Sprites;
     // Use this for initialization
     private void Start()
@@ -35,7 +35,22 @@ public class DisplayPlayerStats : MonoBehaviour
             text.fontSize = 10;
             if (text.name.Contains("Health"))
             {
-                text.text = PlayerStats.GetComponent<PlayerStatBehaviour>().Health.ToString();
+                var health = PlayerStats.GetComponent<PlayerStatBehaviour>().Health;
+                if (!maxChanged)
+                {
+                    if (health <= 100)
+                    {
+                        HealthSlider.maxValue = 100;
+                    }
+                    else
+                    {
+                        HealthSlider.maxValue = 200;
+                        maxChanged = true;
+                    }
+                }
+
+                HealthSlider.value = health;
+                text.text = "";               
             }
             else if (text.name.Contains("Armor"))
             {

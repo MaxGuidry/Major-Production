@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Config : MonoBehaviour
 {
-
+    public static ConfigSettings EditSettings;
     #region References
 
     public CountDown Countdown;
@@ -63,6 +63,7 @@ public class Config : MonoBehaviour
         }
         string configJSON = File.ReadAllText(path);
         ConfigSettings config = JsonUtility.FromJson<ConfigSettings>(configJSON);
+        EditSettings = config;
         if (config.DontYouDareTouchThisVariable__Thanks == "__Dev_Mode__5172018__@")
         {
             Countdown.Timer = config.RoundTime;
@@ -70,4 +71,23 @@ public class Config : MonoBehaviour
         }
     }
 
+    public void SaveSettings()
+    {
+        string path = Application.dataPath + "/bin/config.json";
+
+        if (!File.Exists(path))
+        {
+            if (!Directory.Exists(Application.dataPath + "/bin"))
+                Directory.CreateDirectory(Application.dataPath + "/bin");
+            File.Create(path);
+        }
+
+        if (!File.Exists(path))
+        {
+            return;
+        }
+
+        string json = JsonUtility.ToJson(EditSettings);
+        File.WriteAllText(path,json);
+    }
 }

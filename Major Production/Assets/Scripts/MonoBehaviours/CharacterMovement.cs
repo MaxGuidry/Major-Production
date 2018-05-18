@@ -12,7 +12,7 @@ using Random = UnityEngine.Random;
 public class CharacterMovement : MonoBehaviour
 {
     [SectionHeader("Camera")]
-    
+
     public float Sensitivity = 1;
     public Transform cameraPivot;
 
@@ -44,7 +44,7 @@ public class CharacterMovement : MonoBehaviour
 
     private Vector3 acceleration = Vector3.zero;
     private Coroutine dash;
-
+    public Coroutine whirl;
     [HideInInspector]
     public float rocketCooldown = 0;
     public float MaxRocketCooldown = 8;
@@ -144,20 +144,26 @@ public class CharacterMovement : MonoBehaviour
                 rocketCooldown = MaxRocketCooldown;
             }
         }
-        if (Input.GetAxis("Left Bumper" + PlayerNumber) > 0 && state != PlayerState.Attacking)
-            anim.SetBool("Whirlwind", true);
+        
+
+        if (Input.GetAxis("Left Bumper" + PlayerNumber) > .1f && state != PlayerState.Attacking)
+        {
+                anim.SetTrigger("Whirlwind");
+        }
+
+
         if (Input.GetAxis("Trigger" + PlayerNumber) < -.9f)
         {
             if (dash == null)
                 dash = StartCoroutine(Dash());
         }
 
-        if (Input.GetAxis("Trigger" + PlayerNumber) > .9f && state != PlayerState.Defending && shieldCooldown<=0)
+        if (Input.GetAxis("Trigger" + PlayerNumber) > .9f && state != PlayerState.Defending && shieldCooldown <= 0)
         {
             StartCoroutine(Shield());
         }
         //if (Input.GetKeyDown(KeyCode.N) && PlayerNumber == "")
-          //  SpawnOnOtherPlanet(FindObjectsOfType<PlanetBehaviour>()[Random.Range(0, 4)]);
+        //  SpawnOnOtherPlanet(FindObjectsOfType<PlanetBehaviour>()[Random.Range(0, 4)]);
         if (!cameraPivot)
             return;
         object[] test = { this, "A" };
@@ -261,7 +267,7 @@ public class CharacterMovement : MonoBehaviour
         {
             case "P1":
                 stats.stats.GetStat("PArmor").Value += 75;
-                
+
                 break;
             case "P2":
                 stats.stats.GetStat("PArmor 1").Value += 75;
@@ -302,7 +308,7 @@ public class CharacterMovement : MonoBehaviour
         while (shieldCooldown > 0)
         {
             shieldCooldown -= Time.deltaTime;
-            
+
             yield return null;
         }
     }
@@ -454,19 +460,21 @@ public class CharacterMovement : MonoBehaviour
     public IEnumerator Whirlwind()
     {
         whirlwindCooldown = MaxWhirlwindCooldown;
-        var go = Instantiate(whirlwind,Vector3.zero,Quaternion.identity);
+        var go = Instantiate(whirlwind, Vector3.zero, Quaternion.identity);
         go.transform.parent = this.transform;
-       
+
         while (whirlwindCooldown > 0)
         {
-            go.transform.localEulerAngles = new Vector3(-90,0,0);
+            go.transform.localEulerAngles = new Vector3(-90, 0, 0);
             go.transform.position = this.transform.position;
             whirlwindCooldown -= Time.deltaTime;
             yield return null;
         }
 
-        anim.SetBool("Whirlwind", false);
+        anim.SetTrigger("WhirlwindExit");
+        
         yield return new WaitForSeconds(0.1f);
+        whirl = null;
         Destroy(go);
 
     }
@@ -495,14 +503,14 @@ public class CharacterMovement : MonoBehaviour
         cameraPivot = null;
         //Destroy(this.gameObject.GetComponent<CharacterMovement>());
         //gameObject.GetComponent<CharacterMovement>().enabled = false;
-        this.state = PlayerState.Dead;
-        this.transform.parent.GetComponentInChildren<GameEventArgsListenerObject>().enabled = false;
+        state = PlayerState.Dead;
+        transform.parent.GetComponentInChildren<GameEventArgsListenerObject>().enabled = false;
         StartCoroutine(deathps());
     }
 
     IEnumerator deathps()
     {
         yield return new WaitForSeconds(1.5f);
-        Instantiate(deathPuff,this.transform.position,this.transform.rotation);
+        Instantiate(deathPuff, this.transform.position, this.transform.rotation);
     }
 }

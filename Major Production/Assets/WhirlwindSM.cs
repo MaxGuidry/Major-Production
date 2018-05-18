@@ -10,13 +10,13 @@ public class WhirlwindSM : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         player.state = CharacterMovement.PlayerState.Attacking;
-        player.StartCoroutine(player.Whirlwind());
+        player.whirl = player.StartCoroutine(player.Whirlwind());
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (timer==.25f)
+        if (timer == .25f)
         {
             player.state = CharacterMovement.PlayerState.Attacking;
         }
@@ -33,6 +33,7 @@ public class WhirlwindSM : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         player.state = CharacterMovement.PlayerState.Running;
+        animator.ResetTrigger("Whirlwind");
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here

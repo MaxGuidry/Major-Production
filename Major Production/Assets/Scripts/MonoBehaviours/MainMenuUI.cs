@@ -16,7 +16,6 @@ public class MainMenuUI : MonoBehaviour
     public GameObject BackButton, StartButton, FourPlayerStart;
     public Canvas MainCanvas;
     private AudioSource _backSound;
-    private EventSystem eventSystem;
 
     private void Start()
     {
@@ -31,7 +30,6 @@ public class MainMenuUI : MonoBehaviour
         Config.SaveSettings();
         GameTime.text = "Game Time: " + Mathf.Round(Config.EditSettings.RoundTime);
         EndTimer.text = "End Screen Time: " + Mathf.Round(Config.EditSettings.EndScreenTimer);
-        eventSystem = FindObjectOfType<EventSystem>();
         MainCanvas.gameObject.SetActive(true);
         OptionsCanvas.gameObject.SetActive(false);
         StartLocalGameCanvas.gameObject.SetActive(false);
@@ -102,16 +100,16 @@ public class MainMenuUI : MonoBehaviour
     private void SetSelected()
     {
         if (BackButton.activeInHierarchy)
-        {
-            eventSystem.SetSelectedGameObject(BackButton);
+        {    
+            EventSystem.current.SetSelectedGameObject(BackButton);
         }
         else if (StartButton.activeInHierarchy)
         {
-            eventSystem.SetSelectedGameObject(StartButton);
+            EventSystem.current.SetSelectedGameObject(StartButton);
         }
         else if (FourPlayerStart.activeInHierarchy)
         {
-            eventSystem.SetSelectedGameObject(FourPlayerStart);
+            EventSystem.current.SetSelectedGameObject(FourPlayerStart);
         }
     }
 }

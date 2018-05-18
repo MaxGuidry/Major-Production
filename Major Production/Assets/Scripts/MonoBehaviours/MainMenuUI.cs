@@ -81,16 +81,16 @@ public class MainMenuUI : MonoBehaviour
 
     public void InvertMouse()
     {
-        InputMap.Sensititivity *= -1;
+        //InputMap.Sensititivity *= -1;
     }
 
     public void MouseSensitivitySlider(float value)
     {
-        InputMap.Sensititivity = value;
+        //InputMap.Sensititivity = value;
     }
 
     public void AudioSlider(float value)
     {
-        _backSound.volume = value;
+        //_backSound.volume = value;
     }
 }

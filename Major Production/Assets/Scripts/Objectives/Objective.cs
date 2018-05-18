@@ -78,7 +78,7 @@ public class Objective : ScriptableObject
         if (args[0] == null)
             return;
 
-        Debug.Log("Quest Progress: " + _title + " " + args[0]);
+       // Debug.Log("Quest Progress: " + _title + " " + args[0]);
 
         var valids = new object[] { _requiredItem, "initialize", "start" };
 

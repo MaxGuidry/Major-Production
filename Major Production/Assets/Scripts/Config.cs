@@ -63,7 +63,6 @@ public class Config : MonoBehaviour
         }
         string configJSON = File.ReadAllText(path);
         ConfigSettings config = JsonUtility.FromJson<ConfigSettings>(configJSON);
-        EditSettings = config;
 
         Countdown.Timer = config.RoundTime;
         Countdown.GameOverScreenTimer = config.EndScreenTimer;

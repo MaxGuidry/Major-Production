@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.PostProcessing;
 
 public class PlayerStatBehaviour : MonoBehaviour, IDamageable
 {
     public GameObject LevelUpEffect;
     public GameEventArgs LevelUpEvent;
     public Stats stats;
-
+    public GameObject HitParticleEffect;
     public int Health, Armor, Level, Speed, Damage, EXP;
 
     private void OnEnable()
@@ -186,8 +187,81 @@ public class PlayerStatBehaviour : MonoBehaviour, IDamageable
             }
             UpdateStat();
         }
+        var cams = FindObjectsOfType<Camera>();
+        foreach (var cam in cams)
+        {
+            switch (gameObject.tag)
+            {
+                case "P1":
+                    if (cam.transform.root.gameObject.name.Contains("One"))
+                    {
+                        StartCoroutine(CameraEffectsHit(cam.gameObject.GetComponent<PostProcessingBehaviour>()));
+                    }
+                    break;
+                case "P2":
+                    if (cam.transform.root.gameObject.name.Contains("Two"))
+                    {
+                        StartCoroutine(CameraEffectsHit(cam.gameObject.GetComponent<PostProcessingBehaviour>()));
+                    }
+                    break;
+                case "P3":
+                    if (cam.transform.root.gameObject.name.Contains("Three"))
+                    {
+                        StartCoroutine(CameraEffectsHit(cam.gameObject.GetComponent<PostProcessingBehaviour>()));
+                    }
+                    break;
+                case "P4":
+                    if (cam.transform.root.gameObject.name.Contains("Four"))
+                    {
+                        StartCoroutine(CameraEffectsHit(cam.gameObject.GetComponent<PostProcessingBehaviour>()));
+                    }
+                    break;
+
+            }
+
+        }
+
+        var go = GameObject.Instantiate(HitParticleEffect, this.transform.position, Quaternion.identity);
+        go.transform.position += Vector3.up * .5f;
+        go.transform.localScale += Vector3.one;
+        go.GetComponent<ParticleSystem>().Play();
     }
 
+    private IEnumerator CameraEffectsHit(PostProcessingBehaviour pp)
+    {
+        pp.profile.chromaticAberration.enabled = true;
+        pp.profile.grain.enabled = true;
+        ChromaticAberrationModel.Settings CASettings = new ChromaticAberrationModel.Settings();
+        GrainModel.Settings GrainSettings = new GrainModel.Settings();
+        CASettings.intensity = 0;
+        GrainSettings.intensity = 0;
+        GrainSettings.size = 0;
+        var time = .4f;
+        while (time > .2f)
+        {
+            time -= Time.deltaTime;
+            CASettings.intensity += .1f;
+            GrainSettings.intensity += .025f;
+            GrainSettings.size += .1f;
+            pp.profile.chromaticAberration.settings = CASettings;
+            pp.profile.grain.settings = GrainSettings;
+            yield return null;
+        }
+
+        while (time > 0f && time<=.2f)
+        {
+            time -= Time.deltaTime;
+            CASettings.intensity -= .15f;
+            GrainSettings.intensity -= .025f;
+            GrainSettings.size -= .1f;
+            pp.profile.chromaticAberration.settings = CASettings;
+            pp.profile.grain.settings = GrainSettings;
+            yield return null;
+        }
+        pp.profile.chromaticAberration.enabled = false;
+        pp.profile.grain.enabled = false;
+
+    }
     /// <summary>
     ///     Death of Entity
     ///     TODO: Add more to death

@@ -71,7 +71,7 @@ public class Config : MonoBehaviour
         }
     }
 
-    public void SaveSettings()
+    public static void SaveSettings()
     {
         string path = Application.dataPath + "/bin/config.json";
 

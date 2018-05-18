@@ -18,6 +18,6 @@ public class SliderLabel : MonoBehaviour
     {
         if (Label == "")
             return;
-        text.text = Label + (int)GetComponent<Slider>().value;
+        text.text = Label + ": " +(int)GetComponent<Slider>().value;
     }
 }

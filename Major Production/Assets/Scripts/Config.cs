@@ -15,6 +15,7 @@ public class Config : MonoBehaviour
 
     void Awake()
     {
+        
         if (!Countdown)
             return;
         string path = Application.dataPath + "/bin/config.json";
@@ -30,19 +31,23 @@ public class Config : MonoBehaviour
             ConfigSettings config = new ConfigSettings();
             config.EndScreenTimer = 3f;
             config.RoundTime = 60f;
+            config.DontYouDareTouchThisVariable__Thanks = "Stop it.";
             File.WriteAllText(path, JsonUtility.ToJson(config));
         }
 
         LoadSettings();
     }
+    [System.Serializable]
     public class ConfigSettings
     {
+        public string DontYouDareTouchThisVariable__Thanks;
         public float RoundTime;
         public float EndScreenTimer;
     }
 
     public void LoadSettings()
     {
+        
         string path = Application.dataPath + "/bin/config.json";
 
         if (!File.Exists(path))
@@ -58,8 +63,11 @@ public class Config : MonoBehaviour
         }
         string configJSON = File.ReadAllText(path);
         ConfigSettings config = JsonUtility.FromJson<ConfigSettings>(configJSON);
-        Countdown.Timer = config.RoundTime;
-        Countdown.GameOverScreenTimer = config.EndScreenTimer;
+        if (config.DontYouDareTouchThisVariable__Thanks == "__Dev_Mode__5172018__@")
+        {
+            Countdown.Timer = config.RoundTime;
+            Countdown.GameOverScreenTimer = config.EndScreenTimer;
+        }
     }
 
 }

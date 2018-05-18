@@ -37,6 +37,10 @@ public class SliderBehavior : MonoBehaviour
             return;
         }
         vars[s].SetValue(objectToChange, slider.value);
+        var label = GetComponent<SliderLabel>();
+        if (!label)
+            return;
+        label.UpdateLabel();
     }
     public System.Type getType(object o)
     {

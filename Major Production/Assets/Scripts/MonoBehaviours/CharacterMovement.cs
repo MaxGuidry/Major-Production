@@ -12,7 +12,7 @@ using Random = UnityEngine.Random;
 public class CharacterMovement : NetworkBehaviour
 {
     [SectionHeader("Camera")]
-    [Range(1, 20)]
+    
     public float Sensitivity = 1;
     public Transform cameraPivot;
 
@@ -402,10 +402,20 @@ public class CharacterMovement : NetworkBehaviour
 
         anim.SetTrigger("Dash");
         float timer = 0;
+        Vector3 forward = this.transform.forward;
         while (timer < .5f)
         {
+            //this magically worked on the first try to stop clipping through planet/trees.
+            float mod = .35f;
+            RaycastHit rh;
+            if (Physics.Raycast(this.transform.position + this.transform.up, this.transform.forward, out rh, 1.5f,
+                ~LayerMask.GetMask("Player")))
+            {
+                if (rh.transform.gameObject.GetComponent<MeshCollider>() != null)
+                    mod = .1f;
+            }
             timer += Time.deltaTime;
-            this.transform.position += this.transform.forward * .4f;
+            this.transform.position += forward * mod;
             yield return null;
         }
 

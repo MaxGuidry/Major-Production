@@ -47,16 +47,14 @@ public class InputEvents : MonoBehaviour
             axisValues.Add(axis, 0);
             prevAxisValues.Add(axis, 0);
         }
+        
     }
 
     void Update()
     {
         foreach (var button in Buttons)
         {
-
-
-           
-
+         
 
             prevButtonValues[button] = buttonValues[button];
             float value = Input.GetAxis(button);
@@ -72,6 +70,7 @@ public class InputEvents : MonoBehaviour
 
         foreach (var axis in Axis)
         {
+          
 
             prevAxisValues[axis] = axisValues[axis];
             float value = Input.GetAxis(axis);

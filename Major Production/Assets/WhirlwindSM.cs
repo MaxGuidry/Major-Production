@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WhirlwindSM : StateMachineBehaviour
 {
-
+    private float timer = .25f;
     public CharacterMovement player;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -16,7 +16,16 @@ public class WhirlwindSM : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        if (timer==.25f)
+        {
+            player.state = CharacterMovement.PlayerState.Attacking;
+        }
 
+        timer -= Time.deltaTime;
+        if (timer < 0)
+        {
+            player.state = CharacterMovement.PlayerState.None;
+        }
 
     }
 

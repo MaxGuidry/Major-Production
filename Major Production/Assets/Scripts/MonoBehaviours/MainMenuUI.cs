@@ -13,8 +13,9 @@ public class MainMenuUI : MonoBehaviour
     public Slider EndScreenTimer;
     public Text GameTime;
     public Text EndTimer;
-    public GameObject BackButton, StartButton, FourPlayerStart;
+    public GameObject BackButtonOptions, StartButton, FourPlayerStart, BackButtonControls;
     public Canvas MainCanvas;
+    public Canvas ControlsCanvas;
     private AudioSource _backSound;
 
     private void Start()
@@ -74,6 +75,12 @@ public class MainMenuUI : MonoBehaviour
         SetSelected();
     }
 
+    public void Controls()
+    {
+        SwitchCanvas(ControlsCanvas);
+        SetSelected();
+    }
+
     private void SwitchCanvas(Canvas otherCanvas)
     {
         switch (MainCanvas.GetComponentInChildren<Transform>().gameObject.activeInHierarchy)
@@ -99,9 +106,9 @@ public class MainMenuUI : MonoBehaviour
 
     private void SetSelected()
     {
-        if (BackButton.activeInHierarchy)
+        if (BackButtonOptions.activeInHierarchy)
         {    
-            EventSystem.current.SetSelectedGameObject(BackButton);
+            EventSystem.current.SetSelectedGameObject(BackButtonOptions);
         }
         else if (StartButton.activeInHierarchy)
         {
@@ -110,6 +117,10 @@ public class MainMenuUI : MonoBehaviour
         else if (FourPlayerStart.activeInHierarchy)
         {
             EventSystem.current.SetSelectedGameObject(FourPlayerStart);
+        }
+        else if (BackButtonControls.activeInHierarchy)
+        {
+            EventSystem.current.SetSelectedGameObject(BackButtonControls);
         }
     }
 }

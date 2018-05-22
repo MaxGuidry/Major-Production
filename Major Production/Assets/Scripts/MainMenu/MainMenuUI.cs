@@ -21,7 +21,7 @@ public class MainMenuUI : MonoBehaviour
             if (child.name.Contains("Main_Canvas"))
             {
                 MainCanvas = child.GetComponent<Canvas>().gameObject;
-                OpenStartGameButton = MainCanvas.transform.GetChild(0).GetChild(0).GetComponent<Button>().gameObject;
+                OpenStartGameButton = MainCanvas.transform.GetChild(1).GetChild(0).GetComponent<Button>().gameObject;
             }
             if (child.name.Contains("Options_Canvas"))
             {
@@ -60,15 +60,15 @@ public class MainMenuUI : MonoBehaviour
     private void Start()
     {
         var GSlider = GameTimerSlider.GetComponent<Slider>();
-        GSlider.maxValue = 999;
-        GSlider.minValue = 30;
-        GSlider.value = 90;
+        GSlider.maxValue = 10;
+        GSlider.minValue = 3;
+        GSlider.value = 9;
         var ESlider = EndScreenTimerSlider.GetComponent<Slider>();
         ESlider.maxValue = 10;
         ESlider.minValue = 1;
         ESlider.value = 10;
 
-        Config.EditSettings.RoundTime = GameTimerSlider.GetComponent<Slider>().value;
+        Config.EditSettings.RoundTime = GameTimerSlider.GetComponent<Slider>().value * 10;
         Config.EditSettings.EndScreenTimer = EndScreenTimerSlider.GetComponent<Slider>().value;
         Config.SaveSettings();
 
@@ -76,7 +76,7 @@ public class MainMenuUI : MonoBehaviour
         EndTimer.GetComponent<Text>().text = "End Screen Time: " + Mathf.Round(Config.EditSettings.EndScreenTimer);
 
         _backSound = FindObjectOfType<AudioSource>();
-        _backSound.volume = 1;
+        _backSound.volume = .7f;
 
         if (MusicClip == null) return;
         _backSound.clip = MusicClip;
@@ -86,7 +86,7 @@ public class MainMenuUI : MonoBehaviour
 
     public void Update()
     {
-        Config.EditSettings.RoundTime = GameTimerSlider.GetComponent<Slider>().value;
+        Config.EditSettings.RoundTime = GameTimerSlider.GetComponent<Slider>().value * 10;
         Config.EditSettings.EndScreenTimer = EndScreenTimerSlider.GetComponent<Slider>().value;
         GameTime.GetComponent<Text>().text = "Game Time: " + Mathf.Round(Config.EditSettings.RoundTime);
         EndTimer.GetComponent<Text>().text = "End Screen Time: " + Mathf.Round(Config.EditSettings.EndScreenTimer);
@@ -126,27 +126,11 @@ public class MainMenuUI : MonoBehaviour
         switch (MainCanvas.GetComponentInChildren<Transform>().gameObject.activeInHierarchy)
         {
             case true:
-                foreach (var child in MainCanvas.GetComponentsInChildren<Transform>())
-                {
-                    child.gameObject.SetActive(false);
-                }
+                MainCanvas.gameObject.SetActive(false);
                 otherCanvas.gameObject.SetActive(true);
                 break;
             case false:
                 MainCanvas.gameObject.SetActive(true);
-                for (var i = 0; i < MainCanvas.transform.childCount; i++)
-                {
-                    if (MainCanvas.transform.GetChild(0))
-                    {
-                        for (var x = 0; x < MainCanvas.transform.GetChild(0).childCount; x++)
-                        {
-                            MainCanvas.transform.GetChild(0).GetChild(x).gameObject.SetActive(true);
-                            MainCanvas.transform.GetChild(0).GetChild(x).GetChild(0).gameObject.SetActive(true);
-                        }
-                    }
-                    MainCanvas.transform.GetChild(i).gameObject.SetActive(true);
-                    MainCanvas.transform.GetChild(i).GetChild(0).gameObject.SetActive(true);
-                }
                 otherCanvas.gameObject.SetActive(false);
                 break;
         }

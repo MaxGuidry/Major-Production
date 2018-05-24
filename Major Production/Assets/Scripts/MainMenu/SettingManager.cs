@@ -30,7 +30,6 @@ public class SettingManager : MonoBehaviour
         {
             ResolutionDrop.options.Add(new Dropdown.OptionData(res.ToString()));
         }
-
         LoadSettings();
     }
 
@@ -69,13 +68,16 @@ public class SettingManager : MonoBehaviour
 
     public void LoadSettings()
     {
-        var data = File.ReadAllText(Application.persistentDataPath + "/gameSettings.json");
-        GameSettings = JsonUtility.FromJson<GameSettingsManager>(data);
+        if (File.Exists("gameSettings.json"))
+        {
+            var data = File.ReadAllText(Application.persistentDataPath + "/gameSettings.json");
+            GameSettings = JsonUtility.FromJson<GameSettingsManager>(data);
 
-        FullScreenToggle.isOn = GameSettings.FullScreen;
-        AntiDrop.value = GameSettings.AntiAliasing;
-        VSyncDrop.value = GameSettings.VSync;
-        TextureDrop.value = GameSettings.TextureQuality;
-        ResolutionDrop.value = GameSettings.ResolutionIndex;
+            FullScreenToggle.isOn = GameSettings.FullScreen;
+            AntiDrop.value = GameSettings.AntiAliasing;
+            VSyncDrop.value = GameSettings.VSync;
+            TextureDrop.value = GameSettings.TextureQuality;
+            ResolutionDrop.value = GameSettings.ResolutionIndex;
+        }
     }
 }

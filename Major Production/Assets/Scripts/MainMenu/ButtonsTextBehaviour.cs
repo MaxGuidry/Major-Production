@@ -22,6 +22,8 @@ public class ButtonsTextBehaviour : MonoBehaviour {
             var image = button.GetComponent<Image>();
             image.sprite = ButtonSprite;
             var text = button.GetComponentInChildren<Text>();
+            if (text == null)
+                return;
             text.font = TextFont;
             text.color = TextColor;
             text.fontSize = FontSize;

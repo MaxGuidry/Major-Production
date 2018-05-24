@@ -18,8 +18,7 @@ public class Config : MonoBehaviour
     void OnEnable()
     {
 
-        if (!Countdown)
-            return;
+        
         string path = Application.dataPath + "/bin/config.json";
         if (!File.Exists(path))
         {
@@ -36,8 +35,25 @@ public class Config : MonoBehaviour
             config.DontYouDareTouchThisVariable__Thanks = "Stop it.";
             File.WriteAllText(path, JsonUtility.ToJson(config));
         }
+        else
+        {
+            fileStream = File.Open(path, FileMode.Open);
+            fileStream.Close();
+        }
+        if (!Countdown)
+            return;
+        if (!LoadSettings())
+            StartCoroutine(TrySaveSettingsIfFail());
+    }
 
-        LoadSettings();
+    private IEnumerator TrySaveSettingsIfFail()
+    {
+        float timer = 2f;
+        while (!LoadSettings() && timer > 0)
+        {
+            timer -= Time.deltaTime;
+            yield return null;
+        }
     }
     [System.Serializable]
     public class ConfigSettings
@@ -53,7 +69,7 @@ public class Config : MonoBehaviour
         public float EndScreenTimer;
     }
 
-    public void LoadSettings()
+    public bool LoadSettings()
     {
 
         string path = Application.dataPath + "/bin/config.json";
@@ -69,17 +85,28 @@ public class Config : MonoBehaviour
 
         if (!File.Exists(path))
         {
-            return;
+            return false;
         }
 
         fileStream= File.OpenRead(path);
         string configJSON = File.ReadAllText(path);
         ConfigSettings config = JsonUtility.FromJson<ConfigSettings>(configJSON);
+        if (config == null)
+        {
+            Debug.LogError("Config object null");
+            return false;
+        }
 
+        if (Countdown == null)
+        {
+            Debug.LogError("Countdown object null");
+            return false;
+
+        }
         Countdown.Timer = config.RoundTime;
         Countdown.GameOverScreenTimer = config.EndScreenTimer;
         fileStream.Close();
-
+        return true;
     }
 
     public static void SaveSettings()

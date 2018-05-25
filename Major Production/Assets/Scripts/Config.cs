@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 public class Config : MonoBehaviour
 {
-    public TestConfigBehaviour tcb;
+    //public TestConfigBehaviour tcb;
     [System.Serializable]
     public class ConfigSettings
     {

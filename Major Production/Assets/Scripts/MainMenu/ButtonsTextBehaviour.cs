@@ -20,6 +20,8 @@ public class ButtonsTextBehaviour : MonoBehaviour {
             cb.pressedColor = Pressed;
             button.colors = cb;
             var image = button.GetComponent<Image>();
+            if (image.transform.name == "Start_Game_Button")
+                return;
             image.sprite = ButtonSprite;
             var text = button.GetComponentInChildren<Text>();
             if (text == null)

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -19,19 +20,27 @@ public class CountDown : MonoBehaviour
     private float deathTimer = 10f;
     public Text TimerDisplay;
     [HideInInspector]public float GameOverScreenTimer = 5f;
-    [SerializeField]private float testTimer;
     public Image HourGlass;
     private float MaxTimer, MaxDeathTimer;
     public Image CountdownImage;
 
     public Text CreditText;
+
+    private GameSettingsConfig gameSettings;
     // Use this for initialization
     private void Start()
     {
+        if (File.Exists(Application.persistentDataPath + "/gameSettings.json"))
+        {
+            var data = File.ReadAllText(Application.persistentDataPath + "/gameSettings.json");
+            gameSettings = JsonUtility.FromJson<GameSettingsConfig>(data);
+            Timer = gameSettings.GameTime * 10;
+            deathTimer = gameSettings.EndTime;
+        }
+
         CreditText.enabled = false;
         MaxTimer = Timer;
         MaxDeathTimer = deathTimer;
-        testTimer = 10;
         HourGlass.enabled = false;
         BackGround.SetActive(false);
         DisplayWinner.enabled = false;
@@ -135,9 +144,9 @@ public class CountDown : MonoBehaviour
     private void StartHourGlass()
     {
         HourGlass.enabled = true;
-        testTimer -= Time.deltaTime;
+        deathTimer -= Time.deltaTime;
         var slope = 1f / MaxDeathTimer;
-        var sliderAmount = slope * testTimer;
+        var sliderAmount = slope * deathTimer;
         HourGlass.fillAmount = sliderAmount;
     }
 

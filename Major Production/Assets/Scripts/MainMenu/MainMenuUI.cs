@@ -8,14 +8,15 @@ using UnityEngine.SceneManagement;
 public class MainMenuUI : MonoBehaviour
 {
     public AudioClip MusicClip;
-    private GameObject GameTimerSlider, EndScreenTimerSlider;
-    private GameObject GameTime, EndTimer;
+
     private GameObject BackButtonOptions, OpenStartGameButton, StartGameButton, BackButtonControls;
     private GameObject MainCanvas, ControlsCanvas, OptionsCanvas, StartLocalGameCanvas;
     private AudioSource _backSound;
 
-    private void Awake()
+    private void OnEnable()
     {
+
+
         foreach (var child in FindObjectsOfType<Transform>())
         {
             if (child.name.Contains("Main_Canvas"))
@@ -27,19 +28,6 @@ public class MainMenuUI : MonoBehaviour
             {
                 OptionsCanvas = child.GetComponent<Canvas>().gameObject;
                 BackButtonOptions = OptionsCanvas.GetComponentInChildren<Button>().gameObject;
-                foreach (var childOptions in OptionsCanvas.GetComponentsInChildren<Transform>())
-                {
-                    if (childOptions.name.Contains("Game_Time"))
-                    {
-                        GameTimerSlider = childOptions.GetComponentInChildren<Slider>().gameObject;
-                        GameTime = childOptions.GetComponentInChildren<Text>().gameObject;
-                    }
-                    if (childOptions.name.Contains("End_Time"))
-                    {
-                        EndScreenTimerSlider = childOptions.GetComponentInChildren<Slider>().gameObject;
-                        EndTimer = childOptions.GetComponentInChildren<Text>().gameObject;
-                    }
-                }
                 OptionsCanvas.SetActive(false);
             }
             if (child.name.Contains("Controls_Canvas"))
@@ -59,22 +47,6 @@ public class MainMenuUI : MonoBehaviour
 
     private void Start()
     {
-        var GSlider = GameTimerSlider.GetComponent<Slider>();
-        GSlider.maxValue = 10;
-        GSlider.minValue = 3;
-        GSlider.value = 9;
-        var ESlider = EndScreenTimerSlider.GetComponent<Slider>();
-        ESlider.maxValue = 10;
-        ESlider.minValue = 1;
-        ESlider.value = 10;
-
-        Config.EditSettings.RoundTime = GameTimerSlider.GetComponent<Slider>().value * 10;
-        Config.EditSettings.EndScreenTimer = EndScreenTimerSlider.GetComponent<Slider>().value;
-        Config.SaveSettings();
-
-        GameTime.GetComponent<Text>().text = "Game Time: " + Mathf.Round(Config.EditSettings.RoundTime);
-        EndTimer.GetComponent<Text>().text = "End Screen Time: " + Mathf.Round(Config.EditSettings.EndScreenTimer);
-
         _backSound = FindObjectOfType<AudioSource>();
         _backSound.volume = .7f;
 
@@ -82,15 +54,6 @@ public class MainMenuUI : MonoBehaviour
         _backSound.clip = MusicClip;
         _backSound.Play();
         SetSelected();
-    }
-
-    public void Update()
-    {
-        Config.EditSettings.RoundTime = GameTimerSlider.GetComponent<Slider>().value * 10;
-        Config.EditSettings.EndScreenTimer = EndScreenTimerSlider.GetComponent<Slider>().value;
-        GameTime.GetComponent<Text>().text = "Game Time: " + Mathf.Round(Config.EditSettings.RoundTime);
-        EndTimer.GetComponent<Text>().text = "End Screen Time: " + Mathf.Round(Config.EditSettings.EndScreenTimer);
-        Config.SaveSettings();
     }
 
     public void LoadScene(string scene)

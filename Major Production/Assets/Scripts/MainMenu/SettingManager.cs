@@ -1,83 +1,151 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
+using UnityEngine;
 
-public class SettingManager : MonoBehaviour
+[CreateAssetMenu]
+public class SettingManager : ScriptableObject
 {
-    public Toggle FullScreenToggle;
-    public Dropdown ResolutionDrop, TextureDrop, AntiDrop, VSyncDrop;
-    public List<Resolution> resolutions;
-    public Button ApplyButton;
-    public Button RevertButton;
-    private GameSettingsManager GameSettings;
+    public SaveLoadEvent ON_SAVESETTINGS = new SaveLoadEvent();
+    public SaveLoadEvent ON_LOADSETTINGS = new SaveLoadEvent();
+    public SaveLoadEvent ON_SETTINGSCHANGED = new SaveLoadEvent();
+    private static SettingManager _instance;
+
+    [SerializeField]
+    private GameSettingsConfig _config;
+
+    public GameSettingsConfig Config
+    {
+        get { return _config; }
+    }
+    public static SettingManager Instance
+    {
+        get
+        {
+            if (!_instance)
+                _instance = Resources.FindObjectsOfTypeAll<SettingManager>().FirstOrDefault();
+            if (!_instance)
+                _instance = Resources.Load<SettingManager>("_Settings");
+            return _instance;
+        }
+    }
+
+
+    private string path
+    {
+        get { return Application.persistentDataPath + "/gameSettings.json"; }
+    }
+
+    public int GameTime
+    {
+        get { return _config.GameTime; }
+        set
+        {
+            _config.GameTime = value;
+            ON_SETTINGSCHANGED.Invoke(_config);
+        }
+    }
+
+    public bool FullScreen
+    {
+        get { return _config.FullScreen; }
+        set
+        {
+            _config.FullScreen = value;
+            ON_SETTINGSCHANGED.Invoke(_config);
+
+        }
+    }
+
+    public int TextureQuality
+    {
+        get { return _config.TextureQuality; }
+        set
+        {
+            _config.TextureQuality = value;
+            ON_SETTINGSCHANGED.Invoke(_config);
+        }
+    }
+
+    public int AntiAliasing
+    {
+        get { return _config.AntiAliasing; }
+        set
+        {
+            _config.AntiAliasing = value;
+            ON_SETTINGSCHANGED.Invoke(_config);
+        }
+    }
+
+    public int VSync
+    {
+        get { return _config.VSync; }
+        set
+        {
+            _config.VSync = value;
+            ON_SETTINGSCHANGED.Invoke(_config);
+        }
+    }
+
+    public int ResolutionIndex
+    {
+        get { return _config.ResolutionIndex; }
+        set
+        {
+            _config.ResolutionIndex = value;
+            ON_SETTINGSCHANGED.Invoke(_config);
+        }
+    }
+
+    public int EndTime
+    {
+        get { return _config.EndTime; }
+        set
+        {
+            _config.EndTime = value;
+            ON_SETTINGSCHANGED.Invoke(_config);
+        }
+    }
 
     private void OnEnable()
     {
-        GameSettings = new GameSettingsManager();
-        FullScreenToggle.onValueChanged.AddListener(delegate { OnFullScreenToggle(); });
-        ResolutionDrop.onValueChanged.AddListener(delegate { OnResoultionChange(); });
-        TextureDrop.onValueChanged.AddListener(delegate { OnTextureQualityChange(); });
-        AntiDrop.onValueChanged.AddListener(delegate { OnAntiChange(); });
-        VSyncDrop.onValueChanged.AddListener(delegate { OnVSyncChange(); });
-        ApplyButton.onClick.AddListener(delegate { SaveSettings(); });
-        RevertButton.onClick.AddListener(delegate { LoadSettings(); });
-        resolutions = Screen.resolutions.ToList();
-
-        foreach (var res in resolutions)
+        _config = new GameSettingsConfig();
+        
+        if (!LoadSettings()) //if file doesn't exist
         {
-            ResolutionDrop.options.Add(new Dropdown.OptionData(res.ToString()));
+            _config.GameTime = 3;
+            _config.AntiAliasing = 3;
+            _config.EndTime = 10;
+            _config.FullScreen = true;
+            _config.ResolutionIndex = 0;
+            _config.TextureQuality = 0;
+            _config.VSync = 1;
+            SaveSettings(); //make it
         }
-        LoadSettings();
     }
 
-    public void OnFullScreenToggle()
+    public bool LoadSettings()
     {
-        GameSettings.FullScreen = Screen.fullScreen = FullScreenToggle.isOn;
-    }
-
-    public void OnResoultionChange()
-    {
-        Screen.SetResolution(resolutions[ResolutionDrop.value].width, resolutions[ResolutionDrop.value].height, Screen.fullScreen);
-        GameSettings.ResolutionIndex = ResolutionDrop.value;
-    }
-
-    public void OnTextureQualityChange()
-    {
-        QualitySettings.masterTextureLimit = GameSettings.TextureQuality = TextureDrop.value;
-    }
-
-    public void OnAntiChange()
-    {
-        QualitySettings.antiAliasing = (int)Mathf.Pow(2, AntiDrop.value);
-        GameSettings.AntiAliasing = AntiDrop.value;
-    }
-
-    public void OnVSyncChange()
-    {
-        QualitySettings.vSyncCount = GameSettings.VSync = VSyncDrop.value;
+        if (!File.Exists(path))
+        {
+            Debug.LogError("no file");
+            return false;
+        }
+            
+        var data = File.ReadAllText(path);
+        JsonUtility.FromJsonOverwrite(data, _config);
+        ON_LOADSETTINGS.Invoke(_config);
+        return true;
     }
 
     public void SaveSettings()
     {
-        var data = JsonUtility.ToJson(GameSettings, true);
-        File.WriteAllText(Application.persistentDataPath + "/gameSettings.json", data);
+        var data = JsonUtility.ToJson(_config, true);
+        File.WriteAllText(path, data);
+        ON_SAVESETTINGS.Invoke(_config);
     }
 
-    public void LoadSettings()
+    private void OnDisable()
     {
-        if (File.Exists("gameSettings.json"))
-        {
-            var data = File.ReadAllText(Application.persistentDataPath + "/gameSettings.json");
-            GameSettings = JsonUtility.FromJson<GameSettingsManager>(data);
-
-            FullScreenToggle.isOn = GameSettings.FullScreen;
-            AntiDrop.value = GameSettings.AntiAliasing;
-            VSyncDrop.value = GameSettings.VSync;
-            TextureDrop.value = GameSettings.TextureQuality;
-            ResolutionDrop.value = GameSettings.ResolutionIndex;
-        }
+        SaveSettings();
     }
 }
